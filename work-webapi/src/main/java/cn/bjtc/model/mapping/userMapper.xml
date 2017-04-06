@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="User">
+	<resultMap type="cn.bjtc.model.User" id="UserMap">
+		<result column="uname" property="username"/>
+		<result column="upass" property="password"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.User" id="UserParamMap">
+		<parameter property="username" resultMap="UserMap" />
+		<parameter property="password" resultMap="UserMap" />
+	</parameterMap>
+	<insert id="saveUser" parameterMap="UserParamMap">
+		INSERT INTO t_user VALUES (#{username},#{password})
+	</insert>
+	
+	<select id="findAllUser" resultMap="UserMap" >SELECT * FROM t_user</select>
+	
+	<select id="countAllUser" resultType="Integer" >SELECT count(*) FROM t_user</select>
+</mapper>

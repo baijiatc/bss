@@ -1,0 +1,62 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>cn.bjtc</groupId>
+    <artifactId>work-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>work-web</artifactId>
+  <packaging>war</packaging>
+  <name>work-web</name>
+  
+  <dependencies>
+    <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-webmvc</artifactId>
+	    <version>${spring.version}</version>
+	</dependency>
+    <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+	<dependency>
+	    <groupId>javax.servlet</groupId>
+	    <artifactId>javax.servlet-api</artifactId>
+	    <version>3.1.0</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/jstl/jstl -->
+	<dependency>
+	    <groupId>jstl</groupId>
+	    <artifactId>jstl</artifactId>
+	    <version>1.2</version>
+	</dependency>
+	<dependency>
+		<groupId>cn.bjtc</groupId>
+  		<artifactId>work-dao</artifactId>
+  		 <version>0.0.1-SNAPSHOT</version>
+	</dependency>
+	<dependency>
+		<groupId>cn.bjtc</groupId>
+  		<artifactId>work-webapi</artifactId>
+  		 <version>0.0.1-SNAPSHOT</version>
+  		 <type>war</type>
+	</dependency>
+  </dependencies>
+  <build>
+    <finalName>work-web</finalName>
+    <plugins>
+         <!-- 合并多个war -->
+         <plugin>
+             <groupId>org.apache.maven.plugins</groupId>
+             <artifactId>maven-war-plugin</artifactId>
+             <configuration>
+                 <packagingExcludes>WEB-INF/web.xml</packagingExcludes>  
+                 <overlays>
+                     <overlay>
+                         <groupId>cn.bjtc</groupId>
+                         <artifactId>work-webapi</artifactId>
+                     </overlay>
+                 </overlays>
+             </configuration>
+         </plugin>
+     </plugins>
+  </build>
+</project>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Privilege">
+	<resultMap type="cn.bjtc.model.Privilege" id="PrivMap">
+		<result column="privid" property="privid"/>
+		<result column="privname" property="privname"/>
+		<result column="privtype" property="privtype"/>
+		<result column="privcat" property="privcat"/>
+		<result column="privdesc" property="privdesc"/>
+		<result column="privst" property="privst"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Privilege" id="PrivParamMap">
+		<parameter property="privid" resultMap="PrivMap" />
+		<parameter property="privname" resultMap="PrivMap" />
+		<parameter property="privtype" resultMap="PrivMap" />
+		<parameter property="privcat" resultMap="PrivMap" />
+		<parameter property="privdesc" resultMap="PrivMap" />
+		<parameter property="privst" resultMap="PrivMap" />
+	</parameterMap>
+	<insert id="savePriv" parameterMap="PrivParamMap">
+		INSERT INTO privilege(privname,privtype,privcat,privdesc,privst) VALUES (#{privname},#{privtype},#{privcat},#{privdesc},#{privst})
+	</insert>
+	
+	<update id="updatePriv" parameterMap="PrivParamMap">
+		UPDATE privilege SET privname=#{privname},privtype=#{privtype},privcat=#{privcat},privdesc=#{privdesc},privst=#{privst} WHERE privid=#{privid}
+	</update>
+	
+	<select id="findAllPrivs" resultMap="PrivMap" >
+	 	SELECT * FROM privilege WHERE 1=1 
+	 	<if test="privid!=null and privid!=0"> AND privid=#{privid}</if>
+	 	<if test="privname!=null and privname!=''"> AND privname=#{privname}</if>
+	 	<if test="privtype!=null and privtype!=0"> AND privtype=#{privtype}</if>
+	 	<if test="privcat!=null and privcat!=0"> AND privcat=#{privcat}</if>
+	 	<if test="privst!=null"> AND privst=#{privst}</if>
+	 	LIMIT #{pageOffset},#{pageSize}
+	</select>
+	
+	<select id="countAllPrivs" resultType="Integer" >
+		SELECT count(privid) FROM privilege WHERE 1=1
+		<if test="privid!=null and privid!=0"> AND privid=#{privid}</if>
+	 	<if test="privname!=null and privname!=''"> AND privname=#{privname}</if>
+	 	<if test="privtype!=null and privtype!=0"> AND privtype=#{privtype}</if>
+	 	<if test="privcat!=null and privcat!=0"> AND privcat=#{privcat}</if>
+	 	<if test="privst!=null"> AND privst=#{privst}</if>
+	</select>
+</mapper>

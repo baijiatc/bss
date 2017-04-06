@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Menu">
+	<resultMap type="cn.bjtc.model.Menu" id="MenuMap">
+		<result column="menuid" property="menuid"/>
+		<result column="menuname" property="menuname"/>
+		<result column="url" property="url"/>
+		<result column="parentid" property="parentid"/>
+		<result column="icon" property="icon"/>
+		<result column="sort" property="sort"/>
+		<result column="menust" property="menust"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Menu" id="MenuParamMap">
+		<parameter property="menuid" resultMap="MenuMap" />
+		<parameter property="menuname" resultMap="MenuMap" />
+		<parameter property="url" resultMap="MenuMap" />
+		<parameter property="parentid" resultMap="MenuMap" />
+		<parameter property="icon" resultMap="MenuMap" />
+		<parameter property="sort" resultMap="MenuMap" />
+		<parameter property="menust" resultMap="MenuMap" />
+	</parameterMap>
+	<insert id="saveMenu" parameterMap="MenuParamMap">
+		INSERT INTO menu VALUES (#{menuname},#{url},#{parentid},#{icon},#{sort},#{menust})
+	</insert>
+	
+	<select id="findMenuByParam" resultMap="MenuMap" >SELECT * FROM menu WHERE 1=1
+	 	<if test="menuname!=null and menuname!=''"> AND menuname=#{menuname}</if>
+	 	<if test="parentid!=null"> AND parentid=#{parentid}</if>
+	 	<if test="menust!=null"> AND menust=#{menust}</if>
+	</select>
+	
+	<select id="countMenuByParam" resultType="Integer" >SELECT count(*) FROM menu WHERE 1=1
+		<if test="menuname!=null and menuname!=''"> AND menuname=#{menuname}</if>
+	 	<if test="parentid!=null"> AND parentid=#{parentid}</if>
+	 	<if test="menust!=null"> AND menust=#{menust}</if>
+	</select>
+</mapper>

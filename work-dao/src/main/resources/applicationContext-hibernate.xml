@@ -1,0 +1,72 @@
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop"
+xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+xmlns:cache="http://www.springframework.org/schema/cache" xmlns:p="http://www.springframework.org/schema/p"
+xmlns:mvc="http://www.springframework.org/schema/mvc"
+xsi:schemaLocation="http://www.springframework.org/schema/beans 
+  http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+  http://www.springframework.org/schema/aop
+  http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+  http://www.springframework.org/schema/context
+  http://www.springframework.org/schema/context/spring-context-4.0.xsd
+  http://www.springframework.org/schema/tx
+  http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+  http://www.springframework.org/schema/mvc
+  http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+  http://www.springframework.org/schema/cache 
+  http://www.springframework.org/schema/cache/spring-cache-4.0.xsd">
+     
+    <context:component-scan base-package="cn.bjtc.dao" />
+    <context:component-scan base-package="cn.bjtc.service" />
+    <!-- 引入配置文件 -->
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+      	<property name="location" value="classpath:config.properties" />
+    </bean>
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+		<property name="driverClassName" value="${db.driver}" />
+		<property name="url" value="${db.url}" />
+		<property name="username" value="${db.username}" />
+		<property name="password" value="${db.password}" />
+	</bean>
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hiberante.format_sql">true</prop>
+			</props>
+		</property>
+		<property name="mappingLocations">
+			<list>
+				<value>classpath:cn/bjtc/model/mapping/*.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="template" class="org.springframework.orm.hibernate4.HibernateTemplate">
+		<constructor-arg name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+  	<!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
+  	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+       <property name="sessionFactory" ref="sessionFactory"></property>
+   	</bean>
+   	
+   	<!-- 事务代理类 -->  
+    <bean id="transactionBese" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true" abstract="true">  
+        <property name="transactionManager" ref="transactionManager"></property>  
+        <property name="transactionAttributes">  
+            <props>  
+                <prop key="add*">PROPAGATION_REQUIRED,-Exception</prop>  
+                <prop key="update*">PROPAGATION_REQUIRED,-Exception</prop>  
+                <prop key="insert*">PROPAGATION_REQUIRED,-Exception</prop>  
+                <prop key="modify*">PROPAGATION_REQUIRED,-Exception</prop>  
+                <prop key="delete*">PROPAGATION_REQUIRED,-Exception</prop>  
+                <prop key="del*">PROPAGATION_REQUIRED,-Exception</prop>  
+                <prop key="get*">PROPAGATION_NEVER</prop>  
+            </props>  
+        </property>  
+    </bean>
+</beans>

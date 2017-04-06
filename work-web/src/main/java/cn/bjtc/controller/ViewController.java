@@ -40,9 +40,19 @@ public class ViewController {
 		return "priv/setdet";
 	}
 	
-
 	@RequestMapping(value="role/show",method=RequestMethod.GET)
 	public String showRoleListView(){
 		return "role/list";
+	}
+	
+	@RequestMapping(value="role/add",method=RequestMethod.GET)
+	public String showRoleAddView(){
+		return "role/add";
+	}
+	
+	@RequestMapping(value="role/{roleid}",method=RequestMethod.GET)
+	public String showRoleAddView(@PathVariable Integer roleid,Model model){
+		model.addAttribute("roleid", roleid);
+		return "role/edit";
 	}
 }

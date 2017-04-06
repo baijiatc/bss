@@ -16,7 +16,7 @@
 <script>
 ROLEDIALOG.ok = function(){
 	var role = BSS.form2json('#frm_role');
-	BSS.dispatch({code:20001,data:[role]},function(){
+	BSS.dispatch({code:20005,data:[role]},function(){
 		BSS.alert();;
 	},function(){});
 }

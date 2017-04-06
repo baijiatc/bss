@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Login Page</title>
+<title>主界面——营销系统</title>
 <style>
 body{
 	background-color:#FFFFFF;
@@ -19,10 +19,11 @@ ul{
 }
 a{
 	text-decoration: none;
+	color:#000;
 }
 </style>
 <link rel="stylesheet" type="text/css" href="js/easyui/themes/default/easyui.css">
-<link rel="stylesheet" type="text/css" href="js/easyui/themes/icon.css">
+<link rel="stylesheet" type="text/css" href="js/easyui/themes/insdep/icon.css">
 </head>
 <body>
 	<div id="div_container" align="center" style="width:auto;">

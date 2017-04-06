@@ -18,6 +18,9 @@ public class Pagination {
 		this.pageSize = pageSize;
 	}
 	public int getPageOffset() {
+		if(pageIndex == 0){
+			pageIndex = 1;
+		}
 		return (pageIndex-1)*pageSize;
 	}
 }

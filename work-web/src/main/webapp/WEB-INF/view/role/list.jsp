@@ -14,7 +14,7 @@ $(function(){
 	//构建datagrid，并填充数据
 	var roleGrid = new BSS.DataGrid('#tbl_role_datagrid');
 	ROLEDIALOG = new BSS.Dialog('#div_roleadd');
-	roleGrid.build(options,{code:20003});
+	roleGrid.build(options,{code:20007});
 	//设置新建事件
 	roleGrid.create = function(){
 		ROLEDIALOG.init({href:'role/add',width:400});
@@ -27,9 +27,6 @@ $(function(){
 			return;
 		}
 		var roleid = row['roleid'];
-		if(BSS.Helper.isNull(row)){
-			return;
-		}
 		ROLEDIALOG.init({href:'role/'+roleid,width:400});
 	};
 })

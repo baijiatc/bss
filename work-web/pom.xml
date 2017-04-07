@@ -35,6 +35,16 @@
 	</dependency>
 	<dependency>
 		<groupId>cn.bjtc</groupId>
+  		<artifactId>work-auth</artifactId>
+  		 <version>0.0.1-SNAPSHOT</version>
+	</dependency>
+	<dependency>
+		<groupId>cn.bjtc</groupId>
+  		<artifactId>work-tools</artifactId>
+  		 <version>0.0.1-SNAPSHOT</version>
+	</dependency>
+	<dependency>
+		<groupId>cn.bjtc</groupId>
   		<artifactId>work-webapi</artifactId>
   		 <version>0.0.1-SNAPSHOT</version>
   		 <type>war</type>

@@ -11,6 +11,7 @@ public class ApiManager {
 	private static final String REQUEST_PARAM = "request.param";
 	
 	static{
+		API_MAP.put(10001, "../login.json");
 		API_MAP.put(20001, "../priv/create.json");
 		API_MAP.put(20002, "../priv/get.json");
 		API_MAP.put(20003, "../priv/all.json");

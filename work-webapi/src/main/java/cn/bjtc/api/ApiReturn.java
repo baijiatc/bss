@@ -4,7 +4,7 @@ import java.util.List;
 
 public class ApiReturn {
 
-	private int code = 1;
+	private int code = 0;
 	private String message = "success";
 	private int count = 0;
 	private List<?> data;

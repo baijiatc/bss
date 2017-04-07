@@ -20,7 +20,7 @@ $(function(){
 	dataGrid.build(options,{code:20003});
 	//设置新建事件
 	dataGrid.create = function(){
-		PRIVDIALOG.init({href:'priv/add',width:400});
+		PRIVDIALOG.init({href:'priv/add.html',width:400});
 	};
 	//设置编辑事件
 	dataGrid.edit = function(){
@@ -30,7 +30,7 @@ $(function(){
 			return;
 		}
 		var privid = row['privid'];
-		PRIVDIALOG.init({href:'priv/'+privid,width:400});
+		PRIVDIALOG.init({href:'priv/'+privid+'.html',width:400});
 	};
 })
 </script>

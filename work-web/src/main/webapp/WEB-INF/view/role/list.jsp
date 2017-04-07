@@ -17,7 +17,7 @@ $(function(){
 	roleGrid.build(options,{code:20007});
 	//设置新建事件
 	roleGrid.create = function(){
-		ROLEDIALOG.init({href:'role/add',width:400});
+		ROLEDIALOG.init({href:'role/add.html',width:400});
 	};
 	//设置编辑事件
 	roleGrid.edit = function(){
@@ -27,7 +27,7 @@ $(function(){
 			return;
 		}
 		var roleid = row['roleid'];
-		ROLEDIALOG.init({href:'role/'+roleid,width:400});
+		ROLEDIALOG.init({href:'role/'+roleid+'.html',width:400});
 	};
 })
 </script>

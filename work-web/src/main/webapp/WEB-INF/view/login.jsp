@@ -23,21 +23,39 @@
 <script language="javascript" src="js/easyui/jquery.easyui.min.js" charset="utf-8"></script>
 <script>
 $(function(){
-	var $uname = $('#login input[name="uname"]');
-	var $upass = $('#login input[name="upass"]');
 	var $login = $('.but');
 	$login.click(function(){
-		if(BSS.Helper.isEmpty($uname.val())){
-			BSS.warning('请输入用户名');
-			return;
+		doLogin();
+	});
+	$(document).keydown(function(){
+		if(event.keyCode==13){
+			doLogin();
 		}
-		if(BSS.Helper.isEmpty($upass.val())){
-			BSS.warning('请输入密码');
-			return;
-		}
-		BSS.redirect('main');
 	});
 });
+
+function doLogin(){
+	var $uname = $('#login input[name="uname"]');
+	var $upass = $('#login input[name="upass"]');
+	if(BSS.Helper.isEmpty($uname.val())){
+		BSS.warning('请输入用户名');
+		return;
+	}
+	if(BSS.Helper.isEmpty($upass.val())){
+		BSS.warning('请输入密码');
+		return;
+	}
+	BSS.dispatch({code:10001,data:[{uname:$uname.val(),upass:$upass.val()}]},function(resp){
+		var code = resp.code;
+		if(code==0){
+			BSS.redirect('main.html');
+		}else{
+			BSS.alert(resp.message);
+		}
+	},function(resp){
+		
+	});
+}
 </script>
 </body>
 </html>

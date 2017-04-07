@@ -47,8 +47,8 @@ a{
 $(function(){
 	var layout = new BSS.Layout('#div_container');
 	layout.layout();
-	BSS.include('#div_left','main/left');
-	BSS.include('#div_center','main/center');
+	BSS.include('#div_left','main/left.html');
+	BSS.include('#div_center','main/center.html');
 });
 </script>
 </body>

@@ -1,0 +1,72 @@
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop"
+xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+xmlns:cache="http://www.springframework.org/schema/cache" xmlns:p="http://www.springframework.org/schema/p"
+xmlns:mvc="http://www.springframework.org/schema/mvc"
+xsi:schemaLocation="http://www.springframework.org/schema/beans 
+  http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+  http://www.springframework.org/schema/aop
+  http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+  http://www.springframework.org/schema/context
+  http://www.springframework.org/schema/context/spring-context-4.0.xsd
+  http://www.springframework.org/schema/tx
+  http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+  http://www.springframework.org/schema/mvc
+  http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+  http://www.springframework.org/schema/cache 
+  http://www.springframework.org/schema/cache/spring-cache-4.0.xsd">
+     
+	<!-- 继承自AuthorizingRealm的自定义Realm,即指定Shiro验证用户登录的类为自定义的ShiroRealm.java -->  
+	<bean id="shiroRealm" class="cn.bjtc.realm.MyRealm"/>
+	
+	<!-- 配置权限管理器 -->
+	<!-- Shiro默认会使用Servlet容器的Session,可通过sessionMode属性来指定使用Shiro原生Session -->  
+	<!-- 即<property name="sessionMode" value="native"/>,详细说明见官方文档 -->  
+	<!-- 这里主要是设置自定义的单Realm应用,若有多个Realm,可使用'realms'属性代替 -->  
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">    
+        <!-- ref对应我们写的realm ShiroRealm -->  
+        <property name="realm" ref="shiroRealm"/>    
+        <!-- 使用下面配置的缓存管理器 -->  
+        <property name="cacheManager" ref="cacheManager"/>    
+    </bean>  
+      
+    <!-- 配置shiro的过滤器工厂类，id- shiroFilter要和我们在web.xml中配置的过滤器一致 -->
+    <!-- Shiro主过滤器本身功能十分强大,其强大之处就在于它支持任何基于URL路径表达式的、自定义的过滤器的执行 -->  
+	<!-- Web应用中,Shiro可控制的Web请求必须经过Shiro主过滤器的拦截,Shiro对基于Spring的Web应用提供了完美的支持 -->  
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">   
+        <!-- 调用我们配置的权限管理器 -->
+        <!-- Shiro的核心安全接口,这个属性是必须的 --> 
+        <property name="securityManager" ref="securityManager"/>   
+        <!-- 配置我们的登录请求地址 -->
+        <!-- 要求登录时的链接(可根据项目的URL进行替换),非必须的属性,默认会自动寻找Web工程根目录下的"/login.jsp"页面 -->
+        <!-- 访问：http://localhost:8080/mms时跳转到login登陆页面 -->
+        <!-- /是必须的，否则当未登陆直接访问类似:http://localhost:9080/mms/upld/images/*.jpg这样的URL时 -->
+        <!-- 将会跳转到到http://localhost:9080/mms/upld/images/login，从而造成无法正确显示登录页 -->
+        <property name="loginUrl" value="/login.html"/>    
+        <!-- 配置我们在登录页登录成功后的跳转地址，如果你访问的是非/login地址，则跳到您访问的地址 -->  
+        <!-- <property name="successUrl" value="/user"/> -->    
+        <!-- 如果您请求的资源不再您的权限范围，则跳转到/404请求地址 -->  
+        <property name="unauthorizedUrl" value="/404"/>    
+        <!-- 权限配置 -->  
+        <property name="filterChainDefinitions">    
+            <value>    
+                <!-- anon表示此地址不需要任何权限即可访问 -->  
+                /images/**=anon  
+                /js/**=anon  
+                /css/**=anon  
+                /ec/**=anon  
+                /example/**=anon  
+                /plugin/**=anon
+                /login.html=anon
+                /*.json=anon
+                /route/dispatch=anon
+                <!--所有的请求(除去配置的静态资源请求或请求地址为anon的请求)都要通过登录验证,如果未登录则跳到/login-->    
+                /** = authc  
+            </value>    
+        </property>    
+    </bean>  
+      
+    <bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />
+    <!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+</beans>

@@ -52,7 +52,7 @@ $(function(){
 	});
 });
 function showPrivDetView(title){
-	BSS.showView('privset/det',function(html){
+	BSS.showView('privset/det.html',function(html){
 		var options = {title:'['+title+']权限分配'};
 		var privsetCenterPnl =new BSS.Panel('#div_privset_center_pnl');
 		privsetCenterPnl.init(options,html);

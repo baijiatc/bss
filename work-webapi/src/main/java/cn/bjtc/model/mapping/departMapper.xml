@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Depart">
+	<resultMap type="cn.bjtc.model.Depart" id="DepartMap">
+		<result column="departid" property="departid"/>
+		<result column="departname" property="departname"/>
+		<result column="parentid" property="parentid"/>
+		<result column="leader" property="leader"/>
+		<result column="address" property="address"/>
+		<result column="telephone" property="telephone"/>
+		<result column="departst" property="departst"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Depart" id="DepartParamMap">
+		<parameter property="departid" resultMap="DepartMap" />
+		<parameter property="departname" resultMap="DepartMap" />
+		<parameter property="parentid" resultMap="DepartMap" />
+		<parameter property="leader" resultMap="DepartMap" />
+		<parameter property="address" resultMap="DepartMap" />
+		<parameter property="telephone" resultMap="DepartMap" />
+		<parameter property="departst" resultMap="DepartMap" />
+	</parameterMap>
+	<insert id="saveDepart" parameterMap="DepartParamMap">
+		INSERT INTO depart(departname,parentid,leader,address,telephone,departst) VALUES (#{departname},#{parentid},#{leader},#{address},#{telephone},#{departst})
+	</insert>
+	
+	<update id="updateDepart" parameterMap="DepartParamMap">
+		UPDATE depart SET departname=#{departname},parentid=#{parentid},leader=#{leader},address=#{address},telephone=#{telephone},departst=#{departst} WHERE departid=#{departid}
+	</update>
+	
+	<select id="findAllDepart" resultMap="DepartMap" >
+	 	SELECT * FROM depart WHERE 1=1 
+	 	<if test="departid!=null and departid!=0"> AND departid=#{departid}</if>
+	 	<if test="departname!=null and departname!=''"> AND departname=#{departname}</if>
+	 	<if test="parentid!=null and parentid!=0"> AND parentid=#{parentid}</if>
+	 	<if test="leader!=null and leader!=0"> AND leader=#{leader}</if>
+	 	<if test="address!=null and address!=''"> AND address=#{address}</if>
+	 	<if test="telephone!=null and telephone!=0"> AND telephone=#{telephone}</if>
+	 	<if test="departst!=null and departst!=0"> AND departst=#{departst}</if>
+	 	LIMIT #{pageOffset},#{pageSize}
+	</select>
+	
+	<select id="countAllDepart" resultType="Integer" >
+		SELECT count(departid) FROM depart WHERE 1=1
+		<if test="departid!=null and departid!=0"> AND departid=#{departid}</if>
+	 	<if test="departname!=null and departname!=''"> AND departname=#{departname}</if>
+	 	<if test="parentid!=null and parentid!=0"> AND parentid=#{parentid}</if>
+	 	<if test="leader!=null and leader!=0"> AND leader=#{leader}</if>
+	 	<if test="address!=null and address!=''"> AND address=#{address}</if>
+	 	<if test="telephone!=null and telephone!=0"> AND telephone=#{telephone}</if>
+	 	<if test="departst!=null and departst!=0"> AND departst=#{departst}</if>
+	</select>
+</mapper>

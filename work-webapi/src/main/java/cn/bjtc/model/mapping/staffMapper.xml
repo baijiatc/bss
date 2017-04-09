@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Staff">
+	<resultMap type="cn.bjtc.model.Staff" id="StaffMap">
+		<result column="staffid" property="staffid"/>
+		<result column="staffname" property="staffname"/>
+		<result column="gender" property="gender"/>
+		<result column="mobile" property="mobile"/>
+		<result column="idcard" property="idcard"/>
+		<result column="telphone" property="telphone"/>
+		<result column="email" property="email"/>
+		<result column="edu" property="edu"/>
+		<result column="jobstation" property="jobstation"/>
+		<result column="passwd" property="passwd"/>
+		<result column="address" property="address"/>
+		<result column="departid" property="departid"/>
+		<result column="emername" property="emername"/>
+		<result column="emerphone" property="emerphone"/>
+		<result column="staffst" property="staffst"/>
+		<result column="leavetime" property="leavetime"/>
+		<result column="jointime" property="jointime"/>
+		<result column="creator" property="creator"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Staff" id="StaffParamMap">
+		<parameter property="staffid" resultMap="StaffMap" />
+		<parameter property="staffname" resultMap="StaffMap" />
+		<parameter property="gender" resultMap="StaffMap" />
+		<parameter property="mobile" resultMap="StaffMap" />
+		<parameter property="idcard" resultMap="StaffMap" />
+		<parameter property="telphone" resultMap="StaffMap" />
+		<parameter property="email" resultMap="StaffMap" />
+		<parameter property="edu" resultMap="StaffMap" />
+		<parameter property="jobstation" resultMap="StaffMap" />
+		<parameter property="passwd" resultMap="StaffMap" />
+		<parameter property="address" resultMap="StaffMap" />
+		<parameter property="departid" resultMap="StaffMap" />
+		<parameter property="emername" resultMap="StaffMap" />
+		<parameter property="emerphone" resultMap="StaffMap" />
+		<parameter property="staffst" resultMap="StaffMap" />
+		<parameter property="leavetime" resultMap="StaffMap" />
+		<parameter property="jointime" resultMap="StaffMap" />
+		<parameter property="creator" resultMap="StaffMap" />
+	</parameterMap>
+	<insert id="saveStaff" parameterMap="StaffParamMap">
+		INSERT INTO staff(staffid,staffname,gender,mobile,idcard,telphone,email,edu,jobstation,passwd,address,departid,emername,emerphone,staffst,leavetime,jointime,creator) VALUES (#{staffid},#{staffname},#{gender},#{mobile},#{idcard},#{telphone},#{email},#{edu},#{jobstation},#{passwd},#{address},#{departid},#{emername},#{emerphone},#{staffst},#{leavetime},#{jointime},#{creator})
+	</insert>
+	
+	<update id="updateStaff" parameterMap="StaffParamMap">
+		UPDATE staff SET staffname=#{staffname},gender=#{gender},mobile=#{mobile},idcard=#{idcard},telphone=#{telphone},email=#{email},edu=#{edu},jobstation=#{jobstation},passwd=#{passwd},address=#{address},departid=#{departid},emername=#{emername},emerphone=#{emerphone},staffst=#{staffst},leavetime=#{leavetime},jointime=#{jointime},creator=#{creator} WHERE staffid=#{staffid}
+	</update>
+	
+	<select id="findAllStaff" resultMap="StaffMap" >
+	 	SELECT * FROM staff WHERE 1=1 
+	 	<if test="staffid!=null and staffid!=0"> AND staffid=#{staffid}</if>
+	 	<if test="staffname!=null and staffname!=''"> AND staffname=#{staffname}</if>
+	 	<if test="gender!=null and gender!=0"> AND gender=#{gender}</if>
+	 	<if test="mobile!=null and mobile!=0"> AND mobile=#{mobile}</if>
+	 	<if test="idcard!=null and idcard!=''"> AND idcard=#{idcard}</if>
+	 	<if test="edu!=null and edu!=0"> AND edu=#{edu}</if>
+	 	<if test="jobstation!=null and jobstation!=0"> AND jobstation=#{jobstation}</if>
+	 	<if test="passwd!=null and passwd!=''"> AND passwdt=#{passwd}</if>
+	 	<if test="departid!=null and departid!=0"> AND departid=#{departid}</if>
+	 	<if test="staffst!=null and staffst!=0"> AND staffst=#{staffst}</if>
+	 	<if test="jointime!=null and jointime!=0"> AND jointime=#{jointime}</if>
+	 	LIMIT #{pageOffset},#{pageSize}
+	</select>
+	
+	<select id="countAllStaff" resultType="Integer" >
+		SELECT count(staffid) FROM staff WHERE 1=1
+		<if test="staffid!=null and staffid!=0"> AND staffid=#{staffid}</if>
+	 	<if test="staffname!=null and staffname!=''"> AND staffname=#{staffname}</if>
+	 	<if test="gender!=null and gender!=0"> AND gender=#{gender}</if>
+	 	<if test="mobile!=null and mobile!=0"> AND mobile=#{mobile}</if>
+	 	<if test="idcard!=null and idcard!=''"> AND idcard=#{idcard}</if>
+	 	<if test="edu!=null and edu!=0"> AND edu=#{edu}</if>
+	 	<if test="jobstation!=null and jobstation!=0"> AND jobstation=#{jobstation}</if>
+	 	<if test="passwd!=null and passwd!=''"> AND passwdt=#{passwd}</if>
+	 	<if test="departid!=null and departid!=0"> AND departid=#{departid}</if>
+	 	<if test="staffst!=null and staffst!=0"> AND staffst=#{staffst}</if>
+	 	<if test="jointime!=null and jointime!=0"> AND jointime=#{jointime}</if>
+	</select>
+</mapper>

@@ -46,9 +46,7 @@
 	</div>
 	<div title="数据传输" data-options="iconCls:'icon-blank'" style="overflow:auto;padding:10px;">
 		<ul style="margin:0;padding:0 0 0 20px">
-			<li data-href="cstmtr/show.html"><a href="javascript:void(0)">客户</a></li>
-			<li data-href="ordertr/show.html"><a href="javascript:void(0)">订单</a></li>
-			<li data-href="flowtr/show.html"><a href="javascript:void(0)">资金流水</a></li>
+			<li data-href="trans/show.html"><a href="javascript:void(0)">数据传输</a></li>
 		</ul>
 	</div>
 	<div title="绩效配置" data-options="iconCls:'icon-blank'" style="overflow:auto;padding:10px;">

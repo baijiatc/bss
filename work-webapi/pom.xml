@@ -59,8 +59,35 @@
   		<artifactId>work-tools</artifactId>
   		 <version>0.0.1-SNAPSHOT</version>
 	</dependency>
+	<dependency>
+		<groupId>cn.bjtc</groupId>
+  		<artifactId>work-schedule</artifactId>
+  		 <version>0.0.1-SNAPSHOT</version>
+	</dependency>
+	<dependency>
+		<groupId>cn.bjtc</groupId>
+  		<artifactId>work-schedule</artifactId>
+  		 <version>0.0.1-SNAPSHOT</version>
+  		 <type>war</type>
+	</dependency>
   </dependencies>
   <build>
     <finalName>work-webapi</finalName>
+    <plugins>
+         <!-- 合并多个war -->
+         <plugin>
+             <groupId>org.apache.maven.plugins</groupId>
+             <artifactId>maven-war-plugin</artifactId>
+             <configuration>
+                 <packagingExcludes>WEB-INF/web.xml</packagingExcludes>  
+                 <overlays>
+                     <overlay>
+                         <groupId>cn.bjtc</groupId>
+                         <artifactId>work-schedule</artifactId>
+                     </overlay>
+                 </overlays>
+             </configuration>
+         </plugin>
+     </plugins>
   </build>
 </project>

@@ -28,6 +28,10 @@ public class ApiManager {
 		API_MAP.put(11006, "../depart/create.json");
 		API_MAP.put(11007, "../depart/update.json");
 		API_MAP.put(11010, "../depart/get.json");
+		API_MAP.put(17001, "../trans/all.json");
+		API_MAP.put(17002, "../trans/pause.json");
+		API_MAP.put(17003, "../trans/exec.json");
+		API_MAP.put(17004, "../trans/resume.json");
 	}
 	
 	public ApiParam getParameters(HttpServletRequest request){

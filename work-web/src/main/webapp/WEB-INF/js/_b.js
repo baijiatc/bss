@@ -167,13 +167,21 @@ BSS.DataGrid = function(selector){
 			pageNumber:1,
 			rownumbers:true,
 			singleSelect:true,
-			toolbar:[
-			  {iconCls:'icon-add',text:'新建',handler:function(){$this.create();}},
-			  {iconCls:'icon-edit',text:'编辑',handler:function(){$this.edit();}}
-			]
+			onClickRow:function(ridx,rdata){
+				$this.clickRow(ridx,rdata);
+			},
+			toolbar:$this.toolbar
 		};
 		$.extend(defaults,options);
 		$($this.selector).datagrid(defaults);
+	};
+	$this.toolbar=$this.toolbar 
+	|| [
+	     {iconCls:'icon-add',text:'新建',handler:function(){$this.create();}},
+	     {iconCls:'icon-edit',text:'编辑',handler:function(){$this.edit();}}
+	];
+	$this.clickRow=function(ridx,rdata){
+		
 	};
 	/**
 	 * 为DataGrid填充数据
@@ -499,6 +507,7 @@ BSS.DateTime = {
 	 * @returns
 	 */
 	format:function(date,pattern) {
+		pattern = pattern || 'yyyy-MM-dd hh:mm:ss';
 		var o = {
 			"M+" : date.getMonth() + 1, //月份 
 			"d+" : date.getDate(), //日 

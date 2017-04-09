@@ -8,14 +8,14 @@ import cn.bjtc.dao.IGenericDAO;
 public class RedisDAO<T, K> implements IGenericDAO<T, K> {
 
 	@Autowired
-	private RedisTemplate template;
+	private RedisTemplate redisTemplate;
 
-	public RedisTemplate getTemplate() {
-		return template;
+	public RedisTemplate getRedisTemplate() {
+		return redisTemplate;
 	}
 
-	public void setTemplate(RedisTemplate template) {
-		this.template = template;
+	public void setRedisTemplate(RedisTemplate redisTemplate) {
+		this.redisTemplate = redisTemplate;
 	}
 	
 }

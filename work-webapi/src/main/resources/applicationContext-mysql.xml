@@ -38,7 +38,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
   	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
        <property name="dataSource" ref="dataSource" />
    	</bean>
-   	<bean id="template" class="org.mybatis.spring.SqlSessionTemplate">
+   	<bean id="mybatisTemplate" class="org.mybatis.spring.SqlSessionTemplate">
    		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
    	</bean>
 </beans>

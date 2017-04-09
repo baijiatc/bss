@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<table class="easyui-datagrid"></table>
+<table id="tbl_priv_datagrid" class="easyui-datagrid"></table>
 <div id="div_privadd" style="padding:0 0 0 50px;"></div>
 <!-- javascript部分 -->
 <script>
@@ -15,7 +15,7 @@ $(function(){
 		]]
 	};
 	//构建datagrid，并填充数据
-	var dataGrid = new BSS.DataGrid('.easyui-datagrid');
+	var dataGrid = new BSS.DataGrid('#tbl_priv_datagrid');
 	PRIVDIALOG = new BSS.Dialog('#div_privadd');
 	dataGrid.build(options,{code:20003});
 	//设置新建事件

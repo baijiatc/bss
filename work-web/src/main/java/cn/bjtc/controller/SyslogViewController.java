@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class SyslogViewController {
 
-	@RequestMapping(value="syslog/show",method=RequestMethod.GET)
+	@RequestMapping(value="syslog/show.html",method=RequestMethod.GET)
 	public String showSyslogView(){
 		return "syslog/list";
 	}

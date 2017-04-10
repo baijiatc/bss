@@ -25,5 +25,6 @@
   	<module>work-webapi</module>
   	<module>work-web</module>
   	<module>work-api</module>
+  	<module>work-flow</module>
   </modules>
 </project>

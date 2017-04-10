@@ -23,7 +23,7 @@
 	<mvc:annotation-driven/>
 	
 	<!-- 视图解释类 -->
-	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/view/"/>
 		<property name="suffix" value=".jsp"/>
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />

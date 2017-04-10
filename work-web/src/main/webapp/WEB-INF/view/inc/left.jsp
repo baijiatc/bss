@@ -73,7 +73,8 @@
 	</div>
 	<div title="系统设置" data-options="iconCls:'icon-blank'" style="overflow:auto;padding:10px;">
 		<ul style="margin:0;padding:0 0 0 20px">
-			<li data-href="menu/show"><a href="javascript:void(0)">菜单维护</a></li>
+			<li data-href="menu/show.html"><a href="javascript:void(0)">菜单维护</a></li>
+			<li data-href="api/show.html"><a href="javascript:void(0)">API配置</a></li>
 			<li data-href="syslog/show.html"><a href="javascript:void(0)">日志查询</a></li>
 			<li data-href="dict/show.html"><a href="javascript:void(0)">字典管理</a></li>
 			<li data-href="sysparam/show.html"><a href="javascript:void(0)">参数设定</a></li>

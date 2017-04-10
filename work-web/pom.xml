@@ -49,6 +49,12 @@
   		 <version>0.0.1-SNAPSHOT</version>
   		 <type>war</type>
 	</dependency>
+	<dependency>
+		<groupId>cn.bjtc</groupId>
+  		<artifactId>work-schedule</artifactId>
+  		 <version>0.0.1-SNAPSHOT</version>
+  		 <type>war</type>
+	</dependency>
   </dependencies>
   <build>
     <finalName>work-web</finalName>
@@ -63,6 +69,10 @@
                      <overlay>
                          <groupId>cn.bjtc</groupId>
                          <artifactId>work-webapi</artifactId>
+                     </overlay>
+                     <overlay>
+                         <groupId>cn.bjtc</groupId>
+                         <artifactId>work-schedule</artifactId>
                      </overlay>
                  </overlays>
              </configuration>

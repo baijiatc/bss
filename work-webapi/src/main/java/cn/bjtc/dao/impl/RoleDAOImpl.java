@@ -15,9 +15,9 @@ public class RoleDAOImpl extends MyBatisDAO<Role, Integer> implements
 		IRoleDAO {
 
 	public int saveRole(RoleView view) {
-		Role priv = new Role();
-		BeanUtils.copyProperties(view, priv);
-		return super.save("saveRole", priv);
+		Role role = new Role();
+		BeanUtils.copyProperties(view, role);
+		return super.save("saveRole", role);
 	}
 
 	public int updateRole(RoleView view) {

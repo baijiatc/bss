@@ -19,6 +19,12 @@ public class ApiManager {
 		API_MAP.put(20006, "../role/get.json");
 		API_MAP.put(20007, "../role/all.json");
 		API_MAP.put(20008, "../role/update.json");
+		API_MAP.put(12002, "../cust/all.json");
+		API_MAP.put(21004, "../sys/all.json");
+		API_MAP.put(21005, "../dict/creat.json");
+		API_MAP.put(21006, "../dict/update.json");
+		API_MAP.put(21090, "../dict/get.json");
+		API_MAP.put(21007, "../dict/all.json");
 	}
 	
 	public ApiParam getParameters(HttpServletRequest request){

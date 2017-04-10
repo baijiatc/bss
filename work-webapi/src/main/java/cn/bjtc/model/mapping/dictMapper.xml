@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Dictionary">
+	<resultMap type="cn.bjtc.model.Dictionary" id="DictMap">
+		<result column="id" property="id"/>
+		<result column="dictname" property="dictname"/>
+		<result column="dictval" property="dictval"/>
+		<result column="dicttype" property=" dicttype"/>
+		<result column="dictst" property="dictst"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Dictionary" id="DictionaryMap">
+		<parameter property="id" resultMap="DictMap" />
+		<parameter property="dictname" resultMap="DictMap" />
+		<parameter property="dictval" resultMap="DictMap" />
+		<parameter property="dicttype" resultMap="DictMap" />
+		<parameter property="dictst" resultMap="DictMap" />
+	</parameterMap>
+ 
+ <insert id="saveDict" parameterMap="DictionaryMap">
+		INSERT INTO  dictionary (dictname,dictval,dicttype,dictst) VALUES (#{dictname},#{dictval},#{dicttype},#{dictst})
+	</insert>
+	
+	<update id="updateDict" parameterMap="DictionaryMap">
+		UPDATE dictionary SET dictname=#{dictname},dictval=#{dictval},dicttype=#{dicttype},dictst=#{dictst} 
+	</update>
+
+	<select id="findAllDicts" resultMap="DictMap" >
+	 	SELECT * FROM  dictionary WHERE   dictst=1
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="dictname!=null and dictname!=''"> AND dictname=#{dictname}</if>
+	 	<if test="dictval!=null and dictval!=''"> AND dictval=#{dictval}</if>
+	 	<if test="dicttype!=null"> AND dicttype=#{dicttype}</if>
+	 	 LIMIT #{pageOffset},#{pageSize}
+	</select>
+	
+	<select id="countAllDicts" resultType="Integer" >
+	 	SELECT count(id) FROM dictionary   WHERE   dictst=1	 
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="dictname!=null and dictname!=''"> AND dictname=#{dictname}</if>
+	 	<if test="dictval!=null and dictval!=''"> AND dictval=#{dictval}</if>
+	 	<if test="dicttype!=null"> AND dicttype=#{dicttype}</if>
+	</select>
+	 
+</mapper>

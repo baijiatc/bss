@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Syslog">
+	<resultMap type="cn.bjtc.model.Syslog" id="SysMap">
+		<result column="id" property="id"/>
+		<result column="logtype" property="logtype"/>
+		<result column="operator" property="operator"/>
+		<result column="privid" property=" privid"/>
+		<result column="createtime" property="createtime"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Syslog" id="SysParamMap">
+		<parameter property="id" resultMap="SysMap" />
+		<parameter property="logtype" resultMap="SysMap" />
+		<parameter property="operator" resultMap="SysMap" />
+		<parameter property="privid" resultMap="SysMap" />
+		<parameter property="createtime" resultMap="SysMap" />
+	</parameterMap>
+ 
+
+	<select id="findAllSys" resultMap="SysMap" >
+	 	SELECT * FROM  syslog    
+	 	 LIMIT #{pageOffset},#{pageSize}
+	</select>
+	
+	<select id="countAllSys" resultType="Integer" >
+	 	SELECT count(*) FROM syslog  	 
+	</select>
+	 
+</mapper>

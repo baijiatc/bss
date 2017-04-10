@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Role">
+	<resultMap type="cn.bjtc.model.Role" id="RoleMap">
+		<result column="roleid" property="roleid"/>
+		<result column="rolename" property="rolename"/>
+		<result column="rolest" property="rolest"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Role" id="RoleParamMap">
+		<parameter property="roleid" resultMap="RoleMap" />
+		<parameter property="rolename" resultMap="RoleMap" />
+		<parameter property="rolest" resultMap="RoleMap" />
+	</parameterMap>
+	<insert id="saveRole" parameterMap="RoleParamMap">
+		INSERT INTO role(rolename,rolest) VALUES (#{rolename},#{rolest})
+	</insert>
+	
+	<update id="updateRole" parameterMap="RoleParamMap">
+		UPDATE role SET rolename=#{rolename},rolest=#{rolest} WHERE roleid=#{roleid}
+	</update>
+	
+	<select id="findAllRoles" resultMap="RoleMap" >
+	 	SELECT * FROM role WHERE 1=1 
+	 	<if test="roleid!=null and roleid!=0"> AND roleid=#{roleid}</if>
+	 	<if test="rolename!=null and rolename!=''"> AND rolename=#{rolename}</if>
+	 	<if test="rolest!=null"> AND rolest=#{rolest}</if>
+	 	LIMIT #{pageOffset},#{pageSize}
+	</select>
+	
+	<select id="countAllRoles" resultType="Integer" >
+		SELECT count(roleid) FROM role WHERE 1=1
+		<if test="roleid!=null and roleid!=0"> AND roleid=#{roleid}</if>
+	 	<if test="rolename!=null and rolename!=''"> AND rolename=#{rolename}</if>
+	 	<if test="rolest!=null"> AND rolest=#{rolest}</if>
+	</select>
+</mapper>

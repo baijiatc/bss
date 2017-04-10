@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class CustomerViewController {
 
-	@RequestMapping(value="cstmls/show",method=RequestMethod.GET)
+	@RequestMapping(value="cstmls/show.html",method=RequestMethod.GET)
 	public String showCustomerView(){
 		return "cust/list";
 	}

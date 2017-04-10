@@ -6,10 +6,10 @@
 $(function(){
 	var options={
 		columns:[[
-          {field:'id',title: 'ID',align: 'center',hidden:'true'},
+          {field:'dictid',title: 'ID',align: 'center',hidden:'true'},
           {field:'dictname',title: '枚举名称',align: 'center',width: 200},
-          {field:'dictval',title: '枚举值',align: 'center',width: 200}
-          {field:'dicttype',title: '枚举类型',align: 'center',width: 200}
+          {field:'dictval',title: '枚举值',align: 'center',width: 200},
+          {field:'dicttype',title: '枚举类型',align: 'center',width: 200},
           {field:'dictst',title: '状态',align: 'center',width: 200}
 		]]
 	};
@@ -19,7 +19,7 @@ $(function(){
 	dictGrid.build(options,{code:21007});
 	//设置新建事件
 	dictGrid.create = function(){
-		DICTDIALOG.init({href:'dict/add',width:400});
+		DICTDIALOG.init({href:'dict/add.html',width:400});
 	};
 	//设置编辑事件
 	dictGrid.edit = function(){
@@ -28,11 +28,8 @@ $(function(){
 			BSS.warning('请选择要编辑的数据行');
 			return;
 		}
-		var id = row['id'];
-		if(BSS.Helper.isNull(row)){
-			return;
-		}
-		DICTDIALOG.init({href:'dict/'+id,width:400});
+		var dictid = row['dictid'];
+		DICTDIALOG.init({href:'dict/'+dictid+'.html',width:400});
 	};
 })
 </script>

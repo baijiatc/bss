@@ -18,21 +18,15 @@
 		<tr>
 			<td>枚举类型：</td>
 			<td>
+				<input class="easyui-textbox" type="text" name="dicttype" data-options="required:true"></input> 
 				 
-				<select class="easyui-textbox" name="dicttype">
-				   <option value="0">定义类型</option>
-				   <option>其他</option>
-				</select>
 			</td>
 		</tr>
 		
 		<tr>
 			<td>状态：</td>
 			<td> 
-			    	<select class="easyui-textbox" name="dictst">
-				   <option value="1">启用</option>
-				   <option value="0">停止</option>
-				</select>
+			    	<input class="easyui-textbox" type="text" name="dictst" data-options="required:true"></input>
 			 
 			
 			</td>
@@ -43,7 +37,7 @@
 DICTDIALOG.ok = function(){
 	var dict = BSS.form2json('#frm_dict');
 	BSS.dispatch({code:21005,data:[dict]},function(){
-		BSS.alert();;
+		BSS.alert("保存成功");;
 	},function(){});
 }
 </script>

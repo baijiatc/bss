@@ -1,16 +1,17 @@
 package cn.bjtc.model;
 
 public class Dictionary {
-    private Integer id;
+    private Integer dictid;
     private String dictname;//枚举名称
     private String dictval;//枚举值
     private Integer dicttype;//枚举类型
     private Integer dictst;//状态1-启用，0-停用
-	public Integer getId() {
-		return id;
+ 
+	public Integer getDictid() {
+		return dictid;
 	}
-	public void setId(Integer id) {
-		this.id = id;
+	public void setDictid(Integer dictid) {
+		this.dictid = dictid;
 	}
 	public String getDictname() {
 		return dictname;

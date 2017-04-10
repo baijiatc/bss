@@ -30,7 +30,7 @@ public class DictController extends BaseController{
 	}
 	
 	
-	@RequestMapping(value="creat",method=RequestMethod.POST)
+	@RequestMapping(value="create",method=RequestMethod.POST)
 	public ApiReturn execAddDict(){
 		ApiParam param=ApiManager.getInstance().getParameters(request);
 		DictionaryView  view=(DictionaryView) ParamUtil.convertToView(param, DictionaryView.class);

@@ -7,20 +7,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
+@RequestMapping("dict")
 public class DictViewController {
-	@RequestMapping(value="dict/show",method=RequestMethod.GET)
+	
+	@RequestMapping(value="show.html",method=RequestMethod.GET)
 	public String showDictView(){
 		return "dict/list";
 	}
 	
-	@RequestMapping(value="dict/add",method=RequestMethod.GET)
+	@RequestMapping(value="add.html",method=RequestMethod.GET)
 	public String showDictAddView(){
 		return "dict/add";
 	}
 	
-	@RequestMapping(value="dict/{id}",method=RequestMethod.GET)
-	public String showDictEditView(@PathVariable Integer id,Model model){
-		model.addAttribute("id",id);
+	@RequestMapping(value="{dictid}.html",method=RequestMethod.GET)
+	public String showDictEditView(@PathVariable Integer dictid,Model model){
+		model.addAttribute("dictid",dictid);
 		return "dict/edit";
 	}
 	

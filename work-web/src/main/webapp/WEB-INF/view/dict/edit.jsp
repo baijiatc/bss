@@ -4,43 +4,35 @@
 		<tr>
 			<td>枚举名称：</td>
 			<td>
-				<input class="easyui-textbox" type="text" name="dictname" data-options="required:true"></input>
+				<input class="easyui-textbox" id="id_dictname"  type="text" name="dictname" data-options="required:true"></input>
+			    <input class="easyui-textbox"  id="id_dictid" type="hidden" name="dictid" data-options="required:true"></input>
 			</td>
 		</tr>
 		
 		<tr>
 			<td>枚举值：</td>
 			<td>
-				<input class="easyui-textbox" type="text" name="dictval" data-options="required:true"></input>
+				<input class="easyui-textbox" id="id_dictval" type="text" name="dictval" data-options="required:true"></input>
 			</td>
 		</tr>
 		
 		<tr>
 			<td>枚举类型：</td>
 			<td>
-				 
-				<select class="easyui-textbox" name="dicttype">
-				   <option value="0">定义类型</option>
-				   <option>其他</option>
-				</select>
+		    	<input class="easyui-textbox"  id="id_dicttype" type="text" name="dicttype" data-options="required:true"></input>	 
 			</td>
 		</tr>
 		
 		<tr>
 			<td>状态：</td>
 			<td> 
-			    	<select class="easyui-textbox" name="dictst">
-				   <option value="1">启用</option>
-				   <option value="0">停止</option>
-				</select>
-			 
-			
+		     <input class="easyui-textbox"  id="id_dictst" type="text" name="dictst" data-options="required:true"></input>
 			</td>
 		</tr>
 	</table>
 </form>
 <script>
-BSS.dispatch({code:21090,data:[{id:'${id}'}]},function(resp){
+BSS.dispatch({code:21090,data:[{dictid:'${dictid}'}]},function(resp){
 	BSS.json2form('#frm_dict',resp.data[0]);
 });
 DICTDIALOG.ok = function(){

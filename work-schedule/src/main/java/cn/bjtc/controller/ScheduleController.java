@@ -13,12 +13,11 @@ import cn.bjtc.service.IScheduleService;
 @Controller
 public class ScheduleController {
 
-	@RequestMapping("sched/show")
+	@RequestMapping("trans/show.html")
 	public String showList(Model model){
 		List<Map<String, Object>> triggers = scheduleService.getQrtzTriggers();
-		model.addAttribute("test", "This is a test string...");
 		model.addAttribute("triggers", triggers);
-		return "list";
+		return "trans/list";
 	}
 	
 	@Autowired

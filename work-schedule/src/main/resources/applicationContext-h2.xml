@@ -21,12 +21,12 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
      <context:component-scan base-package="cn.bjtc.dao" />
      <context:component-scan base-package="cn.bjtc.service" />
      
-     <jdbc:embedded-database id="dataSource" type="H2">
+     <jdbc:embedded-database id="h2DataSource" type="H2">
      	<jdbc:script location="classpath:ddl/tables_h2.sql"/>
      </jdbc:embedded-database>
      
      <!-- 配置Jdbc模板 -->
-	<bean id="template" class="org.springframework.jdbc.core.JdbcTemplate">
-		<property name="dataSource" ref="dataSource"></property>
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="h2DataSource"></property>
 	</bean>
 </beans>

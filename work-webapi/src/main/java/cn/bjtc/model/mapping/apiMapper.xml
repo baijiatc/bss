@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Api">
+	<resultMap type="cn.bjtc.model.Api" id="ApiMap">
+		<result column="apiid" property="apiid"/>
+		<result column="code" property="code"/>
+		<result column="apiname" property="apiname"/>
+		<result column="apiurl" property="apiurl"/>
+		<result column="retype" property="retype"/>
+		<result column="apist" property="apist"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Api" id="ApiParamMap">
+		<parameter property="apiid" resultMap="ApiMap" />
+		<parameter property="code" resultMap="ApiMap" />
+		<parameter property="apiname" resultMap="ApiMap" />
+		<parameter property="apiurl" resultMap="ApiMap" />
+		<parameter property="retype" resultMap="ApiMap" />
+		<parameter property="apist" resultMap="ApiMap" />
+	</parameterMap>
+	<insert id="saveApi" parameterMap="ApiParamMap">
+		INSERT INTO sysapi(code,apiname,apiurl,retype,apist) VALUES (#{code},#{apiname},#{apiurl},#{retype},#{apist})
+	</insert>
+	
+	<update id="updateApi" parameterMap="ApiParamMap">
+		UPDATE sysapi SET code=#{code},apiname=#{apiname},apiurl=#{apiurl},retype=#{retype},apist=#{apist} WHERE apiid=#{apiid}
+	</update>
+	
+	<select id="findAllApis" resultMap="ApiMap" >
+	 	SELECT * FROM sysapi WHERE 1=1 
+	 	<if test="apiid!=null and apiid!=0"> AND apiid=#{apiid}</if>
+	 	<if test="code!=null and code!=0"> AND code=#{code}</if>
+	 	<if test="apiname!=null and apiname!=''"> AND apiname=#{apiname}</if>
+	 	<if test="apiurl!=null and apiurl!=''"> AND apiurl=#{apiurl}</if>
+	 	<if test="retype!=null and retype!=''"> AND retype=#{retype}</if>
+	 	<if test="apist!=null"> AND apist=#{apist}</if>
+	 	LIMIT #{pageOffset},#{pageSize}
+	</select>
+	
+	<select id="countAllApis" resultType="Integer" >
+		SELECT count(apiid) FROM sysapi WHERE 1=1
+		<if test="apiid!=null and apiid!=0"> AND apiid=#{apiid}</if>
+	 	<if test="code!=null and code!=0"> AND code=#{code}</if>
+	 	<if test="apiname!=null and apiname!=''"> AND apiname=#{apiname}</if>
+	 	<if test="apiurl!=null and apiurl!=''"> AND apiurl=#{apiurl}</if>
+	 	<if test="retype!=null and retype!=''"> AND retype=#{retype}</if>
+	 	<if test="apist!=null"> AND apist=#{apist}</if>
+	</select>
+</mapper>

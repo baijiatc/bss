@@ -16,7 +16,7 @@ import cn.bjtc.dao.utils.EntitySqlResolver;
 public class SpringJdbcDAO<T, K> implements IGenericDAO<T, K> {
 
 	@Autowired
-	private JdbcTemplate template;
+	private JdbcTemplate jdbcTemplate;
 	
 	private String processTableName(){
 		ParameterizedType type = (ParameterizedType) getClass().getGenericSuperclass();
@@ -29,7 +29,7 @@ public class SpringJdbcDAO<T, K> implements IGenericDAO<T, K> {
 		String sql = sqlMaker.makeSql(DML.INSERT);
 		 Object[] args = sqlMaker.setArgs(entity, DML.INSERT);
         int[] argTypes = sqlMaker.setArgTypes(entity, DML.INSERT);
-        template.update(sql.toString(), args, argTypes);
+        jdbcTemplate.update(sql.toString(), args, argTypes);
 	}
 	
 	public void update(T entity){
@@ -37,7 +37,7 @@ public class SpringJdbcDAO<T, K> implements IGenericDAO<T, K> {
 		String sql = sqlMaker.makeSql(DML.UPDATE);
         Object[] args = sqlMaker.setArgs(entity, DML.UPDATE);
         int[] argTypes = sqlMaker.setArgTypes(entity, DML.UPDATE);
-        template.update(sql, args, argTypes);
+        jdbcTemplate.update(sql, args, argTypes);
 	}
 	
 	public void delete(T entity) {
@@ -45,12 +45,12 @@ public class SpringJdbcDAO<T, K> implements IGenericDAO<T, K> {
         String sql = sqlMaker.makeSql(DML.DELETE);
         Object[] args = sqlMaker.setArgs(entity, DML.DELETE);
         int[] argTypes = sqlMaker.setArgTypes(entity, DML.DELETE);
-        template.update(sql, args, argTypes);
+        jdbcTemplate.update(sql, args, argTypes);
     }
 	
 	public void deleteAll() {
         String sql = " TRUNCATE TABLE " + processTableName();
-        template.execute(sql);
+        jdbcTemplate.execute(sql);
     }
 	
 	public void batchDelete(K[] ids) {
@@ -59,12 +59,12 @@ public class SpringJdbcDAO<T, K> implements IGenericDAO<T, K> {
             idStr+=",'"+ids[i]+"'";
         }
         String sql = " DELETE FROM " + processTableName() + " WHERE id in (?)";
-        template.update(sql, idStr.charAt(1));
+        jdbcTemplate.update(sql, idStr.charAt(1));
     }
 	
 	public void deleteById(K id) {
         String sql = " DELETE FROM " + processTableName() + " WHERE id=?";
-        template.update(sql, id);
+        jdbcTemplate.update(sql, id);
     }
 	
 	public void batchSave(List<T> lt) {
@@ -100,7 +100,7 @@ public class SpringJdbcDAO<T, K> implements IGenericDAO<T, K> {
         val = val.substring(1);
         sb.append(") value (").append(val).append(")");
         String sql = sb.toString();
-        template.batchUpdate(sql, params);
+        jdbcTemplate.batchUpdate(sql, params);
     }
 	
 	public void batchUpdate(List<T> lt) {
@@ -139,22 +139,22 @@ public class SpringJdbcDAO<T, K> implements IGenericDAO<T, K> {
         sb.deleteCharAt(sb.length() - 1);
         sb.append(" where ").append(primaryKey).append(" = ? ");
         String sql = sb.toString();
-        template.batchUpdate(sql, params);
+        jdbcTemplate.batchUpdate(sql, params);
     }
 	
 	public void execSQL(String sql) {
-		template.execute(sql);
+		jdbcTemplate.execute(sql);
     }
 
 	public List<T> findAll(String sql,Object... args){
-		return (List<T>) template.queryForList(sql,args);
+		return (List<T>) jdbcTemplate.queryForList(sql,args);
 	}
 
-	public JdbcTemplate getTemplate() {
-		return template;
+	private JdbcTemplate getJdbcTemplate() {
+		return jdbcTemplate;
 	}
 
-	public void setTemplate(JdbcTemplate template) {
-		this.template = template;
+	private void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
 	}
 }

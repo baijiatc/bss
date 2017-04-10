@@ -8,14 +8,14 @@ import cn.bjtc.dao.IGenericDAO;
 public class MongoDAO<T, K> implements IGenericDAO<T, K> {
 
 	@Autowired
-	private MongoTemplate template;
+	private MongoTemplate mongoTemplate;
 
-	public MongoTemplate getTemplate() {
-		return template;
+	private MongoTemplate getMongoTemplate() {
+		return mongoTemplate;
 	}
 
-	public void setTemplate(MongoTemplate template) {
-		this.template = template;
+	private void setMongoTemplate(MongoTemplate mongoTemplate) {
+		this.mongoTemplate = mongoTemplate;
 	}
 	
 }

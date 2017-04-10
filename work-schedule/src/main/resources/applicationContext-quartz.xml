@@ -17,33 +17,69 @@
      http://www.springframework.org/schema/cache/spring-cache-4.0.xsd">
 
 	<!-- 定义调用对象和调用对象的方法 -->
-	<bean id="demoJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+	<bean id="cstmJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
 		<!-- 调用的类 -->
 		<property name="jobClass">
-			<value>cn.bjtc.quartz.DemoQuartz</value>
+			<value>cn.bjtc.quartz.CustomerQuartz</value>
 		</property>
-		<property name="name" value="demoJob"></property>
-		<property name="group" value="demoJobGroup"></property>
+		<property name="name" value="客户数据传输"></property>
+		<property name="group" value="客户组"></property>
+		<property name="durability" value="true" />
+	</bean>
+	<bean id="orderJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<property name="jobClass">
+			<value>cn.bjtc.quartz.OrderQuartz</value>
+		</property>
+		<property name="name" value="订单数据传输"></property>
+		<property name="group" value="订单组"></property>
+		<property name="durability" value="true" />
+	</bean>
+	<bean id="flowJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<property name="jobClass">
+			<value>cn.bjtc.quartz.MoneyFlowQuartz</value>
+		</property>
+		<property name="name" value="资金流水传输"></property>
+		<property name="group" value="资金流水组"></property>
 		<property name="durability" value="true" />
 	</bean>
 	<!-- 定义触发时间 -->
 	<!-- cron表达式 -->
-	<bean id="demoTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-		<property name="jobDetail" ref="demoJob"/>
-		<property name="name" value="demoTrigger" />
-		<property name="group" value="demoTriggerGroup" />
+	<bean id="cstmTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="cstmJob"/>
+		<property name="name" value="客户触发器" />
+		<property name="group" value="客户触发器组" />
+		<property name="cronExpression">
+			<value>0 */30 * * * ?</value>
+		</property>
+	</bean>
+	<bean id="orderTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="orderJob"/>
+		<property name="name" value="订单触发器" />
+		<property name="group" value="订单触发器组" />
 		<property name="cronExpression">
 			<value>0 */1 * * * ?</value>
+		</property>
+	</bean>
+	<bean id="flowTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="flowJob"/>
+		<property name="name" value="资金流水触发器" />
+		<property name="group" value="资金流水触发器组" />
+		<property name="cronExpression">
+			<value>0 * */1 * * ?</value>
 		</property>
 	</bean>
 	<!-- 总管理类 如果将lazy-init='false'那么容器启动就会执行调度程序 -->
 	<bean id="scheduler" lazy-init="false" autowire="no"
 		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-		<property name="dataSource" ref="dataSource"/>
+		<property name="dataSource" ref="h2DataSource"/>
 		<!-- 注册触发器 -->
 		<property name="triggers">
 			<list>
-				<ref bean="demoTrigger" />
+				<ref bean="cstmTrigger" />
+				<ref bean="orderTrigger" />
+				<ref bean="flowTrigger" />
 			</list>
 		</property>
 		<!-- 初始化之后延迟30秒启动scheduler -->

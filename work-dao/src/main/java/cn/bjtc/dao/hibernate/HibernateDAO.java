@@ -10,18 +10,18 @@ import cn.bjtc.dao.IGenericDAO;
 public class HibernateDAO<T, K> implements IGenericDAO<T, K> {
 	
 	@Autowired
-	private HibernateTemplate template;
+	private HibernateTemplate hibernateTemplate;
 	
 	public List<T> findAll(String queryString, Object[] values){
-		return (List<T>) template.find(queryString, values);
+		return (List<T>) hibernateTemplate.find(queryString, values);
 	}
 
-	public HibernateTemplate getTemplate() {
-		return template;
+	private HibernateTemplate getHibernateTemplate() {
+		return hibernateTemplate;
 	}
 
-	public void setTemplate(HibernateTemplate template) {
-		this.template = template;
+	private void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+		this.hibernateTemplate = hibernateTemplate;
 	}
 	
 }

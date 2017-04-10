@@ -16,6 +16,9 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
   http://www.springframework.org/schema/cache 
   http://www.springframework.org/schema/cache/spring-cache-4.0.xsd">
      
+	<import resource="classpath:applicationContext-shiro.xml"/>
 	<import resource="classpath:applicationContext-view.xml"/>
 	<import resource="classpath:applicationContext-mysql.xml"/>
+	<import resource="classpath:applicationContext-h2.xml"/>
+	<import resource="classpath:applicationContext-quartz.xml"/>
 </beans>

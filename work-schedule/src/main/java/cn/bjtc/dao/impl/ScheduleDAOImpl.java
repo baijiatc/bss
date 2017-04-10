@@ -17,4 +17,21 @@ public class ScheduleDAOImpl extends SpringJdbcDAO<Map<String, Object>, Integer>
 		return super.findAll(sql, null);
 	}
 
+	public Integer countQrtzTriggers() {
+		String sql = "SELECT count(*) as qrtzcount FROM qrtz_triggers;";
+		List<Map<String, Object>> countMapList= super.findAll(sql, null);
+		if(countMapList == null || countMapList.size() == 0){
+			return 0;
+		}
+		Map<String, Object> countMap = countMapList.get(0);
+		if(countMap.isEmpty()){
+			return 0;
+		}
+		try {
+			return countMap.get("qrtzcount") == null?0:Integer.parseInt(countMap.get("qrtzcount").toString());
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+
 }

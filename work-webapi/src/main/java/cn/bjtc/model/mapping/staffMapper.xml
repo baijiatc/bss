@@ -7,7 +7,7 @@
 		<result column="gender" property="gender"/>
 		<result column="mobile" property="mobile"/>
 		<result column="idcard" property="idcard"/>
-		<result column="telphone" property="telphone"/>
+		<result column="telephone" property="telephone"/>
 		<result column="email" property="email"/>
 		<result column="edu" property="edu"/>
 		<result column="jobstation" property="jobstation"/>
@@ -27,7 +27,7 @@
 		<parameter property="gender" resultMap="StaffMap" />
 		<parameter property="mobile" resultMap="StaffMap" />
 		<parameter property="idcard" resultMap="StaffMap" />
-		<parameter property="telphone" resultMap="StaffMap" />
+		<parameter property="telephone" resultMap="StaffMap" />
 		<parameter property="email" resultMap="StaffMap" />
 		<parameter property="edu" resultMap="StaffMap" />
 		<parameter property="jobstation" resultMap="StaffMap" />
@@ -42,11 +42,11 @@
 		<parameter property="creator" resultMap="StaffMap" />
 	</parameterMap>
 	<insert id="saveStaff" parameterMap="StaffParamMap">
-		INSERT INTO staff(staffid,staffname,gender,mobile,idcard,telphone,email,edu,jobstation,passwd,address,departid,emername,emerphone,staffst,leavetime,jointime,creator) VALUES (#{staffid},#{staffname},#{gender},#{mobile},#{idcard},#{telphone},#{email},#{edu},#{jobstation},#{passwd},#{address},#{departid},#{emername},#{emerphone},#{staffst},#{leavetime},#{jointime},#{creator})
+		INSERT INTO staff(staffid,staffname,gender,mobile,idcard,telephone,email,edu,jobstation,passwd,address,departid,emername,emerphone,staffst,leavetime,jointime,creator) VALUES (#{staffid},#{staffname},#{gender},#{mobile},#{idcard},#{telphone},#{email},#{edu},#{jobstation},#{passwd},#{address},#{departid},#{emername},#{emerphone},#{staffst},#{leavetime},#{jointime},#{creator})
 	</insert>
 	
 	<update id="updateStaff" parameterMap="StaffParamMap">
-		UPDATE staff SET staffname=#{staffname},gender=#{gender},mobile=#{mobile},idcard=#{idcard},telphone=#{telphone},email=#{email},edu=#{edu},jobstation=#{jobstation},passwd=#{passwd},address=#{address},departid=#{departid},emername=#{emername},emerphone=#{emerphone},staffst=#{staffst},leavetime=#{leavetime},jointime=#{jointime},creator=#{creator} WHERE staffid=#{staffid}
+		UPDATE staff SET staffname=#{staffname},gender=#{gender},mobile=#{mobile},idcard=#{idcard},telephone=#{telephone},email=#{email},edu=#{edu},jobstation=#{jobstation},passwd=#{passwd},address=#{address},departid=#{departid},emername=#{emername},emerphone=#{emerphone},staffst=#{staffst},leavetime=#{leavetime},jointime=#{jointime},creator=#{creator} WHERE staffid=#{staffid}
 	</update>
 	
 	<select id="findAllStaff" resultMap="StaffMap" >

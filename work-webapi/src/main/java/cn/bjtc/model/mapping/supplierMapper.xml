@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Supplier">
+	<resultMap type="cn.bjtc.model.Supplier" id="SupplierMap">
+		<result column="suppid" property="suppid"/>
+		<result column="suppname" property="suppname"/>
+		<result column="supplv" property="supplv"/>
+		<result column="contact" property="contact"/>
+		<result column="mobile" property="mobile"/>
+		<result column="telephone" property="telephone"/>
+		<result column="address" property="address"/>
+		<result column="isopenshop" property="isopenshop"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Supplier" id="SupplierParamMap">
+		<parameter property="suppid" resultMap="SupplierMap" />
+		<parameter property="suppname" resultMap="SupplierMap" />
+		<parameter property="supplv" resultMap="SupplierMap" />
+		<parameter property="contact" resultMap="SupplierMap" />
+		<parameter property="mobile" resultMap="SupplierMap" />
+		<parameter property="telephone" resultMap="SupplierMap" />
+		<parameter property="address" resultMap="SupplierMap" />
+		<parameter property="isopenshop" resultMap="SupplierMap" />
+	</parameterMap>
+	<insert id="saveSupplier" parameterMap="SupplierParamMap">
+		INSERT INTO supplier(suppid,suppname,supplv,contact,mobile,telephone,address,isopenshop) VALUES (#{suppid},#{suppname},#{supplv},#{contact},#{mobile},#{telephone},#{address},#{isopenshop})
+	</insert>
+	
+	<update id="updateSupplier" parameterMap="SupplierParamMap">
+		UPDATE supplier SET suppname=#{suppname},supplv=#{supplv},contact=#{contact},mobile=#{mobile},telephone=#{telephone},address=#{address},isopenshop=#{isopenshop} WHERE suppid=#{suppid}
+	</update>
+	
+	<select id="findAllSupplier" resultMap="SupplierMap" >
+	 	SELECT * FROM supplier WHERE 1=1 
+	 	<if test="suppid!=null and suppid!=0"> AND suppid=#{suppid}</if>
+	 	<if test="suppname!=null and suppname!=''"> AND suppname=#{suppname}</if>
+	 	<if test="supplv!=null and supplv!=0"> AND supplv=#{supplv}</if>
+	 	<if test="contact!=null and contact!=0"> AND contact=#{contact}</if>
+	 	<if test="mobile!=null and mobile!=''"> AND mobile=#{mobile}</if>
+	 	<if test="telephone!=null and telephone!=0"> AND telephone=#{telephone}</if>
+	 	<if test="address!=null and address!=0"> AND address=#{address}</if>
+	 	<if test="isopenshop!=null and isopenshop!=''"> AND isopenshop=#{isopenshop}</if>
+	 	LIMIT #{pageOffset},#{pageSize}
+	</select>
+	
+	<select id="countAllSupplier" resultType="Integer" >
+		SELECT count(suppid) FROM supplier WHERE 1=1
+		<if test="suppid!=null and suppid!=0"> AND suppid=#{suppid}</if>
+	 	<if test="suppname!=null and suppname!=''"> AND suppname=#{suppname}</if>
+	 	<if test="supplv!=null and supplv!=0"> AND supplv=#{supplv}</if>
+	 	<if test="contact!=null and contact!=0"> AND contact=#{contact}</if>
+	 	<if test="mobile!=null and mobile!=''"> AND mobile=#{mobile}</if>
+	 	<if test="telephone!=null and telephone!=0"> AND telephone=#{telephone}</if>
+	 	<if test="address!=null and address!=0"> AND address=#{address}</if>
+	 	<if test="isopenshop!=null and isopenshop!=''"> AND isopenshop=#{isopenshop}</if>
+	</select>
+</mapper>

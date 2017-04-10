@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:webflow="http://www.springframework.org/schema/webflow-config"
+	xsi:schemaLocation=" http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+    http://www.springframework.org/schema/webflow-config 
+    http://www.springframework.org/schema/webflow-config/spring-webflow-config-2.0.xsd">
+    
+    <!--  如何根据http请求选择合适的controller是MVC中一项十分关键的功能，在Spring MVC中，HandlerMapping接口是这一活动的抽象 -->
+	<!-- SimpleUrlHandlerMapping  通过配置文件，把一个URL映射到Controller -->
+	<bean id="viewMappings" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<!-- /shopping.do 请求由 flowController 来处理 -->
+		<!-- 不管设成 /shopping.do 还是设成 /shopping ，或者 /shopping.htm ，效果都是一样的， flowController 都会去找 id 为 shopping的flow来执行 -->
+		<property name="mappings">
+			<value>/cmchk.html=flowController</value>
+		</property>
+		 <property name="defaultHandler">
+			<!-- UrlFilenameViewController 会将 "/index" 这样的请求映射成名为 "index" 的视图 -->
+			<bean class="org.springframework.web.servlet.mvc.UrlFilenameViewController" />
+		</property> 
+	</bean>
+	<!-- 我们只要明白 FlowController 可根据客户端请求的结尾部分，找出相应的 flow 来执行。配置 FlowController只需指定FlowExecutor即可 -->
+	<bean id="flowController" class="org.springframework.webflow.mvc.servlet.FlowController">
+		<property name="flowExecutor" ref="flowExecutor" />
+	</bean>
+    
+    <!-- FlowExecutor 是 Spring Web Flow 的一个核心接口，启动某个 flow ，都要通过这个接口来进行。
+    	从配置角度来说，只要保证有个 FlowExecutor 就可以了， Spring Web Flow 的默认行为已经足够 -->
+    <!-- FlowExecutor 就是通过 id 来找出要执行的 flow 。至于这个 id ，则是要由用户来指定的。
+    	在默认配置情况下，如果客户端发送了如下URL请求：http://localhost:8080/CartApp/spring/shopping。
+    	则从 Spring Web Flow 的角度来看，这个 URL 就表示客户想要执行一个 id 为“ shopping ”的 flow ，
+    	于是就会在 FlowRegistry 中查找名为“ shopping ”的 flow，由FlowExecutor负责执行。 -->
+	<webflow:flow-executor id="flowExecutor" />
+	
+	<!-- 所有 flow的定义文件它的位置在这里进行配置， flow-builder-services 用于配置 flow 的特性 -->
+	<!-- FlowRegistry 是存放 flow 的仓库，每个定义 flow 的 XML 文档被解析后，都会被分配一个唯一的 id ，并以 FlowDefinition 对象的形式存放在 FlowResigtry 中 -->
+	<!-- 每个 flow 都必须要有 id 来标识，如果在配置中省略，那么该 flow 默认的 id 将是该定义文件（xml文件）的文件名去掉后缀所得的字符串
+	（例如本例中如果去掉id="shopping"，那么flow的id就是shopping.xml去掉后缀名.xml后的shopping作为id） -->
+	
+	<!--  flow-builder-services 属性的配置指明了在这个 flow-registry “仓库”里的 flow 的一些基本特性，
+		例如，是用 Unified EL 还是 OGNL 、 model （模型）对象中的数据在显示之前是否需要先作转换，等等 -->
+		
+	<webflow:flow-registry id="flowRegistry" flow-builder-services="flowBuilderServices">
+		<webflow:flow-location path="/WEB-INF/flow/cstmchk.xml" id="cmchk" />
+		<!-- webflow:flow-location path="/WEB-INF/flow/cstmchk.xml" id="cmchk" /-->
+	</webflow:flow-registry>
+	
+	<!--Web Flow 中的视图通过 MVC 框架的视图技术来呈现 -->
+	<webflow:flow-builder-services id="flowBuilderServices" view-factory-creator="mvcViewFactoryCreator" />
+	
+	<!-- 指明 MVC 框架的 view resolver ，用于通过 view 名查找资源 -->
+	<bean id="mvcViewFactoryCreator" class="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator">
+		<property name="viewResolvers" ref="viewResolver" />
+	</bean>
+</beans>

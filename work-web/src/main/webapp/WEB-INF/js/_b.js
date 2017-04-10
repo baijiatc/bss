@@ -292,6 +292,17 @@ BSS.Tab = function(selector){
 			$($this.selector).tabs('close', index);
 		}
 	};
+	$this.selectedTab=function(){
+		return $($this.selector).tabs('getSelected');
+	};
+	$this.updateSelectedTab=function(html){
+		if(!html){BSS.warning('请设定要更新的内容!');}
+		var tab = $this.selectedTab();
+		$($this.selector).tabs('update',{
+			tab:tab,
+			options:{content:html}
+		});
+	};
 }
 /**
  * 封装EasyUI Tree。
@@ -322,16 +333,12 @@ BSS.Panel = function(selector){
 	var $this = this;
 	$this.selector = selector;
 	$this.init=function(options,html){
-		if(!html){
-			html = options;
-			options = {};
-		}
 		options = options || {};
 		var defaults = {
 			title:'标题',
 			fit:true,
 			border:false,
-			content:html
+			content:html || null
 		};
 		$.extend(defaults,options);
 		$($this.selector).panel(defaults);

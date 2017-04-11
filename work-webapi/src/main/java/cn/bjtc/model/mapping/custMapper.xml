@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Customer">
+	<resultMap type="cn.bjtc.model.Customer" id="CustMap">
+		<result column="cstmid" property="cstmid"/>
+		<result column="cstmname" property="cstmname"/>
+		<result column="mobile" property="mobile"/>
+		<result column="email" property="email"/>
+		<result column="cstmlevel" property="cstmlevel"/>
+		<result column="regtime" property="regtime"/>
+		<result column="cstmst" property="cstmst"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Customer" id="CustomerMap">
+		<parameter property="cstmid" resultMap="CustMap" />
+		<parameter property="cstmname" resultMap="CustMap" />
+		<parameter property="mobile" resultMap="CustMap" />
+		<parameter property="email" resultMap="CustMap" />
+		<parameter property="regtime" resultMap="CustMap" />
+		<parameter property="cstmlevel" resultMap="CustMap" />
+		<parameter property="cstmst" resultMap="CustMap" />
+		<parameter property="cstmtype" resultMap="CustMap" />
+	</parameterMap>
+ 
+
+	<select id="findAllCusts" resultMap="CustMap" >
+	 	SELECT cstmid,cstmname,mobile,email,cstmlevel,regtime,cstmst FROM customer WHERE cstmtype=1 
+	 	 LIMIT #{pageOffset},#{pageSize}
+	</select>
+	
+	<select id="countAllCusts" resultType="Integer"  >
+	 	SELECT count(cstmid) FROM customer WHERE cstmtype=1 
+	 	 
+	</select>
+	 
+</mapper>

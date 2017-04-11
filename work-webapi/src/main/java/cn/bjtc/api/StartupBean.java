@@ -14,7 +14,7 @@ public class StartupBean {
 		initApiMap();
 	}
 	
-	private void initApiMap(){
+	public void initApiMap(){
 		ApiView view = new ApiView();
 		view.setApist(1);
 		view.setPageSize(Integer.MAX_VALUE);

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Channel">
+	<resultMap type="cn.bjtc.model.Channel" id="ChannelMap">
+		<result column="chanid" property="chanid"/>
+		<result column="channame" property="channame"/>
+		<result column="chantype" property="chantype"/>
+		<result column="mobile" property="mobile"/>
+		<result column="contact" property="contact"/>
+		<result column="province" property="province"/>
+		<result column="city" property="city"/>
+		<result column="district" property="district"/>
+		<result column="town" property="town"/>
+		<result column="village" property="village"/>
+		<result column="address" property="address"/>
+		<result column="parentid" property="parentid"/>
+		<result column="chanst" property="chanst"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Channel" id="ChannelParamMap">
+		<parameter property="chanid" resultMap="ChannelMap"/>
+		<parameter property="channame" resultMap="ChannelMap"/>
+		<parameter property="chantype" resultMap="ChannelMap"/>
+		<parameter property="mobile" resultMap="ChannelMap"/>
+		<parameter property="contact" resultMap="ChannelMap"/>
+		<parameter property="province" resultMap="ChannelMap"/>
+		<parameter property="city" resultMap="ChannelMap"/>
+		<parameter property="district" resultMap="ChannelMap"/>
+		<parameter property="town" resultMap="ChannelMap"/>
+		<parameter property="village" resultMap="ChannelMap"/>
+		<parameter property="address" resultMap="ChannelMap"/>
+		<parameter property="parentid" resultMap="ChannelMap"/>
+		<parameter property="chanst" resultMap="ChannelMap"/>
+	</parameterMap>
+	<insert id="saveChannel" parameterMap="ChannelParamMap">
+		INSERT INTO channel(channame,chantype,mobile,contact,province,city,district,town,village,address,parentid,chanst) 
+		VALUES (#{channame},#{chantype},#{mobile},#{contact},#{province},#{city},#{district},#{town},#{village},#{address},#{parentid},#{chanst})
+	</insert>
+	
+	<update id="updateChannel" parameterMap="ChannelParamMap">
+		UPDATE channel SET 
+		channame=#{channame},chantype=#{chantype},mobile=#{mobile},
+		contact=#{contact},province=#{province},city=#{city},
+		district=#{district},town=#{town},village=#{village},
+		address=#{address},parentid=#{parentid},chanst=#{chanst}
+		WHERE chanid=#{chanid}
+	</update>
+	
+	<select id="findAllChannels" resultMap="ChannelMap" >
+	 	SELECT * FROM channel WHERE 1=1 
+	 	<if test="chanid!=null and chanid!=0"> AND chanid=#{chanid}</if>
+	 	<if test="channame!=null and channame!=''"> AND channame=#{channame}</if>
+	 	<if test="chantype!=null and chantype!=0"> AND chantype=#{chantype}</if>
+	 	<if test="mobile!=null and mobile!=0"> AND mobile=#{mobile}</if>
+	 	<if test="contact!=null and contact!=''"> AND contact=#{contact}</if>
+	 	<if test="province!=null and province!=0"> AND province=#{province}</if>
+	 	<if test="city!=null and city!=0"> AND city=#{city}</if>
+	 	<if test="district!=null and district!=0"> AND district=#{district}</if>
+	 	<if test="town!=null and town!=0"> AND town=#{town}</if>
+	 	<if test="village!=null and village!=0"> AND village=#{village}</if>
+	 	<if test="parentid!=null"> AND parentid=#{parentid}</if>
+	 	<if test="chanst!=null"> AND chanst=#{chanst}</if>
+	 	LIMIT #{pageOffset},#{pageSize}
+	</select>
+	
+	<select id="countAllChannels" resultType="Integer" >
+		SELECT count(chanid) FROM channel WHERE 1=1
+		<if test="chanid!=null and chanid!=0"> AND chanid=#{chanid}</if>
+	 	<if test="channame!=null and channame!=''"> AND channame=#{channame}</if>
+	 	<if test="chantype!=null and chantype!=0"> AND chantype=#{chantype}</if>
+	 	<if test="mobile!=null and mobile!=0"> AND mobile=#{mobile}</if>
+	 	<if test="contact!=null and contact!=''"> AND contact=#{contact}</if>
+	 	<if test="province!=null and province!=0"> AND province=#{province}</if>
+	 	<if test="city!=null and city!=0"> AND city=#{city}</if>
+	 	<if test="district!=null and district!=0"> AND district=#{district}</if>
+	 	<if test="town!=null and town!=0"> AND town=#{town}</if>
+	 	<if test="village!=null and village!=0"> AND village=#{village}</if>
+	 	<if test="parentid!=null"> AND parentid=#{parentid}</if>
+	 	<if test="chanst!=null"> AND chanst=#{chanst}</if>
+	</select>
+</mapper>

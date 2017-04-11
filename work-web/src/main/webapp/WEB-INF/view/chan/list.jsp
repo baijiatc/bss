@@ -24,8 +24,13 @@ $(function(){
 	chanGrid.create = function(){
 		chanDialog.ok = function(){
 			var chan = BSS.form2json('#frm_chanadd');
-			BSS.dispatch({code:13007,data:[chan]},function(){
-				BSS.alert();;
+			BSS.dispatch({code:13007,data:[chan]},function(resp){
+				if(resp.code == 0){
+					BSS.info('保存成功！');
+					chanGrid.load({code:13009});
+				}else{
+					BSS.error(resp.message);
+				}
 			},function(){});
 		}
 		chanDialog.init({href:'chan/add.html',width:400,height:400});
@@ -40,7 +45,12 @@ $(function(){
 		chanDialog.ok = function(){
 			var chan = BSS.form2json('#frm_chanedit');
 			BSS.dispatch({code:13008,data:[chan]},function(){
-				BSS.alert('保存成功！');
+				if(resp.code == 0){
+					BSS.info('保存成功！');
+					chanGrid.load({code:13009});
+				}else{
+					BSS.error(resp.message);
+				}
 			},function(){});
 		}
 		var chanid = row['chanid'];

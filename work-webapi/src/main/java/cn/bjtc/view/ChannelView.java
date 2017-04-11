@@ -4,7 +4,7 @@ public class ChannelView extends Pagination {
 	private Integer chanid;
 	private String channame;
 	private Integer chantype;
-	private Integer mobile;
+	private Long mobile;
 	private String contact;
 	private Integer province;
 	private Integer city;
@@ -33,10 +33,10 @@ public class ChannelView extends Pagination {
 	public void setChantype(Integer chantype) {
 		this.chantype = chantype;
 	}
-	public Integer getMobile() {
+	public Long getMobile() {
 		return mobile;
 	}
-	public void setMobile(Integer mobile) {
+	public void setMobile(Long mobile) {
 		this.mobile = mobile;
 	}
 	public String getContact() {

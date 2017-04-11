@@ -22,7 +22,7 @@
 		</tr>
 		<tr>
 			<td>电话：</td>
-			<td><input id="id_telphone" class="easyui-textbox" type="text" name="telphone" data-options="required:false"></input></td>
+			<td><input id="id_telephone" class="easyui-textbox" type="text" name="telephone" data-options="required:false"></input></td>
 		</tr>
 		<tr>
 			<td>邮件：</td>

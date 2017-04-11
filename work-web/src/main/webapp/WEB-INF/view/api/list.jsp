@@ -17,6 +17,15 @@ $(function(){
 	//构建datagrid，并填充数据
 	var apiGrid = new BSS.DataGrid('#tbl_api_datagrid');
 	var apiDialog = new BSS.Dialog('#div_apiadd');
+	apiGrid.toolbar.push({iconCls:'icon-refresh',text:'刷新',handler:function(){
+		BSS.dispatch({code:21014},function(resp){
+			if(resp.code == 0){
+				BSS.info('刷新成功！');
+			}else{
+				BSS.error(resp.message);
+			}
+		},function(resp){});
+	}});
 	apiGrid.build(options,{code:21012});
 	//设置新建事件
 	apiGrid.create = function(){

@@ -32,4 +32,10 @@ public class DoLoginController extends BaseController {
 		return apiReturn;
 	}
 	
+	@RequestMapping(value="logout",method=RequestMethod.POST)
+	public ApiReturn logout(){
+		Subject subject = SecurityUtils.getSubject();
+		subject.logout();
+		return apiReturn;
+	}
 }

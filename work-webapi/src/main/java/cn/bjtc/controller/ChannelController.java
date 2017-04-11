@@ -10,64 +10,50 @@ import org.springframework.web.bind.annotation.RestController;
 import cn.bjtc.api.ApiManager;
 import cn.bjtc.api.ApiParam;
 import cn.bjtc.api.ApiReturn;
-import cn.bjtc.api.StartupBean;
 import cn.bjtc.api.util.ParamUtil;
-import cn.bjtc.service.IApiService;
-import cn.bjtc.view.ApiView;
+import cn.bjtc.service.IChannelService;
+import cn.bjtc.view.ChannelView;
 
 @RestController
-@RequestMapping("api")
-public class ApiController extends BaseController {
+@RequestMapping("chan")
+public class ChannelController extends BaseController {
 
 	@RequestMapping(value="all", method=RequestMethod.POST)
-	public ApiReturn showApis(){
+	public ApiReturn showChannels(){
 		ApiParam param = ApiManager.getInstance().getParameters(request);
-		ApiView view = (ApiView) ParamUtil.convertToView(param, ApiView.class);
-		int count = apiService.countAllApis(view);
-		List<?> privis = apiService.findAllApis(view);
+		ChannelView view = (ChannelView) ParamUtil.convertToView(param, ChannelView.class);
+		int count = channelService.countAllChannels(view);
+		List<?> privis = channelService.findAllChannels(view);
 		apiReturn.setCount(count);
 		apiReturn.setData(privis);
 		return apiReturn;
 	}
 	
 	@RequestMapping(value="create", method=RequestMethod.POST)
-	public ApiReturn execAddApi(){
+	public ApiReturn execAddChannel(){
 		ApiParam param = ApiManager.getInstance().getParameters(request);
-		ApiView view = (ApiView) ParamUtil.convertToView(param, ApiView.class);
-		apiService.saveApi(view);
+		ChannelView view = (ChannelView) ParamUtil.convertToView(param, ChannelView.class);
+		channelService.saveChannel(view);
 		return apiReturn;
 	}
 	
 	@RequestMapping(value="update", method=RequestMethod.POST)
-	public ApiReturn execUpdateApi(){
+	public ApiReturn execUpdateChannel(){
 		ApiParam param = ApiManager.getInstance().getParameters(request);
-		ApiView view = (ApiView) ParamUtil.convertToView(param, ApiView.class);
-		apiService.updateApi(view);
+		ChannelView view = (ChannelView) ParamUtil.convertToView(param, ChannelView.class);
+		channelService.updateChannel(view);
 		return apiReturn;
 	}
 	
 	@RequestMapping(value="get", method=RequestMethod.POST)
-	public ApiReturn execeditApi(){
+	public ApiReturn execeditChannel(){
 		ApiParam param = ApiManager.getInstance().getParameters(request);
-		ApiView view = (ApiView) ParamUtil.convertToView(param, ApiView.class);
-		List<?> privis = apiService.findAllApis(view);
+		ChannelView view = (ChannelView) ParamUtil.convertToView(param, ChannelView.class);
+		List<?> privis = channelService.findAllChannels(view);
 		apiReturn.setData(privis);
 		return apiReturn;
 	}
 	
-	@RequestMapping(value="refresh", method=RequestMethod.POST)
-	public ApiReturn refreshApiMap(){
-		try {
-			startupBean.initApiMap();
-		} catch (Exception e) {
-			apiReturn.setCode(1);
-			apiReturn.setMessage("刷新过程中出现异常！");
-		}
-		return apiReturn;
-	}
-	
 	@Autowired
-	private IApiService apiService;
-	@Autowired
-	private StartupBean startupBean;
+	private IChannelService channelService;
 }

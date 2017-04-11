@@ -25,13 +25,13 @@ public class ParamUtil {
 					field.setAccessible(true);
 					Class<?> type = field.getType();
 					if(type==Integer.class){
-						field.set(view, Integer.valueOf(map.get(key).toString()));
+						field.set(view, Integer.valueOf(String.valueOf(map.get(key))));
 					}else if(type==Double.class){
-						field.setDouble(view, Double.valueOf(map.get(key).toString()));
+						field.set(view, Double.valueOf(String.valueOf(map.get(key))));
 					}else if(type==Long.class){
-						field.setLong(view, Long.valueOf(map.get(key).toString()));
+						field.set(view, Long.valueOf(String.valueOf(map.get(key))));
 					}else if(type==Boolean.class){
-						field.setBoolean(view, Boolean.valueOf(map.get(key).toString()));
+						field.set(view, Boolean.valueOf(String.valueOf(map.get(key))));
 					}else{
 						field.set(view, map.get(key));
 					}

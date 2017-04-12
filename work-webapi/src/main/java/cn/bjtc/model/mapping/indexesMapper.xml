@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Indexes">
+	<resultMap type="cn.bjtc.model.Indexes" id="IndexesMap">
+		<result column="id" property="id"/>
+		<result column="idxcode" property="idxcode"/>
+		<result column="idxname" property="idxname"/>
+		<result column="idxorder" property="idxorder"/>
+		<result column="idxtype" property="idxtype"/>
+		<result column="idxscope" property="idxscope"/>
+		<result column="idxformula" property="idxformula"/>
+		<result column="isdisplay" property="isdisplay"/>
+		<result column="validdt" property="validdt"/>
+		<result column="invaliddt" property="invaliddt"/>
+		<result column="creator" property="creator"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Indexes" id="IndexesParamMap">
+		<parameter property="id" resultMap="IndexesMap" />
+		<parameter property="idxcode" resultMap="IndexesMap" />
+		<parameter property="idxname" resultMap="IndexesMap" />
+		<parameter property="idxorder" resultMap="IndexesMap" />
+		<parameter property="idxtype" resultMap="IndexesMap" />
+		<parameter property="idxscope" resultMap="IndexesMap" />
+		<parameter property="idxformula" resultMap="IndexesMap" />
+		<parameter property="isdisplay" resultMap="IndexesMap" />
+		<parameter property="validdt" resultMap="IndexesMap" />
+		<parameter property="invaliddt" resultMap="IndexesMap" />
+		<parameter property="creator" resultMap="IndexesMap" />
+	</parameterMap>
+	<insert id="saveIndexes" parameterMap="IndexesParamMap">
+		INSERT INTO indexes(id,idxcode,idxname,idxorder,idxtype,idxscope,idxformula,isdisplay,validdt,invaliddt,creator) VALUES (#{id},#{idxcode},#{idxname},#{idxorder},#{idxtype},#{idxscope},#{idxformula},#{isdisplay},#{validdt},#{invaliddt},#{creator})
+	</insert>
+	
+	<update id="updateIndexes" parameterMap="IndexesParamMap">
+		UPDATE  indexes set idxcode=#{idxcode},idxname=#{idxname},idxorder=#{idxorder},idxtype=#{idxtype},idxscope=#{idxscope},idxformula=#{idxformula},isdisplay=#{isdisplay},validdt=#{validdt},invaliddt=#{invaliddt},creator=#{creator} WHERE id=#{id}
+	</update>
+	
+	<select id="findAllIndexes" resultMap="IndexesMap" >
+	 	SELECT * FROM indexes WHERE 1=1 
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="idxcode!=null and idxcode!=''"> AND idxcode=#{idxcode}</if>
+	 	<if test="idxname!=null and idxname!=''"> AND idxname=#{idxname}</if>
+	 	<if test="idxorder!=null and idxorder!=0"> AND idxorder=#{idxorder}</if>
+	 	<if test="idxtype!=null and idxtype!=0"> AND idxtype=#{idxtype}</if>
+	 	<if test="idxscope!=null and idxscope!=0"> AND idxscope=#{idxscope}</if>
+	 	<if test="idxformula!=null and idxformula!=''"> AND idxformula=#{idxformula}</if>
+	 	<if test="isdisplay!=null and isdisplay!=0"> AND isdisplay=#{isdisplay}</if>
+	 	<if test="validdt!=null and validdt!=0"> AND validdt=#{validdt}</if>
+	 	<if test="invaliddt!=null and invaliddt!=0"> AND invaliddt=#{invaliddt}</if>
+	 	<if test="creator!=null and creator!=0"> AND creator=#{creator}</if>
+	 	LIMIT #{pageOffset},#{pageSize}
+	</select>
+	
+	<select id="countAllIndexes" resultType="Integer" >
+		SELECT count(id) FROM indexes WHERE 1=1
+		<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="idxcode!=null and idxcode!=''"> AND idxcode=#{idxcode}</if>
+	 	<if test="idxname!=null and idxname!=''"> AND idxname=#{idxname}</if>
+	 	<if test="idxorder!=null and idxorder!=0"> AND idxorder=#{idxorder}</if>
+	 	<if test="idxtype!=null and idxtype!=0"> AND idxtype=#{idxtype}</if>
+	 	<if test="idxscope!=null and idxscope!=0"> AND idxscope=#{idxscope}</if>
+	 	<if test="idxformula!=null and idxformula!=''"> AND idxformula=#{idxformula}</if>
+	 	<if test="isdisplay!=null and isdisplay!=0"> AND isdisplay=#{isdisplay}</if>
+	 	<if test="validdt!=null and validdt!=0"> AND validdt=#{validdt}</if>
+	 	<if test="invaliddt!=null and invaliddt!=0"> AND invaliddt=#{invaliddt}</if>
+	 	<if test="creator!=null and creator!=0"> AND creator=#{creator}</if>
+	</select>
+</mapper>

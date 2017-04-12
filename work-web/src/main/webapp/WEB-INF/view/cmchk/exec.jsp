@@ -9,7 +9,7 @@
 var execPnl =new BSS.Panel('#div_cstm_exec_pnl');
 execPnl.init({header:'#div_cstmchk_exec_pnlheader'});
 $('#lnk_return').click(function(){
-	BSS.showView('${flowExecutionUrl}&_eventId=continue',function(html){
+	BSS.showView('cstmchk/show.html',function(html){
 		MAINTAB.updateSelectedTab(html);
 	});
 });

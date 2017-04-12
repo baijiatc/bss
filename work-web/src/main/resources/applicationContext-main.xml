@@ -18,7 +18,6 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
      
 	<import resource="classpath:applicationContext-shiro.xml"/>
 	<import resource="classpath:applicationContext-view.xml"/>
-	<import resource="classpath:applicationContext-flow.xml"/>
 	<import resource="classpath:applicationContext-mysql.xml"/>
 	<import resource="classpath:applicationContext-h2.xml"/>
 	<import resource="classpath:applicationContext-quartz.xml"/>

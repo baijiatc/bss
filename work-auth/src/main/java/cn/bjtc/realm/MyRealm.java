@@ -12,6 +12,10 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 
+import cn.bjtc.model.LoginUser;
+import cn.bjtc.service.IAuthService;
+import cn.bjtc.tools.SpringUtil;
+
 /**
  * 自定义的指定Shiro验证用户登录的类
  * @see 在本例中定义了2个用户:jadyer和玄玉,jadyer具有admin角色和admin:manage权限,玄玉不具有任何角色和权限
@@ -41,8 +45,10 @@ public class MyRealm extends AuthorizingRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
 		UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
-		setSession("loginuser","admin");
-		return new SimpleAuthenticationInfo("admin","admin",getName());
+		IAuthService authService = (IAuthService) SpringUtil.getBean("authService");
+		LoginUser loginUser = authService.findUserByName(token.getUsername());
+		setSession("loginuser",loginUser);
+		return new SimpleAuthenticationInfo(loginUser.getUsername(),loginUser.getPassword(),getName());
 	}
 	
 	/**

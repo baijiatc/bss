@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Idxparam">
+	<resultMap type="cn.bjtc.model.Idxparam" id="IdxparamMap">
+		<result column="id" property="id"/>
+		<result column="parmcode" property="parmcode"/>
+		<result column="parmname" property="parmname"/>
+		<result column="parmtype" property="parmtype"/>
+		<result column="defaultvalue" property="defaultvalue"/>
+		<result column="creator" property="creator"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Idxparam" id="IdxparamParamMap">
+		<parameter property="id" resultMap="IdxparamMap" />
+		<parameter property="parmcode" resultMap="IdxparamMap" />
+		<parameter property="parmname" resultMap="IdxparamMap" />
+		<parameter property="parmtype" resultMap="IdxparamMap" />
+		<parameter property="defaultvalue" resultMap="IdxparamMap" />
+		<parameter property="creator" resultMap="IdxparamMap" />
+	</parameterMap>
+	<insert id="saveIdxparam" parameterMap="IdxparamParamMap">
+		INSERT INTO idxparam(id,parmcode,parmname,parmtype,defaultvalue,creator) VALUES (#{id},#{parmcode},#{parmname},#{parmtype},#{defaultvalue},#{creator})
+	</insert>
+	
+	<update id="updateIdxparam" parameterMap="IdxparamParamMap">
+		UPDATE  idxparam set parmcode=#{parmcode},parmname=#{parmname},parmtype=#{parmtype},defaultvalue=#{defaultvalue},creator=#{creator} WHERE id=#{id}
+	</update>
+	
+	<select id="findAllIdxparam" resultMap="IdxparamMap" >
+	 	SELECT * FROM idxparam WHERE 1=1 
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="parmcode!=null and parmcode!=''"> AND parmcode=#{parmcode}</if>
+	 	<if test="parmname!=null and parmname!=''"> AND parmname=#{parmname}</if>
+	 	<if test="parmtype!=null and parmtype!=0"> AND parmtype=#{parmtype}</if>
+	 	<if test="defaultvalue!=null and defaultvalue!=0"> AND defaultvalue=#{defaultvalue}</if>
+	 	<if test="creator!=null and creator!=0"> AND creator=#{creator}</if>
+	 	LIMIT #{pageOffset},#{pageSize}
+	</select>
+	
+	<select id="countAllIdxparam" resultType="Integer" >
+		SELECT count(id) FROM idxparam WHERE 1=1
+		<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="parmcode!=null and parmcode!=''"> AND parmcode=#{parmcode}</if>
+	 	<if test="parmname!=null and parmname!=''"> AND parmname=#{parmname}</if>
+	 	<if test="parmtype!=null and parmtype!=0"> AND parmtype=#{parmtype}</if>
+	 	<if test="defaultvalue!=null and defaultvalue!=0"> AND defaultvalue=#{defaultvalue}</if>
+	 	<if test="creator!=null and creator!=0"> AND creator=#{creator}</if>
+	</select>
+</mapper>

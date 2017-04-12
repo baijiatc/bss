@@ -42,4 +42,6 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
    		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
    	</bean>
    	<bean id="startupBean" lazy-init="false" class="cn.bjtc.api.StartupBean" init-method="init"/>
+   	
+   	<bean class="cn.bjtc.tools.SpringUtil"/>
 </beans>

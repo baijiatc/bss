@@ -23,13 +23,26 @@
  
 
 	<select id="findAllCusts" resultMap="CustMap" >
-	 	SELECT cstmid,cstmname,mobile,email,cstmlevel,regtime,cstmst FROM customer WHERE cstmtype=1 
+	 	SELECT cstmid,cstmname,mobile,email,cstmlevel,regtime,cstmst FROM customer WHERE 1=1 
+	 	<if test="cstmid !=null and cstmid !=0"> AND cstmid=#{cstmid}</if> 
+	 	<if test="cstmname !=null and cstmid !=''"> AND cstmname=#{cstmname}</if> 
+	 	<if test="mobile !=null and mobile !=''"> AND mobile=#{mobile}</if> 
+	 	<if test="email !=null and email !=''"> AND email=#{email}</if> 
+	 	<if test="cstmlevel !=null and cstmlevel !=0"> AND cstmlevel=#{cstmlevel}</if> 
+	 	<if test="cstmst !=null"> AND cstmst=#{cstmst}</if> 
+	 	<if test="cstmtype !=null and cstmtype !=0"> AND cstmtype=#{cstmtype}</if> 
 	 	 LIMIT #{pageOffset},#{pageSize}
 	</select>
 	
 	<select id="countAllCusts" resultType="Integer"  >
-	 	SELECT count(cstmid) FROM customer WHERE cstmtype=1 
-	 	 
+	 	SELECT count(cstmid) FROM customer WHERE 1=1
+	 	<if test="cstmid !=null and cstmid !=0"> AND cstmid=#{cstmid}</if> 
+	 	<if test="cstmname !=null and cstmid !=''"> AND cstmname=#{cstmname}</if> 
+	 	<if test="mobile !=null and mobile !=''"> AND mobile=#{mobile}</if> 
+	 	<if test="email !=null and email !=''"> AND email=#{email}</if> 
+	 	<if test="cstmlevel !=null and cstmlevel !=0"> AND cstmlevel=#{cstmlevel}</if> 
+	 	<if test="cstmst !=null"> AND cstmst=#{cstmst}</if> 
+	 	<if test="cstmtype !=null and cstmtype !=0"> AND cstmtype=#{cstmtype}</if> 
 	</select>
 	 
 </mapper>

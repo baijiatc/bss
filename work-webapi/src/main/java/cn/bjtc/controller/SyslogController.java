@@ -1,3 +1,4 @@
+
 package cn.bjtc.controller;
 
 import java.util.List;
@@ -44,3 +45,4 @@ public class SyslogController extends BaseController{
 	private  ISyslogService  syslogService; 
 	
 }
+ 

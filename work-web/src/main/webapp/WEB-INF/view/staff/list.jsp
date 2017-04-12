@@ -13,7 +13,7 @@ $(function(){
           {field:'gender',title: '性别',align: 'center',width: 100},
           {field:'mobile',title: '手机',align: 'center',width: 100},
           {field:'idcard',title: '身份证',align: 'center',width: 100},
-          {field:'telphone',title: '电话',align: 'center',width: 100},
+          {field:'telephone',title: '电话',align: 'center',width: 100},
           {field:'email',title: '邮件',align: 'center',width: 100},
           {field:'edu',title: '教育程度',align: 'center',width: 100},
           {field:'jobstation',title: '岗位',align: 'center',width: 100},

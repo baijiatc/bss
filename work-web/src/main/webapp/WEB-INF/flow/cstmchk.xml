@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+ http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+ <!-- view-state中的view对应jsp文件夹中的jsp页面，on是触发事件，to对应state id -->
+	<!-- 根据排在第一位的顺序来执行 -->
+	<view-state id="viewCert" view="cmchk/cert">
+		<transition on="cnfrm" to="viewCnfrm">
+		</transition>
+	</view-state>
+	<view-state id="viewCnfrm" view="cmchk/cnfrm">
+		<transition on="exec" to="viewExec">
+		</transition>
+	</view-state>
+	<view-state id="viewExec" view="cmchk/exec">
+		<transition on="continue" to="continue">
+		</transition>
+	</view-state>
+	<end-state id="continue" view="externalRedirect:servletRelative:../cstmchk/show.html">
+	</end-state>
+</flow>

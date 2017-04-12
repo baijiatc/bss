@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import cn.bjtc.api.ApiManager;
 import cn.bjtc.api.ApiParam;
 import cn.bjtc.api.ApiReturn;
+import cn.bjtc.api.StartupBean;
 import cn.bjtc.api.util.ParamUtil;
 import cn.bjtc.service.IApiService;
 import cn.bjtc.view.ApiView;
@@ -54,6 +55,19 @@ public class ApiController extends BaseController {
 		return apiReturn;
 	}
 	
+	@RequestMapping(value="refresh", method=RequestMethod.POST)
+	public ApiReturn refreshApiMap(){
+		try {
+			startupBean.initApiMap();
+		} catch (Exception e) {
+			apiReturn.setCode(1);
+			apiReturn.setMessage("刷新过程中出现异常！");
+		}
+		return apiReturn;
+	}
+	
 	@Autowired
 	private IApiService apiService;
+	@Autowired
+	private StartupBean startupBean;
 }

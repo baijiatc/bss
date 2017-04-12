@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<table class="easyui-datagrid"></table>
+<table id="syslog-datagrid"  class="easyui-datagrid"></table>
 <div id="div_syslog" style="padding:0 0 0 50px;"></div>
 <!-- javascript部分 -->
  <script>
@@ -15,9 +15,10 @@ $(function(){
 		]]
 	};
 	//构建datagrid，并填充数据
-	var dataGrid = new BSS.DataGrid('.easyui-datagrid');
+	var syslogGrid = new BSS.DataGrid('#syslog-datagrid');
 	SYSLOG  = new BSS.Dialog('#div_syslog');
-	dataGrid.build(options,{code:21004});
+	syslogGrid.toolbar=null;
+	syslogGrid.build(options,{code:21004});
 
 })
 </script>

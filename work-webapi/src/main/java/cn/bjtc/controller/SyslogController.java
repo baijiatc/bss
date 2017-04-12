@@ -1,3 +1,4 @@
+
 package cn.bjtc.controller;
 
 import java.util.List;
@@ -15,7 +16,7 @@ import cn.bjtc.service.ISyslogService;
 import cn.bjtc.view.SyslogView;
  
 @RestController
-@RequestMapping("sys")
+@RequestMapping("syslog")
 public class SyslogController extends BaseController{
 
 	@RequestMapping(value="all",method=RequestMethod.POST)
@@ -37,10 +38,6 @@ public class SyslogController extends BaseController{
 		List<?> sys=syslogService.findAllSys(view);
 		apiReturn.setData(sys);
 		return apiReturn;
-    	
-    	
-    	
-    	
     }
 	
 
@@ -48,3 +45,4 @@ public class SyslogController extends BaseController{
 	private  ISyslogService  syslogService; 
 	
 }
+ 

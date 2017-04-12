@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<table class="easyui-datagrid"></table>
+<table  id="cust-datagrid" class="easyui-datagrid"></table>
 <div id="div_customer" style="padding:0 0 0 50px;"></div>
 <!-- javascript部分 -->
  <script>
@@ -16,9 +16,9 @@ $(function(){
 		]]
 	};
 	//构建datagrid，并填充数据
-	var dataGrid = new BSS.DataGrid('.easyui-datagrid');
+	var custGrid = new BSS.DataGrid('#cust-datagrid');
 	CUSTOMER  = new BSS.Dialog('#div_customer');
-	dataGrid.build(options,{code:12002});
+	custGrid.build(options,{code:12002});
 
 })
 </script>

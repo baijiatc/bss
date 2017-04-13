@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Stock">
+	<resultMap type="cn.bjtc.model.Stock" id="StockMap">
+		<result column="id" property="stockid"/>
+		<result column="productid" property="productid"/>
+		<result column="skuid" property="skuid"/>
+		<result column="stocknum" property="stocknum"/>
+		<result column="minstock" property="minstock"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Stock" id="StockParamMap">
+		<parameter property="stockid" resultMap="StockMap" />
+		<parameter property="productid" resultMap="StockMap" />
+		<parameter property="skuid" resultMap="StockMap" />
+		<parameter property="stocknum" resultMap="StockMap" />
+		<parameter property="minstock" resultMap="StockMap" />
+	</parameterMap>
+	<select id="findAllStocks" resultMap="StockMap" >
+	 	SELECT * FROM stock WHERE 1=1 
+	 	<if test="stockid!=null and stockid!=0"> AND id=#{stockid}</if>
+	 	<if test="productid!=null and productid!=0"> AND productid=#{productid}</if>
+	 	<if test="skuid!=null and skuid!=0"> AND skuid=#{skuid}</if>
+	 	<if test="stocknum!=null and stocknum!=0"> AND stocknum=#{stocknum}</if>
+	 	<if test="minstock!=null and minstock!=0"> AND minstock=#{minstock}</if>
+	 	LIMIT #{pageOffset},#{pageSize}
+	</select>
+	<select id="countAllStocks" resultType="Integer" >
+		SELECT count(id) FROM stock WHERE 1=1
+		<if test="stockid!=null and stockid!=0"> AND id=#{stockid}</if>
+	 	<if test="productid!=null and productid!=0"> AND productid=#{productid}</if>
+	 	<if test="skuid!=null and skuid!=0"> AND skuid=#{skuid}</if>
+	 	<if test="stocknum!=null and stocknum!=0"> AND stocknum=#{stocknum}</if>
+	 	<if test="minstock!=null and minstock!=0"> AND minstock=#{minstock}</if>
+	</select>
+</mapper>

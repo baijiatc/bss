@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div id="div_cstmchk_cnfrm_pnl" style="width:auto,height:300px;">
 	<div id="div_cstmchk_cnfrm_container" style="width:auto;">
 		<div id="div_cstmchk_left" data-options="region:'west'" style="width:350px;" align="center">
@@ -12,13 +13,14 @@
 					<td>审核结果：</td>
 					<td>
 						<select class="easyui-combobox" type="text" name="result" disabled>
-							<option value="2" selected>通过</option>
+							<option value="-1">请选择</option>
+							<option value="2" <c:if test="${cst eq 2 }">selected</c:if>>通过</option>
 						</select>
 					</td>
 				</tr>
 				<tr>
 					<td>审核意见：</td>
-					<td><input class="easyui-textbox" data-options="multiline:true" readonly></td>
+					<td><input class="easyui-textbox" data-options="multiline:true" readonly value="${crslt }"></td>
 				</tr>
 			</table>
 		</div>

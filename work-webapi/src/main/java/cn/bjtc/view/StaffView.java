@@ -5,7 +5,7 @@ public class StaffView extends Pagination {
 	private Integer staffid;
 	private String staffname;
 	private Integer gender;
-	private Integer mobile;
+	private Long mobile;
 	private String idcard;
 	private String telephone;
 	private String email;
@@ -38,10 +38,10 @@ public class StaffView extends Pagination {
 	public void setGender(Integer gender) {
 		this.gender = gender;
 	}
-	public Integer getMobile() {
+	public Long getMobile() {
 		return mobile;
 	}
-	public void setMobile(Integer mobile) {
+	public void setMobile(Long mobile) {
 		this.mobile = mobile;
 	}
 	public String getIdcard() {

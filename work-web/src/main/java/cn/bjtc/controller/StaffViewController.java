@@ -25,4 +25,10 @@ public class StaffViewController {
 		model.addAttribute("staffid", staffid);
 		return "staff/edit";
 	}
+	
+	@RequestMapping(value="{staffid}/profile.html",method=RequestMethod.GET)
+	public String showStaffCenterView(@PathVariable Integer staffid,Model model){
+		model.addAttribute("staffid", staffid);
+		return "staff/profile";
+	}
 }

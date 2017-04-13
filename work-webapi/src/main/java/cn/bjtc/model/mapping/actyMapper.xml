@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Activity">
+	<resultMap type="cn.bjtc.model.Activity" id="ActyMap">
+		<result column="id" property="id"/>
+		<result column="actname" property="actname"/>
+		<result column="acttype" property="acttype"/>
+		<result column="actcat" property="actcat"/>
+		<result column="begindt" property="begindt"/>
+		<result column="enddt" property="enddt"/>
+		<result column="actdesc" property="actdesc"/>
+		<result column="creator" property="creator"/>
+		<result column="actst" property="actst"/>
+		
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Activity" id="ActyParamMap">
+		<parameter property="id" resultMap="ActyMap" />
+		<parameter property="actname" resultMap="ActyMap" />
+		<parameter property="acttype" resultMap="ActyMap" />
+		<parameter property="actcat" resultMap="ActyMap" />
+		<parameter property="begindt" resultMap="ActyMap" />
+		<parameter property="enddt" resultMap="ActyMap" />
+		<parameter property="actdesc" resultMap="ActyMap" />
+		<parameter property="creator" resultMap="ActyMap" />
+		<parameter property="actst" resultMap="ActyMap" />
+	</parameterMap>
+ 
+   <insert id="saveActy" parameterMap="ActyParamMap">
+		INSERT INTO  activity (actname,acttype,actcat,begindt,enddt,actdesc,creator,actst) VALUES (#{actname},#{acttype},#{actcat},#{begindt},#{enddt},#{actdesc},#{creator},#{actst})
+   </insert>
+	
+	<update id="updateActy" parameterMap="ActyParamMap">
+		UPDATE activity SET actname=#{actname},acttype=#{acttype},actcat=#{actcat},begindt=#{begindt},enddt=#{enddt},actdesc=#{actdesc},creator=#{creator},actst=#{actst} WHERE id =#{id}
+	</update>
+
+	<select id="findAllActys" resultMap="ActyMap" >
+	 	SELECT * FROM  activity WHERE   1=1
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="actname!=null and actname!=''"> AND actname=#{actname}</if>
+	 	<if test="acttype!=null and acttype!=0"> AND acttype=#{acttype}</if>
+	 	<if test="actcat!=null and actcat!=0"> AND actcat=#{actcat}</if>
+	 	<if test="begindt!=null and begindt!=0"> AND begindt=#{begindt}</if>
+	 	<if test="enddt!=null and enddt!=0"> AND enddt=#{enddt}</if>
+	 	<if test="actdesc!=null and actdesc!=''"> AND actdesc=#{actdesc}</if>
+	 	<if test="creator!=null"> AND creator=#{creator}</if>
+	    <if test="actst!=null and actst!=0"> AND actst=#{actst}</if>
+	 	LIMIT #{pageOffset},#{pageSize}
+	</select>
+	
+	<select id="countAllActys" resultType="Integer" >
+	 	SELECT count(id) FROM activity   WHERE   1=1
+	 		<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="actname!=null and actname!=''"> AND actname=#{actname}</if>
+	 	<if test="acttype!=null and acttype!=0"> AND acttype=#{acttype}</if>
+	 	<if test="actcat!=null and actcat!=0"> AND actcat=#{actcat}</if>
+	 	<if test="begindt!=null and begindt!=0"> AND begindt=#{begindt}</if>
+	 	<if test="enddt!=null and enddt!=0"> AND enddt=#{enddt}</if>
+	 	<if test="actdesc!=null and actdesc!=''"> AND actdesc=#{actdesc}</if>
+	 	<if test="creator!=null"> AND creator=#{creator}</if>
+	    <if test="actst!=null and actst!=0"> AND actst=#{actst}</if>
+	</select>
+	 
+</mapper>

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
-<form id="frm_api" method="post">
+<form id="frm_apiedit" method="post">
 	<table cellpadding="5">
 		<tr>
 			<td>业务编码：</td>
@@ -34,6 +34,6 @@
 </form>
 <script>
 BSS.dispatch({code:21011,data:[{apiid:'${apiid}'}]},function(resp){
-	BSS.json2form('#frm_api',resp.data[0]);
+	BSS.json2form('#frm_apiedit',resp.data[0]);
 });
 </script>

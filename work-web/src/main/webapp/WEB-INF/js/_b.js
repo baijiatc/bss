@@ -144,6 +144,16 @@ BSS = {
 		});
 	}
 };
+BSS.Accordion = function(selector){
+	var $this = this;
+	$this.selector=selector;
+	$this.init=function(options){
+		options = options || {};
+		var defaults = {border:false};
+		$.extend(defaults,options);
+		$($this.selector).accordion(defaults);
+	}
+}
 /**
  * 封装Jquery EasyUI DataGrid
  */

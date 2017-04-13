@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<form id="frm_api" method="post">
+<form id="frm_apiadd" method="post">
 	<table cellpadding="5">
 		<tr>
 			<td>业务编码：</td>

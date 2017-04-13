@@ -30,7 +30,7 @@ $(function(){
 	//设置新建事件
 	apiGrid.create = function(){
 		apiDialog.ok = function(){
-			var api = BSS.form2json('#frm_api');
+			var api = BSS.form2json('#frm_apiadd');
 			BSS.dispatch({code:21010,data:[api]},function(){
 				BSS.info('保存成功');
 				apiGrid.load({code:21012});
@@ -48,7 +48,7 @@ $(function(){
 		var apiid = row['apiid'];
 		apiDialog.init({href:'api/'+apiid+'.html',width:400});
 		apiDialog.ok = function(){
-			var api = BSS.form2json('#frm_api');
+			var api = BSS.form2json('#frm_apiedit');
 			BSS.dispatch({code:21013,data:[api]},function(){
 				BSS.info('更新成功');
 				apiGrid.load({code:21012});

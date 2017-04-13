@@ -2,10 +2,17 @@ package cn.bjtc.model;
 
 public class LoginUser {
 
+	private Integer uid;
 	private String username;
 	private String password;
 	private boolean isRemember = false;
 	
+	public Integer getUid() {
+		return uid;
+	}
+	public void setUid(Integer uid) {
+		this.uid = uid;
+	}
 	public String getUsername() {
 		return username;
 	}

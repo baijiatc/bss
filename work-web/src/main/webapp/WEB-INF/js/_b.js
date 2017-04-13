@@ -21,10 +21,7 @@ BSS = {
 	   return o;  
 	},
 	json2form:function(selector,json){
-		var obj = $(selector);
-		$.each(json, function (name, ival) {
-			$('#id_'+name).textbox('setValue',ival);
-		});
+		var obj = $(selector).form('load',json);
 	},
 	/**
 	 * 动态加载页面内容<br/>

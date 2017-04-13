@@ -1,0 +1,71 @@
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop"
+xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+xmlns:cache="http://www.springframework.org/schema/cache" xmlns:p="http://www.springframework.org/schema/p"
+xmlns:mvc="http://www.springframework.org/schema/mvc"
+xsi:schemaLocation="http://www.springframework.org/schema/beans 
+  http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+  http://www.springframework.org/schema/aop
+  http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+  http://www.springframework.org/schema/context
+  http://www.springframework.org/schema/context/spring-context-4.0.xsd
+  http://www.springframework.org/schema/tx
+  http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+  http://www.springframework.org/schema/mvc
+  http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+  http://www.springframework.org/schema/cache 
+  http://www.springframework.org/schema/cache/spring-cache-4.0.xsd">
+     
+    <context:component-scan base-package="cn.bjtc.dao" />
+    <context:component-scan base-package="cn.bjtc.service" />
+    <!-- 引入配置文件 -->
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+      	<property name="location" value="classpath:config.properties" />
+    </bean>
+	<bean id="masterDataSource" class="com.alibaba.druid.pool.DruidDataSource">
+		<property name="driverClassName" value="${master.db.driver}" />
+		<property name="url" value="${master.db.url}" />
+		<property name="username" value="${master.db.username}" />
+		<property name="password" value="${master.db.password}" />
+	</bean>
+	<bean id="slaveDataSource" class="com.alibaba.druid.pool.DruidDataSource">
+		<property name="driverClassName" value="${slave.db.driver}" />
+		<property name="url" value="${slave.db.url}" />
+		<property name="username" value="${slave.db.username}" />
+		<property name="password" value="${slave.db.password}" />
+	</bean>
+	<bean id="dataSource" class="cn.bjtc.dao.dynamic.DynamicDataSource">
+		<property name="targetDataSources">
+			<map key-type="java.lang.String">
+				<!-- write -->
+				<entry key="master" value-ref="masterDataSource"/>
+				<!-- read -->
+				<entry key="slave" value-ref="slaveDataSource"/>
+			</map>
+		</property>
+		<property name="defaultTargetDataSource" ref="masterdataSource"/>
+	</bean>
+	<bean id="dataSourceInterceptor" class="cn.bjtc.dao.dynamic.DataSourceInterceptor"/>
+    <!-- 配置数据库注解aop -->
+    <aop:config>  
+        <aop:aspect id="dataSourceAspect" ref="dataSourceInterceptor">  
+            <aop:pointcut id="master" expression="execution(* cn.bjtc.service.master.*.*(..))" />  
+            <aop:pointcut id="slave" expression="execution(* cn.bjtc.service.slave.*.*(..))" />  
+            <aop:before pointcut-ref="master" method="setMaster" />  
+            <aop:before pointcut-ref="slave" method="setSlave" />  
+        </aop:aspect>  
+    </aop:config>
+	<!-- 声明式事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+  	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+      	<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations" value="classpath:cn/bjtc/model/mapping/*.xml"></property> 
+  	</bean>
+  	<!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
+  	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+       <property name="dataSource" ref="dataSource" />
+   	</bean>
+   	<bean id="template" class="org.mybatis.spring.SqlSessionTemplate">
+   		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+   	</bean>
+</beans>

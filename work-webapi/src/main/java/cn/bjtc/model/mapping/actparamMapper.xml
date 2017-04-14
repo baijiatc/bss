@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Actparam">
+	<resultMap type="cn.bjtc.model.Actparam" id="ActparamMap">
+		<result column="id" property="id"/>
+		<result column="actid" property="actid"/>
+		<result column="paramtype" property="paramtype"/>
+		<result column="paramvalue" property="paramvalue"/>
+		<result column="creator" property="creator"/>	
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Actparam" id="ActparamParamMap">
+		<parameter property="id" resultMap="ActparamMap" />
+		<parameter property="actid" resultMap="ActparamMap" />
+		<parameter property="paramtype" resultMap="ActparamMap" />
+		<parameter property="paramvalue" resultMap="ActparamMap" />
+		<parameter property="creator" resultMap="ActparamMap" />
+	</parameterMap>
+ 
+   <insert id="saveActparam" parameterMap="ActparamParamMap">
+		INSERT INTO  actparam (actid,paramtype,paramvalue,creator) VALUES (#{actid},#{paramtype},#{paramvalue},#{creator})
+   </insert>
+	
+	<update id="updateActparam" parameterMap="ActparamParamMap">
+		UPDATE actparam SET actid=#{actid},paramtype=#{paramtype},paramvalue=#{paramvalue},creator=#{creator}   WHERE id =#{id}
+	</update>
+
+	<select id="findAllActparams" resultMap="ActparamMap" >
+	 	SELECT * FROM  actparam WHERE   1=1
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="actid!=null and actid!=0"> AND actid=#{actid}</if>
+	 	<if test="paramtype!=null and  paramtype!=0"> AND paramtype=#{paramtype}</if>
+	 	<if test="paramvalue!=null and paramvalue!=0"> AND paramvalue=#{paramvalue}</if>
+	 	<if test="creator!=null"> AND creator=#{creator}</if>  
+	 	LIMIT #{pageOffset},#{pageSize}
+	</select>
+	
+	<select id="countAllActparams" resultType="Integer" >
+	 	SELECT count(id) FROM actparam   WHERE   1=1
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="actid!=null and actid!=0"> AND actid=#{actid}</if>
+	 	<if test="paramtype!=null and  paramtype!=0"> AND paramtype=#{paramtype}</if>
+	 	<if test="paramvalue!=null and paramvalue!=0"> AND paramvalue=#{paramvalue}</if>
+	 	<if test="creator!=null"> AND creator=#{creator}</if> 
+	</select>
+	 
+</mapper>

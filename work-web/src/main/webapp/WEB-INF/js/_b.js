@@ -21,10 +21,7 @@ BSS = {
 	   return o;  
 	},
 	json2form:function(selector,json){
-		var obj = $(selector);
-		$.each(json, function (name, ival) {
-			$('#id_'+name).textbox('setValue',ival);
-		});
+		var obj = $(selector).form('load',json);
 	},
 	/**
 	 * 动态加载页面内容<br/>
@@ -144,6 +141,43 @@ BSS = {
 		});
 	}
 };
+BSS.StringBuilder = function(){
+	var $this = this;
+	$this.strArr = [];
+	$this.append=function(str){
+		str = str || '';
+		$this.strArr.push(str);
+		return $this;
+	};
+	$this.toString=function(){
+		var str = '';
+		var len = $this.strArr.length;
+		if(len==0){
+			return str;
+		}
+		for(var i = 0; i < len; i++){
+			var subStr = $this.strArr[i];
+			str += subStr;
+		}
+		return str;
+	};
+}
+BSS.PropGrid = function(selector){
+	var $this = this;
+	$this.selector=selector;
+	$this.init=function(options){
+		options = options || {};
+		var defaults = {showGroup:false,border:true,showHeader:true};
+		$.extend(defaults,options);
+		$($this.selector).propertygrid(defaults);
+	};
+	$this.append=function(row){
+		$($this.selector).propertygrid('appendRow',row);
+	};
+	$this.getChanges=function(){
+		return $($this.selector).propertygrid('getChanges');
+	}
+}
 BSS.Accordion = function(selector){
 	var $this = this;
 	$this.selector=selector;

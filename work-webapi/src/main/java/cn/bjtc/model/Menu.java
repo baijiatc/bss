@@ -1,7 +1,5 @@
 package cn.bjtc.model;
 
-import java.util.List;
-
 public class Menu {
 
 	private Integer menuid;
@@ -10,8 +8,8 @@ public class Menu {
 	private Integer parentid;
 	private String icon;
 	private Integer sort;
-	private Integer menust;
-	private List<Menu> childs;
+	private Integer menust;//1-启用，0-停用，-1删除
+ 
 	
 	public Integer getMenuid() {
 		return menuid;
@@ -54,11 +52,5 @@ public class Menu {
 	}
 	public void setMenust(Integer menust) {
 		this.menust = menust;
-	}
-	public List<Menu> getChilds() {
-		return childs;
-	}
-	public void setChilds(List<Menu> childs) {
-		this.childs = childs;
 	}
 }

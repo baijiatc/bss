@@ -1,0 +1,39 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<table id="tbl_menu_datagrid" class="easyui-datagrid"></table>
+<div id="div_menuadd" style="padding:0 0 0 50px;"></div>
+<!-- javascript部分 -->
+<script language="javascript" src="js/easyui/jquery.easyui.min.js" charset="utf-8"></script>
+<script language="javascript" src="js/easyui/locale/easyui-lang-zh_CN.js" charset="utf-8"></script>
+<script>
+$(function(){
+	var options={
+		columns:[[
+          {field:'menuid',title: 'ID',align: 'center',hidden:'true'},
+          {field:'menuname',title: '菜单名称',align: 'center',width: 220},
+          {field:'url',title: '菜单URL',align: 'center',width: 220},
+          {field:'parentid',title: '上级菜单',align: 'center',width: 220},
+          {field:'icon',title: '菜单图标',align: 'center',width: 220},
+          {field:'sort',title: '菜单排序',align: 'center',width: 220},
+          {field:'menust',title: '状态',align: 'center',width: 220},
+		]]
+	};
+	//构建datagrid，并填充数据
+	var menuGrid = new BSS.DataGrid('#tbl_menu_datagrid');
+    MENUDIALOG = new BSS.Dialog('#div_menuadd');
+    menuGrid.build(options,{code:21003});
+	//设置新建事件
+	menuGrid.create = function(){
+		MENUDIALOG.init({href:'menu/add.html',width:400});
+	};
+	//设置编辑事件
+	menuGrid.edit = function(){
+		var row=this.getSelectedRow();
+		if(BSS.Helper.isNull(row)){
+			BSS.warning('请选择要编辑的数据行');
+			return;
+		}
+		var menuid = row['menuid'];
+		MENUDIALOG.init({href:'menu/'+menuid+'.html',width:400});
+	};
+})
+</script>

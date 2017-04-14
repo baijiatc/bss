@@ -7,19 +7,60 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import cn.bjtc.api.ApiManager;
+import cn.bjtc.api.ApiParam;
 import cn.bjtc.api.ApiReturn;
+import cn.bjtc.api.util.ParamUtil;
 import cn.bjtc.service.IMenuService;
+import cn.bjtc.view.MenuView;
 
 @RestController
 @RequestMapping("menu")
 public class MenuController extends BaseController {
 
-	@RequestMapping(value="isact", method=RequestMethod.POST)
+	@RequestMapping(value="all", method=RequestMethod.POST)
 	public ApiReturn showActMenus(){
-		List<?> pmenus = menuService.findActMenus();
-		apiReturn.setData(pmenus);
+		 ApiParam param=ApiManager.getInstance().getParameters(request);
+		 MenuView view=(MenuView) ParamUtil.convertToView(param, MenuView.class);
+		 int count=menuService.countAllMenus(view);
+		 List<?> menus=menuService.findAllMenus(view);
+		 apiReturn.setCount(count);
+		 apiReturn.setData(menus);
+		 return apiReturn; 
+	}
+	
+	@RequestMapping(value="create", method=RequestMethod.POST)
+	public ApiReturn execAddMenu(){
+		ApiParam param=ApiManager.getInstance().getParameters(request);
+		MenuView view=(MenuView) ParamUtil.convertToView(param, MenuView.class);
+		menuService.saveMenu(view);
 		return apiReturn;
 	}
+	
+	@RequestMapping(value="update", method=RequestMethod.POST)
+	public ApiReturn execUpdateMenu(){
+		ApiParam param=ApiManager.getInstance().getParameters(request);
+		MenuView view=(MenuView) ParamUtil.convertToView(param, MenuView.class);
+		menuService.updateMenu(view);
+		return apiReturn;
+	}
+	
+	@RequestMapping(value="get", method=RequestMethod.POST)
+	public ApiReturn execeditMenu(){
+		ApiParam param=ApiManager.getInstance().getParameters(request);
+		MenuView view=(MenuView) ParamUtil.convertToView(param, MenuView.class);
+		List<?> menus=menuService.findAllMenus(view);
+		apiReturn.setData(menus);
+		return apiReturn;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	@Autowired
 	private IMenuService menuService;

@@ -20,17 +20,25 @@
 		<parameter property="menust" resultMap="MenuMap" />
 	</parameterMap>
 	<insert id="saveMenu" parameterMap="MenuParamMap">
-		INSERT INTO menu VALUES (#{menuname},#{url},#{parentid},#{icon},#{sort},#{menust})
+		INSERT INTO menu (menuname,url,parentid,icon,sort,menust) VALUES (#{menuname},#{url},#{parentid},#{icon},#{sort},#{menust})
 	</insert>
 	
-	<select id="findMenuByParam" resultMap="MenuMap" >SELECT * FROM menu WHERE 1=1
-	 	<if test="menuname!=null and menuname!=''"> AND menuname=#{menuname}</if>
+	<update id="updateMenu" parameterMap="MenuParamMap">
+		UPDATE menu SET menuid=#{menuid},menuname=#{menuname},url=#{url},parentid=#{parentid},icon=#{icon},sort=#{sort},menust=#{menust}   WHERE menuid =#{menuid}
+	</update>
+	
+	<select id="findAllMenus" resultMap="MenuMap" >SELECT * FROM menu WHERE 1=1
+	    <if test="menuid!=null and menuid!=0"> AND menuid=#{menuid}</if>
+	    <if test="menuname!=null and menuname!=''"> AND menuname=#{menuname}</if>
+	    <if test="url!=null and url!=''"> AND url=#{url}</if>
 	 	<if test="parentid!=null"> AND parentid=#{parentid}</if>
 	 	<if test="menust!=null"> AND menust=#{menust}</if>
 	</select>
 	
-	<select id="countMenuByParam" resultType="Integer" >SELECT count(*) FROM menu WHERE 1=1
-		<if test="menuname!=null and menuname!=''"> AND menuname=#{menuname}</if>
+	<select id="countAllMenus" resultType="Integer" >SELECT count(*) FROM menu WHERE 1=1
+		 <if test="menuid!=null and menuid!=0"> AND menuid=#{menuid}</if>
+	    <if test="menuname!=null and menuname!=''"> AND menuname=#{menuname}</if>
+	    <if test="url!=null and url!=''"> AND url=#{url}</if>
 	 	<if test="parentid!=null"> AND parentid=#{parentid}</if>
 	 	<if test="menust!=null"> AND menust=#{menust}</if>
 	</select>

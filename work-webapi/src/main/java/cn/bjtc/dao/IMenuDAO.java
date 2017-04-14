@@ -3,12 +3,12 @@ package cn.bjtc.dao;
 import java.util.List;
 
 import cn.bjtc.model.Menu;
+import cn.bjtc.view.MenuView;
 
 public interface IMenuDAO {
 
-	public void saveMenu(Menu menu);
-	
-	public List<Menu> findMenuByParam(Object parameter);
-	
-	public Integer countMenuByParam(Object parameter);
+	public int saveMenu(MenuView view);
+	public int updateMenu(MenuView view);
+    public List<Menu> findAllMenus(MenuView view);
+	public Integer countAllMenus(MenuView view);
 }

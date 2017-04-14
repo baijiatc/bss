@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ page import="cn.bjtc.tools.ApplicationDataManager" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>主界面——营销系统</title>
+<title>主界面——<%=ApplicationDataManager.getSysParamByCode("APP_NAME") %></title>
 <style>
 body{
 	background-color:#FFFFFF;
@@ -30,7 +31,7 @@ a{
 		<div id="div_header" data-options="region:'north'" style="vertical-align:bottom;width:auto;height:80px;background:url(images/banner.jpg) no-repeat;background-size:100% 78px;">
 			<a href="javascript:void(0)" style="float:right;margin-top:50px;color:gray;" id="lnk_usercenter" class="easyui-menubutton" data-options="menu:'#lnk_usersubcenter'">你好：${loginuser.username }</a>
 			<div id="lnk_usersubcenter" style="width:150px;">
-				<div data-options="iconCls:'icon-blank'">用户中心</div>
+				<div id="div_staffcenter" data-options="iconCls:'icon-blank'">个人中心</div>
 				<div class="menu-sep"></div>
 				<div id="div_logout" data-options="iconCls:'icon-blank'">退出</div>
 			</div>
@@ -54,6 +55,13 @@ $(function(){
 	layout.layout();
 	BSS.include('#div_left','main/left.html');
 	BSS.include('#div_center','main/center.html');
+	$('#div_staffcenter').click(function(){
+		var url = 'staff/${loginuser.uid}/profile.html'
+		var title = $(this).text();
+		BSS.showView(url,function(html){
+			MAINTAB.add(title,html);
+		});
+	});
 	$('#div_logout').click(function(){
 		BSS.dispatch({code:10002},function(){
 			BSS.redirect('login.html');

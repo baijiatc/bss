@@ -25,6 +25,7 @@ public class StartupLoader {
 	}
 	
 	public void initApiMap(){
+		ApiManager.API_MAP.clear();
 		ApiView view = new ApiView();
 		view.setApist(1);
 		view.setPageSize(Integer.MAX_VALUE);
@@ -35,6 +36,7 @@ public class StartupLoader {
 	}
 	
 	public void initSysParam(){
+		ApplicationDataManager.SYSPARAMS.clear();
 		SysParamView view = new SysParamView();
 		view.setPageSize(Integer.MAX_VALUE);
 		List<SysParam> sysParams = sysParmService.findAllSysParams(view);
@@ -44,17 +46,15 @@ public class StartupLoader {
 	}
 	
 	public void initSysMenus(){
+		ApplicationDataManager.SYSMENUS.clear();
 		MenuView view = new MenuView();
 		view.setParentid(0);
 		view.setPageSize(50);
 		view.setMenust(1);
 		List<Menu> pmenus = menuService.findAllMenus(view);
 		for(Menu parent : pmenus){
-			MenuView view2 = new MenuView();
-			view2.setParentid(parent.getMenuid());
-			view2.setPageSize(50);
-			view2.setMenust(1);
-			List<Menu> cmenus = menuService.findAllMenus(view2);
+			view.setParentid(parent.getMenuid());
+			List<Menu> cmenus = menuService.findAllMenus(view);
 			Object[] objs = {parent,cmenus};
 			ApplicationDataManager.SYSMENUS.add(objs);
 		}

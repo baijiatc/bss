@@ -1,6 +1,5 @@
 package cn.bjtc.realm;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
@@ -43,12 +42,13 @@ public class MyRealm extends AuthorizingRealm {
      * @see  经测试:本例中该方法的调用时机为LoginController.login()方法中执行Subject.login()时 
      */
 	@Override
-	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
+	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) {
 		UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
 		IAuthService authService = (IAuthService) SpringUtil.getBean("authService");
 		LoginUser loginUser = authService.findUserByName(token.getUsername());
 		setSession("loginuser",loginUser);
-		return new SimpleAuthenticationInfo(loginUser.getUsername(),loginUser.getPassword(),getName());
+		AuthenticationInfo info = new SimpleAuthenticationInfo(loginUser.getUsername(),loginUser.getPassword(),getName());
+		return info;
 	}
 	
 	/**

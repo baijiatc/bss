@@ -12,6 +12,7 @@ import cn.bjtc.api.ApiManager;
 import cn.bjtc.api.ApiParam;
 import cn.bjtc.api.ApiReturn;
 import cn.bjtc.api.util.ParamUtil;
+import cn.bjtc.tools.ApplicationDataManager;
 import cn.bjtc.view.LoginView;
 
 @RestController
@@ -36,6 +37,12 @@ public class DoLoginController extends BaseController {
 	public ApiReturn logout(){
 		Subject subject = SecurityUtils.getSubject();
 		subject.logout();
+		return apiReturn;
+	}
+	
+	@RequestMapping(value="left/menu", method=RequestMethod.POST)
+	public ApiReturn loadLeftMenu(){
+		apiReturn.setData(ApplicationDataManager.SYSMENUS);
 		return apiReturn;
 	}
 }

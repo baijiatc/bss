@@ -5,7 +5,7 @@ public class Staff {
 	private Integer staffid;
 	private String staffname;
 	private Integer gender;
-	private Integer mobile;
+	private Long mobile;
 	private String idcard;
 	private String telephone;
 	private String email;
@@ -37,12 +37,6 @@ public class Staff {
 	}
 	public void setGender(Integer gender) {
 		this.gender = gender;
-	}
-	public Integer getMobile() {
-		return mobile;
-	}
-	public void setMobile(Integer mobile) {
-		this.mobile = mobile;
 	}
 	public String getIdcard() {
 		return idcard;
@@ -127,5 +121,11 @@ public class Staff {
 	}
 	public void setCreator(Integer creator) {
 		this.creator = creator;
+	}
+	public Long getMobile() {
+		return mobile;
+	}
+	public void setMobile(Long mobile) {
+		this.mobile = mobile;
 	}
 }

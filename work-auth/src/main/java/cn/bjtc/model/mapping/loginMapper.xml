@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="LoginUser">
+	<resultMap type="cn.bjtc.model.LoginUser" id="LoginUserMap">
+		<result column="staffid" property="uid"/>
+		<result column="mobile" property="username"/>
+		<result column="passwd" property="password"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.LoginUser" id="LoginUserParamMap">
+		<parameter property="uid" resultMap="LoginUserMap" />
+		<parameter property="username" resultMap="LoginUserMap" />
+		<parameter property="password" resultMap="LoginUserMap" />
+	</parameterMap>
+	<select id="findUserByName" resultMap="LoginUserMap" >
+	 	SELECT staffid,mobile,passwd FROM staff WHERE mobile=#{username} AND staffst=1
+	</select>
+</mapper>

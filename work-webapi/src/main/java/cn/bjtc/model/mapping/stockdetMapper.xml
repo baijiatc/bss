@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="StockDet">
+	<resultMap type="cn.bjtc.model.StockDet" id="StockDetMap">
+		<result column="id" property="stockdetid"/>
+		<result column="warehouse" property="warehouse"/>
+		<result column="position" property="position"/>
+		<result column="batchno" property="batchno"/>
+		<result column="indt" property="indt"/>
+		<result column="stocknum" property="stocknum"/>
+		<result column="stockid" property="stockid"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.StockDet" id="StockDetParamMap">
+		<parameter property="stockdetid" resultMap="StockMap" />
+		<parameter property="warehouse" resultMap="StockMap" />
+		<parameter property="position" resultMap="StockMap" />
+		<parameter property="batchno" resultMap="StockMap" />
+		<parameter property="indt" resultMap="StockMap" />
+		<parameter property="stocknum" resultMap="StockMap" />
+		<parameter property="stockid" resultMap="StockMap" />
+	</parameterMap>
+	<select id="findAllStockDets" resultMap="StockDetMap" >
+	 	SELECT * FROM stockdet WHERE 1=1 
+	 	<if test="stockid!=null and stockid!=0"> AND id=#{stockid}</if>
+	 	LIMIT #{pageOffset},#{pageSize}
+	</select>
+	<select id="countAllStockDets" resultType="Integer" >
+		SELECT count(id) FROM stockdet WHERE 1=1
+		<if test="stockid!=null and stockid!=0"> AND stockid=#{stockid}</if>
+	</select>
+</mapper>

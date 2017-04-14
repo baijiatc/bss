@@ -21,10 +21,7 @@ BSS = {
 	   return o;  
 	},
 	json2form:function(selector,json){
-		var obj = $(selector);
-		$.each(json, function (name, ival) {
-			$('#id_'+name).textbox('setValue',ival);
-		});
+		var obj = $(selector).form('load',json);
 	},
 	/**
 	 * 动态加载页面内容<br/>
@@ -144,6 +141,16 @@ BSS = {
 		});
 	}
 };
+BSS.Accordion = function(selector){
+	var $this = this;
+	$this.selector=selector;
+	$this.init=function(options){
+		options = options || {};
+		var defaults = {border:false};
+		$.extend(defaults,options);
+		$($this.selector).accordion(defaults);
+	}
+}
 /**
  * 封装Jquery EasyUI DataGrid
  */

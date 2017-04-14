@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="SysParam">
+	<resultMap type="cn.bjtc.model.SysParam" id="SysParamMap">
+		<result column="paramid" property="paramid"/>
+		<result column="paramname" property="paramname"/>
+		<result column="paramvalue" property="paramvalue"/>
+		<result column="remark" property="remark"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.SysParam" id="SysParamParamMap">
+		<parameter property="paramid" resultMap="SysParamMap" />
+		<parameter property="paramname" resultMap="SysParamMap" />
+		<parameter property="paramvalue" resultMap="SysParamMap" />
+		<parameter property="remark" resultMap="SysParamMap" />
+	</parameterMap>
+	<insert id="saveSysParam" parameterMap="SysParamParamMap">
+		INSERT INTO sysparam(paramname,paramvalue,remark) VALUES (#{paramname},#{paramvalue},#{remark})
+	</insert>
+	
+	<update id="updateSysParam" parameterMap="SysParamParamMap">
+		UPDATE sysparam SET paramname=#{paramname},paramvalue=#{paramvalue},remark=#{remark} WHERE paramid=#{paramid}
+	</update>
+	
+	<select id="findAllSysParams" resultMap="SysParamMap" >
+	 	SELECT * FROM sysparam WHERE 1=1 
+	 	<if test="paramid!=null and paramid!=0"> AND paramid=#{paramid}</if>
+	 	<if test="paramname!=null and paramname!=''"> AND paramname=#{paramname}</if>
+	 	<if test="paramvalue!=null and paramvalue!=''"> AND paramvalue=#{paramvalue}</if>
+	 	<if test="remark!=null and remark!=''"> AND remark=#{remark}</if>
+	 	LIMIT #{pageOffset},#{pageSize}
+	</select>
+	
+	<select id="countAllSysParams" resultType="Integer" >
+		SELECT count(paramid) FROM sysparam WHERE 1=1
+		<if test="paramid!=null and paramid!=0"> AND paramid=#{paramid}</if>
+	 	<if test="paramname!=null and paramname!=''"> AND paramname=#{paramname}</if>
+	 	<if test="paramvalue!=null and paramvalue!=''"> AND paramvalue=#{paramvalue}</if>
+	 	<if test="remark!=null and remark!=''"> AND remark=#{remark}</if>
+	</select>
+</mapper>

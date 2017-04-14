@@ -12,53 +12,47 @@ import cn.bjtc.api.ApiParam;
 import cn.bjtc.api.ApiReturn;
 import cn.bjtc.api.util.ParamUtil;
 import cn.bjtc.load.StartupLoader;
-import cn.bjtc.service.IApiService;
-import cn.bjtc.view.ApiView;
+import cn.bjtc.service.ISysParamService;
+import cn.bjtc.view.SysParamView;
 
 @RestController
-@RequestMapping("api")
-public class ApiController extends BaseController {
+@RequestMapping("sysparam")
+public class SysParamController extends BaseController {
 
 	@RequestMapping(value="all", method=RequestMethod.POST)
-	public ApiReturn showApis(){
+	public ApiReturn showSysParams(){
 		ApiParam param = ApiManager.getInstance().getParameters(request);
-		ApiView view = (ApiView) ParamUtil.convertToView(param, ApiView.class);
-		int count = apiService.countAllApis(view);
-		List<?> privis = apiService.findAllApis(view);
+		SysParamView view = (SysParamView) ParamUtil.convertToView(param, SysParamView.class);
+		int count = sysParamService.countAllSysParams(view);
+		List<?> privis = sysParamService.findAllSysParams(view);
 		apiReturn.setCount(count);
 		apiReturn.setData(privis);
 		return apiReturn;
 	}
 	
 	@RequestMapping(value="create", method=RequestMethod.POST)
-	public ApiReturn execAddApi(){
+	public ApiReturn execAddSysParam(){
 		ApiParam param = ApiManager.getInstance().getParameters(request);
-		ApiView view = (ApiView) ParamUtil.convertToView(param, ApiView.class);
-		apiService.saveApi(view);
+		SysParamView view = (SysParamView) ParamUtil.convertToView(param, SysParamView.class);
+		sysParamService.saveSysParam(view);
 		return apiReturn;
 	}
 	
 	@RequestMapping(value="update", method=RequestMethod.POST)
-	public ApiReturn execUpdateApi(){
+	public ApiReturn execUpdateSysParam(){
 		ApiParam param = ApiManager.getInstance().getParameters(request);
-		ApiView view = (ApiView) ParamUtil.convertToView(param, ApiView.class);
-		apiService.updateApi(view);
-		return apiReturn;
-	}
-	
-	@RequestMapping(value="get", method=RequestMethod.POST)
-	public ApiReturn execeditApi(){
-		ApiParam param = ApiManager.getInstance().getParameters(request);
-		ApiView view = (ApiView) ParamUtil.convertToView(param, ApiView.class);
-		List<?> privis = apiService.findAllApis(view);
-		apiReturn.setData(privis);
+		List<Object> views = ParamUtil.convertToViewList(param, SysParamView.class);
+		for(Object obj : views){
+			SysParamView view = (SysParamView) obj;
+			sysParamService.updateSysParam(view);
+		}
 		return apiReturn;
 	}
 	
 	@RequestMapping(value="refresh", method=RequestMethod.POST)
 	public ApiReturn refreshApiMap(){
 		try {
-			startupLoader.initApiMap();
+			startupLoader.initSysParam();
 		} catch (Exception e) {
 			apiReturn.setCode(1);
 			apiReturn.setMessage("刷新过程中出现异常！");
@@ -67,7 +61,7 @@ public class ApiController extends BaseController {
 	}
 	
 	@Autowired
-	private IApiService apiService;
+	private ISysParamService sysParamService;
 	@Autowired
 	private StartupLoader startupLoader;
 }

@@ -7,4 +7,12 @@
   </parent>
   <artifactId>work-tools</artifactId>
   <name>work-tools</name>
+  
+  <dependencies>
+  	<dependency>
+	    <groupId>commons-net</groupId>
+	    <artifactId>commons-net</artifactId>
+	    <version>3.5</version>
+	</dependency>
+  </dependencies>
 </project>

@@ -8,7 +8,8 @@ $(function(){
 		columns:[[
           {field:'roleid',title: 'ID',align: 'center',hidden:'true'},
           {field:'rolename',title: '角色名称',align: 'center',width: 200},
-          {field:'rolest',title: '状态',align: 'center',width: 200}
+          {field:'rolest',title: '状态值',align: 'center',hidden:'true'},
+          {field:'rolestStr',title: '状态',align: 'center',width: 200}
 		]]
 	};
 	//构建datagrid，并填充数据

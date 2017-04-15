@@ -10,7 +10,14 @@ public class ApplicationDataManager {
 	
 	public static final List<Object> SYSMENUS = new CopyOnWriteArrayList<Object>();
 	
+	public static final Map<String,Map<String,String>> SYSDICTS = new ConcurrentHashMap<String,Map<String,String>>();
+	
 	public static String getSysParamByCode(String code){
 		return SYSPARAMS.get(code);
+	}
+	
+	public static String getDictValueByTypeValue(String type,String value){
+		Map<String,String> valueMap = SYSDICTS.get(type);
+		return valueMap.get(value);
 	}
 }

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Actawards">
+	<resultMap type="cn.bjtc.model.Actawards" id="ActawardsMap">
+		<result column="id" property="id"/>
+		<result column="actid" property="actid"/>
+		<result column="awardtype" property="awardtype"/>
+		<result column="awobj" property="awobj"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Actawards" id="ActawardsParamMap">
+		<parameter property="id" resultMap="ActawardsMap" />
+		<parameter property="actid" resultMap="ActawardsMap" />
+		<parameter property="awardtype" resultMap="ActawardsMap" />
+		<parameter property="awobj" resultMap="ActawardsMap" />
+	</parameterMap>
+ 
+   <insert id="saveActawards" parameterMap="ActawardsParamMap">
+		INSERT INTO  actawards (actid,awardtype,awobj) VALUES (#{actid},#{awardtype},#{awobj})
+   </insert>
+	
+	<update id="updateActawards" parameterMap="ActawardsParamMap">
+		UPDATE actawards SET actid=#{actid},awardtype=#{awardtype},awobj=#{awobj}    WHERE id =#{id}
+	</update>
+
+	<select id="findAllActawards" resultMap="ActawardsMap" >
+	 	SELECT * FROM  actawards WHERE   1=1
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="actid!=null and actid!=0"> AND actid=#{actid}</if>
+	 	<if test="awardtype!=null and  awardtype!=0"> AND awardtype=#{awardtype}</if>
+	 	<if test="awobj!=null and awobj!=''"> AND awobj=#{awobj}</if>
+	 	LIMIT #{pageOffset},#{pageSize}
+	</select>
+	
+	<select id="countAllActawards" resultType="Integer" >
+	 	SELECT count(id) FROM actawards   WHERE   1=1
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="actid!=null and actid!=0"> AND actid=#{actid}</if>
+	 	<if test="awardtype!=null and  awardtype!=0"> AND awardtype=#{awardtype}</if>
+	 	<if test="awobj!=null and awobj!=''"> AND awobj=#{awobj}</if>
+	</select>
+	 
+</mapper>

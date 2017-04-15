@@ -32,7 +32,6 @@ PASSDIALOG.ok = function(){
 		var passwd = $("#id_passwd").val();
 	    var staffid = $("#id_staffid").val();
 	    var passwdedits = {passwd:""+passwd+"",staffid:""+staffid+""};
-	    alert(passwd);
 	BSS.dispatch({code:11004,data:[passwdedits]},function(){
 		BSS.alert('重置成功！');
 	},function(){});

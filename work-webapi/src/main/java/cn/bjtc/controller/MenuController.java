@@ -11,6 +11,7 @@ import cn.bjtc.api.ApiManager;
 import cn.bjtc.api.ApiParam;
 import cn.bjtc.api.ApiReturn;
 import cn.bjtc.api.util.ParamUtil;
+import cn.bjtc.load.StartupLoader;
 import cn.bjtc.service.IMenuService;
 import cn.bjtc.view.MenuView;
 
@@ -54,14 +55,14 @@ public class MenuController extends BaseController {
 		return apiReturn;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
+	@RequestMapping(value="refresh", method=RequestMethod.POST)
+	public ApiReturn refreshMenus(){
+		startupLoader.initSysMenus();
+		return apiReturn;
+	}
 	
 	@Autowired
 	private IMenuService menuService;
+	@Autowired
+	private StartupLoader startupLoader;
 }

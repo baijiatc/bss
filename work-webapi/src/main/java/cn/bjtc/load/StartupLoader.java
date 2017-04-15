@@ -1,5 +1,6 @@
 package cn.bjtc.load;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import cn.bjtc.model.Menu;
 import cn.bjtc.model.SysParam;
 import cn.bjtc.service.IApiService;
 import cn.bjtc.service.IDictService;
+import cn.bjtc.service.IElementService;
 import cn.bjtc.service.IMenuService;
 import cn.bjtc.service.ISysParamService;
 import cn.bjtc.tools.ApplicationDataManager;
@@ -61,8 +63,14 @@ public class StartupLoader {
 		for(Menu parent : pmenus){
 			view.setParentid(parent.getMenuid());
 			List<Menu> cmenus = menuService.findAllMenus(view);
-			Object[] objs = {parent,cmenus};
-			ApplicationDataManager.SYSMENUS.add(objs);
+			List m2elemList = new ArrayList();
+			for(Menu child : cmenus){
+				List<?> elems = elemService.findElementsByMenuId(child.getMenuid());
+				Object[] m2elem = {child,elems};
+				m2elemList.add(m2elem);
+			}
+			Object[] p2child = {parent,m2elemList};
+			ApplicationDataManager.SYSMENUS.add(p2child);
 		}
 	}
 	
@@ -89,6 +97,8 @@ public class StartupLoader {
 	private ISysParamService sysParmService;
 	@Autowired
 	private IMenuService menuService;
+	@Autowired
+	private IElementService elemService;
 	@Autowired
 	private IDictService dictService;
 }

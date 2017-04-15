@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Element">
+	<resultMap type="cn.bjtc.model.Element" id="ElementMap">
+		<result column="elemid" property="elemid"/>
+		<result column="elemname" property="elemname"/>
+		<result column="action" property="action"/>
+		<result column="elemst" property="elemst"/>
+		<result column="remark" property="remark"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Element" id="ElementParamMap">
+		<parameter property="elemid" resultMap="ElementMap" />
+		<parameter property="elemname" resultMap="ElementMap" />
+		<parameter property="action" resultMap="ElementMap" />
+		<parameter property="elemst" resultMap="ElementMap" />
+		<parameter property="remark" resultMap="ElementMap" />
+	</parameterMap>
+	<insert id="saveElement" parameterMap="ElementParamMap">
+		INSERT INTO element (elemname,action,elemst,remark) VALUES (#{elemname},#{action},#{elemst},#{remark})
+	</insert>
+	
+	<update id="updateElement" parameterMap="ElementParamMap">
+		UPDATE element SET elemname=#{elemname},action=#{action},elemst=#{elemst},remark=#{remark} WHERE elemid =#{elemid}
+	</update>
+	
+	<select id="findAllElements" resultMap="ElementMap" >SELECT * FROM element WHERE 1=1
+	    <if test="elemid!=null and elemid!=0"> AND elemid=#{elemid}</if>
+	    <if test="elemname!=null and elemname!=''"> AND elemname=#{elemname}</if>
+	    <if test="action!=null and action!=''"> AND action=#{action}</if>
+	    <if test="elemst!=null"> AND elemst=#{elemst}</if>
+	 	LIMIT #{pageOffset},#{pageSize}
+	</select>
+	
+	<select id="countAllElements" resultType="Integer" >SELECT count(*) FROM element WHERE 1=1
+		<if test="elemid!=null and elemid!=0"> AND elemid=#{elemid}</if>
+	    <if test="elemname!=null and elemname!=''"> AND elemname=#{elemname}</if>
+	    <if test="action!=null and action!=''"> AND action=#{action}</if>
+	    <if test="elemst!=null"> AND elemst=#{elemst}</if>
+	</select>
+	
+	<select id="findElementsByMenuId" resultMap="ElementMap" >SELECT e.* FROM element e
+		LEFT JOIN menuelem me ON e.elemid=me.elemid WHERE me.menuid=#{0}
+	</select>
+</mapper>

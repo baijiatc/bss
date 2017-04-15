@@ -40,7 +40,12 @@ $(function(){
 				var nodes = $('#ul_privset_show_tree').tree('getChecked', ['checked','indeterminate']);
 				var arrStr = [];
 				for(var i = 0; i < nodes.length; i++){
-					arrStr.push(nodes[i].text);
+					var node = nodes[i];
+					if(node.ismenu){
+						//保存菜单权限
+					}else{
+						//保存元素权限
+					}
 				}
 				BSS.info('选择了:'+JSON.stringify(arrStr))
 			}

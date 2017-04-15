@@ -18,20 +18,7 @@ $(function(){
           {field:'idcard',title: '身份证',align: 'center',width: 100},
           {field:'telephone',title: '电话',align: 'center',width: 100},
           {field:'jobstation',title: '岗位',align: 'center',width: 100},
-          {field:'passwd',title: '密码',align: 'center',width: 100,formatter:function(value, arr){
-              var editor = '';
-              if(typeof arr.editor == 'object'){
-                  editor = arr.editor.type;
-              }else{
-                  editor = arr.editor;
-              }
-              switch(editor){
-                  case 'passwd':
-                      return value.replace(/./g, '●');
-                      break;
-                  default:
-                      return value;
-              }}},
+          {field:'passwd',title: '密码',align: 'center',width: 100},
           {field:'departid',title: '所属部门',align: 'center',width: 100},
           {field:'staffst',title: '员工状态',align: 'center',width: 100},
           {field:'leavetime',title: '离职时间',align: 'center',width: 100},

@@ -22,6 +22,7 @@ public class ActparamViewController {
 	
 	@RequestMapping(value="{id}.html",method=RequestMethod.GET)
 	public String showActparamEditView(@PathVariable Integer id,Model model){
+		model.addAttribute("id", id);
 		return "actparam/edit";
 		
 	}

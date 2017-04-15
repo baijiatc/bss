@@ -49,6 +49,7 @@ BSS = {
 		$.ajax({
 			url:'route/dispatch',
 			type:'POST',
+			cache:false,
 			contentType:'application/json;charset=utf-8',
 			data:JSON.stringify(obj),
 			success:function(data){
@@ -62,6 +63,7 @@ BSS = {
 	showView:function(url,callback){
 		$.ajax({
 			url:url,
+			cache:false,
 			type:'GET',
 			success:function(html){
 				callback(html);

@@ -2,8 +2,6 @@
 <table id="tbl_menu_datagrid" class="easyui-datagrid"></table>
 <div id="div_menuadd" style="padding:0 0 0 50px;"></div>
 <!-- javascript部分 -->
-<script language="javascript" src="js/easyui/jquery.easyui.min.js" charset="utf-8"></script>
-<script language="javascript" src="js/easyui/locale/easyui-lang-zh_CN.js" charset="utf-8"></script>
 <script>
 $(function(){
 	var options={
@@ -19,6 +17,17 @@ $(function(){
 	};
 	//构建datagrid，并填充数据
 	var menuGrid = new BSS.DataGrid('#tbl_menu_datagrid');
+	menuGrid.toolbar.push({iconCls:'icon-refresh',text:'刷新',handler:function(){
+		BSS.dispatch({code:21092},function(resp){
+			if(resp.code == 0){
+				BSS.info('刷新成功<br/>请刷新页面!');
+			}else{
+				BSS.warning(resp.message);
+			}
+		},function(resp){
+			console.log(JSON.stringify(resp));
+		});
+	}});
     MENUDIALOG = new BSS.Dialog('#div_menuadd');
     menuGrid.build(options,{code:21003});
 	//设置新建事件

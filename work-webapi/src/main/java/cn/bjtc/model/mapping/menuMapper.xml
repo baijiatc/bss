@@ -33,6 +33,7 @@
 	    <if test="url!=null and url!=''"> AND url=#{url}</if>
 	 	<if test="parentid!=null"> AND parentid=#{parentid}</if>
 	 	<if test="menust!=null"> AND menust=#{menust}</if>
+	 	LIMIT #{pageOffset},#{pageSize}
 	</select>
 	
 	<select id="countAllMenus" resultType="Integer" >SELECT count(*) FROM menu WHERE 1=1

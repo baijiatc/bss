@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
 <ul id="ul_privset_show_tree"></ul>
 <!-- javascript部分 -->
 <script>
 $(function(){
-	BSS.dispatch({code:10003},function(resp){
-		if(resp.code == 0){
+	BSS.dispatch({code:20011,data:[{objid:'${objid}',isRole:'${isRole}'}]},function(resp){
+		if(resp.code == 0){console.log(JSON.stringify(resp.data));
 			var len = resp.data.length;
 			var nodes = [];
 			for(var i = 0; i < len; i++){
@@ -17,13 +17,13 @@ $(function(){
 					for(var j = 0; j < clen; j++){
 						var submenuGroup = subMenu2ElemArr[j];
 						var cmenu = submenuGroup[0];
-						var cnode = {text:cmenu.menuname,state:'open',id:cmenu.menuid,children:[],ismenu:true};
+						var cnode = {text:cmenu.menuname,state:'open',id:cmenu.menuid,checked:cmenu.checked,disabled:cmenu.disabled,children:[],ismenu:true};
 						if(submenuGroup.length > 1){
 							var elems = submenuGroup[1];
 							var elen = elems.length;
 							for(var k = 0; k < elen; k++){
 								var elem = elems[k];
-								var enode = {text:elem.elemname,id:elem.elemid,ismenu:false};
+								var enode = {text:elem.elemname,id:elem.elemid,ismenu:false,checked:elem.checked,disabled:elem.disabled};
 								cnode.children.push(enode);
 							}
 						}
@@ -38,6 +38,17 @@ $(function(){
 				checkbox:true,
 				data:nodes
 			});
+			var nodes = privsetShowTree.getChecked();
+			//var nodes = $('#ul_privset_show_tree').tree('getChecked', ['checked']);
+			var len = nodes.length;
+			if(len <= 0){return;}
+			for(var i = 0; i < len; i++){
+				var node = nodes[i];
+				//$('#ul_privset_show_tree').tree('disableCheck',node.target);
+				if(node.disabled){
+					privsetShowTree.disable(node);
+				}
+			}
 		}else{
 			BSS.warning(resp.message);
 		}

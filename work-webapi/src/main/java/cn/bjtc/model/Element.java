@@ -6,6 +6,7 @@ public class Element {
 	private String action;
 	private Integer elemst;
 	private String remark;
+	private Integer menuid;
 	
 	public Integer getElemid() {
 		return elemid;
@@ -36,5 +37,11 @@ public class Element {
 	}
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+	public Integer getMenuid() {
+		return menuid;
+	}
+	public void setMenuid(Integer menuid) {
+		this.menuid = menuid;
 	}
 }

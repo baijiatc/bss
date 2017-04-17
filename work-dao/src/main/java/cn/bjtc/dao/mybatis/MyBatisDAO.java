@@ -27,6 +27,10 @@ public class MyBatisDAO<T, K> implements IGenericDAO<T, K> {
 	public Integer countByParam(String statement, Object parameter){
 		return mybatisTemplate.selectOne(statement,parameter);
 	}
+	
+	public int delete(String statement, Object parameter){
+		return mybatisTemplate.delete(statement, parameter);
+	}
 
 	private SqlSessionTemplate getMybatisTemplate() {
 		return mybatisTemplate;

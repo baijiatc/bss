@@ -1,18 +1,23 @@
 package cn.bjtc.load;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import cn.bjtc.api.ApiManager;
 import cn.bjtc.model.Api;
+import cn.bjtc.model.Dictionary;
 import cn.bjtc.model.Menu;
 import cn.bjtc.model.SysParam;
 import cn.bjtc.service.IApiService;
+import cn.bjtc.service.IDictService;
 import cn.bjtc.service.IMenuService;
 import cn.bjtc.service.ISysParamService;
 import cn.bjtc.tools.ApplicationDataManager;
 import cn.bjtc.view.ApiView;
+import cn.bjtc.view.DictionaryView;
 import cn.bjtc.view.MenuView;
 import cn.bjtc.view.SysParamView;
 
@@ -22,6 +27,7 @@ public class StartupLoader {
 		initApiMap();
 		initSysParam();
 		initSysMenus();
+		initDicts();
 	}
 	
 	public void initApiMap(){
@@ -60,10 +66,29 @@ public class StartupLoader {
 		}
 	}
 	
+	public void initDicts(){
+		ApplicationDataManager.SYSDICTS.clear();
+		DictionaryView view = new DictionaryView();
+		view.setPageSize(Integer.MAX_VALUE);
+		view.setDicttype(0);
+		List<Dictionary> baseDicts = dictService.findAllDicts(view);
+		for(Dictionary base : baseDicts){
+			view.setDicttype(base.getDictid());
+			List<Dictionary> concetDicts = dictService.findAllDicts(view);
+			Map<String, String> concetMap = new HashMap<String,String>();
+			for(Dictionary concet : concetDicts){
+				concetMap.put(concet.getDictval(), concet.getDictname());
+			}
+			ApplicationDataManager.SYSDICTS.put(base.getDictval(), concetMap);
+		}
+	}
+	
 	@Autowired
 	private IApiService apiService;
 	@Autowired
 	private ISysParamService sysParmService;
 	@Autowired
 	private IMenuService menuService;
+	@Autowired
+	private IDictService dictService;
 }

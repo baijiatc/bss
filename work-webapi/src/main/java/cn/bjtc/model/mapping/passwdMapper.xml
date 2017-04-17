@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Passwd">
+	<resultMap type="cn.bjtc.model.Passwd" id="PasswdMap">
+		<result column="staffid" property="staffid"/>
+		<result column="staffname" property="staffname"/>
+		<result column="gender" property="gender"/>
+		<result column="mobile" property="mobile"/>
+		<result column="idcard" property="idcard"/>
+		<result column="telephone" property="telephone"/>
+		<result column="email" property="email"/>
+		<result column="edu" property="edu"/>
+		<result column="jobstation" property="jobstation"/>
+		<result column="passwd" property="passwd"/>
+		<result column="address" property="address"/>
+		<result column="departid" property="departid"/>
+		<result column="emername" property="emername"/>
+		<result column="emerphone" property="emerphone"/>
+		<result column="staffst" property="staffst"/>
+		<result column="leavetime" property="leavetime"/>
+		<result column="jointime" property="jointime"/>
+		<result column="creator" property="creator"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Passwd" id="PasswdParamMap">
+		<parameter property="staffid" resultMap="StaffMap" />
+		<parameter property="staffname" resultMap="StaffMap" />
+		<parameter property="gender" resultMap="StaffMap" />
+		<parameter property="mobile" resultMap="StaffMap" />
+		<parameter property="idcard" resultMap="StaffMap" />
+		<parameter property="telephone" resultMap="StaffMap" />
+		<parameter property="email" resultMap="StaffMap" />
+		<parameter property="edu" resultMap="StaffMap" />
+		<parameter property="jobstation" resultMap="StaffMap" />
+		<parameter property="passwd" resultMap="StaffMap" />
+		<parameter property="address" resultMap="StaffMap" />
+		<parameter property="departid" resultMap="StaffMap" />
+		<parameter property="emername" resultMap="StaffMap" />
+		<parameter property="emerphone" resultMap="StaffMap" />
+		<parameter property="staffst" resultMap="StaffMap" />
+		<parameter property="leavetime" resultMap="StaffMap" />
+		<parameter property="jointime" resultMap="StaffMap" />
+		<parameter property="creator" resultMap="StaffMap" />
+	</parameterMap>
+	
+	<update id="updatePasswd" parameterMap="PasswdParamMap">
+		UPDATE staff SET passwd=#{passwd} WHERE staffid=#{staffid}
+	</update>
+	
+</mapper>

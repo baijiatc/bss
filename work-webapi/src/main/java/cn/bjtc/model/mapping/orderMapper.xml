@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Orders">
+	<resultMap type="cn.bjtc.model.Orders" id="OrderMap">
+		<result column="id" property="id"/>
+		<result column="orderno" property="orderno"/>
+		<result column="orderst" property="orderst"/>
+		<result column="fromsys" property="fromsys"/>
+		<result column="totalfee" property="totalfee"/>
+		<result column="payment" property="payment"/>
+		<result column="totalpay" property="totalpay"/>
+		<result column="discountfee" property="discountfee"/>
+		<result column="pointsfee" property="pointsfee"/>
+		<result column="platformpay" property="platformpay"/>
+		<result column="refundfee" property="refundfee"/>
+		<result column="ordertype" property="ordertype"/>
+		<result column="buyer" property="buyer"/>
+		<result column="saler" property="saler"/>
+		<result column="paytype" property="paytype"/>
+		<result column="orderdt" property="orderdt"/>
+		<result column="cstmcontactid" property="cstmcontactid"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Orders" id="OrderParamMap">
+		<parameter property="id" resultMap="OrderMap" />
+		<parameter property="orderno" resultMap="OrderMap" />
+		<parameter property="orderst" resultMap="OrderMap" />
+		<parameter property="fromsys" resultMap="OrderMap" />
+		<parameter property="totalfee" resultMap="OrderMap" />
+		<parameter property="payment" resultMap="OrderMap" />
+		<parameter property="totalpay" resultMap="OrderMap" />
+		<parameter property="discountfee" resultMap="OrderMap" />
+		<parameter property="pointsfee" resultMap="OrderMap" />
+		<parameter property="platformpay" resultMap="OrderMap" />
+		<parameter property="refundfee" resultMap="OrderMap" />
+		<parameter property="ordertype" resultMap="OrderMap" />
+		<parameter property="buyer" resultMap="OrderMap" />
+		<parameter property="saler" resultMap="OrderMap" />
+		<parameter property="paytype" resultMap="OrderMap" />
+		<parameter property="orderdt" resultMap="OrderMap" />
+		<parameter property="cstmcontactid" resultMap="OrderMap" />
+	</parameterMap>
+	<select id="findAllOrder" resultMap="OrderMap" >
+	 	SELECT * FROM orders WHERE 1=1 
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="orderno!=null and orderno!=''"> AND orderno=#{orderno}</if>
+	 	<if test="orderst!=null and orderst!=0"> AND orderst=#{orderst}</if>
+	 	<if test="fromsys!=null and fromsys!=0"> AND fromsys=#{fromsys}</if>
+	 	<if test="totalfee!=null and totalfee!=0"> AND totalfee=#{totalfee}</if>
+	 	<if test="payment!=null and payment!=0"> AND payment=#{payment}</if>
+	 	<if test="totalpay!=null and totalpay!=0"> AND totalpay=#{totalpay}</if>
+	 	<if test="discountfee!=null and discountfee!=0"> AND discountfee=#{discountfee}</if>
+	 	<if test="pointsfee!=null and pointsfee!=0"> AND pointsfee=#{pointsfee}</if>
+	 	<if test="platformpay!=null and platformpay!=0"> AND platformpay=#{platformpay}</if>
+	 	<if test="refundfee!=null and refundfee!=0"> AND refundfee=#{refundfee}</if>
+	 	<if test="ordertype!=null and ordertype!=0"> AND ordertype=#{ordertype}</if>
+	 	<if test="buyer!=null and buyer!=0"> AND buyer=#{buyer}</if>
+	 	<if test="saler!=null and saler!=0"> AND saler=#{saler}</if>
+	 	<if test="paytype!=null and paytype!=0"> AND paytype=#{paytype}</if>
+	 	<if test="orderdt!=null and orderdt!=0"> AND orderdt=#{orderdt}</if>
+	 	<if test="cstmcontactid!=null and cstmcontactid!=0"> AND cstmcontactid=#{cstmcontactid}</if>
+	 	LIMIT #{pageOffset},#{pageSize}
+	</select>
+	
+	<select id="countAllOrder" resultType="Integer" >
+		SELECT count(id) FROM orders WHERE 1=1
+		<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="orderno!=null and orderno!=''"> AND orderno=#{orderno}</if>
+	 	<if test="orderst!=null and orderst!=0"> AND orderst=#{orderst}</if>
+	 	<if test="fromsys!=null and fromsys!=0"> AND fromsys=#{fromsys}</if>
+	 	<if test="totalfee!=null and totalfee!=0"> AND totalfee=#{totalfee}</if>
+	 	<if test="payment!=null and payment!=0"> AND payment=#{payment}</if>
+	 	<if test="totalpay!=null and totalpay!=0"> AND totalpay=#{totalpay}</if>
+	 	<if test="discountfee!=null and discountfee!=0"> AND discountfee=#{discountfee}</if>
+	 	<if test="pointsfee!=null and pointsfee!=0"> AND pointsfee=#{pointsfee}</if>
+	 	<if test="platformpay!=null and platformpay!=0"> AND platformpay=#{platformpay}</if>
+	 	<if test="refundfee!=null and refundfee!=0"> AND refundfee=#{refundfee}</if>
+	 	<if test="ordertype!=null and ordertype!=0"> AND ordertype=#{ordertype}</if>
+	 	<if test="buyer!=null and buyer!=0"> AND buyer=#{buyer}</if>
+	 	<if test="saler!=null and saler!=0"> AND saler=#{saler}</if>
+	 	<if test="paytype!=null and paytype!=0"> AND paytype=#{paytype}</if>
+	 	<if test="orderdt!=null and orderdt!=0"> AND orderdt=#{orderdt}</if>
+	 	<if test="cstmcontactid!=null and cstmcontactid!=0"> AND cstmcontactid=#{cstmcontactid}</if>
+	</select>
+</mapper>

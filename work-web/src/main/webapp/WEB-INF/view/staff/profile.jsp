@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
 <table width="100%;" height="450px;" style="padding:5px;">
 	<tr height="220px;">
 		<td width="45%">
 			<div id="div_profile_top_left">
 				<ul style="line-height:20px;margin:0;padding:10px 0 0 10px">
-					<li><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">修改密码</a></li>
+					<li><a id="lnk_proshow" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">修改密码</a></li>
 				</ul>
 			</div>
 		</td>
@@ -31,6 +31,7 @@
 		</td>
 	</tr>
 </table>
+<div id="rpasswd" style="padding:0 0 0 50px;"></div>
 <script>
 $(function(){
 	var tlpnl = new BSS.Panel('#div_profile_top_left');
@@ -45,4 +46,9 @@ $(function(){
 	var brpnl = new BSS.Panel('#div_profile_bottom_right');
 	brpnl.init({title:'操作日志',border:true});
 });
+$('#lnk_proshow').click(function(){
+	var stfid = ${loginuser.uid};
+	RPASSDIALOG = new BSS.Dialog('#rpasswd');
+	RPASSDIALOG.init({href:'staff/'+stfid+'/repasswd.html',width:400});
+	});
 </script>

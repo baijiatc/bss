@@ -31,4 +31,9 @@ public class StaffViewController {
 		model.addAttribute("staffid", staffid);
 		return "staff/profile";
 	}
+	@RequestMapping(value="{staffid}/repasswd.html",method=RequestMethod.GET)
+	public String showRepasswdView(@PathVariable Integer staffid,Model model){
+		model.addAttribute("staffid", staffid);
+		return "staff/repasswd";
+	}
 }

@@ -2704,6 +2704,16 @@
 .tree-checkbox2 {
   background: url('images/tree_icons.png') no-repeat -240px -18px;
 }
+
+.tree-checkbox-disabled0{   
+  background: url('images/tree_icons.png') no-repeat -272px -18px;   
+}   
+.tree-checkbox-disabled1{   
+  background: url('images/tree_icons.png') no-repeat -272px 0;   
+}   
+.tree-checkbox-disabled2{   
+  background: url('images/tree_icons.png') no-repeat -288px 0;   
+}
 .tree-title {
   font-size: 12px;
   display: inline-block;

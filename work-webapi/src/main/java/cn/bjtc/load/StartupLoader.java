@@ -1,5 +1,6 @@
 package cn.bjtc.load;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,11 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import cn.bjtc.api.ApiManager;
 import cn.bjtc.model.Api;
 import cn.bjtc.model.Dictionary;
-import cn.bjtc.model.Menu;
+import cn.bjtc.model.ElemPriv;
+import cn.bjtc.model.MenuPriv;
 import cn.bjtc.model.SysParam;
 import cn.bjtc.service.IApiService;
 import cn.bjtc.service.IDictService;
+import cn.bjtc.service.IElementService;
 import cn.bjtc.service.IMenuService;
+import cn.bjtc.service.IPrivilegeService;
 import cn.bjtc.service.ISysParamService;
 import cn.bjtc.tools.ApplicationDataManager;
 import cn.bjtc.view.ApiView;
@@ -28,6 +32,8 @@ public class StartupLoader {
 		initSysParam();
 		initSysMenus();
 		initDicts();
+		initMenuPriv();
+		initElemPriv();
 	}
 	
 	public void initApiMap(){
@@ -57,12 +63,18 @@ public class StartupLoader {
 		view.setParentid(0);
 		view.setPageSize(50);
 		view.setMenust(1);
-		List<Menu> pmenus = menuService.findAllMenus(view);
-		for(Menu parent : pmenus){
+		List<MenuView> pmenus = menuService.findAllMenus(view);
+		for(MenuView parent : pmenus){
 			view.setParentid(parent.getMenuid());
-			List<Menu> cmenus = menuService.findAllMenus(view);
-			Object[] objs = {parent,cmenus};
-			ApplicationDataManager.SYSMENUS.add(objs);
+			List<MenuView> cmenus = menuService.findAllMenus(view);
+			List m2elemList = new ArrayList();
+			for(MenuView child : cmenus){
+				List<?> elems = elemService.findElementsByMenuId(child.getMenuid());
+				Object[] m2elem = {child,elems};
+				m2elemList.add(m2elem);
+			}
+			Object[] p2child = {parent,m2elemList};
+			ApplicationDataManager.SYSMENUS.add(p2child);
 		}
 	}
 	
@@ -83,6 +95,22 @@ public class StartupLoader {
 		}
 	}
 	
+	public void initMenuPriv(){
+		ApplicationDataManager.SYSMENUPRIVS.clear();
+		List<MenuPriv> mpList = privilegeService.findAllMenuPrivs();
+		for(MenuPriv mp : mpList){
+			ApplicationDataManager.SYSMENUPRIVS.put(ApplicationDataManager.DEFAULT_KEY+mp.getMenuid(), mp.getPrivid());
+		}
+	}
+	
+	public void initElemPriv(){
+		ApplicationDataManager.SYSELEMPRIVS.clear();
+		List<ElemPriv> mpList = privilegeService.findAllElemPrivs();
+		for(ElemPriv mp : mpList){
+			ApplicationDataManager.SYSELEMPRIVS.put(ApplicationDataManager.DEFAULT_KEY+mp.getElemid().toString(), mp.getPrivid());
+		}
+	}
+	
 	@Autowired
 	private IApiService apiService;
 	@Autowired
@@ -90,5 +118,9 @@ public class StartupLoader {
 	@Autowired
 	private IMenuService menuService;
 	@Autowired
+	private IElementService elemService;
+	@Autowired
 	private IDictService dictService;
+	@Autowired
+	private IPrivilegeService privilegeService;
 }

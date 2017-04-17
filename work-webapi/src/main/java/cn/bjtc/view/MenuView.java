@@ -9,7 +9,8 @@ public class MenuView extends Pagination{
 	private String icon;
 	private Integer sort;
 	private Integer menust;//1-启用，0-停用，-1删除
- 
+	private boolean checked;
+	private boolean disabled;
 	
 	public Integer getMenuid() {
 		return menuid;
@@ -52,5 +53,17 @@ public class MenuView extends Pagination{
 	}
 	public void setMenust(Integer menust) {
 		this.menust = menust;
+	}
+	public boolean isChecked() {
+		return checked;
+	}
+	public void setChecked(boolean checked) {
+		this.checked = checked;
+	}
+	public boolean isDisabled() {
+		return disabled;
+	}
+	public void setDisabled(boolean disabled) {
+		this.disabled = disabled;
 	}
 }

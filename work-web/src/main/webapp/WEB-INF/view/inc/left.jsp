@@ -12,10 +12,11 @@ BSS.dispatch({code:10003},function(resp){
 			.append('" data-options="iconCls:\'icon-blank\'" style="overflow:auto;padding:10px;">');
 			if(menuGroup.length > 1){
 				strbuilder.append('<ul style="margin:0;padding:0 0 0 20px">');
-				var cmenus = menuGroup[1];
-				var clen = cmenus.length;
+				var subMenu2ElemArr = menuGroup[1];
+				var clen = subMenu2ElemArr.length;
 				for(var j = 0; j < clen; j++){
-					var cmenu = cmenus[j];
+					var submenuGroup = subMenu2ElemArr[j];
+					var cmenu = submenuGroup[0];
 					strbuilder.append('<li data-href="').append(cmenu.url)
 					.append('"><a href="javascript:void(0)">').append(cmenu.menuname)
 					.append('</a></li>');

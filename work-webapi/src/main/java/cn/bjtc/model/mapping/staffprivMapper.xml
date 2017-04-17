@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="StaffPriv">
+	<resultMap type="cn.bjtc.model.StaffPriv" id="StaffPrivMap">
+		<result column="staffprivid" property="staffprivid"/>
+		<result column="staffid" property="staffid"/>
+		<result column="privid" property="privid"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.StaffPriv" id="StaffPrivParamMap">
+		<parameter property="staffprivid" resultMap="StaffPrivMap" />
+		<parameter property="staffid" resultMap="StaffPrivMap" />
+		<parameter property="privid" resultMap="StaffPrivMap" />
+	</parameterMap>
+	<insert id="saveStaffPriv" parameterMap="StaffPrivParamMap">
+		INSERT INTO staffpriv(staffid,privid) VALUES (#{staffid},#{privid})
+	</insert>
+	
+	<delete id="deleteStaffAllPriv">
+		DELETE FROM staffpriv WHERE staffid=#{0}
+	</delete>
+</mapper>

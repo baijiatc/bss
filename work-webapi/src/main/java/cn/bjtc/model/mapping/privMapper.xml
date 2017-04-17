@@ -35,7 +35,7 @@
 	 	LIMIT #{pageOffset},#{pageSize}
 	</select>
 	
-	<select id="countAllPrivs" resultType="Integer" >
+	<select id="countAllPrivs" resultType="Integer">
 		SELECT count(privid) FROM privilege WHERE 1=1
 		<if test="privid!=null and privid!=0"> AND privid=#{privid}</if>
 	 	<if test="privname!=null and privname!=''"> AND privname=#{privname}</if>
@@ -43,4 +43,5 @@
 	 	<if test="privcat!=null and privcat!=0"> AND privcat=#{privcat}</if>
 	 	<if test="privst!=null"> AND privst=#{privst}</if>
 	</select>
+	
 </mapper>

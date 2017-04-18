@@ -1,6 +1,8 @@
 package cn.bjtc.view;
 
-public class Pagination {
+import java.io.Serializable;
+
+public class Pagination implements Serializable {
 
 	private int pageIndex = 1;
 	private int pageSize;

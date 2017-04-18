@@ -12,6 +12,11 @@ public class ApplicationDataManager {
 	
 	public static final Map<String,Map<String,String>> SYSDICTS = new ConcurrentHashMap<String,Map<String,String>>();
 	
+	public static final Map<String,Object> SYSMENUPRIVS = new ConcurrentHashMap<String,Object>();
+	public static final Map<String,Object> SYSELEMPRIVS = new ConcurrentHashMap<String,Object>();
+	
+	public static final String DEFAULT_KEY = "app.key";
+	
 	public static String getSysParamByCode(String code){
 		return SYSPARAMS.get(code);
 	}

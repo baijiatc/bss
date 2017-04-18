@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="ElemPriv">
+	<resultMap type="cn.bjtc.model.ElemPriv" id="ElemPrivMap">
+		<result column="elemprivid" property="elemprivid"/>
+		<result column="elemid" property="elemid"/>
+		<result column="privid" property="privid"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.ElemPriv" id="ElemPrivParamMap">
+		<parameter property="elemprivid" resultMap="ElemPrivMap" />
+		<parameter property="elemid" resultMap="ElemPrivMap" />
+		<parameter property="privid" resultMap="ElemPrivMap" />
+	</parameterMap>
+	<select id="findAllElemPrivs" resultMap="ElemPrivMap">
+		SELECT * FROM elempriv;
+	</select>
+	
+	<select id="findElemPrivByRole" resultMap="ElemPrivMap">
+		SELECT ep.elemid,ep.privid FROM elempriv ep LEFT JOIN rolepriv rp ON rp.privid=ep.privid
+		WHERE rp.roleid=#{0}
+	</select>
+	
+	<select id="findElemPrivByStaff" resultMap="ElemPrivMap">
+		SELECT ep.elemid,ep.privid FROM elempriv ep LEFT JOIN staffpriv sp ON sp.privid=ep.privid
+		WHERE sp.staffid=#{0}
+	</select>
+	
+	<select id="findStaffRoleElemPriv" resultMap="ElemPrivMap">
+		SELECT ep.elemid,ep.privid FROM elempriv ep LEFT JOIN rolepriv rp ON ep.privid=rp.privid
+		LEFT JOIN staffrole sr ON sr.roleid=rp.roleid WHERE sr.staffid=#{0}
+	</select>
+</mapper>

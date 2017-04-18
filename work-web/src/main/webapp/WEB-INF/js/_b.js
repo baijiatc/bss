@@ -374,6 +374,20 @@ BSS.Tree = function(selector){
 	$this.nodeClick=function(node){
 		
 	};
+	$this.selected=function(){
+		return $($this.selector).tree('getSelected');
+	};
+	$this.unselect=function(){
+		var node = $this.selected();
+		if(!node){return;}
+		$('#'+node.domId).removeClass('tree-node-selected');
+	};
+	$this.getChecked=function(){
+		return $($this.selector).tree('getChecked', ['checked','indeterminate']);
+	};
+	$this.disable=function(node){
+		$($this.selector).tree('disableCheck',node.target);
+	};
 }
 BSS.Panel = function(selector){
 	var $this = this;

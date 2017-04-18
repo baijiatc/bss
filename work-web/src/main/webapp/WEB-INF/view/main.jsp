@@ -49,6 +49,7 @@ a{
 <script language="javascript" src="js/_b.js" charset="utf-8"></script>
 <script language="javascript" src="js/easyui/jquery.easyui.min.js" charset="utf-8"></script>
 <script language="javascript" src="js/easyui/locale/easyui-lang-zh_CN.js" charset="utf-8"></script>
+<script language="javascript" src="js/easyui-tree-extend.js" charset="utf-8"></script>
 <script>
 $(function(){
 	var layout = new BSS.Layout('#div_container');

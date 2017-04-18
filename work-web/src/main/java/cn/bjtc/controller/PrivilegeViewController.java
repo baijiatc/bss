@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class PrivilegeViewController {
@@ -31,7 +32,9 @@ public class PrivilegeViewController {
 	}
 	
 	@RequestMapping(value="privset/det.html",method=RequestMethod.GET)
-	public String showPrivSetDetView(){
+	public String showPrivSetDetView(@RequestParam Integer objid, @RequestParam Boolean isRole,Model model){
+		model.addAttribute("objid", objid);
+		model.addAttribute("isRole", isRole);
 		return "priv/setdet";
 	}
 }

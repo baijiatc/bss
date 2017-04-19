@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Spec">
+	<resultMap type="cn.bjtc.model.Spec" id="SpecMap">
+		<result column="id" property="id"/>
+		<result column="specname" property="specname"/>
+		<result column="specdesc" property="specdesc"/>
+		<result column="spectype" property="spectype"/>
+		<result column="specst" property="specst"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Spec" id="SpecParamMap">
+		<parameter property="id" resultMap="SpecMap" />
+		<parameter property="specname" resultMap="SpecMap" />
+		<parameter property="specdesc" resultMap="SpecMap" />
+		<parameter property="spectype" resultMap="SpecMap" />
+		<parameter property="specst" resultMap="SpecMap" />
+	</parameterMap>
+ 
+   <insert id="saveSpec" parameterMap="SpecParamMap">
+		INSERT INTO  spec (specname,specdesc,spectype,specst) VALUES (#{specname},#{specdesc},#{spectype},#{specst})
+   </insert>
+	
+	<update id="updateSpec" parameterMap="SpecParamMap">
+		UPDATE spec SET specname=#{specname},specdesc=#{specdesc},spectype=#{spectype},specst=#{specst}    WHERE id =#{id}
+	</update>
+
+	<select id="findAllSpec" resultMap="SpecMap" >
+	 	SELECT * FROM  spec WHERE   1=1
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="specname!=null and specname!=''"> AND specname=#{specname}</if>
+	 	<if test="specdesc!=null and specdesc!=''"> AND specdesc=#{specdesc}</if>
+	 	<if test="spectype!=null and spectype!=0"> AND spectype=#{spectype}</if>
+	 	<if test="specst!=null and specst!=0"> AND specst=#{specst}</if>
+	 	LIMIT #{pageOffset},#{pageSize}
+	</select>
+	
+	<select id="countAllSpec" resultType="Integer" >
+	 	SELECT count(id) FROM spec   WHERE   1=1
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="specname!=null and specname!=''"> AND specname=#{specname}</if>
+	 	<if test="specdesc!=null and specdesc!=''"> AND specdesc=#{specdesc}</if>
+	 	<if test="spectype!=null and spectype!=0"> AND spectype=#{spectype}</if>
+	 	<if test="specst!=null and specst!=0"> AND specst=#{specst}</if>
+	</select>
+	 
+</mapper>

@@ -13,7 +13,8 @@ $(function(){
           {field:'mobile',title: '角色名称',align: 'center',width: 200},
           {field:'address',title: '地址',align: 'center',width: 200},
           {field:'parentid',title: '上级渠道',align: 'center',width: 200},
-          {field:'chanst',title: '状态',align: 'center',width: 200}
+          {field:'chanst',title: '状态值',align: 'center',hidden:'true'},
+          {field:'chanstStr',title: '状态',align: 'center',width: 200}
 		]]
 	};
 	//构建datagrid，并填充数据

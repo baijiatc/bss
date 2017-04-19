@@ -8,7 +8,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import cn.bjtc.api.ApiManager;
-import cn.bjtc.model.Api;
 import cn.bjtc.model.Dictionary;
 import cn.bjtc.model.ElemPriv;
 import cn.bjtc.model.MenuPriv;
@@ -41,8 +40,8 @@ public class StartupLoader {
 		ApiView view = new ApiView();
 		view.setApist(1);
 		view.setPageSize(Integer.MAX_VALUE);
-		List<Api> apis = apiService.findAllApis(view);
-		for(Api api : apis){
+		List<ApiView> apis = apiService.findAllApis(view);
+		for(ApiView api : apis){
 			ApiManager.API_MAP.put(api.getCode(), api.getApiurl());
 		}
 	}

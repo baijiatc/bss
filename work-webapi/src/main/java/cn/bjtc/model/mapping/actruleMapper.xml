@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Actrule">
+	<resultMap type="cn.bjtc.model.Actrule" id="ActruleMap">
+		<result column="id" property="id"/>
+		<result column="actid" property="actid"/>
+		<result column="objtype" property="objtype"/>
+		<result column="objid" property="objid"/>
+		<result column="creator" property="creator"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Actrule" id="ActruleParamMap">
+		<parameter property="id" resultMap="ActruleMap" />
+		<parameter property="actid" resultMap="ActruleMap" />
+		<parameter property="objtype" resultMap="ActruleMap" />
+		<parameter property="objid" resultMap="ActruleMap" />
+		<parameter property="creator" resultMap="ActruleMap" />
+	</parameterMap>
+ 
+   <insert id="saveActrule" parameterMap="ActruleParamMap">
+		INSERT INTO  actrules (actid,objtype,objid,creator) VALUES (#{actid},#{objtype},#{objid},#{creator})
+   </insert>
+	
+	<update id="updateActrule" parameterMap="ActruleParamMap">
+		UPDATE actrules SET actid=#{actid},objtype=#{objtype},objid=#{objid},creator=#{creator}  WHERE id =#{id}
+	</update>
+
+	<select id="findAllActrules" resultMap="ActruleMap" >
+	 	SELECT * FROM  actrules WHERE   1=1
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="actid!=null and actid!=0"> AND actid=#{actid}</if>
+	 	<if test="objtype!=null and  objtype!=0"> AND objtype=#{objtype}</if>
+	 	<if test="objid!=null and objid!=0"> AND objid=#{objid}</if>
+	 	<if test="creator!=null "> AND creator=#{creator}</if>
+	 	LIMIT #{pageOffset},#{pageSize}
+	</select>
+	
+	<select id="countAllActrules" resultType="Integer" >
+	 	SELECT count(id) FROM actrules   WHERE   1=1
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="actid!=null and actid!=0"> AND actid=#{actid}</if>
+	 	<if test="objtype!=null and  objtype!=0"> AND objtype=#{objtype}</if>
+	 	<if test="objid!=null and objid!=0"> AND objid=#{objid}</if>
+	 	<if test="creator!=null "> AND creator=#{creator}</if>
+	</select>
+	 
+</mapper>

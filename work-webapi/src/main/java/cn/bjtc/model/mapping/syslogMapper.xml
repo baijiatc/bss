@@ -5,17 +5,16 @@
 		<result column="id" property="id"/>
 		<result column="logtype" property="logtype"/>
 		<result column="operator" property="operator"/>
-		<result column="privid" property=" privid"/>
+		<result column="content" property="content"/>
 		<result column="createtime" property="createtime"/>
 	</resultMap>
 	<parameterMap type="cn.bjtc.model.Syslog" id="SysParamMap">
 		<parameter property="id" resultMap="SysMap" />
 		<parameter property="logtype" resultMap="SysMap" />
 		<parameter property="operator" resultMap="SysMap" />
-		<parameter property="privid" resultMap="SysMap" />
+		<parameter property="content" resultMap="SysMap" />
 		<parameter property="createtime" resultMap="SysMap" />
 	</parameterMap>
- 
 
 	<select id="findAllSys" resultMap="SysMap" >
 	 	SELECT * FROM  syslog    

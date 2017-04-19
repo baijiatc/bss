@@ -24,7 +24,7 @@
 	</insert>
 	
 	<update id="updateMenu" parameterMap="MenuParamMap">
-		UPDATE menu SET menuid=#{menuid},menuname=#{menuname},url=#{url},parentid=#{parentid},icon=#{icon},sort=#{sort},menust=#{menust}   WHERE menuid =#{menuid}
+		UPDATE menu SET  menuname=#{menuname},url=#{url},parentid=#{parentid},icon=#{icon},sort=#{sort},menust=#{menust}   WHERE menuid =#{menuid}
 	</update>
 	
 	<select id="findAllMenus" resultMap="MenuMap" >SELECT * FROM menu WHERE 1=1

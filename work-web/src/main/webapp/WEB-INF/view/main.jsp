@@ -69,6 +69,20 @@ $(function(){
 		},function(){});
 	});
 });
+BSS.Combox.prototype.fromDict=function(type){
+	var $this = this;
+	BSS.dispatch({code:21017,data:[{type:type}]},function(resp){
+		if(resp.code == 0){
+			var datas = resp.data;
+			var options = {valueField:'value',textField:'label',data:datas};
+			$this.init(options);
+		}else{
+			BSS.warning(resp.message);
+		}
+	},function(resp){
+		console.log(JSON.stringify(resp));
+	});
+};
 </script>
 </body>
 </html>

@@ -1,9 +1,11 @@
 package cn.bjtc.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,8 +37,18 @@ public class PrivilegeServiceImpl implements IPrivilegeService {
 		return privilegeDAO.updatePriv(view);
 	}
 
-	public List<Privilege> findAllPrivs(PrivilegeView view) {
-		return privilegeDAO.findAllPrivs(view);
+	public List<PrivilegeView> findAllPrivs(PrivilegeView view) {
+		List<Privilege> privs = privilegeDAO.findAllPrivs(view);
+		if(privs == null){
+			return new ArrayList<PrivilegeView>(0);
+		}
+		List<PrivilegeView> views = new ArrayList<PrivilegeView>(privs.size());
+		for(Privilege priv : privs){
+			PrivilegeView privView = new PrivilegeView();
+			BeanUtils.copyProperties(priv, privView);
+			views.add(privView);
+		}
+		return views;
 	}
 
 	public Integer countAllPrivs(PrivilegeView view) {

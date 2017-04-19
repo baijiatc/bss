@@ -9,9 +9,12 @@ $(function(){
           {field:'privid',title: 'ID',align: 'center',hidden:'true'},
           {field:'privname',title: '权限名',align: 'center',width: 200},
           {field:'privdesc',title: '描述',align: 'center',width: 200},
-          {field:'privtype',title: '分类',align: 'center',width: 200},
-          {field:'privcat',title: '定位',align: 'center',width: 200},
-          {field:'privst',title: '状态',align: 'center',width: 200}
+          {field:'privtype',title: '分类值',align: 'center',hidden:'true'},
+          {field:'privtypeStr',title: '分类',align: 'center',width: 200},
+          {field:'privcat',title: '定位值',align: 'center',hidden:'true'},
+          {field:'privcatStr',title: '定位',align: 'center',width: 200},
+          {field:'privst',title: '状态值',align: 'center',hidden:'true'},
+          {field:'privstStr',title: '状态',align: 'center',width: 200},
 		]]
 	};
 	//构建datagrid，并填充数据

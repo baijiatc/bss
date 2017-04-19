@@ -164,6 +164,16 @@ BSS.StringBuilder = function(){
 		return str;
 	};
 }
+BSS.Combox = function(selector){
+	var $this = this;
+	$this.selector=selector;
+	$this.init=function(options){
+		options = options || {};
+		var defaults = {panelHeight:'auto'};
+		$.extend(defaults,options);
+		$($this.selector).combobox(defaults);
+	};
+}
 BSS.PropGrid = function(selector){
 	var $this = this;
 	$this.selector=selector;

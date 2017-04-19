@@ -1,5 +1,8 @@
 package cn.bjtc.view;
 
+import cn.bjtc.api.BaseDictType;
+import cn.bjtc.tools.ApplicationDataManager;
+
 public class PrivilegeView extends Pagination {
 
 	private Integer privid;
@@ -45,5 +48,13 @@ public class PrivilegeView extends Pagination {
 	public void setPrivst(Integer privst) {
 		this.privst = privst;
 	}
-	
+	public String getPrivtypeStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_PRIVTYPE.toString(),String.valueOf(privtype));
+	}
+	public String getPrivcatStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_PRIVCAT.toString(),String.valueOf(privcat));
+	}
+	public String getPrivstStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_PRIVST.toString(),String.valueOf(privst));
+	}
 }

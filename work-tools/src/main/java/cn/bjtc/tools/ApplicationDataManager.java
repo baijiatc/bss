@@ -23,6 +23,9 @@ public class ApplicationDataManager {
 	
 	public static String getDictValueByTypeValue(String type,String value){
 		Map<String,String> valueMap = SYSDICTS.get(type);
+		if(valueMap == null){
+			return "";
+		}
 		return valueMap.get(value);
 	}
 }

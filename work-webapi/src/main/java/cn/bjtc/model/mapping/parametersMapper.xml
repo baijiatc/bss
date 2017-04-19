@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Parameters">
+	<resultMap type="cn.bjtc.model.Parameters" id="ParametersMap">
+		<result column="id" property="id"/>
+		<result column="paramname" property="paramname"/>
+		<result column="paramdesc" property="paramdesc"/>
+		<result column="paramtype" property="paramtype"/>
+		<result column="paramst" property="paramst"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Parameters" id="PrmsParamMap">
+		<parameter property="id" resultMap="ParametersMap" />
+		<parameter property="paramname" resultMap="ParametersMap" />
+		<parameter property="paramdesc" resultMap="ParametersMap" />
+		<parameter property="paramtype" resultMap="ParametersMap" />
+		<parameter property="paramst" resultMap="ParametersMap" />
+	</parameterMap>
+ 
+   <insert id="saveParameters" parameterMap="PrmsParamMap">
+		INSERT INTO  parameters (paramname,paramdesc,paramtype,paramst) VALUES (#{paramname},#{paramdesc},#{paramtype},#{paramst})
+   </insert>
+	
+	<update id="updateParameters" parameterMap="PrmsParamMap">
+		UPDATE parameters SET paramname=#{paramname},paramdesc=#{paramdesc},paramtype=#{paramtype},paramst=#{paramst}    WHERE id =#{id}
+	</update>
+
+	<select id="findAllParameters" resultMap="ParametersMap" >
+	 	SELECT * FROM  parameters WHERE   1=1
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="paramname!=null and paramname!=''"> AND paramname=#{paramname}</if>
+	 	<if test="paramdesc!=null and paramdesc!=''"> AND paramdesc=#{paramdesc}</if>
+	 	<if test="paramtype!=null and paramtype!=0"> AND paramtype=#{paramtype}</if>
+	 	<if test="paramst!=null and paramst!=0"> AND paramst=#{paramst}</if>
+	 	LIMIT #{pageOffset},#{pageSize}
+	</select>
+	
+	<select id="countAllParameters" resultType="Integer" >
+	 	SELECT count(id) FROM parameters   WHERE   1=1
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="paramname!=null and paramname!=''"> AND paramname=#{paramname}</if>
+	 	<if test="paramdesc!=null and paramdesc!=''"> AND paramdesc=#{paramdesc}</if>
+	 	<if test="paramtype!=null and paramtype!=0"> AND paramtype=#{paramtype}</if>
+	 	<if test="paramst!=null and paramst!=0"> AND paramst=#{paramst}</if>
+	</select>
+	 
+</mapper>

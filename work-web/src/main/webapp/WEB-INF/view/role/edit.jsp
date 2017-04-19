@@ -10,11 +10,14 @@
 		</tr>
 		<tr>
 			<td>角色状态：</td>
-			<td><input id="id_rolest" class="easyui-textbox" type="text" name="rolest" data-options="required:true"></input></td>
+			<td><input id="cbx_rolest" class="easyui-combobox" type="text" name="rolest" data-options="required:true"></input></td>
 		</tr>
 	</table>
 </form>
 <script>
+var roleStCombox = new BSS.Combox('#cbx_rolest');
+roleStCombox.fromDict('DICT_ROLEST');
+
 BSS.dispatch({code:20006,data:[{roleid:'${roleid}'}]},function(resp){
 	BSS.json2form('#frm_role',resp.data[0]);
 });

@@ -28,11 +28,14 @@
 		</tr>
 		<tr>
 			<td>状态：</td>
-			<td><input id="id_apist" class="easyui-textbox" type="text" name="apist" data-options="required:true"></input></td>
+			<td><input id="cbx_apist" class="easyui-combobox" type="text" name="apist" data-options="required:true"></input></td>
 		</tr>
 	</table>
 </form>
 <script>
+var apistCombox = new BSS.Combox('#cbx_apist');
+apistCombox.fromDict('DICT_APIST');
+
 BSS.dispatch({code:21011,data:[{apiid:'${apiid}'}]},function(resp){
 	BSS.json2form('#frm_apiedit',resp.data[0]);
 });

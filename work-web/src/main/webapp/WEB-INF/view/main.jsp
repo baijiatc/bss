@@ -83,6 +83,11 @@ BSS.Combox.prototype.fromDict=function(type){
 		console.log(JSON.stringify(resp));
 	});
 };
+BSS.formatTime = function(val,row){
+	if(val <= 0){return '-';}
+	var valDate = new Date(val);
+	return BSS.DateTime.format(valDate);
+}
 </script>
 </body>
 </html>

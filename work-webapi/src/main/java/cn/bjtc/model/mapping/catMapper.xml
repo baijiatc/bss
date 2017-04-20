@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Category">
+	<resultMap type="cn.bjtc.model.Category" id="CategoryMap">
+		<result column="id" property="id"/>
+		<result column="catname" property="catname"/>
+		<result column="parentid" property="parentid"/>
+		<result column="catlogo" property="catlogo"/>
+		<result column="catst" property="catst"/>	
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Category" id="CategoryParamMap">
+		<parameter property="id" resultMap="CategoryMap" />
+		<parameter property="catname" resultMap="CategoryMap" />
+		<parameter property="parentid" resultMap="CategoryMap" />
+		<parameter property="catlogo" resultMap="CategoryMap" />
+		<parameter property="catst" resultMap="CategoryMap" />
+	</parameterMap>
+ 
+   <insert id="saveCat" parameterMap="CategoryParamMap">
+		INSERT INTO category (catname,parentid,catlogo,catst) VALUES (#{catname},#{parentid},#{catlogo},#{catst})
+   </insert>
+	
+	<update id="updateCat" parameterMap="CategoryParamMap">
+		UPDATE category SET catname=#{catname},parentid=#{parentid},catlogo=#{catlogo},catst=#{catst}   WHERE id =#{id}
+	</update>
+
+	<select id="findAllCats" resultMap="CategoryMap" >
+	 	SELECT * FROM  category  WHERE   1=1
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="catname!=null and catname!=''"> AND catname=#{catname}</if>
+	 	<if test="parentid!=null and  parentid!=0"> AND parentid=#{parentid}</if>
+	 	<if test="catlogo!=null and catlogo!=''"> AND catlogo=#{catlogo}</if>
+	 	<if test="catst!=null"> AND catst=#{catst}</if>  
+	 	LIMIT #{pageOffset},#{pageSize}
+	</select>
+	
+	<select id="countAllCats" resultType="Integer" >
+	 	SELECT count(id) FROM category  WHERE   1=1
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="catname!=null and catname!=''"> AND catname=#{catname}</if>
+	 	<if test="parentid!=null and  parentid!=0"> AND parentid=#{parentid}</if>
+	 	<if test="catlogo!=null and catlogo!=''"> AND catlogo=#{catlogo}</if>
+	 	<if test="catst!=null"> AND catst=#{catst}</if>  
+	</select>
+	 
+</mapper>

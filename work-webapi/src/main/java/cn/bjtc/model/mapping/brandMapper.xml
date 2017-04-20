@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Brand">
+	<resultMap type="cn.bjtc.model.Brand" id="BrandMap">
+		<result column="id" property="id"/>
+		<result column="brandname" property="brandname"/>
+		<result column="brandalias" property="brandalias"/>
+		<result column="weburl" property="weburl"/>
+		<result column="branddesc" property="branddesc"/>
+		<result column="brandlogo" property="brandlogo"/>
+		<result column="sort" property="sort"/>
+		<result column="brandst" property="brandst"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Brand" id="BrandParamMap">
+		<parameter property="id" resultMap="BrandMap" />
+		<parameter property="brandname" resultMap="BrandMap" />
+		<parameter property="brandalias" resultMap="BrandMap" />
+		<parameter property="weburl" resultMap="BrandMap" />
+		<parameter property="branddesc" resultMap="BrandMap" />
+		<parameter property="brandlogo" resultMap="BrandMap" />
+		<parameter property="brandst" resultMap="BrandMap" />
+		<parameter property="sort" resultMap="BrandMap" />
+	</parameterMap>
+ 
+   <insert id="saveBrand" parameterMap="BrandParamMap">
+		INSERT INTO  brand (brandname,brandalias,weburl,branddesc,brandlogo,sort,brandst) VALUES (#{brandname},#{brandalias},#{weburl},#{branddesc},#{brandlogo},#{sort},#{brandst} )
+   </insert>
+	
+	<update id="updateBrand" parameterMap="BrandParamMap">
+		UPDATE brand  SET brandname=#{brandname},brandalias=#{brandalias},weburl=#{weburl},branddesc=#{branddesc},brandlogo=#{brandlogo},sort=#{sort},brandst=#{brandst}   WHERE id =#{id}
+	</update>
+ 
+	<select id="findAllBrands" resultMap="BrandMap" >
+	 	SELECT * FROM  brand WHERE   1=1
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="brandname!=null and brandname!=''"> AND brandname=#{brandname}</if>
+	 	<if test="brandalias!=null and  brandalias!=''"> AND brandalias=#{brandalias}</if>
+	 	<if test="weburl!=null and weburl!=''"> AND weburl=#{weburl}</if>
+	 	<if test="branddesc!=null and branddesc!=''"> AND branddesc=#{branddesc}</if>
+	 	<if test="brandlogo!=null and brandlogo!=''"> AND brandlogo=#{brandlogo}</if>
+	 	<if test="sort!=null and sort!=0"> AND sort=#{sort}</if>
+	 	<if test="brandst!=null"> AND brandst=#{brandst}</if>  
+	 	 LIMIT #{pageOffset},#{pageSize}
+	</select>
+	
+	<select id="countAllBrands" resultType="Integer" >
+	 	SELECT count(id) FROM brand  WHERE   1=1
+	 <if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="brandname!=null and brandname!=''"> AND brandname=#{brandname}</if>
+	 	<if test="brandalias!=null and  brandalias!=''"> AND brandalias=#{brandalias}</if>
+	 	<if test="weburl!=null and weburl!=''"> AND weburl=#{weburl}</if>
+	 	<if test="branddesc!=null and branddesc!=''"> AND branddesc=#{branddesc}</if>
+	 	<if test="brandlogo!=null and brandlogo!=''"> AND brandlogo=#{brandlogo}</if>
+	 	<if test="sort!=null and sort!=0"> AND sort=#{sort}</if>
+	 	<if test="brandst!=null"> AND brandst=#{brandst}</if>  
+	</select>
+	 
+</mapper>

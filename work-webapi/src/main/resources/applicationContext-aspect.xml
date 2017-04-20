@@ -21,9 +21,13 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
     <!--通知spring使用cglib而不是jdk的来生成代理方法 AOP可以拦截到Controller-->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
     <bean id="sysLogAspect" class="cn.bjtc.aspect.SysLogAspect"/>
+    <bean id="sysLogAfterAspect" class="cn.bjtc.aspect.SysLogAfterAspect"/>
     <aop:config>
     	<aop:aspect ref="sysLogAspect">
     		<aop:before method="doBefore" pointcut="execution(* cn.bjtc.controller.*.*.*(..))"/>
+    	</aop:aspect>
+    	<aop:aspect ref="sysLogAfterAspect">
+    		<aop:after method="doAfter" pointcut="execution(* cn.bjtc.controller.*.*.*(..))"/>
     	</aop:aspect>
     </aop:config>
 </beans>

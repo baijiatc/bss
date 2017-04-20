@@ -23,17 +23,14 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
     <bean id="range" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
     	<property name="staticField" value="cn.bjtc.aspect.AspectType.ALL" />
     </bean>
-    <bean id="sysLogAspect" class="cn.bjtc.aspect.SysLogAspect">
-    	<!-- 指定要排除的类 -->
-    	<property name="excludes">
-    		<list>
-    			<value>cn.bjtc.controller.LoginController</value>
-    		</list>
-    	</property>
-    </bean>
+    <bean id="sysLogAspect" class="cn.bjtc.aspect.SysLogAspect"/>
+    <bean id="sysLogAfterAspect" class="cn.bjtc.aspect.SysLogAfterAspect"/>
     <aop:config>
     	<aop:aspect ref="sysLogAspect">
     		<aop:before method="doBefore" pointcut="execution(* cn.bjtc.controller.*.*.*(..))"/>
+    	</aop:aspect>
+    	<aop:aspect ref="sysLogAfterAspect">
+    		<aop:after method="doAfter" pointcut="execution(* cn.bjtc.controller.*.*.*(..))"/>
     	</aop:aspect>
     </aop:config>
 </beans>

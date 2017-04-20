@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import cn.bjtc.annotation.SysLogger;
+import cn.bjtc.annotation.SysLoggerAfter;
 import cn.bjtc.api.ApiManager;
 import cn.bjtc.api.ApiParam;
 import cn.bjtc.api.ApiReturn;
@@ -21,7 +22,7 @@ import cn.bjtc.view.LoginView;
 public class DoLoginController extends BaseController {
 
 	@RequestMapping(value="login",method=RequestMethod.POST)
-	@SysLogger(content="登录系统",type=AspectType.CONTROLLER)
+	@SysLoggerAfter(content="登录系统",type=AspectType.CONTROLLER)
 	public ApiReturn login(){
 		ApiParam param = ApiManager.getInstance().getParameters(request);
 		LoginView view = (LoginView) ParamUtil.convertToView(param, LoginView.class);

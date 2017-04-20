@@ -7,10 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import cn.bjtc.annotation.SysLogger;
 import cn.bjtc.api.ApiManager;
 import cn.bjtc.api.ApiParam;
 import cn.bjtc.api.ApiReturn;
 import cn.bjtc.api.util.ParamUtil;
+import cn.bjtc.aspect.AspectType;
 import cn.bjtc.service.IStockService;
 import cn.bjtc.view.StockDetView;
 import cn.bjtc.view.StockView;
@@ -20,6 +22,7 @@ import cn.bjtc.view.StockView;
 public class StockController extends BaseController {
 
 	@RequestMapping(value="all", method=RequestMethod.POST)
+	@SysLogger(content="查询库存信息",type=AspectType.CONTROLLER)
 	public ApiReturn showStocks(){
 		ApiParam param = ApiManager.getInstance().getParameters(request);
 		StockView view = (StockView) ParamUtil.convertToView(param, StockView.class);
@@ -31,6 +34,7 @@ public class StockController extends BaseController {
 	}
 	
 	@RequestMapping(value="det", method=RequestMethod.POST)
+	@SysLogger(content="查询库存明细信息",type=AspectType.CONTROLLER)
 	public ApiReturn showStockDets(){
 		ApiParam param = ApiManager.getInstance().getParameters(request);
 		StockDetView view = (StockDetView) ParamUtil.convertToView(param, StockDetView.class);

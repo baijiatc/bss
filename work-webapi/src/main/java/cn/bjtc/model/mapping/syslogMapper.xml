@@ -17,12 +17,17 @@
 	</parameterMap>
 
 	<select id="findAllSys" resultMap="SysMap" >
-	 	SELECT * FROM  syslog    
+	 	SELECT * FROM  syslog WHERE 1=1
+	 	<if test="operator != null and operator != 0"> AND operator=#{operator}</if>
+	 	<if test="createtime != null and createtime != 0"> AND createtime=#{createtime}</if>
+	 	 ORDER BY createtime DESC    
 	 	 LIMIT #{pageOffset},#{pageSize}
 	</select>
 	
 	<select id="countAllSys" resultType="Integer" >
-	 	SELECT count(*) FROM syslog  	 
+	 	SELECT count(*) FROM syslog WHERE 1=1  
+	 	<if test="operator != null and operator != 0"> AND operator=#{operator}</if>	 
+	 	<if test="createtime != null and createtime != 0"> AND createtime=#{createtime}</if>
 	</select>
 	 
 </mapper>

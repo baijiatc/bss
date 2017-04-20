@@ -22,7 +22,7 @@
 		</td>
 		<td width="45%">
 			<div id="div_profile_bottom_right" >
-				<ul style=" list-style-type:none;line-height:20px;margin:0;padding:10px 0 0 10px">
+				<ul id="ul_profile_log" style=" list-style-type:none;line-height:20px;margin:0;padding:10px 0 0 10px">
 					<li><label>2017-04-14 13:32:55</label><span>:</span>新增角色</li>
 					<li><label>2017-04-14 13:31:55</label><span>:</span>访问角色管理</li>
 					<li><label>2017-04-14 13:30:55</label><span>:</span>登录</li>
@@ -45,9 +45,31 @@ $(function(){
 	
 	var brpnl = new BSS.Panel('#div_profile_bottom_right');
 	brpnl.init({title:'操作日志',border:true});
+	
+	var stffid = ${_current_user.uid};
+	BSS.dispatch({code:21004,data:[{operator:stffid}],psize:8},function(resp){
+		if(resp.code == 0){
+			var data = resp.data;
+			var len = data.length;
+			var sb = new BSS.StringBuilder();
+			for(var i = 0; i < len; i++){
+				var log = data[i];
+				sb.append('<li><label>')
+				  .append(BSS.formatTime(log.createtime))
+				  .append('</label><span>:</span>')
+				  .append(log.content)
+				  .append('</li>');
+			}
+			$('#ul_profile_log').html(sb.toString());
+		}else{
+			BSS.warning(resp.message);
+		}
+	},function(resp){
+		console.log(JSON.stringify(resp));
+	});
 });
 $('#lnk_proshow').click(function(){
-	var stfid = ${loginuser.uid};
+	var stfid = ${_current_user.uid};
 	RPASSDIALOG = new BSS.Dialog('#rpasswd');
 	RPASSDIALOG.init({href:'staff/'+stfid+'/repasswd.html',width:400});
 	});

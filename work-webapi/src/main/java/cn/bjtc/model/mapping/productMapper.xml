@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Product">
+	<resultMap type="cn.bjtc.model.Product" id="ProductMap">
+		<result column="id" property="id"/>
+		<result column="sourceid" property="sourceid"/>
+		<result column="fromsys" property="fromsys"/>
+		<result column="prodname" property="prodname"/>
+		<result column="catid" property="catid"/>
+		<result column="brandid" property="brandid"/>
+		<result column="description" property="description"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Product" id="ProductParamMap">
+		<parameter property="id" resultMap="ProductMap" />
+		<parameter property="sourceid" resultMap="ProductMap" />
+		<parameter property="fromsys" resultMap="ProductMap" />
+		<parameter property="prodname" resultMap="ProductMap" />
+		<parameter property="catid" resultMap="ProductMap" />
+		<parameter property="brandid" resultMap="ProductMap" />
+		<parameter property="description" resultMap="ProductMap" />
+	</parameterMap>
+ 
+   <insert id="saveProd" parameterMap="ProductParamMap">
+		INSERT INTO  product (sourceid,fromsys,prodname,catid,brandid,description ) VALUES (#{sourceid},#{fromsys},#{prodname},#{catid},#{brandid},#{description } )
+   </insert>
+	
+	<update id="updateProd" parameterMap="ProductParamMap">
+		UPDATE product  SET sourceid=#{sourceid},fromsys=#{fromsys},prodname=#{prodname},catid=#{catid},brandid=#{brandid},description=#{description}  WHERE id =#{id}
+	</update>
+ 
+	<select id="findAllProds" resultMap="ProductMap" >
+	 	SELECT * FROM  product WHERE   1=1
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="sourceid!=null and sourceid!=''"> AND sourceid=#{sourceid}</if>
+	 	<if test="fromsys!=null and  fromsys!=0"> AND fromsys=#{fromsys}</if>
+	 	<if test="prodname!=null and prodname!=''"> AND prodname=#{prodname}</if>
+	 	<if test="catid!=null and catid!=0"> AND catid=#{catid}</if>
+	 	<if test="brandid!=null and brandid!=0"> AND brandid=#{brandid}</if>
+	 	<if test="description!=null and description!=''"> AND description=#{description}</if>
+	 	 LIMIT #{pageOffset},#{pageSize}
+	</select>
+	
+	<select id="countAllProds" resultType="Integer" >
+	 	SELECT count(id) FROM product  WHERE   1=1
+	    <if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="sourceid!=null and sourceid!=''"> AND sourceid=#{sourceid}</if>
+	 	<if test="fromsys!=null and  fromsys!=0"> AND fromsys=#{fromsys}</if>
+	 	<if test="prodname!=null and prodname!=''"> AND prodname=#{prodname}</if>
+	 	<if test="catid!=null and catid!=0"> AND catid=#{catid}</if>
+	 	<if test="brandid!=null and brandid!=0"> AND brandid=#{brandid}</if>
+	 	<if test="description!=null and description!=''"> AND description=#{description}</if>
+	</select>
+	 
+</mapper>

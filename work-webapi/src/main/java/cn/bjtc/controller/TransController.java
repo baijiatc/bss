@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import cn.bjtc.annotation.SysLogger;
 import cn.bjtc.api.ApiManager;
 import cn.bjtc.api.ApiParam;
 import cn.bjtc.api.ApiReturn;
+import cn.bjtc.aspect.AspectType;
 import cn.bjtc.service.IScheduleService;
 
 @RestController
@@ -19,6 +21,7 @@ import cn.bjtc.service.IScheduleService;
 public class TransController extends BaseController {
 
 	@RequestMapping(value="all", method=RequestMethod.POST)
+	@SysLogger(content="查询计划任务信息",type=AspectType.CONTROLLER)
 	public ApiReturn showTriggers(){
 		ApiParam param = ApiManager.getInstance().getParameters(request);
 		Integer count = scheduleService.countQrtzTriggers();
@@ -29,6 +32,7 @@ public class TransController extends BaseController {
 	}
 	
 	@RequestMapping(value="pause", method=RequestMethod.POST)
+	@SysLogger(content="暂停计划任务",type=AspectType.CONTROLLER)
 	public ApiReturn pauseTrigger(){
 		ApiParam param = ApiManager.getInstance().getParameters(request);
 		Map<String, Object> paramMap = param.getData().get(0);
@@ -44,6 +48,7 @@ public class TransController extends BaseController {
 	}
 	
 	@RequestMapping(value="resume", method=RequestMethod.POST)
+	@SysLogger(content="恢复计划任务",type=AspectType.CONTROLLER)
 	public ApiReturn resumeTrigger(){
 		ApiParam param = ApiManager.getInstance().getParameters(request);
 		Map<String, Object> paramMap = param.getData().get(0);
@@ -59,6 +64,7 @@ public class TransController extends BaseController {
 	}
 	
 	@RequestMapping(value="exec", method=RequestMethod.POST)
+	@SysLogger(content="手动执行计划任务",type=AspectType.CONTROLLER)
 	public ApiReturn execTrigger(){
 		ApiParam param = ApiManager.getInstance().getParameters(request);
 		Map<String, Object> paramMap = param.getData().get(0);

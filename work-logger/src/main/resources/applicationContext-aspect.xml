@@ -16,10 +16,24 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
   http://www.springframework.org/schema/cache 
   http://www.springframework.org/schema/cache/spring-cache-4.0.xsd">
      
-	<import resource="classpath:applicationContext-shiro.xml"/>
-	<import resource="classpath:applicationContext-view.xml"/>
-	<import resource="classpath:applicationContext-aspect.xml"/>
-	<import resource="classpath:applicationContext-mysql.xml"/>
-	<import resource="classpath:applicationContext-h2.xml"/>
-	<import resource="classpath:applicationContext-quartz.xml"/>
+	<!-- 启动对@AspectJ注解的支持 --> 
+    <aop:aspectj-autoproxy/>
+    <!--通知spring使用cglib而不是jdk的来生成代理方法 AOP可以拦截到Controller-->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <bean id="range" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+    	<property name="staticField" value="cn.bjtc.aspect.AspectType.ALL" />
+    </bean>
+    <bean id="sysLogAspect" class="cn.bjtc.aspect.SysLogAspect">
+    	<!-- 指定要排除的类 -->
+    	<property name="excludes">
+    		<list>
+    			<value>cn.bjtc.controller.LoginController</value>
+    		</list>
+    	</property>
+    </bean>
+    <aop:config>
+    	<aop:aspect ref="sysLogAspect">
+    		<aop:before method="doBefore" pointcut="execution(* cn.bjtc.controller.*.*.*(..))"/>
+    	</aop:aspect>
+    </aop:config>
 </beans>

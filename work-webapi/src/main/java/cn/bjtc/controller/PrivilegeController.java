@@ -8,12 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import cn.bjtc.annotation.SysLogger;
 import cn.bjtc.api.ApiManager;
 import cn.bjtc.api.ApiParam;
 import cn.bjtc.api.ApiReturn;
 import cn.bjtc.api.util.ParamUtil;
+import cn.bjtc.aspect.AspectType;
 import cn.bjtc.service.IPrivilegeService;
-import cn.bjtc.tools.ApplicationDataManager;
 import cn.bjtc.view.PrivilegeView;
 
 @RestController
@@ -21,6 +22,7 @@ import cn.bjtc.view.PrivilegeView;
 public class PrivilegeController extends BaseController {
 
 	@RequestMapping(value="all", method=RequestMethod.POST)
+	@SysLogger(content="查询权限定义信息",type=AspectType.CONTROLLER)
 	public ApiReturn showPrivileges(){
 		ApiParam param = ApiManager.getInstance().getParameters(request);
 		PrivilegeView view = (PrivilegeView) ParamUtil.convertToView(param, PrivilegeView.class);
@@ -32,6 +34,7 @@ public class PrivilegeController extends BaseController {
 	}
 	
 	@RequestMapping(value="create", method=RequestMethod.POST)
+	@SysLogger(content="新增权限定义",type=AspectType.CONTROLLER)
 	public ApiReturn execAddPrivilege(){
 		ApiParam param = ApiManager.getInstance().getParameters(request);
 		PrivilegeView view = (PrivilegeView) ParamUtil.convertToView(param, PrivilegeView.class);
@@ -40,6 +43,7 @@ public class PrivilegeController extends BaseController {
 	}
 	
 	@RequestMapping(value="update", method=RequestMethod.POST)
+	@SysLogger(content="更新权限定义信息",type=AspectType.CONTROLLER)
 	public ApiReturn execUpdatePrivilege(){
 		ApiParam param = ApiManager.getInstance().getParameters(request);
 		PrivilegeView view = (PrivilegeView) ParamUtil.convertToView(param, PrivilegeView.class);
@@ -57,6 +61,7 @@ public class PrivilegeController extends BaseController {
 	}
 	
 	@RequestMapping(value="role", method=RequestMethod.POST)
+	@SysLogger(content="为角色设置权限",type=AspectType.CONTROLLER)
 	public ApiReturn setRolePriv(){
 		ApiParam param = ApiManager.getInstance().getParameters(request);
 		List<Map<String, Object>> datas = param.getData();
@@ -81,6 +86,7 @@ public class PrivilegeController extends BaseController {
 	}
 	
 	@RequestMapping(value="staff", method=RequestMethod.POST)
+	@SysLogger(content="为员工分配权限",type=AspectType.CONTROLLER)
 	public ApiReturn setStaffPriv(){
 		ApiParam param = ApiManager.getInstance().getParameters(request);
 		List<Map<String, Object>> datas = param.getData();

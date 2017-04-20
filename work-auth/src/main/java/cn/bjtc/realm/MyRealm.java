@@ -11,6 +11,7 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 
+import cn.bjtc.common.WebConstants;
 import cn.bjtc.model.LoginUser;
 import cn.bjtc.service.IAuthService;
 import cn.bjtc.tools.SpringUtil;
@@ -46,7 +47,8 @@ public class MyRealm extends AuthorizingRealm {
 		UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
 		IAuthService authService = (IAuthService) SpringUtil.getBean("authService");
 		LoginUser loginUser = authService.findUserByName(token.getUsername());
-		setSession("loginuser",loginUser);
+		setSession(WebConstants.CURRENT_USER,loginUser);
+		setSession(WebConstants.CURRENT_USER_NAME,loginUser.getUsername());
 		AuthenticationInfo info = new SimpleAuthenticationInfo(loginUser.getUsername(),loginUser.getPassword(),getName());
 		return info;
 	}

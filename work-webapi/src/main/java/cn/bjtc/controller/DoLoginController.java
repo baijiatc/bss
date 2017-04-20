@@ -8,10 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import cn.bjtc.annotation.SysLogger;
 import cn.bjtc.api.ApiManager;
 import cn.bjtc.api.ApiParam;
 import cn.bjtc.api.ApiReturn;
 import cn.bjtc.api.util.ParamUtil;
+import cn.bjtc.aspect.AspectType;
 import cn.bjtc.tools.ApplicationDataManager;
 import cn.bjtc.view.LoginView;
 
@@ -19,6 +21,7 @@ import cn.bjtc.view.LoginView;
 public class DoLoginController extends BaseController {
 
 	@RequestMapping(value="login",method=RequestMethod.POST)
+	@SysLogger(content="登录系统",type=AspectType.CONTROLLER)
 	public ApiReturn login(){
 		ApiParam param = ApiManager.getInstance().getParameters(request);
 		LoginView view = (LoginView) ParamUtil.convertToView(param, LoginView.class);
@@ -34,6 +37,7 @@ public class DoLoginController extends BaseController {
 	}
 	
 	@RequestMapping(value="logout",method=RequestMethod.POST)
+	@SysLogger(content="登出系统",type=AspectType.CONTROLLER)
 	public ApiReturn logout(){
 		Subject subject = SecurityUtils.getSubject();
 		subject.logout();

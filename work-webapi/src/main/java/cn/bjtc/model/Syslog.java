@@ -5,7 +5,7 @@ public class Syslog {
 	private Integer logtype;
 	private Integer operator;// 
 	private String content;
-	private Integer createtime;// 
+	private Long createtime;// 
 	
 	public Integer getId() {
 		return id;
@@ -31,10 +31,10 @@ public class Syslog {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Integer getCreatetime() {
+	public Long getCreatetime() {
 		return createtime;
 	}
-	public void setCreatetime(Integer createtime) {
+	public void setCreatetime(Long createtime) {
 		this.createtime = createtime;
 	}
  

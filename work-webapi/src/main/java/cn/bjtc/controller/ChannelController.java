@@ -7,10 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import cn.bjtc.annotation.SysLogger;
 import cn.bjtc.api.ApiManager;
 import cn.bjtc.api.ApiParam;
 import cn.bjtc.api.ApiReturn;
 import cn.bjtc.api.util.ParamUtil;
+import cn.bjtc.aspect.AspectType;
 import cn.bjtc.service.IChannelService;
 import cn.bjtc.view.ChannelView;
 
@@ -19,6 +21,7 @@ import cn.bjtc.view.ChannelView;
 public class ChannelController extends BaseController {
 
 	@RequestMapping(value="all", method=RequestMethod.POST)
+	@SysLogger(content="查询渠道信息",type=AspectType.CONTROLLER)
 	public ApiReturn showChannels(){
 		ApiParam param = ApiManager.getInstance().getParameters(request);
 		ChannelView view = (ChannelView) ParamUtil.convertToView(param, ChannelView.class);
@@ -30,6 +33,7 @@ public class ChannelController extends BaseController {
 	}
 	
 	@RequestMapping(value="create", method=RequestMethod.POST)
+	@SysLogger(content="新增渠道",type=AspectType.CONTROLLER)
 	public ApiReturn execAddChannel(){
 		ApiParam param = ApiManager.getInstance().getParameters(request);
 		ChannelView view = (ChannelView) ParamUtil.convertToView(param, ChannelView.class);
@@ -38,6 +42,7 @@ public class ChannelController extends BaseController {
 	}
 	
 	@RequestMapping(value="update", method=RequestMethod.POST)
+	@SysLogger(content="更新渠道信息",type=AspectType.CONTROLLER)
 	public ApiReturn execUpdateChannel(){
 		ApiParam param = ApiManager.getInstance().getParameters(request);
 		ChannelView view = (ChannelView) ParamUtil.convertToView(param, ChannelView.class);

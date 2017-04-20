@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
 <div id="div_centerview">
 	<div title="欢迎页">
-		<div>欢迎你：${loginuser.username }</div>
+		<div>欢迎你：${_current_user_name }</div>
 	</div>
 </div>
 <script>

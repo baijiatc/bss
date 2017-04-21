@@ -1,5 +1,8 @@
 package cn.bjtc.view;
 
+import cn.bjtc.api.BaseDictType;
+import cn.bjtc.common.ApplicationDataManager;
+
 public class RoleView extends Pagination {
 	private Integer roleid;
 	private String rolename;
@@ -22,5 +25,8 @@ public class RoleView extends Pagination {
 	}
 	public void setRolest(Integer rolest) {
 		this.rolest = rolest;
+	}
+	public String getRolestStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_ROLEST.toString(), String.valueOf(rolest));
 	}
 }

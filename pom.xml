@@ -25,6 +25,7 @@
   	<module>work-webapi</module>
   	<module>work-web</module>
   	<module>work-api</module>
+  	<module>work-logger</module>
   </modules>
   
   <dependencies>
@@ -37,6 +38,16 @@
 	    <groupId>org.springframework</groupId>
 	    <artifactId>spring-context-support</artifactId>
 	    <version>${spring.version}</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.aspectj</groupId>
+	    <artifactId>aspectjrt</artifactId>
+	    <version>1.8.7</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.aspectj</groupId>
+	    <artifactId>aspectjweaver</artifactId>
+	    <version>1.8.7</version>
 	</dependency>
   </dependencies>
 </project>

@@ -1,11 +1,12 @@
 package cn.bjtc.view;
 
 public class SyslogView extends Pagination{
-	  private Integer id;//
-	  private Integer logtype;
-	  private Integer operator;// 
-	  private Integer privid;//操作人
-	  private Integer createtime;// 
+	private Integer id;//
+	private Integer logtype;
+	private Integer operator;// 
+	private String content;//操作人
+	private Long createtime;// 
+	
 	public Integer getId() {
 		return id;
 	}
@@ -24,16 +25,16 @@ public class SyslogView extends Pagination{
 	public void setOperator(Integer operator) {
 		this.operator = operator;
 	}
-	public Integer getPrivid() {
-		return privid;
+	public String getContent() {
+		return content;
 	}
-	public void setPrivid(Integer privid) {
-		this.privid = privid;
+	public void setContent(String content) {
+		this.content = content;
 	}
-	public Integer getCreatetime() {
+	public Long getCreatetime() {
 		return createtime;
 	}
-	public void setCreatetime(Integer createtime) {
+	public void setCreatetime(Long createtime) {
 		this.createtime = createtime;
 	}
 	 

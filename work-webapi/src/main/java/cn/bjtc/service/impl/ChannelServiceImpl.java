@@ -1,7 +1,9 @@
 package cn.bjtc.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +23,18 @@ public class ChannelServiceImpl implements IChannelService {
 		return channelDAO.updateChannel(view);
 	}
 
-	public List<Channel> findAllChannels(ChannelView view) {
-		return channelDAO.findAllChannels(view);
+	public List<ChannelView> findAllChannels(ChannelView view) {
+		List<Channel> chans = channelDAO.findAllChannels(view);
+		if(chans == null){
+			return new ArrayList<ChannelView>(0);
+		}
+		List<ChannelView> views = new ArrayList<ChannelView>(chans.size());
+		for(Channel chan : chans){
+			ChannelView chanView = new ChannelView();
+			BeanUtils.copyProperties(chan, chanView);
+			views.add(chanView);
+		}
+		return views;
 	}
 
 	public Integer countAllChannels(ChannelView view) {

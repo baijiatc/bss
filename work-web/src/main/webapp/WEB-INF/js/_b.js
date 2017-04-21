@@ -164,6 +164,16 @@ BSS.StringBuilder = function(){
 		return str;
 	};
 }
+BSS.Combox = function(selector){
+	var $this = this;
+	$this.selector=selector;
+	$this.init=function(options){
+		options = options || {};
+		var defaults = {panelHeight:'auto'};
+		$.extend(defaults,options);
+		$($this.selector).combobox(defaults);
+	};
+}
 BSS.PropGrid = function(selector){
 	var $this = this;
 	$this.selector=selector;
@@ -236,8 +246,12 @@ BSS.DataGrid = function(selector){
 	 */
 	$this.load=function(param){
 		BSS.dispatch(param,function(data){
-			$($this.selector).datagrid('loadData',{"total":data.count,"rows":data.data});
-			$this.__whenSelectPage(param);
+			if(data.code == 0){
+				$($this.selector).datagrid('loadData',{"total":data.count,"rows":data.data});
+				$this.__whenSelectPage(param);
+			}else{
+				BSS.warning(data.message);
+			}
 		 },function(data){
 			console.log('err:'+JSON.stringify(data)); 
 		 });
@@ -373,6 +387,20 @@ BSS.Tree = function(selector){
 	};
 	$this.nodeClick=function(node){
 		
+	};
+	$this.selected=function(){
+		return $($this.selector).tree('getSelected');
+	};
+	$this.unselect=function(){
+		var node = $this.selected();
+		if(!node){return;}
+		$('#'+node.domId).removeClass('tree-node-selected');
+	};
+	$this.getChecked=function(){
+		return $($this.selector).tree('getChecked', ['checked','indeterminate']);
+	};
+	$this.disable=function(node){
+		$($this.selector).tree('disableCheck',node.target);
 	};
 }
 BSS.Panel = function(selector){

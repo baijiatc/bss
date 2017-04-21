@@ -27,7 +27,11 @@
 		</tr>
 		<tr>
 			<td>状态：</td>
-			<td><input class="easyui-textbox" type="text" name="apist" data-options="required:true"></input></td>
+			<td><input id="cbx_apist" class="easyui-combobox" type="text" name="apist" data-options="required:true"></input></td>
 		</tr>
 	</table>
 </form>
+<script>
+var apistCombox = new BSS.Combox('#cbx_apist');
+apistCombox.fromDict('DICT_APIST');
+</script>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="RolePriv">
+	<resultMap type="cn.bjtc.model.RolePriv" id="RolePrivMap">
+		<result column="roleprivid" property="roleprivid"/>
+		<result column="roleid" property="roleid"/>
+		<result column="privid" property="privid"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.RolePriv" id="RolePrivParamMap">
+		<parameter property="roleprivid" resultMap="RolePrivMap" />
+		<parameter property="roleid" resultMap="RolePrivMap" />
+		<parameter property="privid" resultMap="RolePrivMap" />
+	</parameterMap>
+	<insert id="saveRolePriv" parameterMap="RolePrivParamMap">
+		INSERT INTO rolepriv(roleid,privid) VALUES (#{roleid},#{privid})
+	</insert>
+	
+	<delete id="deleteRoleAllPriv">
+		DELETE FROM rolepriv WHERE roleid=#{0}
+	</delete>
+</mapper>

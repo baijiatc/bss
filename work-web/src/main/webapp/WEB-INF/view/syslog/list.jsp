@@ -9,8 +9,8 @@ $(function(){
           {field:'id',title: 'ID',align: 'center',hidden:'true'},
           {field:'logtype',title: '日志类型',align: 'center',width: 200},
           {field:'operator',title: '操作人',align: 'center',width: 200},
-          {field:'privid',title: '操作内容',align: 'center',width: 200},
-          {field:'createtime',title: '记录时间',align: 'center',width: 200},
+          {field:'content',title: '操作内容',align: 'center',width: 200},
+          {field:'createtime',title: '记录时间',align: 'center',width: 200,formatter:BSS.formatTime},
          
 		]]
 	};

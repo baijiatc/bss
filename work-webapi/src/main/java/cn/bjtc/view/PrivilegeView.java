@@ -1,7 +1,7 @@
 package cn.bjtc.view;
 
 import cn.bjtc.api.BaseDictType;
-import cn.bjtc.tools.ApplicationDataManager;
+import cn.bjtc.common.ApplicationDataManager;
 
 public class PrivilegeView extends Pagination {
 

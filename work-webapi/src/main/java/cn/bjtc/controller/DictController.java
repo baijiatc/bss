@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import cn.bjtc.api.ApiParam;
 import cn.bjtc.api.ApiReturn;
 import cn.bjtc.api.util.ParamUtil;
+import cn.bjtc.common.ApplicationDataManager;
 import cn.bjtc.service.IDictService;
-import cn.bjtc.tools.ApplicationDataManager;
 import cn.bjtc.view.DictionaryView;
 
 import com.alibaba.fastjson.JSONObject;

@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import cn.bjtc.api.ApiManager;
 import cn.bjtc.api.ApiParam;
 import cn.bjtc.api.ApiReturn;
 import cn.bjtc.api.util.ParamUtil;
@@ -20,37 +19,56 @@ public class SpecController extends BaseController {
 
 	@RequestMapping(value="all", method=RequestMethod.POST)
 	public ApiReturn showActSpec(){
-		 ApiParam param=ApiManager.getInstance().getParameters(request);
-		 SpecView view=(SpecView) ParamUtil.convertToView(param, SpecView.class);
-		 int count=specService.countAllSpecs(view);
-		 List<?> Spec=specService.findAllSpecs(view);
-		 apiReturn.setCount(count);
-		 apiReturn.setData(Spec);
+		 try {
+			ApiParam param=findApiParam();
+			 SpecView view=(SpecView) ParamUtil.convertToView(param, SpecView.class);
+			 int count=specService.countAllSpecs(view);
+			 List<?> Spec=specService.findAllSpecs(view);
+			 apiReturn.setCount(count);
+			 apiReturn.setData(Spec);
+		} catch (Exception e) {
+			showServerError();
+		}
 		 return apiReturn; 
 	}
 	
 	@RequestMapping(value="create", method=RequestMethod.POST)
 	public ApiReturn execAddSpec(){
-		ApiParam param=ApiManager.getInstance().getParameters(request);
-		SpecView view=(SpecView) ParamUtil.convertToView(param, SpecView.class);
-		specService.saveSpec(view);
+		try {
+			ApiParam param=findApiParam();
+			ifParamDataIsEmpty(param);
+			SpecView view=(SpecView) ParamUtil.convertToView(param, SpecView.class);
+			specService.saveSpec(view);
+		} catch (Exception e) {
+			showServerError();
+		}
 		return apiReturn;
 	}
 	
 	@RequestMapping(value="update", method=RequestMethod.POST)
 	public ApiReturn execUpdateSpec(){
-		ApiParam param=ApiManager.getInstance().getParameters(request);
-		SpecView view=(SpecView) ParamUtil.convertToView(param, SpecView.class);
-		specService.updateSpec(view);
+		try {
+			ApiParam param=findApiParam();
+			ifParamDataIsEmpty(param);
+			SpecView view=(SpecView) ParamUtil.convertToView(param, SpecView.class);
+			specService.updateSpec(view);
+		} catch (Exception e) {
+			showServerError();
+		}
 		return apiReturn;
 	}
 	
 	@RequestMapping(value="get", method=RequestMethod.POST)
 	public ApiReturn execeditSpec(){
-		ApiParam param=ApiManager.getInstance().getParameters(request);
-		SpecView view=(SpecView) ParamUtil.convertToView(param, SpecView.class);
-		List<?> Spec=specService.findAllSpecs(view);
-		apiReturn.setData(Spec);
+		try {
+			ApiParam param=findApiParam();
+			ifParamDataIsEmpty(param);
+			SpecView view=(SpecView) ParamUtil.convertToView(param, SpecView.class);
+			List<?> Spec=specService.findAllSpecs(view);
+			apiReturn.setData(Spec);
+		} catch (Exception e) {
+			showServerError();
+		}
 		return apiReturn;
 	}
 	

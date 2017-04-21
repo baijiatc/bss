@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import cn.bjtc.api.ApiManager;
 import cn.bjtc.model.Dictionary;
 import cn.bjtc.model.ElemPriv;
 import cn.bjtc.model.MenuPriv;
@@ -36,13 +35,13 @@ public class StartupLoader {
 	}
 	
 	public void initApiMap(){
-		ApiManager.API_MAP.clear();
+		ApplicationDataManager.SYSAPIMAP.clear();
 		ApiView view = new ApiView();
 		view.setApist(1);
 		view.setPageSize(Integer.MAX_VALUE);
 		List<ApiView> apis = apiService.findAllApis(view);
 		for(ApiView api : apis){
-			ApiManager.API_MAP.put(api.getCode(), api.getApiurl());
+			ApplicationDataManager.SYSAPIMAP.put(api.getCode(), api.getApiurl());
 		}
 	}
 	

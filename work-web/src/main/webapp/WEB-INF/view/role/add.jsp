@@ -19,8 +19,14 @@ roleStCombox.fromDict('DICT_ROLEST');
 
 ROLEDIALOG.ok = function(){
 	var role = BSS.form2json('#frm_role');
-	BSS.dispatch({code:20005,data:[role]},function(){
-		BSS.alert();
-	},function(){});
+	BSS.dispatch({code:20005,data:[role]},function(resp){
+		if(resp.code == 0){
+			BSS.info('保存成功');
+		}else{
+			BSS.warning(resp.message);
+		}
+	},function(resp){
+		console.log(JSON.stringify(resp));
+	});
 }
 </script>

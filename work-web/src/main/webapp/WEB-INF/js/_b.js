@@ -246,8 +246,12 @@ BSS.DataGrid = function(selector){
 	 */
 	$this.load=function(param){
 		BSS.dispatch(param,function(data){
-			$($this.selector).datagrid('loadData',{"total":data.count,"rows":data.data});
-			$this.__whenSelectPage(param);
+			if(data.code == 0){
+				$($this.selector).datagrid('loadData',{"total":data.count,"rows":data.data});
+				$this.__whenSelectPage(param);
+			}else{
+				BSS.warning(data.message);
+			}
 		 },function(data){
 			console.log('err:'+JSON.stringify(data)); 
 		 });

@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import cn.bjtc.api.ApiManager;
 import cn.bjtc.api.ApiParam;
 import cn.bjtc.api.ApiReturn;
 import cn.bjtc.api.util.ParamUtil;
@@ -21,30 +20,44 @@ public class SysParamController extends BaseController {
 
 	@RequestMapping(value="all", method=RequestMethod.POST)
 	public ApiReturn showSysParams(){
-		ApiParam param = ApiManager.getInstance().getParameters(request);
-		SysParamView view = (SysParamView) ParamUtil.convertToView(param, SysParamView.class);
-		int count = sysParamService.countAllSysParams(view);
-		List<?> privis = sysParamService.findAllSysParams(view);
-		apiReturn.setCount(count);
-		apiReturn.setData(privis);
+		try {
+			ApiParam param = findApiParam();
+			SysParamView view = (SysParamView) ParamUtil.convertToView(param, SysParamView.class);
+			int count = sysParamService.countAllSysParams(view);
+			List<?> privis = sysParamService.findAllSysParams(view);
+			apiReturn.setCount(count);
+			apiReturn.setData(privis);
+		} catch (Exception e) {
+			showServerError();
+		}
 		return apiReturn;
 	}
 	
 	@RequestMapping(value="create", method=RequestMethod.POST)
 	public ApiReturn execAddSysParam(){
-		ApiParam param = ApiManager.getInstance().getParameters(request);
-		SysParamView view = (SysParamView) ParamUtil.convertToView(param, SysParamView.class);
-		sysParamService.saveSysParam(view);
+		try {
+			ApiParam param = findApiParam();
+			ifParamDataIsEmpty(param);
+			SysParamView view = (SysParamView) ParamUtil.convertToView(param, SysParamView.class);
+			sysParamService.saveSysParam(view);
+		} catch (Exception e) {
+			showServerError();
+		}
 		return apiReturn;
 	}
 	
 	@RequestMapping(value="update", method=RequestMethod.POST)
 	public ApiReturn execUpdateSysParam(){
-		ApiParam param = ApiManager.getInstance().getParameters(request);
-		List<Object> views = ParamUtil.convertToViewList(param, SysParamView.class);
-		for(Object obj : views){
-			SysParamView view = (SysParamView) obj;
-			sysParamService.updateSysParam(view);
+		try {
+			ApiParam param = findApiParam();
+			ifParamDataIsEmpty(param);
+			List<Object> views = ParamUtil.convertToViewList(param, SysParamView.class);
+			for(Object obj : views){
+				SysParamView view = (SysParamView) obj;
+				sysParamService.updateSysParam(view);
+			}
+		} catch (Exception e) {
+			showServerError();
 		}
 		return apiReturn;
 	}
@@ -54,8 +67,7 @@ public class SysParamController extends BaseController {
 		try {
 			startupLoader.initSysParam();
 		} catch (Exception e) {
-			apiReturn.setCode(1);
-			apiReturn.setMessage("刷新过程中出现异常！");
+			showServerError();
 		}
 		return apiReturn;
 	}

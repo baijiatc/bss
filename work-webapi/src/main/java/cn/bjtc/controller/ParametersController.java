@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import cn.bjtc.api.ApiManager;
 import cn.bjtc.api.ApiParam;
 import cn.bjtc.api.ApiReturn;
 import cn.bjtc.api.util.ParamUtil;
@@ -20,37 +19,56 @@ public class ParametersController extends BaseController {
 
 	@RequestMapping(value="all", method=RequestMethod.POST)
 	public ApiReturn showActParameters(){
-		 ApiParam param=ApiManager.getInstance().getParameters(request);
-		 ParametersView view=(ParametersView) ParamUtil.convertToView(param, ParametersView.class);
-		 int count=parameterservice.countAllParameterss(view);
-		 List<?> parameters=parameterservice.findAllParameterss(view);
-		 apiReturn.setCount(count);
-		 apiReturn.setData(parameters);
+		 try {
+			ApiParam param=findApiParam();
+			 ParametersView view=(ParametersView) ParamUtil.convertToView(param, ParametersView.class);
+			 int count=parameterservice.countAllParameterss(view);
+			 List<?> parameters=parameterservice.findAllParameterss(view);
+			 apiReturn.setCount(count);
+			 apiReturn.setData(parameters);
+		} catch (Exception e) {
+			showServerError();
+		}
 		 return apiReturn; 
 	}
 	
 	@RequestMapping(value="create", method=RequestMethod.POST)
 	public ApiReturn execAddParameters(){
-		ApiParam param=ApiManager.getInstance().getParameters(request);
-		ParametersView view=(ParametersView) ParamUtil.convertToView(param, ParametersView.class);
-		parameterservice.saveParameters(view);
+		try {
+			ApiParam param=findApiParam();
+			ifParamDataIsEmpty(param);
+			ParametersView view=(ParametersView) ParamUtil.convertToView(param, ParametersView.class);
+			parameterservice.saveParameters(view);
+		} catch (Exception e) {
+			showServerError();
+		}
 		return apiReturn;
 	}
 	
 	@RequestMapping(value="update", method=RequestMethod.POST)
 	public ApiReturn execUpdateParameters(){
-		ApiParam param=ApiManager.getInstance().getParameters(request);
-		ParametersView view=(ParametersView) ParamUtil.convertToView(param, ParametersView.class);
-		parameterservice.updateParameters(view);
+		try {
+			ApiParam param=findApiParam();
+			ifParamDataIsEmpty(param);
+			ParametersView view=(ParametersView) ParamUtil.convertToView(param, ParametersView.class);
+			parameterservice.updateParameters(view);
+		} catch (Exception e) {
+			showServerError();
+		}
 		return apiReturn;
 	}
 	
 	@RequestMapping(value="get", method=RequestMethod.POST)
 	public ApiReturn execeditParameters(){
-		ApiParam param=ApiManager.getInstance().getParameters(request);
-		ParametersView view=(ParametersView) ParamUtil.convertToView(param, ParametersView.class);
-		List<?> parameters=parameterservice.findAllParameterss(view);
-		apiReturn.setData(parameters);
+		try {
+			ApiParam param=findApiParam();
+			ifParamDataIsEmpty(param);
+			ParametersView view=(ParametersView) ParamUtil.convertToView(param, ParametersView.class);
+			List<?> parameters=parameterservice.findAllParameterss(view);
+			apiReturn.setData(parameters);
+		} catch (Exception e) {
+			showServerError();
+		}
 		return apiReturn;
 	}
 	

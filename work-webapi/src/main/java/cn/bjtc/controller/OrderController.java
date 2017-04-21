@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import cn.bjtc.api.ApiManager;
 import cn.bjtc.api.ApiParam;
 import cn.bjtc.api.ApiReturn;
 import cn.bjtc.api.util.ParamUtil;
@@ -20,12 +19,16 @@ public class OrderController extends BaseController {
 
 	@RequestMapping(value="all", method=RequestMethod.POST)
 	public ApiReturn showOrder(){
-		ApiParam param = ApiManager.getInstance().getParameters(request);
-		OrderView view = (OrderView) ParamUtil.convertToView(param, OrderView.class);
-		int count = orderService.countAllOrder(view);
-		List<?> Orders = orderService.findAllOrder(view);
-		apiReturn.setCount(count);
-		apiReturn.setData(Orders);
+		try {
+			ApiParam param = findApiParam();
+			OrderView view = (OrderView) ParamUtil.convertToView(param, OrderView.class);
+			int count = orderService.countAllOrder(view);
+			List<?> Orders = orderService.findAllOrder(view);
+			apiReturn.setCount(count);
+			apiReturn.setData(Orders);
+		} catch (Exception e) {
+			showServerError();
+		}
 		return apiReturn;
 	}
 	@Autowired

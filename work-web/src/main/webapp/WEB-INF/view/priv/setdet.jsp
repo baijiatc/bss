@@ -4,7 +4,7 @@
 <script>
 $(function(){
 	BSS.dispatch({code:20011,data:[{objid:'${objid}',isRole:'${isRole}'}]},function(resp){
-		if(resp.code == 0){console.log(JSON.stringify(resp.data));
+		if(resp.code == 0){
 			var len = resp.data.length;
 			var nodes = [];
 			for(var i = 0; i < len; i++){

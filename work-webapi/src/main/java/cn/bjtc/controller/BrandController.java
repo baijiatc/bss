@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import cn.bjtc.api.ApiManager;
 import cn.bjtc.api.ApiParam;
 import cn.bjtc.api.ApiReturn;
 import cn.bjtc.api.util.ParamUtil;
@@ -20,48 +19,59 @@ public class BrandController extends BaseController{
 
 	@RequestMapping(value="all", method=RequestMethod.POST)
 	public ApiReturn showBrands(){
-		ApiParam param=ApiManager.getInstance().getParameters(request);
-		BrandView  view=(BrandView) ParamUtil.convertToView(param, BrandView.class);
-		int count=brandService.countAllBrands(view);
-		List<?> brands=brandService.findAllBrands(view);
-		apiReturn.setCount(count);
-		apiReturn.setData(brands);
+		try {
+			ApiParam param=findApiParam();
+			BrandView  view=(BrandView) ParamUtil.convertToView(param, BrandView.class);
+			int count=brandService.countAllBrands(view);
+			List<?> brands=brandService.findAllBrands(view);
+			apiReturn.setCount(count);
+			apiReturn.setData(brands);
+		} catch (Exception e) {
+			showServerError();
+		}
 		return apiReturn;
 	}
 	
 	@RequestMapping(value="create", method=RequestMethod.POST)
 	public ApiReturn execAddBrand(){
-		ApiParam param=ApiManager.getInstance().getParameters(request);
-		BrandView view=(BrandView) ParamUtil.convertToView(param, BrandView.class);
-		brandService.saveBrand(view);
+		try {
+			ApiParam param=findApiParam();
+			ifParamDataIsEmpty(param);
+			BrandView view=(BrandView) ParamUtil.convertToView(param, BrandView.class);
+			brandService.saveBrand(view);
+		} catch (Exception e) {
+			showServerError();
+		}
 		return apiReturn;
 	}
 	
 	@RequestMapping(value="update", method=RequestMethod.POST)
 	public ApiReturn execUpdateBrand(){
-		ApiParam param=ApiManager.getInstance().getParameters(request);
-		BrandView view=(BrandView) ParamUtil.convertToView(param, BrandView.class);
-		brandService.updateBrand(view);
+		try {
+			ApiParam param=findApiParam();
+			ifParamDataIsEmpty(param);
+			BrandView view=(BrandView) ParamUtil.convertToView(param, BrandView.class);
+			brandService.updateBrand(view);
+		} catch (Exception e) {
+			showServerError();
+		}
 		return apiReturn;
 	}
 	
 	@RequestMapping(value="get", method=RequestMethod.POST)
 	 public ApiReturn execeditBrand(){
-		ApiParam param=ApiManager.getInstance().getParameters(request);
-		BrandView view =(BrandView) ParamUtil.convertToView(param, BrandView.class);
-		List<?> brands=brandService.findAllBrands(view);
-		apiReturn.setData(brands);
+		try {
+			ApiParam param=findApiParam();
+			ifParamDataIsEmpty(param);
+			BrandView view =(BrandView) ParamUtil.convertToView(param, BrandView.class);
+			List<?> brands=brandService.findAllBrands(view);
+			apiReturn.setData(brands);
+		} catch (Exception e) {
+			showServerError();
+		}
 		return apiReturn;
 	}
 	
-   
-	
-	
-	
-	
-	
 	@Autowired
 	private IBrandService brandService;
-	
-	
 }

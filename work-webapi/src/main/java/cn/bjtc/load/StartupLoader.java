@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import cn.bjtc.common.ApplicationDataManager;
 import cn.bjtc.model.Dictionary;
 import cn.bjtc.model.ElemPriv;
 import cn.bjtc.model.MenuPriv;
@@ -17,7 +18,6 @@ import cn.bjtc.service.IElementService;
 import cn.bjtc.service.IMenuService;
 import cn.bjtc.service.IPrivilegeService;
 import cn.bjtc.service.ISysParamService;
-import cn.bjtc.tools.ApplicationDataManager;
 import cn.bjtc.view.ApiView;
 import cn.bjtc.view.DictionaryView;
 import cn.bjtc.view.MenuView;

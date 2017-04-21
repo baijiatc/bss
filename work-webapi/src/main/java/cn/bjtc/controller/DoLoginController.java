@@ -14,7 +14,7 @@ import cn.bjtc.api.ApiParam;
 import cn.bjtc.api.ApiReturn;
 import cn.bjtc.api.util.ParamUtil;
 import cn.bjtc.aspect.AspectType;
-import cn.bjtc.tools.ApplicationDataManager;
+import cn.bjtc.common.ApplicationDataManager;
 import cn.bjtc.view.LoginView;
 
 @RestController

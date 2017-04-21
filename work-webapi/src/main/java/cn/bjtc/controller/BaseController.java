@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import cn.bjtc.api.ApiParam;
 import cn.bjtc.api.ApiReturn;
+import cn.bjtc.common.ApplicationDataManager;
 import cn.bjtc.common.WebConstants;
-import cn.bjtc.tools.ApplicationDataManager;
 
 public class BaseController {
 	protected ApiReturn apiReturn;

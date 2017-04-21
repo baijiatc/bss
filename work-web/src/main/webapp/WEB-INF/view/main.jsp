@@ -29,7 +29,7 @@ a{
 <body>
 	<div id="div_container" align="center" style="width:auto;">
 		<div id="div_header" data-options="region:'north'" style="vertical-align:bottom;width:auto;height:80px;background:url(images/banner.jpg) no-repeat;background-size:100% 78px;">
-			<a href="javascript:void(0)" style="float:right;margin-top:50px;color:gray;" id="lnk_usercenter" class="easyui-menubutton" data-options="menu:'#lnk_usersubcenter'">你好：${loginuser.username }</a>
+			<a href="javascript:void(0)" style="float:right;margin-top:50px;color:gray;" id="lnk_usercenter" class="easyui-menubutton" data-options="menu:'#lnk_usersubcenter'">你好：${_current_user_name }</a>
 			<div id="lnk_usersubcenter" style="width:150px;">
 				<div id="div_staffcenter" data-options="iconCls:'icon-blank'">个人中心</div>
 				<div class="menu-sep"></div>
@@ -57,7 +57,7 @@ $(function(){
 	BSS.include('#div_left','main/left.html');
 	BSS.include('#div_center','main/center.html');
 	$('#div_staffcenter').click(function(){
-		var url = 'staff/${loginuser.uid}/profile.html'
+		var url = 'staff/${_current_user.uid}/profile.html'
 		var title = $(this).text();
 		BSS.showView(url,function(html){
 			MAINTAB.add(title,html);
@@ -69,6 +69,25 @@ $(function(){
 		},function(){});
 	});
 });
+BSS.Combox.prototype.fromDict=function(type){
+	var $this = this;
+	BSS.dispatch({code:21017,data:[{type:type}]},function(resp){
+		if(resp.code == 0){
+			var datas = resp.data;
+			var options = {valueField:'value',textField:'label',data:datas};
+			$this.init(options);
+		}else{
+			BSS.warning(resp.message);
+		}
+	},function(resp){
+		console.log(JSON.stringify(resp));
+	});
+};
+BSS.formatTime = function(val,row){
+	if(val <= 0){return '-';}
+	var valDate = new Date(val);
+	return BSS.DateTime.format(valDate);
+}
 </script>
 </body>
 </html>

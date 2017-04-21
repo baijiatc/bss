@@ -46,6 +46,11 @@
 	</dependency>
 	<dependency>
 		<groupId>cn.bjtc</groupId>
+  		<artifactId>work-logger</artifactId>
+  		 <version>0.0.1-SNAPSHOT</version>
+	</dependency>
+	<dependency>
+		<groupId>cn.bjtc</groupId>
   		<artifactId>work-dao</artifactId>
   		 <version>0.0.1-SNAPSHOT</version>
 	</dependency>

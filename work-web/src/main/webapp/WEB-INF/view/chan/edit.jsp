@@ -48,11 +48,14 @@
 		</tr>
 		<tr>
 			<td>渠道状态：</td>
-			<td><input class="easyui-textbox" type="text" name="chanst" data-options="required:true"></input></td>
+			<td><input id="cbx_chanst" class="easyui-combobox" type="text" name="chanst" data-options="required:true"></input></td>
 		</tr>
 	</table>
 </form>
 <script>
+var chanstCombox = new BSS.Combox('#cbx_chanst');
+chanstCombox.fromDict('DICT_CHANST');
+
 BSS.dispatch({code:13014,data:[{chanid:'${chanid}'}]},function(resp){
 	BSS.json2form('#frm_chan',resp.data[0]);
 });

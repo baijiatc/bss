@@ -1,12 +1,15 @@
 package cn.bjtc.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cn.bjtc.common.ApplicationDataManager;
 import cn.bjtc.dao.IElemPrivDAO;
 import cn.bjtc.dao.IMenuPrivDAO;
 import cn.bjtc.dao.IPrivilegeDAO;
@@ -18,7 +21,6 @@ import cn.bjtc.model.Privilege;
 import cn.bjtc.model.RolePriv;
 import cn.bjtc.model.StaffPriv;
 import cn.bjtc.service.IPrivilegeService;
-import cn.bjtc.tools.ApplicationDataManager;
 import cn.bjtc.tools.CopyUtils;
 import cn.bjtc.view.ElementView;
 import cn.bjtc.view.MenuView;
@@ -35,8 +37,18 @@ public class PrivilegeServiceImpl implements IPrivilegeService {
 		return privilegeDAO.updatePriv(view);
 	}
 
-	public List<Privilege> findAllPrivs(PrivilegeView view) {
-		return privilegeDAO.findAllPrivs(view);
+	public List<PrivilegeView> findAllPrivs(PrivilegeView view) {
+		List<Privilege> privs = privilegeDAO.findAllPrivs(view);
+		if(privs == null){
+			return new ArrayList<PrivilegeView>(0);
+		}
+		List<PrivilegeView> views = new ArrayList<PrivilegeView>(privs.size());
+		for(Privilege priv : privs){
+			PrivilegeView privView = new PrivilegeView();
+			BeanUtils.copyProperties(priv, privView);
+			views.add(privView);
+		}
+		return views;
 	}
 
 	public Integer countAllPrivs(PrivilegeView view) {

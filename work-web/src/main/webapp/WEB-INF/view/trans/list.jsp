@@ -11,13 +11,13 @@ $(function(){
           {field:'TRIGGER_GROUP',title: '触发器组',align: 'center',hidden:'true'},
           {field:'JOB_NAME',title: '任务名称',align: 'center',width: 150},
           {field:'JOB_GROUP',title: '任务组',align: 'center',hidden:'true'},
-          {field:'NEXT_FIRE_TIME',title: '下次触发时间',align: 'center',width: 150,formatter:formatTime},
-          {field:'PREV_FIRE_TIME',title: '上次触发时间',align: 'center',width: 150,formatter:formatTime},
+          {field:'NEXT_FIRE_TIME',title: '下次触发时间',align: 'center',width: 150,formatter:BSS.formatTime},
+          {field:'PREV_FIRE_TIME',title: '上次触发时间',align: 'center',width: 150,formatter:BSS.formatTime},
           {field:'PRIORITY',title: '优先级',align: 'center',width: 100},
           {field:'TRIGGER_STATE',title: '当前状态',align: 'center',width: 100},
           {field:'TRIGGER_TYPE',title: '类型',align: 'center',width: 100},
-          {field:'START_TIME',title: '开始时间',align: 'center',width: 150,formatter:formatTime},
-          {field:'END_TIME',title: '结束时间',align: 'center',width: 150,formatter:formatTime},
+          {field:'START_TIME',title: '开始时间',align: 'center',width: 150,formatter:BSS.formatTime},
+          {field:'END_TIME',title: '结束时间',align: 'center',width: 150,formatter:BSS.formatTime},
           {field:'DESCRIPTION',title: '描述',align: 'center',width: 200}
 		]]
 	};
@@ -85,10 +85,4 @@ $(function(){
 		}
 	};
 })
-
-function formatTime(val,row){
-	if(val <= 0){return '-';}
-	var valDate = new Date(val);
-	return BSS.DateTime.format(valDate);
-}
 </script>

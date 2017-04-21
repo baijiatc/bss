@@ -1,5 +1,8 @@
 package cn.bjtc.view;
 
+import cn.bjtc.api.BaseDictType;
+import cn.bjtc.common.ApplicationDataManager;
+
 public class ChannelView extends Pagination {
 	private Integer chanid;
 	private String channame;
@@ -92,5 +95,8 @@ public class ChannelView extends Pagination {
 	}
 	public void setChanst(Integer chanst) {
 		this.chanst = chanst;
+	}
+	public String getChanstStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_CHANST.toString(),String.valueOf(chanst));
 	}
 }

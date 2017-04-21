@@ -48,8 +48,12 @@
 		<tr>
 			<td>渠道状态：</td>
 			<td>
-				<input class="easyui-textbox" type="text" name="chanst" data-options="required:true"></input>
+				<input id="cbx_chanst" class="easyui-combobox" type="text" name="chanst" data-options="required:true"></input>
 			</td>
 		</tr>
 	</table>
 </form>
+<script>
+var chanstCombox = new BSS.Combox('#cbx_chanst');
+chanstCombox.fromDict('DICT_CHANST');
+</script>

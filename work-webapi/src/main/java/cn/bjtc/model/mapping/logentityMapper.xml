@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="LogEntity">
+	<resultMap type="cn.bjtc.model.LogEntity" id="LogEntityMap">
+		<result column="id" property="logid"/>
+		<result column="logtype" property="logtype"/>
+		<result column="operator" property="operator"/>
+		<result column="content" property="content"/>
+		<result column="createtime" property="crtime"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.LogEntity" id="LogEntityParamMap">
+		<parameter property="logid" resultMap="LogEntityMap" />
+		<parameter property="logtype" resultMap="LogEntityMap" />
+		<parameter property="operator" resultMap="LogEntityMap" />
+		<parameter property="content" resultMap="LogEntityMap" />
+		<parameter property="crtime" resultMap="LogEntityMap" />
+	</parameterMap>
+
+	<insert id="saveLogEntity" parameterMap="LogEntityParamMap">
+		INSERT INTO syslog(logtype,operator,content,createtime) VALUES (#{logtype},#{operator},#{content},#{crtime})
+	</insert>
+	 
+</mapper>

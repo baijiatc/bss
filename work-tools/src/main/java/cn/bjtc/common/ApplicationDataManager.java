@@ -1,4 +1,4 @@
-package cn.bjtc.tools;
+package cn.bjtc.common;
 
 import java.util.List;
 import java.util.Map;
@@ -6,6 +6,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ApplicationDataManager {
+	public static final Map<Integer,String> SYSAPIMAP = new ConcurrentHashMap<Integer, String>();
+	
 	public static final Map<String,String> SYSPARAMS = new ConcurrentHashMap<String, String>();
 	
 	public static final List<Object> SYSMENUS = new CopyOnWriteArrayList<Object>();
@@ -23,6 +25,9 @@ public class ApplicationDataManager {
 	
 	public static String getDictValueByTypeValue(String type,String value){
 		Map<String,String> valueMap = SYSDICTS.get(type);
+		if(valueMap == null){
+			return "";
+		}
 		return valueMap.get(value);
 	}
 }

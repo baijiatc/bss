@@ -1,5 +1,8 @@
 package cn.bjtc.view;
 
+import cn.bjtc.api.BaseDictType;
+import cn.bjtc.common.ApplicationDataManager;
+
 public class ApiView extends Pagination {
 	private Integer apiid;
 	private Integer code;
@@ -43,5 +46,8 @@ public class ApiView extends Pagination {
 	}
 	public void setApist(Integer apist) {
 		this.apist = apist;
+	}
+	public String getApistStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_APIST.toString(),String.valueOf(apist));
 	}
 }

@@ -9,7 +9,7 @@
 		</tr>
 		<tr>
 			<td>性别：</td>
-			<td><input class="easyui-textbox" type="text" name="gender" data-options="required:true"></input></td>
+			<td><input id="cbx_gender" class="easyui-textbox" type="text" name="gender" data-options="required:true"></input></td>
 		</tr>
 		<tr>
 			<td>手机：</td>
@@ -57,7 +57,7 @@
 		</tr>
 		<tr>
 			<td>员工状态：</td>
-			<td><input class="easyui-textbox" type="text" name="staffst" data-options="required:true"></input></td>
+			<td><input id="cbx_staffst" class="easyui-textbox" type="text" name="staffst" data-options="required:true"></input></td>
 		</tr>
 		<tr>
 			<td>离职时间：</td>
@@ -74,10 +74,22 @@
 	</table>
 </form>
 <script>
+var genderCombox = new BSS.Combox('#cbx_gender');
+genderCombox.fromDict('DICT_GENDER');
+
+var staffstCombox = new BSS.Combox('#cbx_staffst');
+staffstCombox.fromDict('DICT_STAFFST');
+
 STAFFDIALOG.ok = function(){
 	var staff = BSS.form2json('#frm_staff');
 	BSS.dispatch({code:11001,data:[staff]},function(){
-		BSS.alert();;
-	},function(){});
+		if(resp.code == 0){
+			BSS.info('保存成功');
+		}else{
+			BSS.warning(resp.message);
+		}
+	},function(){
+		console.log(JSON.stringify(resp));
+	});
 }
 </script>

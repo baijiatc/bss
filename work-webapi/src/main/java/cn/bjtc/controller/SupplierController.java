@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import cn.bjtc.annotation.SysLogger;
 import cn.bjtc.api.ApiParam;
 import cn.bjtc.api.ApiReturn;
 import cn.bjtc.api.util.ParamUtil;
+import cn.bjtc.aspect.AspectType;
 import cn.bjtc.service.ISupplierService;
 import cn.bjtc.view.SupplierView;
 
@@ -18,6 +20,7 @@ import cn.bjtc.view.SupplierView;
 public class SupplierController extends BaseController {
 
 	@RequestMapping(value="all", method=RequestMethod.POST)
+	@SysLogger(content="查询供应商信息",type=AspectType.CONTROLLER)
 	public ApiReturn showSupplier(){
 		try {
 			ApiParam param = findApiParam();
@@ -33,6 +36,7 @@ public class SupplierController extends BaseController {
 	}
 	
 	@RequestMapping(value="create", method=RequestMethod.POST)
+	@SysLogger(content="新增供应商信息",type=AspectType.CONTROLLER)
 	public ApiReturn execAddSupplier(){
 		try {
 			ApiParam param = findApiParam();
@@ -46,6 +50,7 @@ public class SupplierController extends BaseController {
 	}
 	
 	@RequestMapping(value="update", method=RequestMethod.POST)
+	@SysLogger(content="编辑供应商信息",type=AspectType.CONTROLLER)
 	public ApiReturn execUpdateSupplier(){
 		try {
 			ApiParam param = findApiParam();

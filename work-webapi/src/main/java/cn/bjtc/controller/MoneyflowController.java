@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import cn.bjtc.annotation.SysLogger;
 import cn.bjtc.api.ApiParam;
 import cn.bjtc.api.ApiReturn;
 import cn.bjtc.api.util.ParamUtil;
+import cn.bjtc.aspect.AspectType;
 import cn.bjtc.service.IMoneyflowService;
 import cn.bjtc.view.MoneyflowView;
 
@@ -18,6 +20,7 @@ import cn.bjtc.view.MoneyflowView;
 public class MoneyflowController extends BaseController {
 
 	@RequestMapping(value="all", method=RequestMethod.POST)
+	@SysLogger(content="查询资金流水信息",type=AspectType.CONTROLLER)
 	public ApiReturn showMoneyflow(){
 		try {
 			ApiParam param = findApiParam();

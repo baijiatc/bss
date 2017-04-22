@@ -26,4 +26,9 @@ public class MainController {
 	public String show200View(){
 		return "inc/200";
 	}
+	
+	@RequestMapping(value="main/unauth.html",method=RequestMethod.GET)
+	public String showUnauthView(){
+		return "inc/unauth";
+	}
 }

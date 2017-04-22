@@ -1,4 +1,6 @@
 package cn.bjtc.realm;
+import java.util.Map;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -11,6 +13,7 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 
+import cn.bjtc.common.ApplicationDataManager;
 import cn.bjtc.common.WebConstants;
 import cn.bjtc.model.LoginUser;
 import cn.bjtc.service.IAuthService;
@@ -34,7 +37,13 @@ public class MyRealm extends AuthorizingRealm {
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		//获取当前登录的用户名,等价于(String)principals.fromRealm(this.getName()).iterator().next()
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        String loginName = (String)super.getAvailablePrincipal(principals); 
+		Object uname = getSession(WebConstants.CURRENT_USER_NAME);
+		Object uid = getSession(WebConstants.CURRENT_USER_ID);
+		String key = String.valueOf(uname)+String.valueOf(uid);
+        Map<String, Object> currentUserPrivMap = ApplicationDataManager.USERPRIVS.get(key);
+        for(String privname : currentUserPrivMap.keySet()){
+        	info.addStringPermission(privname);
+        }
 		return info;
 	}
 
@@ -49,6 +58,7 @@ public class MyRealm extends AuthorizingRealm {
 		LoginUser loginUser = authService.findUserByName(token.getUsername());
 		setSession(WebConstants.CURRENT_USER,loginUser);
 		setSession(WebConstants.CURRENT_USER_NAME,loginUser.getUsername());
+		setSession(WebConstants.CURRENT_USER_ID,loginUser.getUid());
 		AuthenticationInfo info = new SimpleAuthenticationInfo(loginUser.getUsername(),loginUser.getPassword(),getName());
 		return info;
 	}
@@ -66,5 +76,18 @@ public class MyRealm extends AuthorizingRealm {
 				session.setAttribute(key, value);
 			}
 		}
+	}
+	
+	private Object getSession(Object key){
+		Object obj = null;
+		Subject currentUser = SecurityUtils.getSubject();
+		if(null != currentUser){
+			Session session = currentUser.getSession();
+			System.out.println("Session默认超时时间为[" + session.getTimeout() + "]毫秒");
+			if(null != session){
+				obj = session.getAttribute(key);
+			}
+		}
+		return obj;
 	}
 }

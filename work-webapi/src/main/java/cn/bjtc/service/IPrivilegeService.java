@@ -23,4 +23,6 @@ public interface IPrivilegeService {
 	public List<ElemPriv> findAllElemPrivs();
 	
 	public List<Object> loadObjectPriv(Object objid, Object isRole);
+	
+	public List<PrivilegeView> findCurrentUserPrivs(Object uid);
 }

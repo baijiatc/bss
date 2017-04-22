@@ -40,6 +40,7 @@ public class ProdController extends BaseController{
 	public ApiReturn execAddProd(){
 		try {
 			ApiParam param=findApiParam();
+			ifParamDataIsEmpty(param);
 			ProductView view=(ProductView) ParamUtil.convertToView(param, ProductView.class);
 			prodService.saveProd(view);
 		} catch (Exception e) {
@@ -53,6 +54,7 @@ public class ProdController extends BaseController{
 	public ApiReturn execUpdateProd(){
 		try {
 			ApiParam param=findApiParam();
+			ifParamDataIsEmpty(param);
 			ProductView view=(ProductView) ParamUtil.convertToView(param, ProductView.class);
 			prodService.updateProd(view);
 		} catch (Exception e) {
@@ -66,6 +68,7 @@ public class ProdController extends BaseController{
 	public ApiReturn execeditProd(){
 		try {
 			ApiParam  param=findApiParam();
+			ifParamDataIsEmpty(param);
 			ProductView view=(ProductView) ParamUtil.convertToView(param, ProductView.class);
 			List<?> prods=prodService.findAllProds(view);
 			apiReturn.setData(prods);

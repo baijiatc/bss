@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="StockAlarm">
+	<resultMap type="cn.bjtc.model.StockAlarm" id="StockAlarmMap">
+		<result column="alarmid" property="alarmid"/>
+		<result column="factcatid" property="factcatid"/>
+		<result column="objid" property="objid"/>
+		<result column="factorid" property="factorid"/>
+		<result column="factvalueid" property="factvalueid"/>
+		<result column="alarmst" property="alarmst"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.StockAlarm" id="StockAlarmParamMap">
+		<parameter property="alarmid" resultMap="StockAlarmMap" />
+		<parameter property="factcatid" resultMap="StockAlarmMap" />
+		<parameter property="objid" resultMap="StockAlarmMap" />
+		<parameter property="factorid" resultMap="StockAlarmMap" />
+		<parameter property="factvalueid" resultMap="StockAlarmMap" />
+		<parameter property="alarmst" resultMap="StockAlarmMap" />
+	</parameterMap>
+	<insert id="saveStockAlarm" parameterMap="StockAlarmParamMap">
+		INSERT INTO stockalarm(factcatid,objid,factorid,factvalueid,alarmst) 
+		VALUES (#{factcatid},#{objid},#{factorid},#{factvalueid},#{alarmst})
+	</insert>
+	
+	<update id="updateStockAlarm" parameterMap="StockAlarmParamMap">
+		UPDATE stockalarm SET factcatid=#{factcatid},objid=#{objid},factorid=#{factorid},factvalueid=#{factvalueid},alarmst=#{alarmst} 
+		WHERE alarmid=#{alarmid}
+	</update>
+	
+	<select id="findAllStockAlarms" resultMap="StockAlarmMap" >
+	 	SELECT * FROM stockalarm WHERE 1=1 
+	 	<if test="alarmid!=null and alarmid!=0"> AND alarmid=#{alarmid}</if>
+	 	<if test="factcatid!=null and factcatid!=0"> AND factcatid=#{factcatid}</if>
+	 	<if test="objid!=null and objid!=0"> AND objid=#{objid}</if>
+	 	<if test="factorid!=null and factorid!=0"> AND factorid=#{factorid}</if>
+	 	<if test="factvalueid!=null and factvalueid!=0"> AND factvalueid=#{factvalueid}</if>
+	 	<if test="alarmst!=null and alarmst!=0"> AND alarmst=#{alarmst}</if>
+	 	LIMIT #{pageOffset},#{pageSize}
+	</select>
+	
+	<select id="countAllStockAlarms" resultType="Integer" >
+		SELECT count(alarmid) FROM stockalarm WHERE 1=1
+		<if test="alarmid!=null and alarmid!=0"> AND alarmid=#{alarmid}</if>
+	 	<if test="factcatid!=null and factcatid!=0"> AND factcatid=#{factcatid}</if>
+	 	<if test="objid!=null and objid!=0"> AND objid=#{objid}</if>
+	 	<if test="factorid!=null and factorid!=0"> AND factorid=#{factorid}</if>
+	 	<if test="factvalueid!=null and factvalueid!=0"> AND factvalueid=#{factvalueid}</if>
+	 	<if test="alarmst!=null and alarmst!=0"> AND alarmst=#{alarmst}</if>
+	</select>
+</mapper>

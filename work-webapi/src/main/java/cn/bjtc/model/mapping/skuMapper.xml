@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Sku">
+	<resultMap type="cn.bjtc.model.Sku" id="SkuMap">
+		<result column="id" property="id"/>
+		<result column="skuname" property="skuname"/>
+		<result column="barcode" property="barcode"/>
+		<result column="price" property="price"/>
+		<result column="mktprice" property="mktprice"/>
+		<result column="fromsys" property="fromsys"/>
+		<result column="sourceid" property="sourceid"/>
+		<result column="productid" property="productid"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Sku" id="SkuParamMap">
+		<parameter property="id" resultMap="SkuMap" />
+		<parameter property="skuname" resultMap="SkuMap" />
+		<parameter property="barcode" resultMap="SkuMap" />
+		<parameter property="price" resultMap="SkuMap" />
+		<parameter property="mktprice" resultMap="SkuMap" />
+		<parameter property="fromsys" resultMap="SkuMap" />
+		<parameter property="sourceid" resultMap="SkuMap" />
+		<parameter property="productid" resultMap="SkuMap" />
+	</parameterMap>
+ 
+   <insert id="saveSku" parameterMap="SkuParamMap">
+		INSERT INTO  sku (skuname,barcode,price,mktprice,fromsys,sourceid,productid) VALUES (#{skuname},#{barcode},#{price},#{mktprice},#{fromsys},#{sourceid},#{productid})
+   </insert>
+	
+	<update id="updateSku" parameterMap="SkuParamMap">
+		UPDATE Sku SET skuname=#{skuname},barcode=#{barcode},price=#{price},mktprice=#{mktprice},fromsys=#{fromsys},sourceid=#{sourceid},productid=#{productid}    WHERE id =#{id}
+	</update>
+
+	<select id="findAllSku" resultMap="SkuMap" >
+	 	SELECT * FROM  sku WHERE   1=1
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="skuname!=null and skuname!=''"> AND skuname=#{skuname}</if>
+	 	<if test="barcode!=null and barcode!=''"> AND barcode=#{barcode}</if>
+	 	<if test="price!=null and price!=0"> AND price=#{price}</if>
+	 	<if test="mktprice!=null and mktprice!=0"> AND mktprice=#{mktprice}</if>
+	 	<if test="fromsys!=null and fromsys!=0"> AND fromsys=#{fromsys}</if>
+	 	<if test="sourceid!=null and sourceid!=0"> AND sourceid=#{sourceid}</if>
+	 	<if test="productid!=null and productid!=0"> AND productid=#{productid}</if>
+	 	LIMIT #{pageOffset},#{pageSize}
+	</select>
+	
+	<select id="countAllSku" resultType="Integer" >
+	 	SELECT count(id) FROM sku   WHERE   1=1
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="skuname!=null and skuname!=''"> AND skuname=#{skuname}</if>
+	 	<if test="barcode!=null and barcode!=''"> AND barcode=#{barcode}</if>
+	 	<if test="price!=null and price!=0"> AND price=#{price}</if>
+	 	<if test="mktprice!=null and mktprice!=0"> AND mktprice=#{mktprice}</if>
+	 	<if test="fromsys!=null and fromsys!=0"> AND fromsys=#{fromsys}</if>
+	 	<if test="sourceid!=null and sourceid!=0"> AND sourceid=#{sourceid}</if>
+	 	<if test="productid!=null and productid!=0"> AND productid=#{productid}</if>
+	</select>
+	 
+</mapper>

@@ -182,6 +182,20 @@ public class PrivilegeServiceImpl implements IPrivilegeService {
 		return treeNodeLst;
 	}
 
+	public List<PrivilegeView> findCurrentUserPrivs(Object uid) {
+		List<Privilege> privs = privilegeDAO.findCurrentUserPrivs(uid);
+		if(privs == null){
+			return new ArrayList<PrivilegeView>(0);
+		}
+		List<PrivilegeView> views = new ArrayList<PrivilegeView>(privs.size());
+		for(Privilege priv : privs){
+			PrivilegeView view = new PrivilegeView();
+			BeanUtils.copyProperties(priv, view);
+			views.add(view);
+		}
+		return views;
+	}
+
 	@Autowired
 	private IPrivilegeDAO privilegeDAO;
 	@Autowired

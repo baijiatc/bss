@@ -22,9 +22,13 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
     <aop:aspectj-autoproxy proxy-target-class="true"/>
     <bean id="sysLogAspect" class="cn.bjtc.aspect.SysLogAspect"/>
     <bean id="sysLogAfterAspect" class="cn.bjtc.aspect.SysLogAfterAspect"/>
+    <bean id="sysPrivAspect" class="cn.bjtc.aspect.SysPrivilegeAspect"/>
     <aop:config>
     	<aop:aspect ref="sysLogAspect">
     		<aop:before method="doBefore" pointcut="execution(* cn.bjtc.controller.*.*.*(..))"/>
+    	</aop:aspect>
+    	<aop:aspect ref="sysPrivAspect">
+    		<aop:before method="doBefore" pointcut="execution(* cn.bjtc.controller.*ViewController.*.*(..))"/>
     	</aop:aspect>
     	<aop:aspect ref="sysLogAfterAspect">
     		<aop:after method="doAfter" pointcut="execution(* cn.bjtc.controller.*.*.*(..))"/>

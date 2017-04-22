@@ -25,7 +25,7 @@
 		UPDATE privilege SET privname=#{privname},privtype=#{privtype},privcat=#{privcat},privdesc=#{privdesc},privst=#{privst} WHERE privid=#{privid}
 	</update>
 	
-	<select id="findAllPrivs" resultMap="PrivMap" >
+	<select id="findAllPrivs" resultMap="PrivMap">
 	 	SELECT * FROM privilege WHERE 1=1 
 	 	<if test="privid!=null and privid!=0"> AND privid=#{privid}</if>
 	 	<if test="privname!=null and privname!=''"> AND privname=#{privname}</if>
@@ -44,4 +44,14 @@
 	 	<if test="privst!=null"> AND privst=#{privst}</if>
 	</select>
 	
+	<select id="findCurrentUserPrivs" resultMap="PrivMap">
+		SELECT p.* FROM privilege p 
+		LEFT JOIN rolepriv rp ON p.privid=rp.privid
+		LEFT JOIN staffrole sr ON rp.roleid=sr.roleid
+		WHERE sr.staffid=#{0}
+		UNION
+		SELECT p.* FROM privilege p
+		LEFT JOIN staffpriv sp ON p.privid=sp.privid
+		WHERE sp.staffid=#{0}
+	</select>
 </mapper>

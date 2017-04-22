@@ -10,4 +10,6 @@ public interface IPrivilegeDAO {
 	public int updatePriv(PrivilegeView view);
 	public List<Privilege> findAllPrivs(PrivilegeView view);
 	public Integer countAllPrivs(PrivilegeView view);
+	
+	public List<Privilege> findCurrentUserPrivs(Object uid);
 }

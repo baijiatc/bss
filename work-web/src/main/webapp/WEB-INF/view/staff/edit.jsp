@@ -10,7 +10,7 @@
 		</tr>
 		<tr>
 			<td>性别：</td>
-			<td><input id="id_gender" class="easyui-textbox" type="text" name="gender" data-options="required:true"></input></td>
+			<td><input id="cbx_gender" class="easyui-textbox" type="text" name="gender" data-options="required:true"></input></td>
 		</tr>
 		<tr>
 			<td>手机：</td>
@@ -58,7 +58,7 @@
 		</tr>
 		<tr>
 			<td>员工状态：</td>
-			<td><input id="id_staffst" class="easyui-textbox" type="text" name="staffst" data-options="required:true"></input></td>
+			<td><input id="cbx_staffst" class="easyui-textbox" type="text" name="staffst" data-options="required:true"></input></td>
 		</tr>
 		<tr>
 			<td>离职时间：</td>
@@ -75,13 +75,25 @@
 	</table>
 </form>
 <script>
+var genderCombox = new BSS.Combox('#cbx_gender');
+genderCombox.fromDict('DICT_GENDER');
+
+var staffstCombox = new BSS.Combox('#cbx_staffst');
+staffstCombox.fromDict('DICT_STAFFST');
+
 BSS.dispatch({code:11009,data:[{staffid:'${staffid}'}]},function(resp){
-	BSS.json2form('#frm_staff',resp.data[0]);
+	if(resp.code == 0){
+		BSS.json2form('#frm_staff',resp.data[0]);
+	
+		STAFFDIALOG.ok = function(){
+			var staff = BSS.form2json('#frm_staff');
+			BSS.dispatch({code:11002,data:[staff]},function(){
+				BSS.alert('保存成功！');
+			},function(){});
+		};
+	}else{
+				ROLEDIALOG.ok = function(){};
+				BSS.warning(resp.message);
+			}
 });
-STAFFDIALOG.ok = function(){
-	var staff = BSS.form2json('#frm_staff');
-	BSS.dispatch({code:11002,data:[staff]},function(){
-		BSS.alert('保存成功！');
-	},function(){});
-}
 </script>

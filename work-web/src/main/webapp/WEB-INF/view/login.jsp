@@ -4,14 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>登录——<%=ApplicationDataManager.getSysParamByCode("APP_NAME") %></title>
 <link rel="stylesheet" type="text/css" href="js/easyui/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="js/easyui/themes/icon.css">
 <link rel="stylesheet" type="text/css" href="css/login.css">
 </head>
 <body>
 	<div id="login">  
-        <h1><%=ApplicationDataManager.getSysParamByCode("APP_NAME") %></h1>  
         <form method="post">  
             <input type="text" required="required" placeholder="用户名" name="uname"></input>  
             <input type="password" required="required" placeholder="密码" name="upass"></input>  

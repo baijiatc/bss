@@ -32,4 +32,8 @@ public class PrivilegeDAOImpl extends MyBatisDAO<Privilege, Integer> implements
 		return super.countByParam("countAllPrivs", view);
 	}
 
+	public List<Privilege> findCurrentUserPrivs(Object uid) {
+		return super.findByParam("findCurrentUserPrivs", uid);
+	}
+
 }

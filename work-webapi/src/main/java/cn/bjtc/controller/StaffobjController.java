@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import cn.bjtc.annotation.SysLogger;
 import cn.bjtc.api.ApiParam;
 import cn.bjtc.api.ApiReturn;
 import cn.bjtc.api.util.ParamUtil;
+import cn.bjtc.aspect.AspectType;
 import cn.bjtc.service.IStaffobjService;
 import cn.bjtc.view.StaffobjView;
 
@@ -18,6 +20,7 @@ import cn.bjtc.view.StaffobjView;
 public class StaffobjController extends BaseController {
 
 	@RequestMapping(value="all", method=RequestMethod.POST)
+	@SysLogger(content="查询供应商与员工关系信息",type=AspectType.CONTROLLER)
 	public ApiReturn showStaffobj(){
 		try {
 			ApiParam param = findApiParam();
@@ -33,6 +36,7 @@ public class StaffobjController extends BaseController {
 	}
 	
 	@RequestMapping(value="create", method=RequestMethod.POST)
+	@SysLogger(content="新增供应商与员工关系信息",type=AspectType.CONTROLLER)
 	public ApiReturn execAddStaffobj(){
 		try {
 			ApiParam param = findApiParam();
@@ -46,6 +50,7 @@ public class StaffobjController extends BaseController {
 	}
 	
 	@RequestMapping(value="update", method=RequestMethod.POST)
+	@SysLogger(content="编辑供应商与员工关系信息",type=AspectType.CONTROLLER)
 	public ApiReturn execUpdateStaffobj(){
 		try {
 			ApiParam param = findApiParam();

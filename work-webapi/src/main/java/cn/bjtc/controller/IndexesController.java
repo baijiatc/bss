@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import cn.bjtc.annotation.SysLogger;
 import cn.bjtc.api.ApiParam;
 import cn.bjtc.api.ApiReturn;
 import cn.bjtc.api.util.ParamUtil;
+import cn.bjtc.aspect.AspectType;
 import cn.bjtc.service.IIndexesService;
 import cn.bjtc.view.IndexesView;
 
@@ -18,6 +20,7 @@ import cn.bjtc.view.IndexesView;
 public class IndexesController extends BaseController {
 
 	@RequestMapping(value="all", method=RequestMethod.POST)
+	@SysLogger(content="查询指标信息",type=AspectType.CONTROLLER)
 	public ApiReturn showIndexes(){
 		try {
 			ApiParam param = findApiParam();
@@ -33,6 +36,7 @@ public class IndexesController extends BaseController {
 	}
 	
 	@RequestMapping(value="create", method=RequestMethod.POST)
+	@SysLogger(content="新增指标信息",type=AspectType.CONTROLLER)
 	public ApiReturn execAddIndexes(){
 		try {
 			ApiParam param = findApiParam();
@@ -46,6 +50,7 @@ public class IndexesController extends BaseController {
 	}
 	
 	@RequestMapping(value="update", method=RequestMethod.POST)
+	@SysLogger(content="编辑指标信息",type=AspectType.CONTROLLER)
 	public ApiReturn execUpdateIndexes(){
 		try {
 			ApiParam param = findApiParam();

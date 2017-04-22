@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Factor">
+	<resultMap type="cn.bjtc.model.Factor" id="FactorMap">
+		<result column="factid" property="factid"/>
+		<result column="factname" property="factname"/>
+		<result column="defaultval" property="factst"/>
+		<result column="defaultunit" property="factst"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Factor" id="FactorParamMap">
+		<parameter property="factid" resultMap="FactorMap" />
+		<parameter property="factname" resultMap="FactorMap" />
+		<parameter property="defaultval" resultMap="FactorMap" />
+		<parameter property="defaultunit" resultMap="FactorMap" />
+	</parameterMap>
+	<insert id="saveFactor" parameterMap="FactorParamMap">
+		INSERT INTO factor(factname,defaultval,defaultunit) VALUES (#{factname},#{defaultval},#{defaultunit})
+	</insert>
+	
+	<update id="updateFactor" parameterMap="FactorParamMap">
+		UPDATE factor SET factname=#{factname},defaultval=#{defaultval},defaultunit=#{defaultunit} WHERE factid=#{factid}
+	</update>
+	
+	<select id="findAllFactors" resultMap="FactorMap" >
+	 	SELECT * FROM factor WHERE 1=1 
+	 	<if test="factid!=null and factid!=0"> AND factid=#{factid}</if>
+	 	<if test="factname!=null and factname!=''"> AND factname=#{factname}</if>
+	 	<if test="defaultval!=null and defaultval!=''"> AND defaultval=#{defaultval}</if>
+	 	<if test="defaultunit!=null and defaultunit!=0"> AND defaultunit=#{defaultunit}</if>
+	 	LIMIT #{pageOffset},#{pageSize}
+	</select>
+	
+	<select id="countAllFactors" resultType="Integer" >
+		SELECT count(factid) FROM factor WHERE 1=1
+		<if test="factid!=null and factid!=0"> AND factid=#{factid}</if>
+	 	<if test="factname!=null and factname!=''"> AND factname=#{factname}</if>
+	 	<if test="defaultval!=null and defaultval!=''"> AND defaultval=#{defaultval}</if>
+	 	<if test="defaultunit!=null and defaultunit!=0"> AND defaultunit=#{defaultunit}</if>
+	</select>
+</mapper>

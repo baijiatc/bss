@@ -1,5 +1,8 @@
 package cn.bjtc.view;
 
+import cn.bjtc.api.BaseDictType;
+import cn.bjtc.common.ApplicationDataManager;
+
 public class StaffView extends Pagination {
 
 	private Integer staffid;
@@ -127,5 +130,11 @@ public class StaffView extends Pagination {
 	}
 	public void setCreator(Integer creator) {
 		this.creator = creator;
+	}
+	public String getGenderStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_GENDER.toString(), String.valueOf(gender));
+	}
+	public String getStaffStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_STAFFST.toString(), String.valueOf(staffst));
 	}
 }

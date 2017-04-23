@@ -11,7 +11,8 @@ $(function(){
           {field:'apiname',title: '业务名称',align: 'center',width: 200},
           {field:'apiurl',title: 'URL',align: 'center',width: 200},
           {field:'retype',title: '返回类型',align: 'center',width: 200},
-          {field:'apist',title: '状态',align: 'center',width: 200}
+          {field:'apist',title: '状态值',align: 'center',hidden:'true'},
+          {field:'apistStr',title: '状态',align: 'center',width: 200}
 		]]
 	};
 	//构建datagrid，并填充数据

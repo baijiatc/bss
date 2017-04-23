@@ -4,8 +4,8 @@
 	<resultMap type="cn.bjtc.model.Factor" id="FactorMap">
 		<result column="factid" property="factid"/>
 		<result column="factname" property="factname"/>
-		<result column="defaultval" property="factst"/>
-		<result column="defaultunit" property="factst"/>
+		<result column="defaultval" property="defaultval"/>
+		<result column="defaultunit" property="defaultunit"/>
 	</resultMap>
 	<parameterMap type="cn.bjtc.model.Factor" id="FactorParamMap">
 		<parameter property="factid" resultMap="FactorMap" />

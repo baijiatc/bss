@@ -69,13 +69,14 @@ $(function(){
 		},function(){});
 	});
 });
-BSS.Combox.prototype.fromDict=function(type){
+BSS.Combox.prototype.fromDict=function(type,callback){
 	var $this = this;
 	BSS.dispatch({code:21017,data:[{type:type}]},function(resp){
 		if(resp.code == 0){
 			var datas = resp.data;
 			var options = {valueField:'value',textField:'label',data:datas};
 			$this.init(options);
+			callback = callback || new Function();
 		}else{
 			BSS.warning(resp.message);
 		}

@@ -10,7 +10,8 @@
 </head>
 <body>
 	<div id="login">  
-        <form method="post">  
+        <form method="post">
+        	<h1><%=ApplicationDataManager.getSysParamByCode("APP_NAME") %></h1>  
             <input type="text" required="required" placeholder="用户名" name="uname"></input>  
             <input type="password" required="required" placeholder="密码" name="upass"></input>  
             <button class="but" type="button">登录</button>  

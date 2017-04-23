@@ -7,6 +7,7 @@
 		<result column="objid" property="objid"/>
 		<result column="factorid" property="factorid"/>
 		<result column="factvalueid" property="factvalueid"/>
+		<result column="factunit" property="factunit"/>
 		<result column="alarmst" property="alarmst"/>
 	</resultMap>
 	<parameterMap type="cn.bjtc.model.StockAlarm" id="StockAlarmParamMap">
@@ -15,15 +16,16 @@
 		<parameter property="objid" resultMap="StockAlarmMap" />
 		<parameter property="factorid" resultMap="StockAlarmMap" />
 		<parameter property="factvalueid" resultMap="StockAlarmMap" />
+		<parameter property="factunit" resultMap="StockAlarmMap" />
 		<parameter property="alarmst" resultMap="StockAlarmMap" />
 	</parameterMap>
 	<insert id="saveStockAlarm" parameterMap="StockAlarmParamMap">
-		INSERT INTO stockalarm(factcatid,objid,factorid,factvalueid,alarmst) 
-		VALUES (#{factcatid},#{objid},#{factorid},#{factvalueid},#{alarmst})
+		INSERT INTO stockalarm(factcatid,objid,factorid,factvalueid,factunit,alarmst) 
+		VALUES (#{factcatid},#{objid},#{factorid},#{factvalueid},#{factunit},#{alarmst})
 	</insert>
 	
 	<update id="updateStockAlarm" parameterMap="StockAlarmParamMap">
-		UPDATE stockalarm SET factcatid=#{factcatid},objid=#{objid},factorid=#{factorid},factvalueid=#{factvalueid},alarmst=#{alarmst} 
+		UPDATE stockalarm SET factcatid=#{factcatid},objid=#{objid},factorid=#{factorid},factvalueid=#{factvalueid},factunit=#{factunit},alarmst=#{alarmst} 
 		WHERE alarmid=#{alarmid}
 	</update>
 	
@@ -34,6 +36,7 @@
 	 	<if test="objid!=null and objid!=0"> AND objid=#{objid}</if>
 	 	<if test="factorid!=null and factorid!=0"> AND factorid=#{factorid}</if>
 	 	<if test="factvalueid!=null and factvalueid!=0"> AND factvalueid=#{factvalueid}</if>
+	 	<if test="factunit!=null and factunit!=0"> AND factunit=#{factunit}</if>
 	 	<if test="alarmst!=null and alarmst!=0"> AND alarmst=#{alarmst}</if>
 	 	LIMIT #{pageOffset},#{pageSize}
 	</select>
@@ -45,6 +48,7 @@
 	 	<if test="objid!=null and objid!=0"> AND objid=#{objid}</if>
 	 	<if test="factorid!=null and factorid!=0"> AND factorid=#{factorid}</if>
 	 	<if test="factvalueid!=null and factvalueid!=0"> AND factvalueid=#{factvalueid}</if>
+	 	<if test="factunit!=null and factunit!=0"> AND factunit=#{factunit}</if>
 	 	<if test="alarmst!=null and alarmst!=0"> AND alarmst=#{alarmst}</if>
 	</select>
 </mapper>

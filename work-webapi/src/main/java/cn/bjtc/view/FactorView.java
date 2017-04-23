@@ -1,5 +1,8 @@
 package cn.bjtc.view;
 
+import cn.bjtc.api.BaseDictType;
+import cn.bjtc.common.ApplicationDataManager;
+
 public class FactorView  extends Pagination{
 	private Integer factid;
 	private String factname;
@@ -29,5 +32,8 @@ public class FactorView  extends Pagination{
 	}
 	public void setDefaultunit(Integer defaultunit) {
 		this.defaultunit = defaultunit;
+	}
+	public String getDefaultunitStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_FACTUNIT.toString(), String.valueOf(defaultunit));
 	}
 }

@@ -19,6 +19,9 @@ public class ApplicationDataManager {
 	
 	public static final Map<String, Map<String, Object>> USERPRIVS = new ConcurrentHashMap<String,Map<String, Object>>();
 	
+	public static final Map<String,Object> SYSFACTORS = new ConcurrentHashMap<String,Object>();
+	public static final Map<String,String> SYSFACTORSRESERVE = new ConcurrentHashMap<String,String>();
+	
 	public static final String DEFAULT_KEY = "app.key";
 	
 	public static String getSysParamByCode(String code){
@@ -31,5 +34,9 @@ public class ApplicationDataManager {
 			return "";
 		}
 		return valueMap.get(value);
+	}
+	
+	public static String getFactorStringById(Object factorid){
+		return SYSFACTORSRESERVE.get(DEFAULT_KEY+factorid);
 	}
 }

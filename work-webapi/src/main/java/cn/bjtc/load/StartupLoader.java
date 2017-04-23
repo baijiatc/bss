@@ -15,11 +15,13 @@ import cn.bjtc.model.SysParam;
 import cn.bjtc.service.IApiService;
 import cn.bjtc.service.IDictService;
 import cn.bjtc.service.IElementService;
+import cn.bjtc.service.IFactorService;
 import cn.bjtc.service.IMenuService;
 import cn.bjtc.service.IPrivilegeService;
 import cn.bjtc.service.ISysParamService;
 import cn.bjtc.view.ApiView;
 import cn.bjtc.view.DictionaryView;
+import cn.bjtc.view.FactorView;
 import cn.bjtc.view.MenuView;
 import cn.bjtc.view.SysParamView;
 
@@ -32,6 +34,7 @@ public class StartupLoader {
 		initDicts();
 		initMenuPriv();
 		initElemPriv();
+		initSysFactors();
 	}
 	
 	public void initApiMap(){
@@ -109,6 +112,18 @@ public class StartupLoader {
 		}
 	}
 	
+	public void initSysFactors(){
+		ApplicationDataManager.SYSFACTORS.clear();
+		ApplicationDataManager.SYSFACTORSRESERVE.clear();
+		FactorView view = new FactorView();
+		view.setPageSize(50);
+		List<FactorView> fvLst = factorService.findAllFactors(view);
+		for(FactorView factView : fvLst){
+			ApplicationDataManager.SYSFACTORS.put(factView.getFactname(), factView.getFactid());
+			ApplicationDataManager.SYSFACTORSRESERVE.put(ApplicationDataManager.DEFAULT_KEY+factView.getFactid().toString(),factView.getFactname());
+		}
+	}
+	
 	@Autowired
 	private IApiService apiService;
 	@Autowired
@@ -121,4 +136,6 @@ public class StartupLoader {
 	private IDictService dictService;
 	@Autowired
 	private IPrivilegeService privilegeService;
+	@Autowired
+	private IFactorService factorService;
 }

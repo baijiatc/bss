@@ -7,16 +7,33 @@ $(function(){
 	var options={
 		columns:[[
           {field:'alarmid',title: 'ID',align: 'center',hidden:'true'},
-          {field:'factcatid',title: '因子类别',align: 'center',width: 200},
-          {field:'objid',title: '预警对象',align: 'center',width: 200},
-          {field:'alarmid',title: '因子',align: 'center',width: 200},
-          {field:'factvalueid',title: '因子值',align: 'center',width: 200},
-          {field:'alarmst',title: '状态',align: 'center',width: 200}
+          {field:'factcatid',title: '预警分类',align: 'center',hidden:'true'},
+          {field:'factcatidStr',title: '预警分类',align: 'center',width: 150},
+          {field:'objid',title: '预警对象',align: 'center',width: 150},
+          {field:'factorid',title: '因子ID',align: 'center',hidden:'true'},
+          {field:'factoridStr',title: '因子',align: 'center',width: 200},
+          {field:'factvalueid',title: '因子值',align: 'center',width: 150},
+          {field:'factunit',title: '单位ID',align: 'center',hidden:'true'},
+          {field:'factunitStr',title: '单位',align: 'center',width: 150},
+          {field:'alarmst',title: '状态值',align: 'center',hidden:'true'},
+          {field:'alarmstStr',title: '状态',align: 'center',width: 150}
 		]]
 	};
 	//构建datagrid，并填充数据
 	var alarmGrid = new BSS.DataGrid('#tbl_alarm_datagrid');
 	ALARMDIALOG = new BSS.Dialog('#div_alarmadd');
+	ALARMDIALOG.loadFactor=function(selector){
+		BSS.dispatch({code:15011},function(resp){
+			if(resp.code == 0){
+				var datas = resp.data;
+				var options = {valueField:'value',textField:'label',data:datas};
+				var alarmTypeCombox = new BSS.Combox(selector);
+				alarmTypeCombox.init(options);
+			}else{
+				BSS.warning(resp.message);
+			}
+		},function(resp){})
+	}
 	alarmGrid.build(options,{code:15002});
 	//设置新建事件
 	alarmGrid.create = function(){

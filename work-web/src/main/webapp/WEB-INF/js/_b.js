@@ -169,10 +169,13 @@ BSS.Combox = function(selector){
 	$this.selector=selector;
 	$this.init=function(options){
 		options = options || {};
-		var defaults = {panelHeight:'auto'};
+		var defaults = {panelHeight:'auto',onSelect:function(item){
+			$this.change(item);
+		}};
 		$.extend(defaults,options);
 		$($this.selector).combobox(defaults);
 	};
+	$this.change=function(item){};
 }
 BSS.PropGrid = function(selector){
 	var $this = this;

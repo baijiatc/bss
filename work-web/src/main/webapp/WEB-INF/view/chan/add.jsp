@@ -26,11 +26,21 @@
 			</td>
 		</tr>
 		<tr>
-			<td>省市区：</td>
+			<td>省：</td>
 			<td>
-				<input class="easyui-textbox" type="text" style="width:18%" name="province"></input>
-				<input class="easyui-textbox" type="text" style="width:18%" name="city"></input>
-				<input class="easyui-textbox" type="text" style="width:18%" name="district"></input>
+				<input id="cbx_chan_province" class="easyui-combobox" type="text" name="province"></input>
+			</td>
+		</tr>
+		<tr>
+			<td>市：</td>
+			<td>
+				<input id="cbx_chan_city" class="easyui-combobox" type="text" name="city"></input>
+			</td>
+		</tr>
+		<tr>
+			<td>区：</td>
+			<td>
+				<input id="cbx_chan_district" class="easyui-combobox" type="text" name="district"></input>
 			</td>
 		</tr>
 		<tr>
@@ -56,4 +66,61 @@
 <script>
 var chanstCombox = new BSS.Combox('#cbx_chanst');
 chanstCombox.fromDict('DICT_CHANST');
+
+BSS.dispatch({code:21018,data:[{pid:0}]},function(resp){
+	if(resp.code == 0){
+		var datas = resp.data;
+		var options = {valueField:'value',textField:'label',data:datas,onSelect:function(item){
+			loadCity(item.value);
+		}};
+		var regionCombox = new BSS.Combox('#cbx_chan_province');
+		regionCombox.init(options);
+	}else{
+		BSS.warning(resp.message);
+	}
+},function(resp){
+	console.log(JSON.stringify(resp));
+});
+function loadCity(parentid){
+	BSS.dispatch({code:21018,data:[{pid:parentid}]},function(resp){
+		if(resp.code == 0){
+			var datas = resp.data;
+			var options = {valueField:'value',textField:'label',data:datas,onSelect:function(item){
+				loadDistrict(item.value);
+			}};
+			var regionCombox = new BSS.Combox('#cbx_chan_city');
+			regionCombox.init(options);
+		}else{
+			BSS.warning(resp.message);
+		}
+	},function(resp){
+		console.log(JSON.stringify(resp));
+	});
+}
+function loadDistrict(parentid){
+	BSS.dispatch({code:21018,data:[{pid:parentid}]},function(resp){
+		if(resp.code == 0){
+			var datas = resp.data;
+			var options = {valueField:'value',textField:'label',data:datas};
+			var regionCombox = new BSS.Combox('#cbx_chan_district');
+			regionCombox.init(options);
+		}else{
+			BSS.warning(resp.message);
+		}
+	},function(resp){
+		console.log(JSON.stringify(resp));
+	});
+}
+
+CHANDIALOG.ok = function(){
+	var chan = BSS.form2json('#frm_chanadd');
+	BSS.dispatch({code:13007,data:[chan]},function(resp){
+		if(resp.code == 0){
+			BSS.info('保存成功！');
+			chanGrid.load({code:13009});
+		}else{
+			BSS.error(resp.message);
+		}
+	},function(){});
+}
 </script>

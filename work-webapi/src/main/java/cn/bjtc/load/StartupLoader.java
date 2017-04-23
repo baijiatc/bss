@@ -18,11 +18,13 @@ import cn.bjtc.service.IElementService;
 import cn.bjtc.service.IFactorService;
 import cn.bjtc.service.IMenuService;
 import cn.bjtc.service.IPrivilegeService;
+import cn.bjtc.service.IRegionService;
 import cn.bjtc.service.ISysParamService;
 import cn.bjtc.view.ApiView;
 import cn.bjtc.view.DictionaryView;
 import cn.bjtc.view.FactorView;
 import cn.bjtc.view.MenuView;
+import cn.bjtc.view.RegionView;
 import cn.bjtc.view.SysParamView;
 
 public class StartupLoader {
@@ -35,6 +37,7 @@ public class StartupLoader {
 		initMenuPriv();
 		initElemPriv();
 		initSysFactors();
+		initRegions();
 	}
 	
 	public void initApiMap(){
@@ -124,6 +127,19 @@ public class StartupLoader {
 		}
 	}
 	
+	public void initRegions(){
+		List<RegionView> provinceLst = regionService.findRegionByParent(0);
+		ApplicationDataManager.SYSREGIONS.put(ApplicationDataManager.DEFAULT_KEY+0, provinceLst);
+		for(RegionView province : provinceLst){
+			List<RegionView> cityLst = regionService.findRegionByParent(province.getRegionid());
+			ApplicationDataManager.SYSREGIONS.put(ApplicationDataManager.DEFAULT_KEY+province.getRegionid(), cityLst);
+			for(RegionView city : cityLst){
+				List<RegionView> districtLst = regionService.findRegionByParent(city.getRegionid());
+				ApplicationDataManager.SYSREGIONS.put(ApplicationDataManager.DEFAULT_KEY+city.getRegionid(), districtLst);
+			}
+		}
+	}
+	
 	@Autowired
 	private IApiService apiService;
 	@Autowired
@@ -138,4 +154,6 @@ public class StartupLoader {
 	private IPrivilegeService privilegeService;
 	@Autowired
 	private IFactorService factorService;
+	@Autowired
+	private IRegionService regionService;
 }

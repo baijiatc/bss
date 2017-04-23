@@ -27,11 +27,21 @@
 			</td>
 		</tr>
 		<tr>
-			<td>省市区：</td>
+			<td>省：</td>
 			<td>
-				<input class="easyui-textbox" type="text" style="width:18%" name="province"></input>
-				<input class="easyui-textbox" type="text" style="width:18%" name="city"></input>
-				<input class="easyui-textbox" type="text" style="width:18%" name="district"></input>
+				<input id="cbx_chan_province" class="easyui-combobox" type="text" name="province"></input>
+			</td>
+		</tr>
+		<tr>
+			<td>市：</td>
+			<td>
+				<input id="cbx_chan_city" class="easyui-combobox" type="text" name="city"></input>
+			</td>
+		</tr>
+		<tr>
+			<td>区：</td>
+			<td>
+				<input id="cbx_chan_district" class="easyui-combobox" type="text" name="district"></input>
 			</td>
 		</tr>
 		<tr>
@@ -56,7 +66,84 @@
 var chanstCombox = new BSS.Combox('#cbx_chanst');
 chanstCombox.fromDict('DICT_CHANST');
 
+var provCombox = new BSS.Combox('#cbx_chan_province');
+function loadProvince(callback){
+	BSS.dispatch({code:21018,data:[{pid:0}]},function(resp){
+		if(resp.code == 0){
+			var datas = resp.data;
+			var options = {valueField:'value',textField:'label',data:datas};
+			provCombox.init(options);
+			callback();
+		}else{
+			BSS.warning(resp.message);
+		}
+	},function(resp){
+		console.log(JSON.stringify(resp));
+	});
+}
+var cityCombox = new BSS.Combox('#cbx_chan_city');
+function loadCity(parentid,callback){
+	BSS.dispatch({code:21018,data:[{pid:parentid}]},function(resp){
+		if(resp.code == 0){
+			var datas = resp.data;
+			var options = {valueField:'value',textField:'label',data:datas};
+			cityCombox.init(options);
+			callback();
+		}else{
+			BSS.warning(resp.message);
+		}
+	},function(resp){
+		console.log(JSON.stringify(resp));
+	});
+}
+var distCombox = new BSS.Combox('#cbx_chan_district');
+function loadDistrict(parentid,callback){
+	BSS.dispatch({code:21018,data:[{pid:parentid}]},function(resp){
+		if(resp.code == 0){
+			var datas = resp.data;
+			var options = {valueField:'value',textField:'label',data:datas};
+			distCombox.init(options);
+			callback();
+		}else{
+			BSS.warning(resp.message);
+		}
+	},function(resp){
+		console.log(JSON.stringify(resp));
+	});
+}
+
 BSS.dispatch({code:13014,data:[{chanid:'${chanid}'}]},function(resp){
-	BSS.json2form('#frm_chan',resp.data[0]);
+	if(resp.code == 0){
+		var chan = resp.data[0];
+		loadProvince(function(){
+			loadCity(chan.province,function(){
+				loadDistrict(chan.city,function(){
+					BSS.json2form('#frm_chanedit',chan);
+					provCombox.change=function(item){
+						loadCity(item.value);
+					};
+					cityCombox.change=function(item){
+						loadDistrict(item.value);
+					};
+				});
+			});
+		});
+		
+		CHANDIALOG.ok = function(){
+			var chan = BSS.form2json('#frm_chanedit');
+			BSS.dispatch({code:13008,data:[chan]},function(){
+				if(resp.code == 0){
+					BSS.info('保存成功！');
+					chanGrid.load({code:13009});
+				}else{
+					BSS.error(resp.message);
+				}
+			},function(){});
+		}
+	}else{
+		BSS.warning(resp.message);
+	}
+},function(resp){
+	console.log(console.log(resp));
 });
 </script>

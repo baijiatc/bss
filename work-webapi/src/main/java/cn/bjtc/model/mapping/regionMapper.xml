@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Region">
+	<resultMap type="cn.bjtc.model.Region" id="RegionMap">
+		<result column="id" property="regionid"/>
+		<result column="value" property="value"/>
+		<result column="parentid" property="parentid"/>
+		<result column="regionst" property="regionst"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Region" id="RegionParamMap">
+		<parameter property="regionid" resultMap="RegionMap" />
+		<parameter property="value" resultMap="RegionMap" />
+		<parameter property="parentid" resultMap="RegionMap" />
+		<parameter property="regionst" resultMap="RegionMap" />
+	</parameterMap>
+	<select id="findRegionByParent" resultMap="RegionMap" >
+	 	SELECT * FROM region WHERE parentid=#{0}
+	</select>
+</mapper>

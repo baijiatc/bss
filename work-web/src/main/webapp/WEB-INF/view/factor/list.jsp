@@ -9,7 +9,8 @@ $(function(){
           {field:'factid',title: 'ID',align: 'center',hidden:'true'},
           {field:'factname',title: '因子名称',align: 'center',width: 200},
           {field:'defaultval',title: '默认值',align: 'center',width: 200},
-          {field:'defaultunit',title: '默认单位',align: 'center',width: 200}
+          {field:'defaultunit',title: '默认单位值',align: 'center',hidden:'true'},
+          {field:'defaultunitStr',title: '默认单位',align: 'center',width: 200}
 		]]
 	};
 	//构建datagrid，并填充数据
@@ -27,7 +28,7 @@ $(function(){
 			BSS.warning('请选择要编辑的数据行');
 			return;
 		}
-		var factorid = row['factorid'];
+		var factorid = row['factid'];
 		FACTORDIALOG.init({href:'factor/'+factorid+'.html',width:400});
 	};
 })

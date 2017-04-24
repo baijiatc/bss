@@ -53,10 +53,14 @@ BSS = {
 			contentType:'application/json;charset=utf-8',
 			data:JSON.stringify(obj),
 			success:function(data){
-				success(data);
+				if(success && jQuery.isFunction(success)){
+					success(data);
+				}
 			},
 			error:function(data){
-				error(data);
+				if(error && jQuery.isFunction(error)){
+					error(data);
+				}
 			}
 		});
 	},
@@ -169,10 +173,13 @@ BSS.Combox = function(selector){
 	$this.selector=selector;
 	$this.init=function(options){
 		options = options || {};
-		var defaults = {panelHeight:'auto'};
+		var defaults = {panelHeight:'auto',onSelect:function(item){
+			$this.change(item);
+		}};
 		$.extend(defaults,options);
 		$($this.selector).combobox(defaults);
 	};
+	$this.change=function(item){};
 }
 BSS.PropGrid = function(selector){
 	var $this = this;

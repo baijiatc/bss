@@ -15,18 +15,22 @@
 </form>
 <script>
 var roleStCombox = new BSS.Combox('#cbx_rolest');
-roleStCombox.fromDict('DICT_ROLEST');
+roleStCombox.fromDict('DICT_ROLEST',function(){
+	setOk();
+});
 
-ROLEDIALOG.ok = function(){
-	var role = BSS.form2json('#frm_role');
-	BSS.dispatch({code:20005,data:[role]},function(resp){
-		if(resp.code == 0){
-			BSS.info('保存成功');
-		}else{
-			BSS.warning(resp.message);
-		}
-	},function(resp){
-		console.log(JSON.stringify(resp));
-	});
+function setOk(){
+	ROLEDIALOG.ok = function(){
+		var role = BSS.form2json('#frm_role');
+		BSS.dispatch({code:20005,data:[role]},function(resp){
+			if(resp.code == 0){
+				BSS.info('保存成功');
+			}else{
+				BSS.warning(resp.message);
+			}
+		},function(resp){
+			console.log(JSON.stringify(resp));
+		});
+	}
 }
 </script>

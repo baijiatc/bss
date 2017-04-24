@@ -152,6 +152,11 @@ public class PrivilegeServiceImpl implements IPrivilegeService {
 			if(p2childArr == null || p2childArr.length == 0 || p2childArr.length < 2){
 				continue;
 			}
+			MenuView pmenu = (MenuView) p2childArr[0];
+			if(staffRoleMenuMap.containsKey(ApplicationDataManager.DEFAULT_KEY+pmenu.getMenuid())){
+				pmenu.setChecked(true);//选中员工所属角色的权限
+				pmenu.setDisabled(true);//将员工所属角色权限设置为禁用状态
+			}
 			List m2elemLst = (List) p2childArr[1];
 			for(Object m2e : m2elemLst){
 				Object[] m2eArr = (Object[]) m2e;

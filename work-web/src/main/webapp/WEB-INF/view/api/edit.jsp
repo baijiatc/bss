@@ -34,9 +34,23 @@
 </form>
 <script>
 var apistCombox = new BSS.Combox('#cbx_apist');
-apistCombox.fromDict('DICT_APIST');
-
-BSS.dispatch({code:21011,data:[{apiid:'${apiid}'}]},function(resp){
-	BSS.json2form('#frm_apiedit',resp.data[0]);
+apistCombox.fromDict('DICT_APIST',function(){
+	initApiEditPage();
 });
+
+function initApiEditPage(){
+	BSS.dispatch({code:21011,data:[{apiid:'${apiid}'}]},function(resp){
+		if(resp.code == 0){
+			BSS.json2form('#frm_apiedit',resp.data[0]);
+			APIDIALOG.ok = function(){
+				var api = BSS.form2json('#frm_apiedit');
+				BSS.dispatch({code:21013,data:[api]},function(){
+					BSS.info('更新成功');
+				},function(){});
+			}
+		}else{
+			BSS.warning(resp.message);
+		}
+	});
+}
 </script>

@@ -13,13 +13,13 @@
 		</tr>
 		<tr>
 			<td>默认单位：</td>
-			<td><input class="easyui-textbox" type="text" name="defaultunit" data-options="required:true"></input></td>
+			<td><input id="cbx_defaultunit" class="easyui-combobox" type="text" name="defaultunit" data-options="required:true"></input></td>
 		</tr>
 	</table>
 </form>
 <script>
-var factorStCombox = new BSS.Combox('#cbx_factorst');
-factorStCombox.fromDict('DICT_FACTORST');
+var factunitCombox = new BSS.Combox('#cbx_defaultunit');
+factunitCombox.fromDict('DICT_FACTUNIT');
 
 FACTORDIALOG.ok = function(){
 	var factor = BSS.form2json('#frm_factor');

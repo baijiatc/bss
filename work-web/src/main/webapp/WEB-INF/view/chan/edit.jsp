@@ -64,7 +64,36 @@
 </form>
 <script>
 var chanstCombox = new BSS.Combox('#cbx_chanst');
-chanstCombox.fromDict('DICT_CHANST');
+chanstCombox.fromDict('DICT_CHANST',function(){
+	initChanEditPage();
+});
+
+function initChanEditPage(){
+	BSS.dispatch({code:13014,data:[{chanid:'${chanid}'}]},function(resp){
+		if(resp.code == 0){
+			var chan = resp.data[0];
+			loadProvince(function(){
+				loadCity(chan.province,function(){
+					loadDistrict(chan.city,function(){
+						BSS.json2form('#frm_chanedit',chan);
+						provCombox.change=function(item){
+							loadCity(item.value);
+						};
+						cityCombox.change=function(item){
+							loadDistrict(item.value);
+						};
+					});
+				});
+			});
+			
+			setOk();
+		}else{
+			BSS.warning(resp.message);
+		}
+	},function(resp){
+		console.log(console.log(resp));
+	});
+}
 
 var provCombox = new BSS.Combox('#cbx_chan_province');
 function loadProvince(callback){
@@ -111,31 +140,6 @@ function loadDistrict(parentid,callback){
 		console.log(JSON.stringify(resp));
 	});
 }
-
-BSS.dispatch({code:13014,data:[{chanid:'${chanid}'}]},function(resp){
-	if(resp.code == 0){
-		var chan = resp.data[0];
-		loadProvince(function(){
-			loadCity(chan.province,function(){
-				loadDistrict(chan.city,function(){
-					BSS.json2form('#frm_chanedit',chan);
-					provCombox.change=function(item){
-						loadCity(item.value);
-					};
-					cityCombox.change=function(item){
-						loadDistrict(item.value);
-					};
-				});
-			});
-		});
-		
-		setOk();
-	}else{
-		BSS.warning(resp.message);
-	}
-},function(resp){
-	console.log(console.log(resp));
-});
 
 function setOk(){
 	CHANDIALOG.ok = function(){

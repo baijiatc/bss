@@ -17,7 +17,7 @@ $(function(){
 	};
 	//构建datagrid，并填充数据
 	var apiGrid = new BSS.DataGrid('#tbl_api_datagrid');
-	var apiDialog = new BSS.Dialog('#div_apiadd');
+	APIDIALOG = new BSS.Dialog('#div_apiadd');
 	apiGrid.toolbar.push({iconCls:'icon-refresh',text:'刷新',handler:function(){
 		BSS.dispatch({code:21014},function(resp){
 			if(resp.code == 0){
@@ -30,14 +30,7 @@ $(function(){
 	apiGrid.build(options,{code:21012});
 	//设置新建事件
 	apiGrid.create = function(){
-		apiDialog.ok = function(){
-			var api = BSS.form2json('#frm_apiadd');
-			BSS.dispatch({code:21010,data:[api]},function(){
-				BSS.info('保存成功');
-				apiGrid.load({code:21012});
-			},function(){});
-		}
-		apiDialog.init({href:'api/add.html',width:400});
+		APIDIALOG.init({href:'api/add.html',width:400});
 	};
 	//设置编辑事件
 	apiGrid.edit = function(){
@@ -47,14 +40,7 @@ $(function(){
 			return;
 		}
 		var apiid = row['apiid'];
-		apiDialog.init({href:'api/'+apiid+'.html',width:400});
-		apiDialog.ok = function(){
-			var api = BSS.form2json('#frm_apiedit');
-			BSS.dispatch({code:21013,data:[api]},function(){
-				BSS.info('更新成功');
-				apiGrid.load({code:21012});
-			},function(){});
-		}
+		APIDIALOG.init({href:'api/'+apiid+'.html',width:400});
 	};
 })
 </script>

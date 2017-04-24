@@ -28,19 +28,30 @@
 </form>
 <script>
 var privtypeCombox = new BSS.Combox('#cbx_privtype');
-privtypeCombox.fromDict('DICT_PRIVTYPE');
-var privcatCombox = new BSS.Combox('#cbx_privcat');
-privcatCombox.fromDict('DICT_PRIVCAT');
-var privstCombox = new BSS.Combox('#cbx_privst');
-privstCombox.fromDict('DICT_PRIVST');
-
-BSS.dispatch({code:20002,data:[{privid:'${privid}'}]},function(resp){
-	BSS.json2form('#frm_priv',resp.data[0]);
+privtypeCombox.fromDict('DICT_PRIVTYPE',function(){
+	var privcatCombox = new BSS.Combox('#cbx_privcat');
+	privcatCombox.fromDict('DICT_PRIVCAT',function(){
+		var privstCombox = new BSS.Combox('#cbx_privst');
+		privstCombox.fromDict('DICT_PRIVST',function(){
+			initPrivEidtPage();
+		});
+	});
 });
-PRIVDIALOG.ok = function(){
-	var priv = BSS.form2json('#frm_priv');
-	BSS.dispatch({code:20004,data:[priv]},function(){
-		BSS.alert('保存成功！');
-	},function(){});
+
+function initPrivEidtPage(){
+	BSS.dispatch({code:20002,data:[{privid:'${privid}'}]},function(resp){
+		if(resp.code == 0){
+			BSS.json2form('#frm_priv',resp.data[0]);
+			
+			PRIVDIALOG.ok = function(){
+				var priv = BSS.form2json('#frm_priv');
+				BSS.dispatch({code:20004,data:[priv]},function(){
+					BSS.alert('保存成功！');
+				},function(){});
+			}
+		}else{
+			BSS.warning(resp.message);
+		}
+	});
 }
 </script>

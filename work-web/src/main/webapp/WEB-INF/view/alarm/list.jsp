@@ -22,13 +22,16 @@ $(function(){
 	//构建datagrid，并填充数据
 	var alarmGrid = new BSS.DataGrid('#tbl_alarm_datagrid');
 	ALARMDIALOG = new BSS.Dialog('#div_alarmadd');
-	ALARMDIALOG.loadFactor=function(selector){
+	ALARMDIALOG.loadFactor=function(selector,callback){
 		BSS.dispatch({code:15011},function(resp){
 			if(resp.code == 0){
 				var datas = resp.data;
 				var options = {valueField:'value',textField:'label',data:datas};
 				var alarmTypeCombox = new BSS.Combox(selector);
 				alarmTypeCombox.init(options);
+				if(callback && jQuery.isFunction(callback)){
+					callback();
+				}
 			}else{
 				BSS.warning(resp.message);
 			}

@@ -129,21 +129,25 @@ BSS.dispatch({code:13014,data:[{chanid:'${chanid}'}]},function(resp){
 			});
 		});
 		
-		CHANDIALOG.ok = function(){
-			var chan = BSS.form2json('#frm_chanedit');
-			BSS.dispatch({code:13008,data:[chan]},function(){
-				if(resp.code == 0){
-					BSS.info('保存成功！');
-					chanGrid.load({code:13009});
-				}else{
-					BSS.error(resp.message);
-				}
-			},function(){});
-		}
+		setOk();
 	}else{
 		BSS.warning(resp.message);
 	}
 },function(resp){
 	console.log(console.log(resp));
 });
+
+function setOk(){
+	CHANDIALOG.ok = function(){
+		var chan = BSS.form2json('#frm_chanedit');
+		BSS.dispatch({code:13008,data:[chan]},function(){
+			if(resp.code == 0){
+				BSS.info('保存成功！');
+				chanGrid.load({code:13009});
+			}else{
+				BSS.error(resp.message);
+			}
+		},function(){});
+	}
+}
 </script>

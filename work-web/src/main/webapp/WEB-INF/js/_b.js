@@ -53,10 +53,14 @@ BSS = {
 			contentType:'application/json;charset=utf-8',
 			data:JSON.stringify(obj),
 			success:function(data){
-				success(data);
+				if(success && jQuery.isFunction(success)){
+					success(data);
+				}
 			},
 			error:function(data){
-				error(data);
+				if(error && jQuery.isFunction(error)){
+					error(data);
+				}
 			}
 		});
 	},

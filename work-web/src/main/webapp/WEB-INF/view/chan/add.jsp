@@ -65,22 +65,27 @@
 </form>
 <script>
 var chanstCombox = new BSS.Combox('#cbx_chanst');
-chanstCombox.fromDict('DICT_CHANST');
-
-BSS.dispatch({code:21018,data:[{pid:0}]},function(resp){
-	if(resp.code == 0){
-		var datas = resp.data;
-		var options = {valueField:'value',textField:'label',data:datas,onSelect:function(item){
-			loadCity(item.value);
-		}};
-		var regionCombox = new BSS.Combox('#cbx_chan_province');
-		regionCombox.init(options);
-	}else{
-		BSS.warning(resp.message);
-	}
-},function(resp){
-	console.log(JSON.stringify(resp));
+chanstCombox.fromDict('DICT_CHANST',function(){
+	loadProvince();
+	setOk();
 });
+
+function loadProvince(){
+	BSS.dispatch({code:21018,data:[{pid:0}]},function(resp){
+		if(resp.code == 0){
+			var datas = resp.data;
+			var options = {valueField:'value',textField:'label',data:datas,onSelect:function(item){
+				loadCity(item.value);
+			}};
+			var regionCombox = new BSS.Combox('#cbx_chan_province');
+			regionCombox.init(options);
+		}else{
+			BSS.warning(resp.message);
+		}
+	},function(resp){
+		console.log(JSON.stringify(resp));
+	});
+}
 function loadCity(parentid){
 	BSS.dispatch({code:21018,data:[{pid:parentid}]},function(resp){
 		if(resp.code == 0){
@@ -112,15 +117,17 @@ function loadDistrict(parentid){
 	});
 }
 
-CHANDIALOG.ok = function(){
-	var chan = BSS.form2json('#frm_chanadd');
-	BSS.dispatch({code:13007,data:[chan]},function(resp){
-		if(resp.code == 0){
-			BSS.info('保存成功！');
-			chanGrid.load({code:13009});
-		}else{
-			BSS.error(resp.message);
-		}
-	},function(){});
+function setOk(){
+	CHANDIALOG.ok = function(){
+		var chan = BSS.form2json('#frm_chanadd');
+		BSS.dispatch({code:13007,data:[chan]},function(resp){
+			if(resp.code == 0){
+				BSS.info('保存成功！');
+				chanGrid.load({code:13009});
+			}else{
+				BSS.error(resp.message);
+			}
+		},function(){});
+	}
 }
 </script>

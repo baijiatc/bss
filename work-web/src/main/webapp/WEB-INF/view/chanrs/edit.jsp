@@ -18,7 +18,7 @@
 		</tr>
 		<tr>
 			<td>对象类型：</td>
-			<td><input id="id_objtype" class="easyui-textbox" type="text" name="objtype" data-options="required:true"></input></td>
+			<td><input id="cbx_objtype" class="easyui-textbox" type="text" name="objtype" data-options="required:true"></input></td>
 		</tr>
 		<tr>
 			<td>创建时间：</td>
@@ -27,13 +27,25 @@
 	</table>
 </form>
 <script>
-BSS.dispatch({code:13015,data:[{staffobjid:'${staffobjid}'}]},function(resp){
-	BSS.json2form('#frm_chanrs',resp.data[0]);
+var objTypeCombox = new BSS.Combox('#cbx_objtype');
+objTypeCombox.fromDict('DICT_OBJTYPE',function(){
+	initChanrsEditPage();
 });
-SUPPRSDIALOG.ok = function(){
-	var chanrs = BSS.form2json('#frm_chanrs');
-	BSS.dispatch({code:13005,data:[chanrs]},function(){
-		BSS.alert('保存成功！');
-	},function(){});
+
+function initChanrsEditPage(){
+	BSS.dispatch({code:13015,data:[{staffobjid:'${staffobjid}'}]},function(resp){
+		if(resp.code == 0){
+			BSS.json2form('#frm_chanrs',resp.data[0]);
+			SUPPRSDIALOG.ok = function(){
+				var chanrs = BSS.form2json('#frm_chanrs');
+				BSS.dispatch({code:13005,data:[chanrs]},function(){
+					BSS.alert('保存成功！');
+				},function(){});
+			}
+		}else{
+			BSS.warning(resp.message);
+		}
+	});
+	
 }
 </script>

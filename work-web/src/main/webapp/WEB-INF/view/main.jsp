@@ -76,7 +76,9 @@ BSS.Combox.prototype.fromDict=function(type,callback){
 			var datas = resp.data;
 			var options = {valueField:'value',textField:'label',data:datas};
 			$this.init(options);
-			callback = callback || new Function();
+			if(callback && jQuery.isFunction(callback)){
+				callback();
+			}
 		}else{
 			BSS.warning(resp.message);
 		}

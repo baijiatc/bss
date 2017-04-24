@@ -31,23 +31,30 @@
 </form>
 <script>
 var alarmTypeCombox = new BSS.Combox('#cbx_alarmtype');
-alarmTypeCombox.fromDict('DICT_ALARMTYPE');
-var factunitCombox = new BSS.Combox('#cbx_factunit');
-factunitCombox.fromDict('DICT_FACTUNIT');
-var alarmStCombox = new BSS.Combox('#cbx_alarmst');
-alarmStCombox.fromDict('DICT_ALARMST');
-
-ALARMDIALOG.loadFactor('#cbx_factor');
-ALARMDIALOG.ok = function(){
-	var alarm = BSS.form2json('#frm_alarm');
-	BSS.dispatch({code:15003,data:[alarm]},function(resp){
-		if(resp.code == 0){
-			BSS.info('保存成功');
-		}else{
-			BSS.warning(resp.message);
-		}
-	},function(resp){
-		console.log(JSON.stringify(resp));
+alarmTypeCombox.fromDict('DICT_ALARMTYPE',function(){
+	var factunitCombox = new BSS.Combox('#cbx_factunit');
+	factunitCombox.fromDict('DICT_FACTUNIT',function(){
+		var alarmStCombox = new BSS.Combox('#cbx_alarmst');
+		alarmStCombox.fromDict('DICT_ALARMST',function(){
+			ALARMDIALOG.loadFactor('#cbx_factor',function(){
+				setOk();
+			});
+		});
 	});
+});
+
+function setOk(){
+	ALARMDIALOG.ok = function(){
+		var alarm = BSS.form2json('#frm_alarm');
+		BSS.dispatch({code:15003,data:[alarm]},function(resp){
+			if(resp.code == 0){
+				BSS.info('保存成功');
+			}else{
+				BSS.warning(resp.message);
+			}
+		},function(resp){
+			console.log(JSON.stringify(resp));
+		});
+	}
 }
 </script>

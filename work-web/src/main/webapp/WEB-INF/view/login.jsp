@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<title>登录——<%=ApplicationDataManager.getSysParamByCode("APP_NAME") %></title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="js/easyui/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="js/easyui/themes/icon.css">
@@ -10,7 +11,8 @@
 </head>
 <body>
 	<div id="login">  
-        <form method="post">  
+        <form method="post">
+        	<h1><%=ApplicationDataManager.getSysParamByCode("APP_NAME") %></h1>  
             <input type="text" required="required" placeholder="用户名" name="uname"></input>  
             <input type="password" required="required" placeholder="密码" name="upass"></input>  
             <button class="but" type="button">登录</button>  

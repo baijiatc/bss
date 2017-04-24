@@ -1,5 +1,6 @@
 package cn.bjtc.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,11 @@ import cn.bjtc.api.ApiParam;
 import cn.bjtc.api.ApiReturn;
 import cn.bjtc.api.util.ParamUtil;
 import cn.bjtc.aspect.AspectType;
+import cn.bjtc.common.ApplicationDataManager;
 import cn.bjtc.service.IFactorService;
 import cn.bjtc.view.FactorView;
+
+import com.alibaba.fastjson.JSONObject;
 
 @RestController
 @RequestMapping("factor")
@@ -74,6 +78,19 @@ public class FactorController extends BaseController {
 		} catch (Exception e) {
 			showServerError();
 		}
+		return apiReturn;
+	}
+	
+	@RequestMapping(value="combox", method=RequestMethod.POST)
+	public ApiReturn findFactorFromMem(){
+		List<JSONObject> jsonLst = new ArrayList<JSONObject>();
+		for(String key : ApplicationDataManager.SYSFACTORS.keySet()){
+			JSONObject json = new JSONObject();
+			json.put("value", ApplicationDataManager.SYSFACTORS.get(key));
+			json.put("label", key);
+			jsonLst.add(json);
+		}
+		apiReturn.setData(jsonLst);
 		return apiReturn;
 	}
 	

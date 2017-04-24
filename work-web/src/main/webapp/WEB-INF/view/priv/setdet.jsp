@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
 <ul id="ul_privset_show_tree"></ul>
 <!-- javascript部分 -->
+<script language="javascript" src="js/easyui-tree-extend.js" charset="utf-8"></script>
 <script>
 $(function(){
 	BSS.dispatch({code:20011,data:[{objid:'${objid}',isRole:'${isRole}'}]},function(resp){
@@ -10,14 +11,14 @@ $(function(){
 			for(var i = 0; i < len; i++){
 				var menuGroup = resp.data[i];
 				var pmenu = menuGroup[0];
-				var node = {text:pmenu.menuname,state:'open',id:pmenu.menuid,children:[],ismenu:true};
+				var node = {text:pmenu.menuname,state:'open',id:pmenu.menuid,checked:pmenu.checked,disabled:pmenu.disabled,children:[],ismenu:true};
 				if(menuGroup.length > 1){
 					var subMenu2ElemArr = menuGroup[1];
 					var clen = subMenu2ElemArr.length;
 					for(var j = 0; j < clen; j++){
 						var submenuGroup = subMenu2ElemArr[j];
 						var cmenu = submenuGroup[0];
-						var cnode = {text:cmenu.menuname,state:'open',id:cmenu.menuid,checked:cmenu.checked,disabled:cmenu.disabled,children:[],ismenu:true};
+						var cnode = {text:cmenu.menuname,state:'open',id:cmenu.menuid,disabled:cmenu.disabled,children:[],ismenu:true};
 						if(submenuGroup.length > 1){
 							var elems = submenuGroup[1];
 							var elen = elems.length;

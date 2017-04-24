@@ -14,15 +14,15 @@
 		</tr>
 		<tr>
 			<td>默认单位：</td>
-			<td><input class="easyui-textbox" type="text" name="defaultunit" data-options="required:true"></input></td>
+			<td><input id="cbx_defaultunit" class="easyui-combobox" type="text" name="defaultunit" data-options="required:true"></input></td>
 		</tr>
 	</table>
 </form>
 <script>
-var factorStCombox = new BSS.Combox('#cbx_factorst');
-factorStCombox.fromDict('DICT_FACTORST');
+var factUnitCombox = new BSS.Combox('#cbx_defaultunit');
+factUnitCombox.fromDict('DICT_FACTUNIT');
 
-BSS.dispatch({code:15010,data:[{factorid:'${factorid}'}]},function(resp){
+BSS.dispatch({code:15010,data:[{factid:'${factorid}'}]},function(resp){
 	if(resp.code == 0){
 		BSS.json2form('#frm_factor',resp.data[0]);
 		

@@ -17,7 +17,7 @@
 		</tr>
 		<tr>
 			<td>对象类型：</td>
-			<td><input class="easyui-textbox" type="text" name="objtype" data-options="required:true"></input></td>
+			<td><input id="cbx_objtype" class="easyui-textbox" type="text" name="objtype" data-options="required:true"></input></td>
 		</tr>
 		<tr>
 			<td>创建时间：</td>
@@ -26,6 +26,9 @@
 	</table>
 </form>
 <script>
+var objTypeCombox = new BSS.Combox('#cbx_objtype');
+objTypeCombox.fromDict('DICT_OBJTYPE');
+
 SUPPRSDIALOG.ok = function(){
 	var supp = BSS.form2json('#frm_chanrs');
 	BSS.dispatch({code:13004,data:[supp]},function(){

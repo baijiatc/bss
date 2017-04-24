@@ -6,6 +6,7 @@ public class StockAlarm {
 	private Integer objid;
 	private Integer factorid;
 	private Integer factvalueid;
+	private Integer factunit;
 	private Integer alarmst;
 	
 	public Integer getAlarmid() {
@@ -37,6 +38,12 @@ public class StockAlarm {
 	}
 	public void setFactvalueid(Integer factvalueid) {
 		this.factvalueid = factvalueid;
+	}
+	public Integer getFactunit() {
+		return factunit;
+	}
+	public void setFactunit(Integer factunit) {
+		this.factunit = factunit;
 	}
 	public Integer getAlarmst() {
 		return alarmst;

@@ -36,6 +36,9 @@ public class ChannelView extends Pagination {
 	public void setChantype(Integer chantype) {
 		this.chantype = chantype;
 	}
+	public String getChantypeStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_CHANTYPE.toString(),String.valueOf(chantype));
+	}
 	public Long getMobile() {
 		return mobile;
 	}

@@ -43,7 +43,7 @@ public class StartupLoader {
 	public void initApiMap(){
 		ApplicationDataManager.SYSAPIMAP.clear();
 		ApiView view = new ApiView();
-		view.setApist(1);
+		view.setApist(1);//只查看启用状态API
 		view.setPageSize(Integer.MAX_VALUE);
 		List<ApiView> apis = apiService.findAllApis(view);
 		for(ApiView api : apis){
@@ -87,12 +87,12 @@ public class StartupLoader {
 		DictionaryView view = new DictionaryView();
 		view.setPageSize(Integer.MAX_VALUE);
 		view.setDicttype(0);
-		List<Dictionary> baseDicts = dictService.findAllDicts(view);
-		for(Dictionary base : baseDicts){
+		List<DictionaryView> baseDicts = dictService.findAllDicts(view);
+		for(DictionaryView base : baseDicts){
 			view.setDicttype(base.getDictid());
-			List<Dictionary> concetDicts = dictService.findAllDicts(view);
+			List<DictionaryView> concetDicts = dictService.findAllDicts(view);
 			Map<String, String> concetMap = new HashMap<String,String>();
-			for(Dictionary concet : concetDicts){
+			for(DictionaryView concet : concetDicts){
 				concetMap.put(concet.getDictval(), concet.getDictname());
 			}
 			ApplicationDataManager.SYSDICTS.put(base.getDictval(), concetMap);

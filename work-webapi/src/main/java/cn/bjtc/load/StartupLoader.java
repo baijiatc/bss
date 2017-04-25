@@ -43,7 +43,7 @@ public class StartupLoader {
 	public void initApiMap(){
 		ApplicationDataManager.SYSAPIMAP.clear();
 		ApiView view = new ApiView();
-		view.setApist(1);
+		view.setApist(1);//只查看启用状态API
 		view.setPageSize(Integer.MAX_VALUE);
 		List<ApiView> apis = apiService.findAllApis(view);
 		for(ApiView api : apis){

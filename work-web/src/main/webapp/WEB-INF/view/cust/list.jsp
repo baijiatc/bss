@@ -28,5 +28,6 @@ $(function(){
 	custGrid.toolbar=null;
 	custGrid.build(options,{code:12002});
 
+	
 })
 </script>

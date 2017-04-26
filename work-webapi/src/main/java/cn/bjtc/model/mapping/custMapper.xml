@@ -4,33 +4,51 @@
 	<resultMap type="cn.bjtc.model.Customer" id="CustMap">
 		<result column="cstmid" property="cstmid"/>
 		<result column="cstmname" property="cstmname"/>
+		<result column="certno" property="certno"/>
+		<result column="certtype" property="certtype"/>
 		<result column="mobile" property="mobile"/>
-		<result column="email" property="email"/>
+		<result column="gender" property="gender"/>
+		<result column="birthday" property="birthday"/>
 		<result column="cstmlevel" property="cstmlevel"/>
+		<result column="hobby" property="hobby"/>
+		<result column="email" property="email"/>
+		<result column="cstmtype" property="cstmtype"/>
 		<result column="regtime" property="regtime"/>
 		<result column="cstmst" property="cstmst"/>
 	</resultMap>
 	<parameterMap type="cn.bjtc.model.Customer" id="CustomerMap">
 		<parameter property="cstmid" resultMap="CustMap" />
 		<parameter property="cstmname" resultMap="CustMap" />
+		<parameter property="certno" resultMap="CustMap" />
+		<parameter property="certtype" resultMap="CustMap" />
 		<parameter property="mobile" resultMap="CustMap" />
+		<parameter property="gender" resultMap="CustMap" />
+		<parameter property="birthday" resultMap="CustMap" />
+		<parameter property="cstmlevel" resultMap="CustMap" />
+		<parameter property="hobby" resultMap="CustMap" />
 		<parameter property="email" resultMap="CustMap" />
 		<parameter property="regtime" resultMap="CustMap" />
-		<parameter property="cstmlevel" resultMap="CustMap" />
-		<parameter property="cstmst" resultMap="CustMap" />
 		<parameter property="cstmtype" resultMap="CustMap" />
+		<parameter property="cstmst" resultMap="CustMap" />
 	</parameterMap>
  
 
 	<select id="findAllCusts" resultMap="CustMap" >
-	 	SELECT cstmid,cstmname,mobile,email,cstmlevel,regtime,cstmst FROM customer WHERE 1=1 
+	 	SELECT cstmid,cstmname,certno,certtype,mobile,gender,birthday,cstmlevel,hobby,email,regtime,cstmtype,cstmst FROM customer WHERE 1=1 
 	 	<if test="cstmid !=null and cstmid !=0"> AND cstmid=#{cstmid}</if> 
-	 	<if test="cstmname !=null and cstmid !=''"> AND cstmname=#{cstmname}</if> 
-	 	<if test="mobile !=null and mobile !=''"> AND mobile=#{mobile}</if> 
+	 	<if test="cstmname !=null and cstmname !=''"> AND cstmname=#{cstmname}</if> 
+	 	<if test="certno !=null and certno !=''"> AND certno=#{certno}</if> 
+	 	<if test="certtype !=null and certtype !=0"> AND certtype=#{certtype}</if> 
+	 	<if test="mobile !=null and mobile !=0"> AND mobile=#{mobile}</if> 
+	 	<if test="gender !=null and gender!=0"> AND gender=#{gender}</if> 
+	 	<if test="birthday !=null and birthday !=0"> AND birthday=#{birthday}</if> 
+	 	<if test="cstmlevel !=null and cstmlevel !=0"> AND cstmlevel=#{cstmlevel}</if>
+	 	<if test="hobby !=null and hobby !=''"> AND hobby=#{hobby}</if> 
 	 	<if test="email !=null and email !=''"> AND email=#{email}</if> 
 	 	<if test="cstmlevel !=null and cstmlevel !=0"> AND cstmlevel=#{cstmlevel}</if> 
-	 	<if test="cstmst !=null"> AND cstmst=#{cstmst}</if> 
 	 	<if test="cstmtype !=null and cstmtype !=0"> AND cstmtype=#{cstmtype}</if> 
+	 	<if test="regtime !=null and regtime !=0"> AND regtime=#{regtime}</if> 
+	    <if test="cstmst !=null"> AND cstmst=#{cstmst}</if> 
 	 	 LIMIT #{pageOffset},#{pageSize}
 	</select>
 	

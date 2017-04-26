@@ -30,18 +30,32 @@
 		</tr>
 		<tr>
 			<td>状态：</td>
-			<td><input  id="id_brandst" class="easyui-textbox" type="text" name="brandst" data-options="required:true"></input></td>
+			<td><input  id="cbx_brandst" class="easyui-textbox" type="text" name="brandst" data-options="required:true"></input></td>
 		</tr>
 	</table>
 </form>
 <script>
-BSS.dispatch({code:14090,data:[{id:'${id}'}]},function(resp){
-	BSS.json2form('#frm_brand',resp.data[0]);
+var brandStCombox = new BSS.Combox('#cbx_brandst');
+brandStCombox.fromDict('DICT_BRANDST',function(){
+	initBrandEditPage();   
 });
-BRANDDIALOG.ok = function(){
-	var brand = BSS.form2json('#frm_brand');
-	BSS.dispatch({code:14002,data:[brand]},function(){
-		BSS.alert('保存成功！');
-	},function(){});	
+
+
+function initBrandEditPage(){
+	BSS.dispatch({code:14090,data:[{id:'${id}'}]},function(resp){
+		if(resp.code == 0){
+			BSS.json2form('#frm_brand',resp.data[0]);
+			
+			BRANDDIALOG.ok = function(){
+				var brand= BSS.form2json('#frm_brand');
+				BSS.dispatch({code:14002,data:[brand]},function(){
+					BSS.alert('保存成功！');
+				},function(){});
+			};
+		}else{
+			BRANDDIALOG.ok = function(){};
+			BSS.warning(resp.message);
+		}
+	});
 }
 </script>

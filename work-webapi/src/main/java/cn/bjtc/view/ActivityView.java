@@ -1,5 +1,8 @@
 package cn.bjtc.view;
 
+import cn.bjtc.api.BaseDictType;
+import cn.bjtc.common.ApplicationDataManager;
+
 public class ActivityView extends Pagination{
 
 	 private Integer id;
@@ -65,5 +68,19 @@ public class ActivityView extends Pagination{
 	public void setActst(Integer actst) {
 		this.actst = actst;
 	}
+	
+	public String getActstStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_ACTST.toString(), String.valueOf(actst));
+	}
+	
+	public String getActtypeStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_ACTTYPE.toString(), String.valueOf(acttype));
+	}
+	
+	public String getActcatStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_ACTCAT.toString(), String.valueOf(actcat));
+	}
+	
+	
 	 
 }

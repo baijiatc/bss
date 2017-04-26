@@ -87,12 +87,12 @@ public class StartupLoader {
 		DictionaryView view = new DictionaryView();
 		view.setPageSize(Integer.MAX_VALUE);
 		view.setDicttype(0);
-		List<Dictionary> baseDicts = dictService.findAllDicts(view);
-		for(Dictionary base : baseDicts){
+		List<DictionaryView> baseDicts = dictService.findAllDicts(view);
+		for(DictionaryView base : baseDicts){
 			view.setDicttype(base.getDictid());
-			List<Dictionary> concetDicts = dictService.findAllDicts(view);
+			List<DictionaryView> concetDicts = dictService.findAllDicts(view);
 			Map<String, String> concetMap = new HashMap<String,String>();
-			for(Dictionary concet : concetDicts){
+			for(DictionaryView concet : concetDicts){
 				concetMap.put(concet.getDictval(), concet.getDictname());
 			}
 			ApplicationDataManager.SYSDICTS.put(base.getDictval(), concetMap);

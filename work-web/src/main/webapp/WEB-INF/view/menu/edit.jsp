@@ -26,18 +26,31 @@
 		</tr>
 		<tr>
 			<td>状态：</td>
-			<td><input id="id_menust"  class="easyui-textbox" type="text" name="menust" data-options="required:true"></input></td>
+			<td><input id="cbx_menust"  class="easyui-textbox" type="text" name="menust" data-options="required:true"></input></td>
 		</tr>
-	</table>
-</form>
+	</table>    
+</form> 
 <script>
-BSS.dispatch({code:21091,data:[{menuid:'${menuid}'}]},function(resp){
-	BSS.json2form('#frm_menu',resp.data[0]);
+var menuStCombox = new BSS.Combox('#cbx_menust');
+menuStCombox.fromDict('DICT_MENUST',function(){
+	initRoleEditPage();
 });
-MENUDIALOG.ok = function(){
-	var menu = BSS.form2json('#frm_menu');
-	BSS.dispatch({code:21002,data:[menu]},function(){
-		BSS.alert('保存成功！');
-	},function(){});
+
+function initRoleEditPage(){
+	BSS.dispatch({code:21091,data:[{menuid:'${menuid}'}]},function(resp){
+		if(resp.code == 0){
+			BSS.json2form('#frm_menu',resp.data[0]);
+			
+			MENUDIALOG.ok = function(){
+				var menu = BSS.form2json('#frm_menu');
+				BSS.dispatch({code:21002,data:[menu]},function(){
+					BSS.alert('保存成功！');
+				},function(){});
+			};
+		}else{
+			MENUDIALOG.ok = function(){};
+			BSS.warning(resp.message);
+		}
+	});
 }
 </script>

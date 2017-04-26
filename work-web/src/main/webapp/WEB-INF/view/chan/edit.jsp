@@ -11,7 +11,7 @@
 		<tr>
 			<td>渠道分类：</td>
 			<td>
-				<input class="easyui-textbox" type="text" name="chantype" data-options="required:true"></input>
+				<input id="cbx_chantype" class="easyui-combobox" type="text" name="chantype" data-options="required:true"></input>
 			</td>
 		</tr>
 		<tr>
@@ -63,9 +63,12 @@
 	</table>
 </form>
 <script>
-var chanstCombox = new BSS.Combox('#cbx_chanst');
-chanstCombox.fromDict('DICT_CHANST',function(){
-	initChanEditPage();
+var chantypeCombox = new BSS.Combox('#cbx_chantype');
+chantypeCombox.fromDict('DICT_CHANTYPE',function(){
+	var chanstCombox = new BSS.Combox('#cbx_chanst');
+	chanstCombox.fromDict('DICT_CHANST',function(){
+		initChanEditPage();
+	});
 });
 
 function initChanEditPage(){
@@ -144,10 +147,10 @@ function loadDistrict(parentid,callback){
 function setOk(){
 	CHANDIALOG.ok = function(){
 		var chan = BSS.form2json('#frm_chanedit');
-		BSS.dispatch({code:13008,data:[chan]},function(){
+		BSS.dispatch({code:13008,data:[chan]},function(resp){
 			if(resp.code == 0){
 				BSS.info('保存成功！');
-				chanGrid.load({code:13009});
+				//chanGrid.load({code:13009});
 			}else{
 				BSS.error(resp.message);
 			}

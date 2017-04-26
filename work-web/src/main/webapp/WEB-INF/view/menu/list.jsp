@@ -12,7 +12,8 @@ $(function(){
           {field:'parentid',title: '上级菜单',align: 'center',width: 220},
           {field:'icon',title: '菜单图标',align: 'center',width: 220},
           {field:'sort',title: '菜单排序',align: 'center',width: 220},
-          {field:'menust',title: '状态',align: 'center',width: 220},
+          {field:'menust',title: '状态值',align: 'center',hidden:'true'},
+          {field:'MenustStr',title: '状态',align: 'center',width: 200},
 		]]
 	};
 	//构建datagrid，并填充数据

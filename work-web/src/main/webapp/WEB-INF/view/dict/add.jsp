@@ -26,18 +26,31 @@
 		<tr>
 			<td>状态：</td>
 			<td> 
-			    	<input class="easyui-textbox" type="text" name="dictst" data-options="required:true"></input>
+			    	<input id="cbx_dictst" class="easyui-textbox" type="text" name="dictst" data-options="required:true"></input>
 			 
 			
 			</td>
 		</tr>
-	</table>
+	</table>   
 </form>
 <script>
-DICTDIALOG.ok = function(){
-	var dict = BSS.form2json('#frm_dict');
-	BSS.dispatch({code:21005,data:[dict]},function(){
-		BSS.alert("保存成功");;
-	},function(){});
+var dictStCombox = new BSS.Combox('#cbx_dictst');
+dictStCombox.fromDict('DICT_DICTST',function(){
+	setOk();
+});
+
+function setOk(){
+	DICTDIALOG.ok = function(){
+		var dict = BSS.form2json('#frm_dict');
+		BSS.dispatch({code:21005,data:[dict]},function(resp){
+			if(resp.code == 0){
+				BSS.info('保存成功');
+			}else{
+				BSS.warning(resp.message);
+			}
+		},function(resp){
+			console.log(JSON.stringify(resp));
+		});
+	}
 }
 </script>

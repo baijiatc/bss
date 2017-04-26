@@ -26,19 +26,32 @@
 		<tr>
 			<td>状态：</td>
 			<td> 
-		     <input class="easyui-textbox"  id="id_dictst" type="text" name="dictst" data-options="required:true"></input>
+		     <input class="easyui-textbox"  id="cbx_dictst" type="text" name="dictst" data-options="required:true"></input>
 			</td>
 		</tr>
 	</table>
-</form>
+</form>   
 <script>
-BSS.dispatch({code:21090,data:[{dictid:'${dictid}'}]},function(resp){
-	BSS.json2form('#frm_dict',resp.data[0]);
+var dictStCombox = new BSS.Combox('#cbx_dictst');
+dictStCombox.fromDict('DICT_ROLEST',function(){
+	initRoleEditPage();
 });
-DICTDIALOG.ok = function(){
-	var dict = BSS.form2json('#frm_dict');
-	BSS.dispatch({code:21006,data:[dict]},function(){
-		BSS.alert('保存成功！');
-	},function(){});
+
+function initDictEditPage(){
+	BSS.dispatch({code:21090,data:[{dictid:'${dictid}'}]},function(resp){
+		if(resp.code == 0){
+			BSS.json2form('#frm_dict',resp.data[0]);
+			
+			DICTDIALOG.ok = function(){
+				var dict = BSS.form2json('#frm_dict');
+				BSS.dispatch({code:21006,data:[dict]},function(){
+					BSS.alert('保存成功！');
+				},function(){});
+			};
+		}else{
+			DICTDIALOG.ok = function(){};
+			BSS.warning(resp.message);
+		}
+	});
 }
 </script>

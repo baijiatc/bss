@@ -29,15 +29,28 @@
 		</tr>
 		<tr>
 			<td>状态：</td>
-			<td><input class="easyui-textbox" type="text" name="brandst" data-options="required:true"></input></td>
+			<td><input id="cbx_brandst"  class="easyui-textbox" type="text" name="brandst" data-options="required:true"></input></td>
 		</tr>
 	</table>
 </form>
 <script>
-BRANDDIALOG.ok = function(){
-	var brand = BSS.form2json('#frm_brand');
-	BSS.dispatch({code:14001,data:[brand]},function(){
-		BSS.alert("添加成功");;
-	},function(){});
+var brandStCombox = new BSS.Combox('#cbx_brandst');
+brandStCombox.fromDict('DICT_BRANDST',function(){
+	setOk();
+});
+
+function setOk(){
+	BRANDDIALOG.ok = function(){
+		var brand = BSS.form2json('#frm_brand');
+		BSS.dispatch({code:14001,data:[brand]},function(resp){
+			if(resp.code == 0){
+				BSS.info('保存成功');
+			}else{
+				BSS.warning(resp.message);
+			}
+		},function(resp){
+			console.log(JSON.stringify(resp));
+		});
+	}
 }
 </script>

@@ -1,5 +1,8 @@
 package cn.bjtc.view;
 
+import cn.bjtc.api.BaseDictType;
+import cn.bjtc.common.ApplicationDataManager;
+
 public class DictionaryView extends Pagination {
 
     private Integer dictid;
@@ -38,6 +41,8 @@ public class DictionaryView extends Pagination {
 	public void setDictst(Integer dictst) {
 		this.dictst = dictst;
 	}
-    
+	public String getDictstStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_DICTST.toString(), String.valueOf(dictst));
+	}
     
 }

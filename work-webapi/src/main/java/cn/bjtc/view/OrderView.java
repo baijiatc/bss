@@ -1,5 +1,8 @@
 package cn.bjtc.view;
 
+import cn.bjtc.api.BaseDictType;
+import cn.bjtc.common.ApplicationDataManager;
+
 public class OrderView extends Pagination {
 
 	private Integer id;
@@ -120,5 +123,14 @@ public class OrderView extends Pagination {
 	}
 	public void setCstmcontactid(Integer cstmcontactid) {
 		this.cstmcontactid = cstmcontactid;
+	}
+	public String getOrderStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_ORDER.toString(), String.valueOf(orderst));
+	}
+	public String getOrdertypeStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_ORDERTYPE.toString(), String.valueOf(ordertype));
+	}
+	public String getPaytypeStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_PAYTYPE.toString(), String.valueOf(paytype));
 	}
 }

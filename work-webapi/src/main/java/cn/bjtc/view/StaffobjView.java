@@ -1,5 +1,8 @@
 package cn.bjtc.view;
 
+import cn.bjtc.api.BaseDictType;
+import cn.bjtc.common.ApplicationDataManager;
+
 public class StaffobjView extends Pagination {
 	private Integer staffobjid;
 	private Integer objid;
@@ -42,5 +45,8 @@ public class StaffobjView extends Pagination {
 	}
 	public void setCreatetime(Integer createtime) {
 		this.createtime = createtime;
+	}
+	public String getObjtypeStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_OBJTYPE.toString(), String.valueOf(objtype));
 	}
 }

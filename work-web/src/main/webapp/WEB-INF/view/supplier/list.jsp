@@ -10,12 +10,14 @@ $(function(){
 		columns:[[
           {field:'suppid',title: 'ID',align: 'center',hidden:'true'},
           {field:'suppname',title: '供应商名称',align: 'center',width: 200},
-          {field:'supplv',title: '供应商级别',align: 'center',width: 200},
+          {field:'supplv',title: '供应商级别',align: 'center',hidden:'true'},
+          {field:'supplvStr',title: '供应商级别',align: 'center',width: 200},
           {field:'contact',title: '联系人',align: 'center',width: 200},
           {field:'mobile',title: '手机',align: 'center',width: 200},
           {field:'telephone',title: '电话',align: 'center',width: 200},
           {field:'address',title: '联系地址',align: 'center',width: 200},
-          {field:'isopenshop',title: '是否开店',align: 'center',width: 200},
+          {field:'isopenshop',title: '是否开店',align: 'center',hidden:'true'},
+          {field:'isopenshopStr',title: '是否开店',align: 'center',width: 200},
 		]]
 	};
 	//构建datagrid，并填充数据

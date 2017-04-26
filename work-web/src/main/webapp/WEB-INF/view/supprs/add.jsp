@@ -21,11 +21,14 @@
 		</tr>
 		<tr>
 			<td>创建时间：</td>
-			<td><input class="easyui-textbox" type="text" name="createtime" data-options="required:true"></input></td>
+			<td><input id="cbx_objtype" class="easyui-textbox" type="text" name="createtime" data-options="required:true"></input></td>
 		</tr>
 	</table>
 </form>
 <script>
+var objCombox = new BSS.Combox('#cbx_objtype');
+objCombox.fromDict('DICT_OBJTYPE');
+
 SUPPRSDIALOG.ok = function(){
 	var supp = BSS.form2json('#frm_supprs');
 	BSS.dispatch({code:13004,data:[supp]},function(){

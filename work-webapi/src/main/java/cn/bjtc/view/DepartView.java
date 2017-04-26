@@ -1,5 +1,8 @@
 package cn.bjtc.view;
 
+import cn.bjtc.api.BaseDictType;
+import cn.bjtc.common.ApplicationDataManager;
+
 public class DepartView extends Pagination {
 	private Integer departid;
 	private String departname;
@@ -49,5 +52,8 @@ public class DepartView extends Pagination {
 	}
 	public void setDepartst(Integer departst) {
 		this.departst = departst;
+	}
+	public String getDepartStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_DEPARTST.toString(), String.valueOf(departst));
 	}
 }

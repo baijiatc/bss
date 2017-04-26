@@ -1,5 +1,8 @@
 package cn.bjtc.view;
 
+import cn.bjtc.api.BaseDictType;
+import cn.bjtc.common.ApplicationDataManager;
+
 public class SpecView extends Pagination{
 
 	private Integer id;
@@ -36,5 +39,11 @@ public class SpecView extends Pagination{
 	}
 	public void setSpecst(Integer specst) {
 		this.specst = specst;
+	}
+	public String getSpectypeStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_SPECTYPE.toString(), String.valueOf(spectype));
+	}
+	public String getSpecstStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_SPECST.toString(), String.valueOf(specst));
 	}
 }

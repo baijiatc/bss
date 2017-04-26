@@ -12,7 +12,8 @@ $(function(){
           {field:'objid',title: '客户',align: 'center',width: 200},
           {field:'staffid',title: '员工',align: 'center',width: 200},
           {field:'cstype',title: '关系类型',align: 'center',width: 200},
-          {field:'objtype',title: '对象类型',align: 'center',width: 200},
+          {field:'objtype',title: '对象类型',align: 'center',hidden:'true'},
+          {field:'objtypeStr',title: '对象类型',align: 'center',width: 200},
           {field:'createtime',title: '关系建立日期',align: 'center',width: 200},
 		]]
 	};

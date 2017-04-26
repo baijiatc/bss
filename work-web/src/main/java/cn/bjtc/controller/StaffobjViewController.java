@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import cn.bjtc.annotation.SysPrivilege;
+
 @Controller
 @RequestMapping("supprs")
 public class StaffobjViewController {
@@ -16,11 +18,13 @@ public class StaffobjViewController {
 	}
 	
 	@RequestMapping(value="add.html",method=RequestMethod.GET)
+	@SysPrivilege(name="supprs:add")
 	public String showStaffobjAddView(){
 		return "supprs/add";
 	}
 	
 	@RequestMapping(value="{staffobjid}.html",method=RequestMethod.GET)
+	@SysPrivilege(name="supprs:edit")
 	public String showStaffobjEditView(@PathVariable Integer staffobjid,Model model){
 		model.addAttribute("staffobjid", staffobjid);
 		return "supprs/edit";

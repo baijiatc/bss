@@ -26,11 +26,14 @@
 		</tr>
 		<tr>
 			<td>部门状态：</td>
-			<td><input id="id_departst" class="easyui-textbox" type="text" name="departst" data-options="required:true"></input></td>
+			<td><input id="cbx_departst" class="easyui-textbox" type="text" name="departst" data-options="required:true"></input></td>
 		</tr>
 	</table>
 </form>
 <script>
+var genderCombox = new BSS.Combox('#cbx_departst');
+genderCombox.fromDict('DICT_DEPARTST');
+
 BSS.dispatch({code:11010,data:[{departid:'${departid}'}]},function(resp){
 	BSS.json2form('#frm_deport',resp.data[0]);
 });

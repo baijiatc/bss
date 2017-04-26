@@ -10,7 +10,7 @@
 		</tr>
 		<tr>
 			<td>供应商级别：</td>
-			<td><input id="id_supplv" class="easyui-textbox" type="text" name="supplv" data-options="required:false"></input></td>
+			<td><input id="cbx_supplv" class="easyui-textbox" type="text" name="supplv" data-options="required:false"></input></td>
 		</tr>
 		<tr>
 			<td>联系人：</td>
@@ -30,11 +30,16 @@
 		</tr>
 		<tr>
 			<td>是否开店：</td>
-			<td><input id="id_isopenshop" class="easyui-textbox" type="text" name="isopenshop" data-options="required:true"></input></td>
+			<td><input id="cbx_isopenshop" class="easyui-textbox" type="text" name="isopenshop" data-options="required:true"></input></td>
 		</tr>
 	</table>
 </form>
 <script>
+var supCombox = new BSS.Combox('#cbx_supplv');
+supCombox.fromDict('DICT_SUPPLV');
+var isCombox = new BSS.Combox('#cbx_isopenshop');
+isCombox.fromDict('DICT_ISOPENSHOP');
+
 BSS.dispatch({code:13013,data:[{suppid:'${suppid}'}]},function(resp){
 	BSS.json2form('#frm_supp',resp.data[0]);
 });

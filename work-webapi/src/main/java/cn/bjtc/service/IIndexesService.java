@@ -9,6 +9,6 @@ public interface IIndexesService {
 
 	public int saveIndexes(IndexesView view);
 	public int updateIndexes(IndexesView view);
-	public List<Indexes> findAllIndexes(IndexesView view);
+	public List<IndexesView> findAllIndexes(IndexesView view);
 	public Integer countAllIndexes(IndexesView view);
 }

@@ -8,7 +8,8 @@ $(function(){
 		columns:[[
           {field:'chanid',title: 'ID',align: 'center',hidden:'true'},
           {field:'channame',title: '渠道名称',align: 'center',width: 200},
-          {field:'chantype',title: '渠道类型',align: 'center',width: 200},
+          {field:'chantype',title: '渠道类型值',align: 'center',hidden:'true'},
+          {field:'chantypeStr',title: '渠道类型',align: 'center',width: 200},
           {field:'contact',title: '联系人',align: 'center',width: 200},
           {field:'mobile',title: '角色名称',align: 'center',width: 200},
           {field:'province',title: '地址',align: 'center',hidden:'true'},

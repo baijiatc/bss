@@ -1,5 +1,8 @@
 package cn.bjtc.view;
 
+import cn.bjtc.api.BaseDictType;
+import cn.bjtc.common.ApplicationDataManager;
+
 public class SupplierView extends Pagination {
 	private Integer suppid;
 	private String suppname;
@@ -56,5 +59,11 @@ public class SupplierView extends Pagination {
 	}
 	public void setIsopenshop(Integer isopenshop) {
 		this.isopenshop = isopenshop;
+	}
+	public String getSupplvStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_SUPPLV.toString(), String.valueOf(supplv));
+	}
+	public String getIsopenshopStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_ISOPENSHOP.toString(), String.valueOf(isopenshop));
 	}
 }

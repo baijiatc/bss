@@ -9,6 +9,6 @@ public interface ISpecService {
 
 	public int saveSpec(SpecView view);
 	public int updateSpec(SpecView view);
-    public List<Spec> findAllSpecs(SpecView view);
+    public List<SpecView> findAllSpecs(SpecView view);
 	public Integer countAllSpecs(SpecView view);
 }

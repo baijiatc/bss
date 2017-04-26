@@ -1,5 +1,8 @@
 package cn.bjtc.view;
 
+import cn.bjtc.api.BaseDictType;
+import cn.bjtc.common.ApplicationDataManager;
+
 public class ParametersView extends Pagination{
 
 	private Integer id;
@@ -36,5 +39,11 @@ public class ParametersView extends Pagination{
 	}
 	public void setParamst(Integer paramst) {
 		this.paramst = paramst;
+	}
+	public String getParamtypeStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_PARAMTYPE.toString(), String.valueOf(paramtype));
+	}
+	public String getParamstStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_PARAMST.toString(), String.valueOf(paramst));
 	}
 }

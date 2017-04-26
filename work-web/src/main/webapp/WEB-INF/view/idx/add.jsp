@@ -29,7 +29,7 @@
 		</tr>
 		<tr>
 			<td>是否显示：</td>
-			<td><input class="easyui-textbox" type="text" name="isdisplay" data-options="required:true"></input></td>
+			<td><input id="cbx_isdisplay" class="easyui-textbox" type="text" name="isdisplay" data-options="required:true"></input></td>
 		</tr>
 		<tr>
 			<td>生效日期：</td>
@@ -46,6 +46,8 @@
 	</table>
 </form>
 <script>
+var isdisplayCombox = new BSS.Combox('#cbx_isdisplay');
+isdisplayCombox.fromDict('DICT_ISDISPLAY');
 IDXDIALOG.ok = function(){
 	var idx = BSS.form2json('#frm_idx');
 	BSS.dispatch({code:18001,data:[idx]},function(){

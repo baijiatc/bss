@@ -7,6 +7,6 @@ import cn.bjtc.view.OrderView;
 
 public interface IOrderService {
 
-	public List<Orders> findAllOrder(OrderView view);
+	public List<OrderView> findAllOrder(OrderView view);
 	public Integer countAllOrder(OrderView view);
 }

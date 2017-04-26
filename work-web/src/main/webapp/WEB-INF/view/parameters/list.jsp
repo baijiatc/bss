@@ -9,8 +9,10 @@ $(function(){
           {field:'id',title: 'ID',align: 'center',hidden:'true'},
           {field:'paramname',title: '参数名称',align: 'center',width: 100},
           {field:'paramdesc',title: '参数描述',align: 'center',width: 100},
-          {field:'paramtype',title: '参数类型',align: 'center',width: 100},
+          {field:'paramtype',title: '参数类型',align: 'center',hidden:'true'},
+          {field:'paramtypeStr',title: '参数类型',align: 'center',width: 100},
           {field:'paramst',title: '规格状态',align: 'center',width: 100},
+          {field:'paramstStr',title: '规格状态',align: 'center',hidden:'true'},
 		]]
 	};
 	//构建datagrid，并填充数据

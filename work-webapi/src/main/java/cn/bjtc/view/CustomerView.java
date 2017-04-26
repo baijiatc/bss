@@ -1,4 +1,7 @@
 package cn.bjtc.view;
+
+import cn.bjtc.api.BaseDictType;
+import cn.bjtc.common.ApplicationDataManager;
  
 public class CustomerView extends Pagination{
 	 private Integer cstmid;
@@ -107,17 +110,33 @@ public class CustomerView extends Pagination{
 	public void setCstmst(Integer cstmst) {
 		this.cstmst = cstmst;
 	}
-	@Override
-	public String toString() {
-		return "Customer [cstmid=" + cstmid + ", cstmno=" + cstmno + ", cstmname="
-				+ cstmname + ", certno=" + certno + ", certtype=" + certtype
-				+ ", mobile=" + mobile + ", gender=" + gender + ", birthday="
-				+ birthday + ", cstmlevel=" + cstmlevel + ", cstmphoto="
-				+ cstmphoto + ", hobby=" + hobby + ", email=" + email
-				+ ", cstmtype=" + cstmtype + ", regtime=" + regtime + ", cstmst="
-				+ cstmst + "]";
+	public String getCerttypeStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_CERRTTYPE.toString(), String.valueOf(certtype));
 	}
-	 
+	
+	public String getGenderStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_GENDER.toString(), String.valueOf(gender));
+	}
+	
+	public String getCstmtypeStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_CSTMTYPE.toString(), String.valueOf(cstmtype));
+	}
+	
+	
+	public String getCstmstStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_CSTMST.toString(), String.valueOf(cstmst));
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 		
 	}

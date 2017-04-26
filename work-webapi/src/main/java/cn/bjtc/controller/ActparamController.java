@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import cn.bjtc.annotation.SysLogger;
 import cn.bjtc.api.ApiParam;
 import cn.bjtc.api.ApiReturn;
 import cn.bjtc.api.util.ParamUtil;
+import cn.bjtc.aspect.AspectType;
 import cn.bjtc.service.IActparamService;
 import cn.bjtc.view.ActparamView;
 
@@ -18,6 +20,7 @@ import cn.bjtc.view.ActparamView;
 public class ActparamController extends BaseController{
 
 	@RequestMapping(value="all", method=RequestMethod.POST)
+	@SysLogger(content="查询活动参数信息",type=AspectType.CONTROLLER)
 	public ApiReturn showActparams(){
 		try {
 			ApiParam param=findApiParam();
@@ -34,6 +37,7 @@ public class ActparamController extends BaseController{
 	}
 	
 	@RequestMapping(value="create", method=RequestMethod.POST)
+	@SysLogger(content="新增活动参数信息",type=AspectType.CONTROLLER)
 	public ApiReturn execAddActparam(){
 		try {
 			ApiParam param=findApiParam();
@@ -47,6 +51,7 @@ public class ActparamController extends BaseController{
 	} 
 	
 	@RequestMapping(value="update", method=RequestMethod.POST)
+	@SysLogger(content="更新活动参数信息",type=AspectType.CONTROLLER)
 	public ApiReturn execUpdateActparam(){
 		try {
 			ApiParam param=findApiParam();

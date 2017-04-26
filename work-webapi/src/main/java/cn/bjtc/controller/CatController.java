@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import cn.bjtc.annotation.SysLogger;
 import cn.bjtc.api.ApiParam;
 import cn.bjtc.api.ApiReturn;
 import cn.bjtc.api.util.ParamUtil;
+import cn.bjtc.aspect.AspectType;
 import cn.bjtc.service.ICatService;
 import cn.bjtc.view.CatView;
 
@@ -18,6 +20,7 @@ import cn.bjtc.view.CatView;
 public class CatController extends BaseController{
 
 	@RequestMapping(value="all", method=RequestMethod.POST)
+	@SysLogger(content="查询品类信息",type=AspectType.CONTROLLER)
 	public ApiReturn showCats(){
 		try {
 			ApiParam param=findApiParam();
@@ -33,6 +36,7 @@ public class CatController extends BaseController{
 	}
 	
 	@RequestMapping(value="create", method=RequestMethod.POST)
+	@SysLogger(content="增加品类信息",type=AspectType.CONTROLLER)
 	public ApiReturn execAddCat(){
 		try {
 			ApiParam param=findApiParam();
@@ -46,6 +50,7 @@ public class CatController extends BaseController{
 	}
 	
 	@RequestMapping(value="update", method=RequestMethod.POST)
+	@SysLogger(content="更新品类信息",type=AspectType.CONTROLLER)
 	public ApiReturn execUpdateCat(){
 		try {
 			ApiParam param=findApiParam();

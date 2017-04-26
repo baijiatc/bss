@@ -9,6 +9,6 @@ public interface ISupplierService {
 
 	public int saveSupplier(SupplierView view);
 	public int updateSupplier(SupplierView view);
-	public List<Supplier> findAllSupplier(SupplierView view);
+	public List<SupplierView> findAllSupplier(SupplierView view);
 	public Integer countAllSupplier(SupplierView view);
 }

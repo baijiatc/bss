@@ -36,7 +36,9 @@ a{
 				<div id="div_logout" data-options="iconCls:'icon-blank'">退出</div>
 			</div>
 		</div>
-		<div id="div_footer" data-options="region:'south'" style="width:auto;height:40px;"></div>
+		<div id="div_footer" data-options="region:'south'" style="width:auto;height:40px;">
+			<div><span id="spn_nowtime" style="margin-top:20px;margin-right:10px;vertical-align: middle;float:right;"></span></div>
+		</div>
 		<div id="div_left" data-options="region:'west'" style="width:180px;">
 			<!-- left -->
 		</div>
@@ -67,6 +69,9 @@ $(function(){
 		BSS.dispatch({code:10002},function(){
 			BSS.redirect('login.html');
 		},function(){});
+	});
+	BSS.interval(1000,function(){
+		$('#spn_nowtime').html('当前时间为:'+BSS.DateTime.nowStr());
 	});
 });
 BSS.Combox.prototype.fromDict=function(type,callback){

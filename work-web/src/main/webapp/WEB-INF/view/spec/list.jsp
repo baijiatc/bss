@@ -9,8 +9,10 @@ $(function(){
           {field:'id',title: 'ID',align: 'center',hidden:'true'},
           {field:'specname',title: '规格名称',align: 'center',width: 100},
           {field:'specdesc',title: '规格值说明',align: 'center',width: 100},
-          {field:'spectype',title: '规格类型',align: 'center',width: 100},
-          {field:'specst',title: '规格状态',align: 'center',width: 100},
+          {field:'spectype',title: '规格类型',align: 'center',hidden:'true'},
+          {field:'spectypeStr',title: '规格类型',align: 'center',width: 100},
+          {field:'specst',title: '规格状态',align: 'center',hidden:'true'},
+          {field:'specstStr',title: '规格状态',align: 'center',width: 100},
 		]]
 	};
 	//构建datagrid，并填充数据

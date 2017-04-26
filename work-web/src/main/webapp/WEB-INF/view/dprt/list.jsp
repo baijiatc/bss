@@ -14,7 +14,8 @@ $(function(){
           {field:'parentid',title: '上级部门',align: 'center',width: 200},
           {field:'address',title: '地址',align: 'center',width: 200},
           {field:'telephone',title: '联系电话',align: 'center',width: 200},
-          {field:'departst',title: '状态',align: 'center',width: 200},
+          {field:'departst',title: '状态值',align: 'center',hidden:'true'},
+          {field:'departStr',title: '状态',align: 'center',width: 200},
 		]]
 	};
 	//构建datagrid，并填充数据

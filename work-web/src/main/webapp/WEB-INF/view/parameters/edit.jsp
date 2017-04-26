@@ -12,15 +12,19 @@
 		</tr>
 		<tr>
 			<td>参数类型：</td>
-			<td><input id="id_paramtype" class="easyui-textbox" type="text" name="paramtype" data-options="required:true"></input></td>
+			<td><input id="cbx_paramtype" class="easyui-textbox" type="text" name="paramtype" data-options="required:true"></input></td>
 		</tr>
 		<tr>
 			<td>规格状态：</td>
-			<td><input id="id_paramst" class="easyui-textbox" type="text" name="paramst" data-options="required:true"></input></td>
+			<td><input id="cbx_paramst" class="easyui-textbox" type="text" name="paramst" data-options="required:true"></input></td>
 		</tr>
 	</table>
 </form>
 <script>
+var typeCombox = new BSS.Combox('#cbx_paramtype');
+typeCombox.fromDict('DICT_PARAMTYPE');
+var parCombox = new BSS.Combox('#cbx_paramst');
+parCombox.fromDict('DICT_PARAMST');
 BSS.dispatch({code:14019,data:[{id:'${id}'}]},function(resp){
 	BSS.json2form('#frm_prm',resp.data[0]);
 });

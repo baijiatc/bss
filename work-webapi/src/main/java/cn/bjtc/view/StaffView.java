@@ -137,4 +137,7 @@ public class StaffView extends Pagination {
 	public String getStaffStr() {
 		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_STAFFST.toString(), String.valueOf(staffst));
 	}
+	public String getEduStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_EDU.toString(), String.valueOf(edu));
+	}
 }

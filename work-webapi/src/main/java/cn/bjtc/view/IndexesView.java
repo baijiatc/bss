@@ -1,5 +1,8 @@
 package cn.bjtc.view;
 
+import cn.bjtc.api.BaseDictType;
+import cn.bjtc.common.ApplicationDataManager;
+
 public class IndexesView extends Pagination {
 	private Integer id;
 	private String idxcode;
@@ -77,5 +80,8 @@ public class IndexesView extends Pagination {
 	}
 	public void setCreator(Integer creator) {
 		this.creator = creator;
+	}
+	public String getIsdisplayStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_ISDISPLAY.toString(), String.valueOf(isdisplay));
 	}
 }

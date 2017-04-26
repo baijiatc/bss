@@ -29,7 +29,7 @@
 		</tr>
 		<tr>
 			<td>教育程度：</td>
-			<td><input class="easyui-textbox" type="text" name="edu" data-options="required:true"></input></td>
+			<td><input id="cbx_edu" class="easyui-textbox" type="text" name="edu" data-options="required:true"></input></td>
 		</tr>
 		<tr>
 			<td>岗位：</td>
@@ -79,6 +79,9 @@ genderCombox.fromDict('DICT_GENDER');
 
 var staffstCombox = new BSS.Combox('#cbx_staffst');
 staffstCombox.fromDict('DICT_STAFFST');
+
+var eduCombox = new BSS.Combox('#cbx_edu');
+eduCombox.fromDict('DICT_EDU');
 
 STAFFDIALOG.ok = function(){
 	var staff = BSS.form2json('#frm_staff');

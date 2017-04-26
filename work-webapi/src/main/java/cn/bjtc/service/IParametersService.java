@@ -9,6 +9,6 @@ public interface IParametersService {
 
 	public int saveParameters(ParametersView view);
 	public int updateParameters(ParametersView view);
-    public List<Parameters> findAllParameterss(ParametersView view);
+    public List<ParametersView> findAllParameterss(ParametersView view);
 	public Integer countAllParameterss(ParametersView view);
 }

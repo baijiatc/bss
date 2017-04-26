@@ -30,16 +30,16 @@
 		</tr>
 		<tr>
 			<td>教育程度：</td>
-			<td><input id="id_edu" class="easyui-textbox" type="text" name="edu" data-options="required:true"></input></td>
+			<td><input id="cbx_edu" class="easyui-textbox" type="text" name="edu" data-options="required:true"></input></td>
 		</tr>
 		<tr>
 			<td>岗位：</td>
 			<td><input id="id_jobstation" class="easyui-textbox" type="text" name="jobstation" data-options="required:true"></input></td>
 		</tr>
-		<tr>
-			<td>密码：</td>
-			<td><input id="id_passwd" class="easyui-textbox" type="text" name="passwd" data-options="required:true"></input></td>
-		</tr>
+<!-- 		<tr> -->
+<!-- 			<td>密码：</td> -->
+<!-- 			<td><input id="id_passwd" class="easyui-textbox" type="text" name="passwd" data-options="required:true"></input></td> -->
+<!-- 		</tr> -->
 		<tr>
 			<td>联系地址：</td>
 			<td><input id="id_address" class="easyui-textbox" type="text" name="address" data-options="required:false"></input></td>
@@ -80,6 +80,9 @@ genderCombox.fromDict('DICT_GENDER');
 
 var staffstCombox = new BSS.Combox('#cbx_staffst');
 staffstCombox.fromDict('DICT_STAFFST');
+
+var eduCombox = new BSS.Combox('#cbx_edu');
+eduCombox.fromDict('DICT_EDU');
 
 BSS.dispatch({code:11009,data:[{staffid:'${staffid}'}]},function(resp){
 	if(resp.code == 0){

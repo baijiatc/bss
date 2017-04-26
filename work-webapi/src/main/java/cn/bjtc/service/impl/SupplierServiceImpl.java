@@ -1,7 +1,9 @@
 package cn.bjtc.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +23,18 @@ public class SupplierServiceImpl implements ISupplierService {
 		return supplierDAO.updateSupplier(view);
 	}
 
-	public List<Supplier> findAllSupplier(SupplierView view) {
-		return supplierDAO.findAllSupplier(view);
+	public List<SupplierView> findAllSupplier(SupplierView view) {
+		List<Supplier> Suppliers = supplierDAO.findAllSupplier(view);
+		if(Suppliers == null || Suppliers.size() <= 0){
+			return new ArrayList<SupplierView>(0);
+		}
+		List<SupplierView> views = new ArrayList<SupplierView>(Suppliers.size());
+		for(Supplier Supplier : Suppliers){
+			SupplierView SupplierView = new SupplierView();
+			BeanUtils.copyProperties(Supplier, SupplierView);
+			views.add(SupplierView);
+		}
+		return views;
 	}
 
 	public Integer countAllSupplier(SupplierView view) {

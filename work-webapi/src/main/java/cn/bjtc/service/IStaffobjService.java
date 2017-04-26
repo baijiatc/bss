@@ -9,6 +9,6 @@ public interface IStaffobjService {
 
 	public int saveStaffobj(StaffobjView view);
 	public int updateStaffobj(StaffobjView view);
-	public List<Staffobj> findAllStaffobj(StaffobjView view);
+	public List<StaffobjView> findAllStaffobj(StaffobjView view);
 	public Integer countAllStaffobj(StaffobjView view);
 }

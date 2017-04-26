@@ -25,15 +25,28 @@
 		</tr>
 		<tr>
 			<td>状态：</td>
-			<td><input class="easyui-textbox" type="text" name="menust" data-options="required:true"></input></td>
+			<td><input  id="cbx_menust" class="easyui-textbox" type="text" name="menust" data-options="required:true"></input></td>
 		</tr>
-	</table>
+	</table> 
 </form>
 <script>
-MENUDIALOG.ok = function(){
-	var menu = BSS.form2json('#frm_menu');
-	BSS.dispatch({code:21001,data:[menu]},function(){
-		BSS.alert();;
-	},function(){});
+var menuStCombox = new BSS.Combox('#cbx_menust');
+menuStCombox.fromDict('DICT_MENUST',function(){
+	setOk();
+});
+
+function setOk(){
+	MENUDIALOG.ok = function(){
+		var menu = BSS.form2json('#frm_menu');
+		BSS.dispatch({code:21001,data:[menu]},function(resp){
+			if(resp.code == 0){
+				BSS.info('保存成功');
+			}else{
+				BSS.warning(resp.message);
+			}
+		},function(resp){
+			console.log(JSON.stringify(resp));
+		});
+	}
 }
 </script>

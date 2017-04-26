@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import cn.bjtc.annotation.SysLogger;
 import cn.bjtc.api.ApiParam;
 import cn.bjtc.api.ApiReturn;
 import cn.bjtc.api.util.ParamUtil;
+import cn.bjtc.aspect.AspectType;
 import cn.bjtc.load.StartupLoader;
 import cn.bjtc.service.IMenuService;
 import cn.bjtc.view.MenuView;
@@ -19,6 +21,7 @@ import cn.bjtc.view.MenuView;
 public class MenuController extends BaseController {
 
 	@RequestMapping(value="all", method=RequestMethod.POST)
+	@SysLogger(content="查询菜单信息",type=AspectType.CONTROLLER)
 	public ApiReturn showActMenus(){
 		 try {
 			ApiParam param=findApiParam();
@@ -34,6 +37,7 @@ public class MenuController extends BaseController {
 	}
 	
 	@RequestMapping(value="create", method=RequestMethod.POST)
+	@SysLogger(content="新增菜单信息",type=AspectType.CONTROLLER)
 	public ApiReturn execAddMenu(){
 		try {
 			ApiParam param=findApiParam();
@@ -47,6 +51,7 @@ public class MenuController extends BaseController {
 	}
 	
 	@RequestMapping(value="update", method=RequestMethod.POST)
+	@SysLogger(content="更新菜单信息",type=AspectType.CONTROLLER)
 	public ApiReturn execUpdateMenu(){
 		try {
 			ApiParam param=findApiParam();

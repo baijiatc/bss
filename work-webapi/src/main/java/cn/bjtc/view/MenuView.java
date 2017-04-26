@@ -1,5 +1,8 @@
 package cn.bjtc.view;
 
+import cn.bjtc.api.BaseDictType;
+import cn.bjtc.common.ApplicationDataManager;
+
 public class MenuView extends Pagination{
 
 	private Integer menuid;
@@ -65,5 +68,9 @@ public class MenuView extends Pagination{
 	}
 	public void setDisabled(boolean disabled) {
 		this.disabled = disabled;
+	}
+	
+	public String getMenustStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_MENUST.toString(), String.valueOf(menust));
 	}
 }

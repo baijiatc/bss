@@ -15,7 +15,8 @@ $(function(){
           {field:'branddesc',title: '品牌介绍',align: 'center',width: 200},
           {field:'brandlogo',title: '品牌logo',align: 'center',width: 200},
           {field:'sort',title: '排序',align: 'center',width: 200},
-          {field:'brandst',title: '状态',align: 'center',width: 200},
+          {field:'brandst',title: '状态值',align: 'center',hidden:'true'},
+          {field:'brandstStr',title: '状态',align: 'center',width: 200},
          
 		]]
 	};

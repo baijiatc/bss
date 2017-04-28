@@ -1,5 +1,8 @@
 package cn.bjtc.view;
 
+import cn.bjtc.api.BaseDictType;
+import cn.bjtc.common.ApplicationDataManager;
+
 public class CatView extends Pagination{
 
 	private Integer id;
@@ -38,4 +41,8 @@ public class CatView extends Pagination{
 		this.catst = catst;
 	}
 	
+	public String getCatstStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_CASTST.toString(), String.valueOf(catst));
+	}
+
 }

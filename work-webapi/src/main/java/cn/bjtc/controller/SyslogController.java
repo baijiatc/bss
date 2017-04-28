@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import cn.bjtc.annotation.SysLogger;
 import cn.bjtc.api.ApiParam;
 import cn.bjtc.api.ApiReturn;
 import cn.bjtc.api.util.ParamUtil;
+import cn.bjtc.aspect.AspectType;
 import cn.bjtc.service.ISyslogService;
 import cn.bjtc.view.SyslogView;
  
@@ -19,6 +21,7 @@ import cn.bjtc.view.SyslogView;
 public class SyslogController extends BaseController{
 
 	@RequestMapping(value="all",method=RequestMethod.POST)
+	@SysLogger(content="查询日志信息",type=AspectType.CONTROLLER)
 	public ApiReturn showSyslog(){
 		try {
 			ApiParam param=findApiParam();

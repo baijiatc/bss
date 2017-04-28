@@ -17,15 +17,28 @@
 		</tr>
 		<tr>
 			<td>状态：</td>
-			<td><input class="easyui-textbox" type="text" name="catst" data-options="required:true"></input></td>
+			<td><input id="cbx_catst" class="easyui-textbox" type="text" name="catst" data-options="required:true"></input></td>
 		</tr>
-	</table>
+	</table> 
 </form>
 <script>
-CATDIALOG.ok = function(){
-	var cat = BSS.form2json('#frm_cat');
-	BSS.dispatch({code:14004,data:[cat]},function(){
-		BSS.alert("添加成功");;
-	},function(){});
+var catStCombox = new BSS.Combox('#cbx_catst');
+catStCombox.fromDict('DICT_CASTST',function(){
+	setOk();
+});
+
+function setOk(){
+	CATDIALOG.ok = function(){
+		var cat = BSS.form2json('#frm_cat');
+		BSS.dispatch({code:14004,data:[cat]},function(resp){
+			if(resp.code == 0){
+				BSS.info('保存成功');
+			}else{
+				BSS.warning(resp.message);
+			}
+		},function(resp){
+			console.log(JSON.stringify(resp));
+		});
+	}
 }
 </script>

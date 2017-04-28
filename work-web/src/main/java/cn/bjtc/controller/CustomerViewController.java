@@ -8,10 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@Controller
+import cn.bjtc.annotation.SysPrivilege;
+
+@Controller 
 public class CustomerViewController {
 
 	@RequestMapping(value="cstmls/show.html",method=RequestMethod.GET)
+ 
 	public String showCustomerView(){
 		return "cust/list";
 	}

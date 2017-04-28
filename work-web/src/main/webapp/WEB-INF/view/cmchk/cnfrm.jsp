@@ -12,15 +12,12 @@
 				<tr>
 					<td>审核结果：</td>
 					<td>
-						<select class="easyui-combobox" type="text" name="result" disabled>
-							<option value="-1">请选择</option>
-							<option value="2" <c:if test="${cst eq 2 }">selected</c:if>>通过</option>
-						</select>
+						<input id="cbx_cstmchkst" class="easyui-combobox" type="text" name="result" disabled></input>
 					</td>
 				</tr>
 				<tr>
 					<td>审核意见：</td>
-					<td><input class="easyui-textbox" data-options="multiline:true" readonly value="${crslt }"></td>
+					<td><input id="sel_chkrslt" class="easyui-textbox" data-options="multiline:true" readonly value="${crslt }"></td>
 				</tr>
 			</table>
 		</div>
@@ -30,18 +27,27 @@
 	<a id="lnk_certcnfrm" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" style="width:80px">执行审核</a>
 	<a id="lnk_viewcnfrmback" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-undo'" style="width:80px">上一步</a>
 </div>
+<script language="javascript" src="js/easyui/jquery.easyui.min.js" charset="utf-8"></script>
 <script>
+var cstmChkCombox = new BSS.Combox('#cbx_cstmchkst');
+cstmChkCombox.fromDict('DICT_CSTMCHK',function(){
+	$('#cbx_cstmchkst').combobox('select','${cst}');
+});
 var cnfrmPnl =new BSS.Panel('#div_cstmchk_cnfrm_pnl');
 cnfrmPnl.init({header:'#div_cstmchk_cnfrm_pnlheader'});
 var cnfrmLayout = new BSS.Layout('#div_cstmchk_cnfrm_container');
 cnfrmLayout.layout();
 $('#lnk_certcnfrm').click(function(){
-	BSS.showView('cstmchk/exec.html',function(html){
+	var chkst = cstmChkCombox.getValue();
+	var chkrslt = $('#sel_chkrslt').textbox('getValue');
+	BSS.showView('cstmchk/exec.html?cst='+chkst+'&crslt='+chkrslt,function(html){
 		MAINTAB.updateSelectedTab(html);
 	});
 });
 $('#lnk_viewcnfrmback').click(function(){
-	BSS.showView('cstmchk/cert/${cid}.html',function(html){
+	var chkst = cstmChkCombox.getValue();
+	var chkrslt = $('#sel_chkrslt').textbox('getValue');
+	BSS.showView('cstmchk/cert/${cid}.html?cst='+chkst+'&crslt='+chkrslt,function(html){
 		MAINTAB.updateSelectedTab(html);
 	});
 });

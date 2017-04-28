@@ -11,10 +11,7 @@
 				<tr>
 					<td>审核结果：</td>
 					<td>
-						<select id="sel_chkst" class="easyui-combobox" type="text" name="result">
-							<option value="-1">请选择</option>
-							<option value="2" selected>通过</option>
-						</select>
+						<input id="cbx_cstmchkst" class="easyui-combobox" type="text" name="result"></input>
 					</td>
 				</tr>
 				<tr>
@@ -31,14 +28,18 @@
 </div>
 <script language="javascript" src="js/easyui/jquery.easyui.min.js" charset="utf-8"></script>
 <script>
+var cstmChkCombox = new BSS.Combox('#cbx_cstmchkst');
+cstmChkCombox.fromDict('DICT_CSTMCHK',function(){
+	$('#cbx_cstmchkst').combobox('select','${cst}');
+	$('#sel_chkrslt').textbox('setValue','${crslt}');
+});
 var certPnl =new BSS.Panel('#div_cstmchk_cert_pnl');
 certPnl.init({header:'#div_cstmchk_cert_pnlheader'});
 var certLayout = new BSS.Layout('#div_cstmchk_cert_container');
 certLayout.layout();
 $('#lnk_viewcert').click(function(){
-	var chkst = $('#sel_chkst').combobox('getValue');
+	var chkst = cstmChkCombox.getValue();
 	var chkrslt = $('#sel_chkrslt').textbox('getValue');
-	BSS.info('cst='+chkst+'&crslt='+chkrslt);
 	BSS.showView('cstmchk/cnfrm/${cid}.html?cst='+chkst+'&crslt='+chkrslt,function(html){
 		MAINTAB.updateSelectedTab(html);
 	});

@@ -11,7 +11,8 @@ $(function(){
           {field:'barcode',title: '条形码',align: 'center',width: 100},
           {field:'price',title: '商品SKU价格',align: 'center',width: 100},
           {field:'mktprice',title: '市场价格',align: 'center',width: 100},
-          {field:'fromsys',title: '来源平台',align: 'center',width: 100},
+          {field:'fromsys',title: '来源平台',align: 'center',hidden:'true'},
+          {field:'fromsyStr',title: '来源平台',align: 'center',width: 100},
           {field:'sourceid',title: '平台编码',align: 'center',width: 100},
           {field:'productid',title: '产品',align: 'center',width: 100},
 		]]

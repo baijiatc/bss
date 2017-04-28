@@ -28,15 +28,25 @@
 </form>
 <script>
 var objCombox = new BSS.Combox('#cbx_objtype');
-objCombox.fromDict('DICT_OBJTYPE');
-
-BSS.dispatch({code:13015,data:[{staffobjid:'${staffobjid}'}]},function(resp){
-	BSS.json2form('#frm_supprs',resp.data[0]);
+objCombox.fromDict('DICT_OBJTYPE',function(){
+	initSuppersEditPage();
 });
-SUPPRSDIALOG.ok = function(){
-	var supprs = BSS.form2json('#frm_supprs');
-	BSS.dispatch({code:13005,data:[supprs]},function(){
-		BSS.alert('保存成功！');
-	},function(){});
+
+function initSuppersEditPage(){
+	BSS.dispatch({code:13015,data:[{staffobjid:'${staffobjid}'}]},function(resp){
+		if(resp.code == 0){
+			BSS.json2form('#frm_supprs',resp.data[0]);
+			
+			SUPPRSDIALOG.ok = function(){
+				var supprs = BSS.form2json('#frm_supprs');
+				BSS.dispatch({code:13005,data:[supprs]},function(){
+					BSS.alert('保存成功！');
+				},function(){});
+			};
+		}else{
+			SUPPRSDIALOG.ok = function(){};
+			BSS.warning(resp.message);
+		}
+	});
 }
 </script>

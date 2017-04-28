@@ -48,15 +48,25 @@
 </form>
 <script>
 var isdisplayCombox = new BSS.Combox('#cbx_isdisplay');
-isdisplayCombox.fromDict('DICT_ISDISPLAY');
-
-BSS.dispatch({code:18010,data:[{id:'${id}'}]},function(resp){
-	BSS.json2form('#frm_idx',resp.data[0]);
+isdisplayCombox.fromDict('DICT_ISDISPLAY',function(){
+	initIdxEidtPage();
 });
-IDXDIALOG.ok = function(){
-	var idx = BSS.form2json('#frm_idx');
-	BSS.dispatch({code:18003,data:[idx]},function(){
-		BSS.alert('保存成功！');
-	},function(){});
+
+function initIdxEidtPage(){
+	BSS.dispatch({code:18010,data:[{id:'${id}'}]},function(resp){
+		if(resp.code == 0){
+			BSS.json2form('#frm_idx',resp.data[0]);
+			
+			IDXDIALOG.ok = function(){
+				var idx = BSS.form2json('#frm_idx');
+				BSS.dispatch({code:18003,data:[idx]},function(){
+					BSS.alert('保存成功！');
+				},function(){});
+			};
+		}else{
+			IDXDIALOG.ok = function(){};
+			BSS.warning(resp.message);
+		}
+	});
 }
 </script>

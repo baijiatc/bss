@@ -75,24 +75,27 @@
 </form>
 <script>
 var genderCombox = new BSS.Combox('#cbx_gender');
-genderCombox.fromDict('DICT_GENDER');
-
-var staffstCombox = new BSS.Combox('#cbx_staffst');
-staffstCombox.fromDict('DICT_STAFFST');
-
-var eduCombox = new BSS.Combox('#cbx_edu');
-eduCombox.fromDict('DICT_EDU');
-
-STAFFDIALOG.ok = function(){
-	var staff = BSS.form2json('#frm_staff');
-	BSS.dispatch({code:11001,data:[staff]},function(){
-		if(resp.code == 0){
-			BSS.info('保存成功');
-		}else{
-			BSS.warning(resp.message);
-		}
-	},function(){
-		console.log(JSON.stringify(resp));
+genderCombox.fromDict('DICT_GENDER',function(){
+	var staffstCombox = new BSS.Combox('#cbx_staffst');
+	staffstCombox.fromDict('DICT_STAFFST',function(){
+		var eduCombox = new BSS.Combox('#cbx_edu');
+		eduCombox.fromDict('DICT_EDU',function(){
+			setOk();
+		});
 	});
+});
+function setOk(){
+	STAFFDIALOG.ok = function(){
+		var staff = BSS.form2json('#frm_staff');
+		BSS.dispatch({code:11001,data:[staff]},function(resp){
+			if(resp.code == 0){
+				BSS.info('保存成功');
+			}else{
+				BSS.warning(resp.message);
+			}
+		},function(resp){
+			console.log(JSON.stringify(resp));
+		});
+	}
 }
 </script>

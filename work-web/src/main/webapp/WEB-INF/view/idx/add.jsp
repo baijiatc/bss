@@ -53,7 +53,7 @@ isdisplayCombox.fromDict('DICT_ISDISPLAY',function(){
 function setOk(){
 	IDXDIALOG.ok = function(){
 		var idx = BSS.form2json('#frm_idx');
-		BSS.dispatch({code:18001,data:[idx]},function(){
+		BSS.dispatch({code:18001,data:[idx]},function(resp){
 			if(resp.code == 0){
 				BSS.info('保存成功');
 			}else{

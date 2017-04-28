@@ -21,15 +21,24 @@
 </form>
 <script>
 var spectypeCombox = new BSS.Combox('#cbx_spectype');
-spectypeCombox.fromDict('DICT_SPECTYPE');
-
-var specstCombox = new BSS.Combox('#cbx_specst');
-specstCombox.fromDict('DICT_SPECST');
-
-SPECDIALOG.ok = function(){
-	var prm = BSS.form2json('#frm_spec');
-	BSS.dispatch({code:14010,data:[prm]},function(){
-		BSS.alert();;
-	},function(){});
+spectypeCombox.fromDict('DICT_SPECTYPE',function(){
+	var specstCombox = new BSS.Combox('#cbx_specst');
+	specstCombox.fromDict('DICT_SPECST',function(){
+		setOk();
+	});
+});
+function setOk(){
+	SPECDIALOG.ok = function(){
+		var prm = BSS.form2json('#frm_spec');
+		BSS.dispatch({code:14010,data:[prm]},function(resp){
+			if(resp.code == 0){
+				BSS.info('保存成功');
+			}else{
+				BSS.warning(resp.message);
+			}
+		},function(resp){
+			console.log(JSON.stringify(resp));
+		});
+	}
 }
 </script>

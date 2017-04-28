@@ -39,7 +39,7 @@ objCombox.fromDict('DICT_FROMSYS',function(){
 function setOk(){
 	SKUDIALOG.ok = function(){
 		var sku = BSS.form2json('#frm_sku');
-		BSS.dispatch({code:14016,data:[sku]},function(){
+		BSS.dispatch({code:14016,data:[sku]},function(resp){
 			if(resp.code == 0){
 				BSS.info('保存成功');
 			}else{

@@ -25,7 +25,7 @@
 		</tr>
 		<tr>
 			<td>部门状态：</td>
-			<td><input class="cbx_departst" type="text" name="departst" data-options="required:true"></input></td>
+			<td><input id="cbx_departst" class="easyui-textbox" type="text" name="departst" data-options="required:true"></input></td>
 		</tr>
 	</table>
 </form>

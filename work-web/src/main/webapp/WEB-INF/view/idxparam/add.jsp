@@ -26,10 +26,16 @@
 	</table>
 </form>
 <script>
-IDXPARAMDIALOG.ok = function(){
-	var idx = BSS.form2json('#frm_idxparam');
-	BSS.dispatch({code:18004,data:[idx]},function(){
-		BSS.alert();;
-	},function(){});
-}
+	IDXPARAMDIALOG.ok = function(){
+		var idx = BSS.form2json('#frm_idxparam');
+		BSS.dispatch({code:18004,data:[idx]},function(){
+			if(resp.code == 0){
+				BSS.info('保存成功');
+			}else{
+				BSS.warning(resp.message);
+			}
+		},function(resp){
+			console.log(JSON.stringify(resp));
+		});
+	}
 </script>

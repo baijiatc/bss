@@ -6,7 +6,7 @@ public class Supplier {
 	private String suppname;
 	private Integer supplv;
 	private String contact;
-	private Integer mobile;
+	private Long mobile;
 	private String telephone;
 	private String address;
 	private Integer isopenshop;
@@ -34,10 +34,10 @@ public class Supplier {
 	public void setContact(String contact) {
 		this.contact = contact;
 	}
-	public Integer getMobile() {
+	public Long getMobile() {
 		return mobile;
 	}
-	public void setMobile(Integer mobile) {
+	public void setMobile(Long mobile) {
 		this.mobile = mobile;
 	}
 	public String getTelephone() {

@@ -27,13 +27,19 @@
 	</table>
 </form>
 <script>
-BSS.dispatch({code:18011,data:[{id:'${id}'}]},function(resp){
-	BSS.json2form('#frm_idxparam',resp.data[0]);
-});
-IDXPARAMDIALOG.ok = function(){
-	var idxparam = BSS.form2json('#frm_idxparam');
-	BSS.dispatch({code:18005,data:[idxparam]},function(){
-		BSS.alert('保存成功！');
-	},function(){});
-}
+	BSS.dispatch({code:18011,data:[{id:'${id}'}]},function(resp){
+		if(resp.code == 0){
+			BSS.json2form('#frm_idxparam',resp.data[0]);
+			
+			IDXPARAMDIALOG.ok = function(){
+				var idxparam = BSS.form2json('#frm_idxparam');
+				BSS.dispatch({code:18005,data:[idxparam]},function(){
+					BSS.alert('保存成功！');
+				},function(){});
+			};
+		}else{
+			IDXPARAMDIALOG.ok = function(){};
+			BSS.warning(resp.message);
+		}
+	});
 </script>

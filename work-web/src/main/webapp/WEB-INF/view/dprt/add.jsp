@@ -31,12 +31,23 @@
 </form>
 <script>
 var genderCombox = new BSS.Combox('#cbx_departst');
-genderCombox.fromDict('DICT_DEPARTST');
+genderCombox.fromDict('DICT_DEPARTST',function(){
+	setOk();
+});
 
-DEPTDIALOG.ok = function(){
-	var deport = BSS.form2json('#frm_deport');
-	BSS.dispatch({code:11006,data:[deport]},function(){
-		BSS.alert();;
-	},function(){});
+function setOk(){
+
+	DEPTDIALOG.ok = function(){
+		var deport = BSS.form2json('#frm_deport');
+		BSS.dispatch({code:11006,data:[deport]},function(){
+			if(resp.code == 0){
+				BSS.info('保存成功');
+			}else{
+				BSS.warning(resp.message);
+			}
+		},function(resp){
+			console.log(JSON.stringify(resp));
+		});
+	}
 }
 </script>

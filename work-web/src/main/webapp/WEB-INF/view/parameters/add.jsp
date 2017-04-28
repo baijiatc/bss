@@ -21,13 +21,25 @@
 </form>
 <script>
 var typeCombox = new BSS.Combox('#cbx_paramtype');
-typeCombox.fromDict('DICT_PARAMTYPE');
-var parCombox = new BSS.Combox('#cbx_paramst');
-parCombox.fromDict('DICT_PARAMST');
-PARMDIALOG.ok = function(){
-	var prm = BSS.form2json('#frm_prm');
-	BSS.dispatch({code:14007,data:[prm]},function(){
-		BSS.alert();;
-	},function(){});
+typeCombox.fromDict('DICT_PARAMTYPE',function(){
+	var parCombox = new BSS.Combox('#cbx_paramst');
+	parCombox.fromDict('DICT_PARAMST',function(){
+		setOk();
+	});
+});
+
+function setOk(){
+	PARMDIALOG.ok = function(){
+		var prm = BSS.form2json('#frm_prm');
+		BSS.dispatch({code:14007,data:[prm]},function(){
+			if(resp.code == 0){
+				BSS.info('保存成功');
+			}else{
+				BSS.warning(resp.message);
+			}
+		},function(resp){
+			console.log(JSON.stringify(resp));
+		});
+	}
 }
 </script>

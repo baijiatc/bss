@@ -25,8 +25,10 @@ public class CustomerViewController {
 	}
 	
 	@RequestMapping(value="cstmchk/cert/{cid}.html",method=RequestMethod.GET)
-	public String showCstmChkCertView(@PathVariable Integer cid, Model model){
+	public String showCstmChkCertView(@PathVariable Integer cid,@RequestParam(required=false) String cst,@RequestParam(required=false) String crslt, Model model){
 		model.addAttribute("cid", cid);
+		model.addAttribute("cst", cst);
+		model.addAttribute("crslt", crslt);
 		return "cmchk/cert";
 	}
 	

@@ -22,16 +22,27 @@
 </form>
 <script>
 var typeCombox = new BSS.Combox('#cbx_paramtype');
-typeCombox.fromDict('DICT_PARAMTYPE');
-var parCombox = new BSS.Combox('#cbx_paramst');
-parCombox.fromDict('DICT_PARAMST');
-BSS.dispatch({code:14019,data:[{id:'${id}'}]},function(resp){
-	BSS.json2form('#frm_prm',resp.data[0]);
+typeCombox.fromDict('DICT_PARAMTYPE',function(){
+	var parCombox = new BSS.Combox('#cbx_paramst');
+	parCombox.fromDict('DICT_PARAMST',function(){
+		initParametersEditPage();
+	});
 });
-PARMDIALOG.ok = function(){
-	var prm = BSS.form2json('#frm_prm');
-	BSS.dispatch({code:14008,data:[prm]},function(){
-		BSS.alert('保存成功！');
-	},function(){});
+function initParametersEditPage(){
+	BSS.dispatch({code:14019,data:[{id:'${id}'}]},function(resp){
+		if(resp.code == 0){
+			BSS.json2form('#frm_prm',resp.data[0]);
+			
+			PARMDIALOG.ok = function(){
+				var prm = BSS.form2json('#frm_prm');
+				BSS.dispatch({code:14008,data:[prm]},function(){
+					BSS.alert('保存成功！');
+				},function(){});
+			};
+		}else{
+			PARMDIALOG.ok = function(){};
+			BSS.warning(resp.message);
+		}
+	});
 }
 </script>

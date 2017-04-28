@@ -33,13 +33,19 @@
 	</table>
 </form>
 <script>
-BSS.dispatch({code:14021,data:[{id:'${id}'}]},function(resp){
-	BSS.json2form('#frm_sku',resp.data[0]);
-});
-SKUDIALOG.ok = function(){
-	var sku = BSS.form2json('#frm_sku');
-	BSS.dispatch({code:14017,data:[sku]},function(){
-		BSS.alert('保存成功！');
-	},function(){});
-}
+	BSS.dispatch({code:14021,data:[{id:'${id}'}]},function(resp){
+		if(resp.code == 0){
+			BSS.json2form('#frm_sku',resp.data[0]);
+			
+			SKUDIALOG.ok = function(){
+				var sku = BSS.form2json('#frm_sku');
+				BSS.dispatch({code:14017,data:[sku]},function(){
+					BSS.alert('保存成功！');
+				},function(){});
+			};
+		}else{
+			SKUDIALOG.ok = function(){};
+			BSS.warning(resp.message);
+		}
+	});
 </script>

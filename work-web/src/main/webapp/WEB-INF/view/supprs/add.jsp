@@ -27,12 +27,22 @@
 </form>
 <script>
 var objCombox = new BSS.Combox('#cbx_objtype');
-objCombox.fromDict('DICT_OBJTYPE');
+objCombox.fromDict('DICT_OBJTYPE',function(){
+	setOk();
+});
 
-SUPPRSDIALOG.ok = function(){
-	var supp = BSS.form2json('#frm_supprs');
-	BSS.dispatch({code:13004,data:[supp]},function(){
-		BSS.alert();;
-	},function(){});
+function setOk(){
+	SUPPRSDIALOG.ok = function(){
+		var supp = BSS.form2json('#frm_supprs');
+		BSS.dispatch({code:13004,data:[supp]},function(){
+			if(resp.code == 0){
+				BSS.info('保存成功');
+			}else{
+				BSS.warning(resp.message);
+			}
+		},function(resp){
+			console.log(JSON.stringify(resp));
+		});
+	}
 }
 </script>

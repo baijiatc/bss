@@ -47,11 +47,21 @@
 </form>
 <script>
 var isdisplayCombox = new BSS.Combox('#cbx_isdisplay');
-isdisplayCombox.fromDict('DICT_ISDISPLAY');
-IDXDIALOG.ok = function(){
-	var idx = BSS.form2json('#frm_idx');
-	BSS.dispatch({code:18001,data:[idx]},function(){
-		BSS.alert();;
-	},function(){});
+isdisplayCombox.fromDict('DICT_ISDISPLAY',function(){
+	setOk();
+});
+function setOk(){
+	IDXDIALOG.ok = function(){
+		var idx = BSS.form2json('#frm_idx');
+		BSS.dispatch({code:18001,data:[idx]},function(){
+			if(resp.code == 0){
+				BSS.info('保存成功');
+			}else{
+				BSS.warning(resp.message);
+			}
+		},function(resp){
+			console.log(JSON.stringify(resp));
+		});
+	}
 }
 </script>

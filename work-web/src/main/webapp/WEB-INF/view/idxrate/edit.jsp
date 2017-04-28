@@ -31,13 +31,19 @@
 	</table>
 </form>
 <script>
-BSS.dispatch({code:18015,data:[{id:'${id}'}]},function(resp){
-	BSS.json2form('#frm_idxrate',resp.data[0]);
-});
-IDXRATEDIALOG.ok = function(){
-	var idxrate = BSS.form2json('#frm_idxrate');
-	BSS.dispatch({code:18008,data:[idxrate]},function(){
-		BSS.alert('保存成功！');
-	},function(){});
-}
+	BSS.dispatch({code:18015,data:[{id:'${id}'}]},function(resp){
+		if(resp.code == 0){
+			BSS.json2form('#frm_idxrate',resp.data[0]);
+			
+			IDXRATEDIALOG.ok = function(){
+				var idxrate = BSS.form2json('#frm_idxrate');
+				BSS.dispatch({code:18008,data:[idxrate]},function(){
+					BSS.alert('保存成功！');
+				},function(){});
+			};
+		}else{
+			IDXRATEDIALOG.ok = function(){};
+			BSS.warning(resp.message);
+		}
+	});
 </script>

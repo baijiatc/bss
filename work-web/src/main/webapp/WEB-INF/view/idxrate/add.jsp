@@ -30,10 +30,16 @@
 	</table>
 </form>
 <script>
-IDXRATEDIALOG.ok = function(){
-	var idxrate = BSS.form2json('#frm_idxrate');
-	BSS.dispatch({code:18007,data:[idxrate]},function(){
-		BSS.alert();;
-	},function(){});
-}
+	IDXRATEDIALOG.ok = function(){
+		var idxrate = BSS.form2json('#frm_idxrate');
+		BSS.dispatch({code:18007,data:[idxrate]},function(){
+			if(resp.code == 0){
+				BSS.info('保存成功');
+			}else{
+				BSS.warning(resp.message);
+			}
+		},function(resp){
+			console.log(JSON.stringify(resp));
+		});
+	}
 </script>

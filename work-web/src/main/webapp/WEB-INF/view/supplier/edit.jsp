@@ -36,17 +36,27 @@
 </form>
 <script>
 var supCombox = new BSS.Combox('#cbx_supplv');
-supCombox.fromDict('DICT_SUPPLV');
-var isCombox = new BSS.Combox('#cbx_isopenshop');
-isCombox.fromDict('DICT_ISOPENSHOP');
-
-BSS.dispatch({code:13013,data:[{suppid:'${suppid}'}]},function(resp){
-	BSS.json2form('#frm_supp',resp.data[0]);
+supCombox.fromDict('DICT_SUPPLV',function(){
+	var isCombox = new BSS.Combox('#cbx_isopenshop');
+	isCombox.fromDict('DICT_ISOPENSHOP',function(){
+		initsuppEditPage();
+	});
 });
-SUPPLIERDIALOG.ok = function(){
-	var supp = BSS.form2json('#frm_supp');
-	BSS.dispatch({code:13002,data:[supp]},function(){
-		BSS.alert('保存成功！');
-	},function(){});
+function initsuppEditPage(){
+	BSS.dispatch({code:13013,data:[{suppid:'${suppid}'}]},function(resp){
+		if(resp.code == 0){
+			BSS.json2form('#frm_supp',resp.data[0]);
+			
+			SUPPLIERDIALOG.ok = function(){
+				var supp = BSS.form2json('#frm_supp');
+				BSS.dispatch({code:13002,data:[supp]},function(){
+					BSS.alert('保存成功！');
+				},function(){});
+			};
+		}else{
+			SUPPLIERDIALOG.ok = function(){};
+			BSS.warning(resp.message);
+		}
+	});
 }
 </script>

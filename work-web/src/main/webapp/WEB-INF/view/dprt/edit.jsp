@@ -32,15 +32,25 @@
 </form>
 <script>
 var genderCombox = new BSS.Combox('#cbx_departst');
-genderCombox.fromDict('DICT_DEPARTST');
-
-BSS.dispatch({code:11010,data:[{departid:'${departid}'}]},function(resp){
-	BSS.json2form('#frm_deport',resp.data[0]);
+genderCombox.fromDict('DICT_DEPARTST',function(){
+	initdprtEditPage();
 });
-DEPTDIALOG.ok = function(){
-	var depart = BSS.form2json('#frm_deport');
-	BSS.dispatch({code:11007,data:[depart]},function(){
-		BSS.alert('保存成功！');
-	},function(){});
+
+function initdprtEditPage(){
+	BSS.dispatch({code:11010,data:[{departid:'${departid}'}]},function(resp){
+		if(resp.code == 0){
+			BSS.json2form('#frm_deport',resp.data[0]);
+			
+			DEPTDIALOG.ok = function(){
+				var depart = BSS.form2json('#frm_deport');
+				BSS.dispatch({code:11007,data:[depart]},function(){
+					BSS.alert('保存成功！');
+				},function(){});
+			};
+		}else{
+			DEPTDIALOG.ok = function(){};
+			BSS.warning(resp.message);
+		}
+	});
 }
 </script>

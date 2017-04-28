@@ -32,10 +32,16 @@
 	</table>
 </form>
 <script>
-SKUDIALOG.ok = function(){
-	var sku = BSS.form2json('#frm_sku');
-	BSS.dispatch({code:14016,data:[sku]},function(){
-		BSS.alert();;
-	},function(){});
-}
+	SKUDIALOG.ok = function(){
+		var sku = BSS.form2json('#frm_sku');
+		BSS.dispatch({code:14016,data:[sku]},function(){
+			if(resp.code == 0){
+				BSS.info('保存成功');
+			}else{
+				BSS.warning(resp.message);
+			}
+		},function(resp){
+			console.log(JSON.stringify(resp));
+		});
+	}
 </script>

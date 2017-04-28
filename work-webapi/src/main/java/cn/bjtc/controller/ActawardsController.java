@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import cn.bjtc.annotation.SysLogger;
 import cn.bjtc.api.ApiParam;
 import cn.bjtc.api.ApiReturn;
 import cn.bjtc.api.util.ParamUtil;
+import cn.bjtc.aspect.AspectType;
 import cn.bjtc.service.IActawardsService;
 import cn.bjtc.view.ActawardsView;
 
@@ -18,6 +20,7 @@ import cn.bjtc.view.ActawardsView;
 public class ActawardsController extends BaseController{
 	
 	@RequestMapping(value="all", method=RequestMethod.POST)
+	@SysLogger(content="查询活动奖励信息",type=AspectType.CONTROLLER)
 	public ApiReturn showActawards(){
 		try {
 			ApiParam param=findApiParam();
@@ -33,6 +36,7 @@ public class ActawardsController extends BaseController{
 	}
 	
 	@RequestMapping(value="create", method=RequestMethod.POST)
+	@SysLogger(content="新增活动奖励信息",type=AspectType.CONTROLLER)
 	public ApiReturn execAddActawards(){
 		try {
 			ApiParam param=findApiParam();
@@ -46,6 +50,7 @@ public class ActawardsController extends BaseController{
 	}
 	
 	@RequestMapping(value="update", method=RequestMethod.POST)
+	@SysLogger(content="更新活动奖励信息",type=AspectType.CONTROLLER)
     public ApiReturn execUpdateActawards(){
 		try {
 			ApiParam param=findApiParam();

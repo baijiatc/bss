@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import cn.bjtc.annotation.SysLogger;
 import cn.bjtc.api.ApiParam;
 import cn.bjtc.api.ApiReturn;
 import cn.bjtc.api.util.ParamUtil;
+import cn.bjtc.aspect.AspectType;
 import cn.bjtc.common.ApplicationDataManager;
 import cn.bjtc.service.IDictService;
 import cn.bjtc.view.DictionaryView;
@@ -23,6 +25,7 @@ import com.alibaba.fastjson.JSONObject;
 public class DictController extends BaseController{
 
 	@RequestMapping(value="all", method=RequestMethod.POST)
+	@SysLogger(content="查询字典信息",type=AspectType.CONTROLLER)
 	public  ApiReturn showDictionary(){
 		try {
 			ApiParam param=findApiParam();
@@ -39,6 +42,7 @@ public class DictController extends BaseController{
 	
 	
 	@RequestMapping(value="create",method=RequestMethod.POST)
+	@SysLogger(content="新增字典信息",type=AspectType.CONTROLLER)
 	public ApiReturn execAddDict(){
 		try {
 			ApiParam param=findApiParam();
@@ -52,6 +56,7 @@ public class DictController extends BaseController{
 	}
 	
 	@RequestMapping(value="update",method=RequestMethod.POST)
+	@SysLogger(content="更新字典信息",type=AspectType.CONTROLLER)
 	public ApiReturn  execUpdateDict(){
 		try {
 			ApiParam param=findApiParam();

@@ -10,11 +10,11 @@
 		</tr>
 		<tr>
 			<td>活动类型：</td>
-			<td><input id="id_acttype"  class="easyui-textbox" type="text" name="acttype" data-options="required:false"></input></td>
+			<td><input id="cbx_acttype"  class="easyui-textbox" type="text" name="acttype" data-options="required:false"></input></td>
 		</tr>
 		<tr>
 			<td>活动类别：</td>
-			<td><input  id="id_actcat" class="easyui-textbox" type="text" name="actcat" data-options="required:false"></input></td>
+			<td><input  id="cbx_actcat" class="easyui-textbox" type="text" name="actcat" data-options="required:false"></input></td>
 		</tr>
 		<tr>
 			<td>开始时间：</td>
@@ -34,18 +34,40 @@
 		</tr>
 		<tr>
 			<td>状态：</td>
-			<td><input id="id_actst"  class="easyui-textbox" type="text" name="actst" data-options="required:true"></input></td>
+			<td><input id="cbx_actst"  class="easyui-textbox" type="text" name="actst" data-options="required:true"></input></td>
 		</tr>
 	</table>
 </form>
 <script>
+var acttypeCombox = new BSS.Combox('#cbx_acttype');
+acttypeCombox.fromDict('DICT_ACTTYPE',function(){
+	initActEditPage();}); 
+
+
+var actcatCombox = new BSS.Combox('#cbx_actcat');
+actcatCombox.fromDict('DICT_ACTCAT',function(){
+	initActEditPage();}); 
+
+
+var actstCombox = new BSS.Combox('#cbx_actst');
+actstCombox.fromDict('DICT_ACTST',function(){
+	initActEditPage();}); 
+
+function initActEditPage(){
 BSS.dispatch({code:19090,data:[{id:'${id}'}]},function(resp){
-	BSS.json2form('#frm_acty',resp.data[0]);
-});
-ACTYDIALOG.ok = function(){
-	var acty = BSS.form2json('#frm_acty');
-	BSS.dispatch({code:19002,data:[acty]},function(){
-		BSS.alert('保存成功！');
-	},function(){});
-}
+	if(resp.code == 0){
+		BSS.json2form('#frm_acty',resp.data[0]);
+		
+		ACTYDIALOGROLEDIALOG.ok = function(){
+			var acty = BSS.form2json('#frm_acty');
+			BSS.dispatch({code:20008,data:[acty]},function(){
+				BSS.alert('保存成功！');
+			},function(){});
+		};
+	}else{
+		ACTYDIALOG.ok = function(){};
+		BSS.warning(resp.message);
+	}
+})
+};
 </script>

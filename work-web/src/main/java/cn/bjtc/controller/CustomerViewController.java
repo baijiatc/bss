@@ -14,7 +14,7 @@ import cn.bjtc.annotation.SysPrivilege;
 public class CustomerViewController {
 
 	@RequestMapping(value="cstmls/show.html",method=RequestMethod.GET)
- 
+	@SysPrivilege(name="cstm:show")
 	public String showCustomerView(){
 		return "cust/list";
 	}

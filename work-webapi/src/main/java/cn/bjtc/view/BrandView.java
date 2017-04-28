@@ -1,5 +1,8 @@
 package cn.bjtc.view;
 
+import cn.bjtc.api.BaseDictType;
+import cn.bjtc.common.ApplicationDataManager;
+
 public class BrandView extends Pagination{
 
 	    private Integer id;
@@ -59,4 +62,7 @@ public class BrandView extends Pagination{
 			this.brandst = brandst;
 		}
 	 
+		public String getBrandstStr() {
+			return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_BRANDST.toString(), String.valueOf(brandst));
+		}
 }

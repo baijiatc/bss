@@ -18,18 +18,31 @@
 		</tr>
 		<tr>
 			<td>状态：</td>
-			<td><input  id="id_catst" class="easyui-textbox" type="text" name="catst" data-options="required:true"></input></td>
+			<td><input  id="cbx_catst" class="easyui-textbox" type="text" name="catst" data-options="required:true"></input></td>
 		</tr>
-	</table>
+	</table>  
 </form>
 <script>
-BSS.dispatch({code:14091,data:[{id:'${id}'}]},function(resp){
-	BSS.json2form('#frm_cat',resp.data[0]);
+var catStCombox = new BSS.Combox('#cbx_catst');
+catStCombox.fromDict('DICT_CASTST',function(){
+	initCatstEditPage();
 });
-CATDIALOG.ok = function(){
-	var cat = BSS.form2json('#frm_cat');
-	BSS.dispatch({code:14005,data:[cat]},function(){
-		BSS.alert('保存成功！');
-	},function(){});	
+
+function initCatstEditPage(){
+	BSS.dispatch({code:14091,data:[{id:'${id}'}]},function(resp){
+		if(resp.code == 0){
+			BSS.json2form('#frm_cat',resp.data[0]);
+			
+			CATDIALOG.ok = function(){
+				var cat = BSS.form2json('#frm_cat');
+				BSS.dispatch({code:14005,data:[cat]},function(){
+					BSS.alert('保存成功！');
+				},function(){});
+			};
+		}else{
+			CATDIALOG.ok = function(){};
+			BSS.warning(resp.message);
+		}
+	});
 }
 </script>

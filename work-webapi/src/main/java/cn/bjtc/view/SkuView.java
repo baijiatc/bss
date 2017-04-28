@@ -1,5 +1,8 @@
 package cn.bjtc.view;
 
+import cn.bjtc.api.BaseDictType;
+import cn.bjtc.common.ApplicationDataManager;
+
 /**
  * @author Mr.wu
  *
@@ -60,5 +63,8 @@ public class SkuView extends Pagination{
 	}
 	public void setMktprice(Double mktprice) {
 		this.mktprice = mktprice;
+	}
+	public String getFromsyStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_FROMSYS.toString(), String.valueOf(fromsys));
 	}
 }

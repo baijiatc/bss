@@ -17,11 +17,11 @@
 		</tr>
 		<tr>
 			<td>对象类型：</td>
-			<td><input class="easyui-textbox" type="text" name="objtype" data-options="required:true"></input></td>
+			<td><input id="cbx_objtype" class="easyui-textbox" type="text" name="objtype" data-options="required:true"></input></td>
 		</tr>
 		<tr>
 			<td>创建时间：</td>
-			<td><input id="cbx_objtype" class="easyui-textbox" type="text" name="createtime" data-options="required:true"></input></td>
+			<td><input  class="easyui-textbox" type="text" name="createtime" data-options="required:true"></input></td>
 		</tr>
 	</table>
 </form>

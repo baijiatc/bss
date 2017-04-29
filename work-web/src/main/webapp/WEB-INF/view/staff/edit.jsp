@@ -76,14 +76,16 @@
 </form>
 <script>
 var genderCombox = new BSS.Combox('#cbx_gender');
-genderCombox.fromDict('DICT_GENDER');
-
-var staffstCombox = new BSS.Combox('#cbx_staffst');
-staffstCombox.fromDict('DICT_STAFFST');
-
-var eduCombox = new BSS.Combox('#cbx_edu');
-eduCombox.fromDict('DICT_EDU');
-
+genderCombox.fromDict('DICT_GENDER',function(){
+	var staffstCombox = new BSS.Combox('#cbx_staffst');
+	staffstCombox.fromDict('DICT_STAFFST',function(){
+		var eduCombox = new BSS.Combox('#cbx_edu');
+		eduCombox.fromDict('DICT_EDU',function(){
+			initStaffEditPage();
+		});
+	});
+});
+function initStaffEditPage(){
 BSS.dispatch({code:11009,data:[{staffid:'${staffid}'}]},function(resp){
 	if(resp.code == 0){
 		BSS.json2form('#frm_staff',resp.data[0]);
@@ -99,4 +101,5 @@ BSS.dispatch({code:11009,data:[{staffid:'${staffid}'}]},function(resp){
 				BSS.warning(resp.message);
 			}
 });
+}
 </script>

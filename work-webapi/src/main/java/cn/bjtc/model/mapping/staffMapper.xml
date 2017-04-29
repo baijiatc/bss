@@ -46,7 +46,28 @@
 	</insert>
 	
 	<update id="updateStaff" parameterMap="StaffParamMap">
-		UPDATE staff SET staffname=#{staffname},gender=#{gender},mobile=#{mobile},idcard=#{idcard},telephone=#{telephone},email=#{email},edu=#{edu},jobstation=#{jobstation},passwd=#{passwd},address=#{address},departid=#{departid},emername=#{emername},emerphone=#{emerphone},staffst=#{staffst},leavetime=#{leavetime},jointime=#{jointime},creator=#{creator} WHERE staffid=#{staffid}
+		UPDATE staff 
+		<set>
+		<if test="staffid!=null and staffid!=0"> staffid=#{staffid},</if>
+	 	<if test="staffname!=null and staffname!=''"> staffname=#{staffname},</if>
+	 	<if test="gender!=null and gender!=0"> gender=#{gender},</if>
+	 	<if test="mobile!=null and mobile!=0"> mobile=#{mobile},</if>
+	 	<if test="idcard!=null and idcard!=''"> idcard=#{idcard},</if>
+	 	telephone=#{telephone},
+	 	email=#{email},
+	 	<if test="edu!=null and edu!=0"> edu=#{edu},</if>
+	 	<if test="jobstation!=null and jobstation!=0"> jobstation=#{jobstation},</if>
+	 	<if test="passwd!=null and passwd!=''"> passwd=#{passwd},</if>
+	 	address=#{address},
+	 	<if test="departid!=null and departid!=0"> departid=#{departid},</if>
+	 	emername=#{emername},
+	 	emerphone=#{emerphone},
+	 	<if test="staffst!=null and staffst!=0"> staffst=#{staffst},</if>
+	 	leavetime=#{leavetime},
+	 	<if test="jointime!=null and jointime!=0"> jointime=#{jointime},</if>
+	 	<if test="creator!=null and creator!=0"> creator=#{creator}</if>
+		</set>  
+		WHERE staffid=#{staffid}
 	</update>
 	
 	<select id="findAllStaff" resultMap="StaffMap" >
@@ -56,12 +77,19 @@
 	 	<if test="gender!=null and gender!=0"> AND gender=#{gender}</if>
 	 	<if test="mobile!=null and mobile!=0"> AND mobile=#{mobile}</if>
 	 	<if test="idcard!=null and idcard!=''"> AND idcard=#{idcard}</if>
+	 	<if test="telephone!=null and telephone!=0"> AND telephone=#{telephone}</if>
+	 	<if test="email!=null and email!=''"> AND email=#{email}</if>
 	 	<if test="edu!=null and edu!=0"> AND edu=#{edu}</if>
 	 	<if test="jobstation!=null and jobstation!=0"> AND jobstation=#{jobstation}</if>
-	 	<if test="passwd!=null and passwd!=''"> AND passwdt=#{passwd}</if>
+	 	<if test="passwd!=null and passwd!=''"> AND passwd=#{passwd}</if>
+	 	<if test="address!=null and address!=''"> AND address=#{address}</if>
 	 	<if test="departid!=null and departid!=0"> AND departid=#{departid}</if>
+	 	<if test="emername!=null and emername!=''"> AND emername=#{emername}</if>
+	 	<if test="emerphone!=null and emerphone!=0"> AND emerphone=#{emerphone}</if>
 	 	<if test="staffst!=null and staffst!=0"> AND staffst=#{staffst}</if>
+	 	<if test="leavetime!=null and leavetime!=0"> AND leavetime=#{leavetime}</if>
 	 	<if test="jointime!=null and jointime!=0"> AND jointime=#{jointime}</if>
+	 	<if test="creator!=null and creator!=0"> AND creator=#{creator}</if>
 	 	LIMIT #{pageOffset},#{pageSize}
 	</select>
 	
@@ -72,11 +100,18 @@
 	 	<if test="gender!=null and gender!=0"> AND gender=#{gender}</if>
 	 	<if test="mobile!=null and mobile!=0"> AND mobile=#{mobile}</if>
 	 	<if test="idcard!=null and idcard!=''"> AND idcard=#{idcard}</if>
+	 	<if test="telephone!=null and telephone!=0"> AND telephone=#{telephone}</if>
+	 	<if test="email!=null and email!=''"> AND email=#{email}</if>
 	 	<if test="edu!=null and edu!=0"> AND edu=#{edu}</if>
 	 	<if test="jobstation!=null and jobstation!=0"> AND jobstation=#{jobstation}</if>
-	 	<if test="passwd!=null and passwd!=''"> AND passwdt=#{passwd}</if>
+	 	<if test="passwd!=null and passwd!=''"> AND passwd=#{passwd}</if>
+	 	<if test="address!=null and address!=''"> AND address=#{address}</if>
 	 	<if test="departid!=null and departid!=0"> AND departid=#{departid}</if>
+	 	<if test="emername!=null and emername!=''"> AND emername=#{emername}</if>
+	 	<if test="emerphone!=null and emerphone!=0"> AND emerphone=#{emerphone}</if>
 	 	<if test="staffst!=null and staffst!=0"> AND staffst=#{staffst}</if>
+	 	<if test="leavetime!=null and leavetime!=0"> AND leavetime=#{leavetime}</if>
 	 	<if test="jointime!=null and jointime!=0"> AND jointime=#{jointime}</if>
+	 	<if test="creator!=null and creator!=0"> AND creator=#{creator}</if>
 	</select>
 </mapper>

@@ -28,7 +28,7 @@
 <script>
 	IDXPARAMDIALOG.ok = function(){
 		var idx = BSS.form2json('#frm_idxparam');
-		BSS.dispatch({code:18004,data:[idx]},function(){
+		BSS.dispatch({code:18004,data:[idx]},function(resp){
 			if(resp.code == 0){
 				BSS.info('保存成功');
 			}else{

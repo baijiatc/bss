@@ -32,7 +32,7 @@
 <script>
 	IDXRATEDIALOG.ok = function(){
 		var idxrate = BSS.form2json('#frm_idxrate');
-		BSS.dispatch({code:18007,data:[idxrate]},function(){
+		BSS.dispatch({code:18007,data:[idxrate]},function(resp){
 			if(resp.code == 0){
 				BSS.info('保存成功');
 			}else{

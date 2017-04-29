@@ -31,7 +31,7 @@ typeCombox.fromDict('DICT_PARAMTYPE',function(){
 function setOk(){
 	PARMDIALOG.ok = function(){
 		var prm = BSS.form2json('#frm_prm');
-		BSS.dispatch({code:14007,data:[prm]},function(){
+		BSS.dispatch({code:14007,data:[prm]},function(resp){
 			if(resp.code == 0){
 				BSS.info('保存成功');
 			}else{

@@ -22,18 +22,26 @@
 </form>
 <script>
 var spectypeCombox = new BSS.Combox('#cbx_spectype');
-spectypeCombox.fromDict('DICT_SPECTYPE');
-
-var specstCombox = new BSS.Combox('#cbx_specst');
-specstCombox.fromDict('DICT_SPECST');
-
-BSS.dispatch({code:14020,data:[{id:'${id}'}]},function(resp){
-	BSS.json2form('#frm_spec',resp.data[0]);
+spectypeCombox.fromDict('DICT_SPECTYPE',function(){
+	var specstCombox = new BSS.Combox('#cbx_specst');
+	specstCombox.fromDict('DICT_SPECST',function(){
+		initSpecEditPage();
+	});
 });
-SPECDIALOG.ok = function(){
-	var spec = BSS.form2json('#frm_spec');
-	BSS.dispatch({code:14011,data:[spec]},function(){
-		BSS.alert('保存成功！');
-	},function(){});
+function initSpecEditPage(){
+	BSS.dispatch({code:14020,data:[{id:'${id}'}]},function(resp){
+		if(resp.code == 0){
+			BSS.json2form('#frm_spec',resp.data[0]);
+			SPECDIALOG.ok = function(){
+				var spec = BSS.form2json('#frm_spec');
+				BSS.dispatch({code:14011,data:[spec]},function(){
+					BSS.alert('保存成功！');
+				},function(){});
+			};
+		}else{
+			PARMDIALOG.ok = function(){};
+			BSS.warning(resp.message);
+		}
+	});
 }
 </script>

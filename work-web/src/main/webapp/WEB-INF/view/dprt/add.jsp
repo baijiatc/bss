@@ -39,7 +39,7 @@ function setOk(){
 
 	DEPTDIALOG.ok = function(){
 		var deport = BSS.form2json('#frm_deport');
-		BSS.dispatch({code:11006,data:[deport]},function(){
+		BSS.dispatch({code:11006,data:[deport]},function(resp){
 			if(resp.code == 0){
 				BSS.info('保存成功');
 			}else{

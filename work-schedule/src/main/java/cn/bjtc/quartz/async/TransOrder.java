@@ -1,9 +1,13 @@
 package cn.bjtc.quartz.async;
 
+import cn.bjtc.service.ITransService;
+import cn.bjtc.tools.SpringUtil;
+
 public class TransOrder implements IJob {
 
 	public void execute() {
-		System.out.println("执行订单数据传输!!!");
+		ITransService transService = (ITransService) SpringUtil.getBean("transService");
+		//transService.transOrders();
 	}
 
 }

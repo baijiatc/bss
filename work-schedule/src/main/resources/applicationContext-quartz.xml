@@ -51,7 +51,7 @@
 		<property name="name" value="客户触发器" />
 		<property name="group" value="客户触发器组" />
 		<property name="cronExpression">
-			<value>0 */30 * * * ?</value>
+			<value>0 */2 * * * ?</value>
 		</property>
 	</bean>
 	<bean id="orderTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">

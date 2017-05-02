@@ -19,7 +19,7 @@
 		</tr>
 		<tr>
 			<td>来源平台：</td>
-			<td><input class="easyui-textbox" type="text" name="fromsys" data-options="required:false"></input></td>
+			<td><input id="cbx_fromsys" class="easyui-textbox" type="text" name="fromsys" data-options="required:false"></input></td>
 		</tr>
 		<tr>
 			<td>平台编码：</td>
@@ -32,10 +32,22 @@
 	</table>
 </form>
 <script>
-SKUDIALOG.ok = function(){
-	var sku = BSS.form2json('#frm_sku');
-	BSS.dispatch({code:14016,data:[sku]},function(){
-		BSS.alert();;
-	},function(){});
+var objCombox = new BSS.Combox('#cbx_fromsys');
+objCombox.fromDict('DICT_FROMSYS',function(){
+	setOk();
+});
+function setOk(){
+	SKUDIALOG.ok = function(){
+		var sku = BSS.form2json('#frm_sku');
+		BSS.dispatch({code:14016,data:[sku]},function(resp){
+			if(resp.code == 0){
+				BSS.info('保存成功');
+			}else{
+				BSS.warning(resp.message);
+			}
+		},function(resp){
+			console.log(JSON.stringify(resp));
+		});
+	}
 }
 </script>

@@ -180,6 +180,9 @@ BSS.Combox = function(selector){
 		$($this.selector).combobox(defaults);
 	};
 	$this.change=function(item){};
+	$this.getValue=function(){
+		return $($this.selector).combobox('getValue');
+	};
 }
 BSS.PropGrid = function(selector){
 	var $this = this;

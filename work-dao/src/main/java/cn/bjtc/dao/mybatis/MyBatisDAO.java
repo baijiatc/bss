@@ -31,6 +31,10 @@ public class MyBatisDAO<T, K> implements IGenericDAO<T, K> {
 	public int delete(String statement, Object parameter){
 		return mybatisTemplate.delete(statement, parameter);
 	}
+	
+	public void callProcedrue(String statement,Object parameter){
+		mybatisTemplate.selectOne(statement, parameter);
+	}
 
 	private SqlSessionTemplate getMybatisTemplate() {
 		return mybatisTemplate;

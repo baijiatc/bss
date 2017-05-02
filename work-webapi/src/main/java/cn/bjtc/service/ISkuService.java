@@ -9,6 +9,6 @@ public interface ISkuService {
 
 	public int saveSku(SkuView view);
 	public int updateSku(SkuView view);
-    public List<Sku> findAllSkus(SkuView view);
+    public List<SkuView> findAllSkus(SkuView view);
 	public Integer countAllSkus(SkuView view);
 }

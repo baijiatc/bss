@@ -35,15 +35,25 @@
 </form>
 <script>
 var supCombox = new BSS.Combox('#cbx_supplv');
-supCombox.fromDict('DICT_SUPPLV');
+supCombox.fromDict('DICT_SUPPLV',function(){
+	var isCombox = new BSS.Combox('#cbx_isopenshop');
+	isCombox.fromDict('DICT_ISOPENSHOP',function(){
+		setOk();
+	});
+});
 
-var isCombox = new BSS.Combox('#cbx_isopenshop');
-isCombox.fromDict('DICT_ISOPENSHOP');
-
-SUPPLIERDIALOG.ok = function(){
-	var supp = BSS.form2json('#frm_supp');
-	BSS.dispatch({code:13001,data:[supp]},function(){
-		BSS.alert();;
-	},function(){});
+function setOk(){
+	SUPPLIERDIALOG.ok = function(){
+		var supp = BSS.form2json('#frm_supp');
+		BSS.dispatch({code:13001,data:[supp]},function(resp){
+			if(resp.code == 0){
+				BSS.info('保存成功');
+			}else{
+				BSS.warning(resp.message);
+			}
+		},function(resp){
+			console.log(JSON.stringify(resp));
+		});
+	}
 }
 </script>

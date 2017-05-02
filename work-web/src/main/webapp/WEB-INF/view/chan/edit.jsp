@@ -50,10 +50,10 @@
 				<input class="easyui-textbox" type="text" name="address" data-options="required:true"></input>
 			</td>
 		</tr>
-		<tr>
+		<tr id="tr_prarent_chan">
 			<td>上级渠道：</td>
 			<td>
-				<input class="easyui-textbox" type="text" name="parentid"></input>
+				<input id="cbx_parent_chan" class="easyui-combobox" type="text" name="parentid"></input>
 			</td>
 		</tr>
 		<tr>
@@ -64,6 +64,14 @@
 </form>
 <script>
 var chantypeCombox = new BSS.Combox('#cbx_chantype');
+chantypeCombox.change=function(item){
+	if(item.value == 1){//县级代理
+		$('#tr_prarent_chan').hide();
+	}else{
+		$('#tr_prarent_chan').show();
+		CHANDIALOG.loadParentChans('#cbx_parent_chan',item.value);
+	}
+};
 chantypeCombox.fromDict('DICT_CHANTYPE',function(){
 	var chanstCombox = new BSS.Combox('#cbx_chanst');
 	chanstCombox.fromDict('DICT_CHANST',function(){

@@ -11,7 +11,7 @@ $(function(){
           {field:'chantype',title: '渠道类型值',align: 'center',hidden:'true'},
           {field:'chantypeStr',title: '渠道类型',align: 'center',width: 200},
           {field:'contact',title: '联系人',align: 'center',width: 200},
-          {field:'mobile',title: '角色名称',align: 'center',width: 200},
+          {field:'mobile',title: '手机',align: 'center',width: 200},
           {field:'province',title: '地址',align: 'center',hidden:'true'},
           {field:'city',title: '地址',align: 'center',hidden:'true'},
           {field:'district',title: '地址',align: 'center',hidden:'true'},
@@ -38,6 +38,19 @@ $(function(){
 		}
 		var chanid = row['chanid'];
 		CHANDIALOG.init({href:'chan/'+chanid+'.html',width:400,height:450});
+	};
+	CHANDIALOG.loadParentChans=function(selector,ctype){
+		BSS.dispatch({code:13009,data:[{chantype:(ctype-1)}]},function(resp){
+			if(resp.code == 0){
+				var parentChanCombox = new BSS.Combox(selector);
+				var options = {valueField:'chanid',textField:'channame',data:resp.data};
+				parentChanCombox.init(options);
+			}else{
+				BSS.warning(resp.message);
+			}
+		},function(resp){
+			console.log(JSON.stringify(resp));
+		});
 	};
 })
 </script>

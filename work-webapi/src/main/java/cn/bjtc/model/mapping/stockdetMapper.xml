@@ -21,7 +21,7 @@
 	</parameterMap>
 	<select id="findAllStockDets" resultMap="StockDetMap" >
 	 	SELECT * FROM stockdet WHERE 1=1 
-	 	<if test="stockid!=null and stockid!=0"> AND id=#{stockid}</if>
+	 	<if test="stockid!=null and stockid!=0"> AND stockid=#{stockid}</if>
 	 	LIMIT #{pageOffset},#{pageSize}
 	</select>
 	<select id="countAllStockDets" resultType="Integer" >

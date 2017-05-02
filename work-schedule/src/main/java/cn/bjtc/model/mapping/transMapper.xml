@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="TransJob">
+	<select id="transCustomers" statementType="CALLABLE">
+	 	<![CDATA[
+	 		{CALL p_trans_customer()}
+	 	]]>
+	</select>
+	<select id="transShops" statementType="CALLABLE">
+	 	<![CDATA[
+	 		{CALL p_trans_shop()}
+	 	]]>
+	</select>
+	<select id="transMoneyFlows" statementType="CALLABLE">
+	 	<![CDATA[
+	 		{CALL p_trans_moneyflow()}
+	 	]]>
+	</select>
+	<select id="transOrders" statementType="CALLABLE">
+	 	<![CDATA[
+	 		{CALL p_trans_order()}
+	 	]]>
+	</select>
+</mapper>

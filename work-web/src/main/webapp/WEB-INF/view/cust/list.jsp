@@ -1,6 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<table  id="cust-datagrid" class="easyui-datagrid"></table>
-<div id="div_customer" style="padding:0 0 0 50px;"></div>
+			<div id="div_customer_tab" class="easyui-tabs">
+				<div title="会员">
+					<ul id="customer_memb"></ul>
+				</div>
+				<div title="商户">
+					<ul id="customer_bus"></ul>
+				</div>
+			</div>
+	<div id="div_customer_center" data-options="region:'center'" style="width:auto">
+		<div id="div_customer_center_pnl"></div>
+	</div>
+ 
+  
 <!-- javascript部分 -->
  <script>
 $(function(){
@@ -26,10 +37,16 @@ $(function(){
           {field:'cstmstStr',title: '状态',align: 'center',width: 200}
 		]]
 	};
-	//构建datagrid，并填充数据
-	var custGrid = new BSS.DataGrid('#cust-datagrid');
-	CUSTOMER  = new BSS.Dialog('#div_customer');
-	custGrid.toolbar=null;
-	custGrid.build(options,{code:12002});
+	//构建会员datagrid，并填充数据
+	var custmembGrid = new BSS.DataGrid('#customer_memb');
+	custmembGrid.toolbar=null;
+	custmembGrid.build(options,{code:12002,data:[{cstmtype:1}]});
+	//table
+// 	var privsetTab = new BSS.Tab('#div_customer_tab');
+	//构建商户datagrid，并填充数据
+	var custbusGrid = new BSS.DataGrid('#customer_bus');
+	custbusGrid.toolbar=null;
+	custbusGrid.build(options,{code:12002,data:[{cstmtype:2}]});
+	 
 })
 </script>

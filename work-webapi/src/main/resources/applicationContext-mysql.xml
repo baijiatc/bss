@@ -42,6 +42,10 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
    		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
    	</bean>
    	<bean id="startupLoader" lazy-init="false" class="cn.bjtc.load.StartupLoader" init-method="init"/>
-   	
+   	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"/>
+   	<bean id="mailManager" class="cn.bjtc.common.MailManager">
+   		<constructor-arg name="sender" ref="mailSender"/>
+   		<property name="useSSL" value="true"/>
+   	</bean>
    	<bean class="cn.bjtc.tools.SpringUtil"/>
 </beans>

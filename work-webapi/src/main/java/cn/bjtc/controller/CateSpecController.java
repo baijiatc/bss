@@ -25,7 +25,7 @@ public class CateSpecController extends BaseController{
 	@RequestMapping(value="create", method=RequestMethod.POST)
 	@SysLogger(content="新增品类绑定规格",type=AspectType.CONTROLLER)
 	public ApiReturn execAddCateSpecs(){
-// 		 try {
+  		 try {
 			ApiParam param=findApiParam();
 			ifParamDataIsEmpty(param);
 			Object specid = param.getData().get(0).get("specid");
@@ -35,9 +35,9 @@ public class CateSpecController extends BaseController{
 				 catespecService.saveCateSpecs(catid, specid);  
 				 
 			 }
-// 		} catch (Exception e) {
-//  		showServerError();
-// 		}
+ 		} catch (Exception e) {
+  		showServerError();
+  		}
 		return apiReturn;
 	}
 	

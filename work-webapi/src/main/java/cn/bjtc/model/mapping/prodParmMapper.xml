@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="ProdParm">
+	<resultMap type="cn.bjtc.model.ProdParm" id="ProdParmMap">
+		<result column="id" property="id"/>
+		<result column="productid" property="productid"/>
+		<result column="paramid" property="paramid"/>
+		 
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.ProdParm" id="ProdParmParamMap">
+		<parameter property="id" resultMap="ProdParmMap" />
+		<parameter property="productid" resultMap="ProdParmMap" />
+		<parameter property="paramid" resultMap="ProdParmMap" />
+		 
+	</parameterMap>
+ 
+   <insert id="saveProdParms" parameterMap="ProdParmParamMap">
+		INSERT INTO  productparam (productid,paramid) VALUES (#{productid},#{paramid})
+   </insert>
+	
+	 
+	
+	<select id="delectById" >
+		 DELETE FROM productparam  WHERE  productid= #{productid}
+	</select>
+
+	 
+	
+	 
+	 
+</mapper>

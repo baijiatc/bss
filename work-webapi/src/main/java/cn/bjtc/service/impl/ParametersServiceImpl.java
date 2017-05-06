@@ -1,18 +1,24 @@
 package cn.bjtc.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.druid.mock.MockParameterMetaData.Parameter;
+
 import cn.bjtc.dao.IParametersDAO;
 import cn.bjtc.model.Parameters;
 import cn.bjtc.model.Parameters;
+import cn.bjtc.model.ProdParm;
 import cn.bjtc.service.IParametersService;
 import cn.bjtc.view.ParametersView;
 import cn.bjtc.view.ParametersView;
+import cn.bjtc.view.ProdParmView;
 
 @Service("parametersService")
 public class ParametersServiceImpl implements IParametersService {
@@ -44,6 +50,29 @@ public class ParametersServiceImpl implements IParametersService {
 		return parametersDAO.countAllParameterss(view);
 	}
  
+
+
+
+	public List<ParametersView> findAllParameterByProductId(Object productid) {
+		ParametersView view = new ParametersView();
+		view.setPageSize(100);
+		List<Parameters> allParms =parametersDAO.findAllParameterss(view);
+		List<Parameters>  parameters = parametersDAO.findAllParameterByProductId(productid);
+		Map<String,Parameters> parametersMap = new HashMap<String, Parameters>();
+		for(Parameters parameter : parameters){
+			parametersMap.put( parameter.getParamname(),parameter );
+		}
+		List<ParametersView> views = new ArrayList<ParametersView>(allParms.size());
+		for(Parameters parameter : allParms){
+			ParametersView  parametersView = new ParametersView();
+			if(parametersMap.containsKey(parameter.getParamname())){
+				parametersView.setChecked(true);
+			}
+			BeanUtils.copyProperties(parameter, parametersView);
+			views.add(parametersView);
+		}
+		return views;
+	}
 
 	@Autowired
 	private IParametersDAO parametersDAO;

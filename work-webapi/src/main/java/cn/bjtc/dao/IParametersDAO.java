@@ -11,4 +11,6 @@ public interface IParametersDAO {
 	public int updateParameters(ParametersView view);
     public List<Parameters> findAllParameterss(ParametersView view);
 	public Integer countAllParameterss(ParametersView view);
+	
+	public List<Parameters> findAllParameterByProductId(Object productid);
 }

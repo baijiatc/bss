@@ -8,9 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.bjtc.dao.IOrderDAO;
+import cn.bjtc.dao.IOrderDetDAO;
 import cn.bjtc.model.Orders;
+import cn.bjtc.model.OrderDet;
 import cn.bjtc.service.IOrderService;
 import cn.bjtc.view.OrderView;
+import cn.bjtc.view.OrderDetView;
 
 @Service("orderService")
 public class OrderServiceImpl implements IOrderService {
@@ -33,7 +36,17 @@ public class OrderServiceImpl implements IOrderService {
 		return orderDAO.countAllOrder(view);
 	}
 	
+	public List<OrderDet> findAllOrderDets(OrderDetView view) {
+		return orderDetDAO.findAllOrderDets(view);
+	}
+
+	public Integer countAllOrderDets(OrderDetView view) {
+		return orderDetDAO.countAllOrderDets(view);
+	}
+	
 	@Autowired
 	private IOrderDAO orderDAO;
+	@Autowired
+	private IOrderDetDAO orderDetDAO;
 
 }

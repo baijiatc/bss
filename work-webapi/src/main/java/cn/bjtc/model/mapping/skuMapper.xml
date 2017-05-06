@@ -27,9 +27,17 @@
    </insert>
 	
 	<update id="updateSku" parameterMap="SkuParamMap">
-		UPDATE Sku SET skuname=#{skuname},barcode=#{barcode},price=#{price},mktprice=#{mktprice},fromsys=#{fromsys},sourceid=#{sourceid},productid=#{productid}    WHERE id =#{id}
+		UPDATE Sku SET 
+		<if test="skuname!=null and skuname!=''">skuname=#{skuname},</if>
+		<if test="barcode!=null and barcode!=''">barcode=#{barcode},</if>
+		<if test="price!=null and price!=0">price=#{price},</if>
+		<if test="mktprice!=null and mktprice!=0">mktprice=#{mktprice},</if>
+		<if test="fromsys!=null and fromsys!=0">fromsys=#{fromsys},</if>
+		<if test="sourceid!=null and sourceid!=0">sourceid=#{sourceid},</if>
+		productid=#{productid}
+		WHERE id =#{id}
 	</update>
-
+	
 	<select id="findAllSku" resultMap="SkuMap" >
 	 	SELECT * FROM  sku WHERE   1=1
 	 	<if test="id!=null and id!=0"> AND id=#{id}</if>

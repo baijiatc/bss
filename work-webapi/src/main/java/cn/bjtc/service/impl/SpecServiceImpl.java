@@ -1,16 +1,20 @@
 package cn.bjtc.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.bjtc.dao.ISpecDAO;
+import cn.bjtc.model.Role;
 import cn.bjtc.model.Spec;
 import cn.bjtc.model.Spec;
 import cn.bjtc.service.ISpecService;
+import cn.bjtc.view.RoleView;
 import cn.bjtc.view.SpecView;
 import cn.bjtc.view.SpecView;
 
@@ -45,7 +49,29 @@ public class SpecServiceImpl implements ISpecService {
 	}
  
 
+
+	public List<SpecView> findAllSpecBySkuId(Object skuid) {
+		SpecView view = new SpecView();
+		view.setPageSize(100);
+		List<Spec> allSpecs = specDAO.findAllSpecs(view);
+		List<Spec> skuSpecs = specDAO.findAllSpecBySkuId(skuid);
+		Map<String,Spec> skuSpecMap = new HashMap<String, Spec>();
+		for(Spec spec : skuSpecs){
+			skuSpecMap.put(spec.getSpecname(), spec);
+		}
+		List<SpecView> views = new ArrayList<SpecView>(allSpecs.size());
+		for(Spec spec : allSpecs){
+			SpecView specView = new SpecView();
+			if(skuSpecMap.containsKey(spec.getSpecname())){
+				specView.setChecked(true);
+			}
+			BeanUtils.copyProperties(spec, specView);
+			views.add(specView);
+		}
+		return views;
+	}
+
 	@Autowired
 	private ISpecDAO specDAO;
-
+	
 }

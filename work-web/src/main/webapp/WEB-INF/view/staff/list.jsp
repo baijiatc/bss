@@ -25,14 +25,23 @@ $(function(){
           {field:'emerphone',title: '紧急联系人手机',align: 'center',width: 100},
           {field:'staffst',title: '员工状态值',align: 'center',hidden:'true'},
           {field:'staffStr',title: '员工状态',align: 'center',width: 100},
-          {field:'leavetime',title: '离职时间',align: 'center',width: 100},
-          {field:'jointime',title: '入职时间',align: 'center',width: 100},
+          {field:'leavetime',title: '离职时间',align: 'center',width: 150,formatter:BSS.formatTime},
+          {field:'jointime',title: '入职时间',align: 'center',width: 150,formatter:BSS.formatTime},
           {field:'creator',title: '创建人',align: 'center',width: 100},
 		]]
 	};
 	//构建datagrid，并填充数据
 	var dataGrid = new BSS.DataGrid('#tbl_staff_datagrid');
 	STAFFDIALOG = new BSS.Dialog('#div_staffadd');
+	dataGrid.toolbar.push({iconCls:'icon-redo',text:'分配角色',handler:function(){
+			var row = dataGrid.getSelectedRow();
+			if(BSS.Helper.isNull(row)){
+				BSS.warning('请选择要分配的员工');
+				return;
+		}
+		var staffid = row['staffid'];
+		STAFFDIALOG.init({href:'staffrole/'+staffid+'.html',width:400});
+	}});
 	dataGrid.build(options,{code:11003});
 	//设置新建事件
 	dataGrid.create = function(){

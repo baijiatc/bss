@@ -33,4 +33,9 @@
 	 	<if test="rolename!=null and rolename!=''"> AND rolename=#{rolename}</if>
 	 	<if test="rolest!=null"> AND rolest=#{rolest}</if>
 	</select>
+	
+	<select id="findAllRoleByStaffId" resultMap="RoleMap">
+		SELECT r.* ,sr.staffroleid FROM role r JOIN staffrole sr ON r.roleid=sr.roleid
+		WHERE sr.staffid=#{0}
+	</select>
 </mapper>

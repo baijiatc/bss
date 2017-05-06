@@ -14,12 +14,30 @@ $(function(){
           {field:'fromsys',title: '来源平台',align: 'center',hidden:'true'},
           {field:'fromsyStr',title: '来源平台',align: 'center',width: 100},
           {field:'sourceid',title: '平台编码',align: 'center',width: 100},
-          {field:'productid',title: '产品',align: 'center',width: 100},
+//           {field:'productid',title: '产品',align: 'center',width: 100},
 		]]
 	};
 	//构建datagrid，并填充数据
 	var dataGrid = new BSS.DataGrid('#tbl_sku_datagrid');
 	SKUDIALOG = new BSS.Dialog('#div_skuadd');
+	dataGrid.toolbar.push({iconCls:'icon-redo',text:'绑定规格',handler:function(){
+		var row = dataGrid.getSelectedRow();
+		if(BSS.Helper.isNull(row)){
+			BSS.warning('请选择要绑定的SKU');
+			return;
+	}
+	var id = row['id'];
+	SKUDIALOG.init({href:'skuspec/'+id+'.html',width:400});
+}});
+	dataGrid.toolbar.push({iconCls:'icon-redo',text:'绑定产品',handler:function(){
+		var row = dataGrid.getSelectedRow();
+		if(BSS.Helper.isNull(row)){
+			BSS.warning('请选择要绑定的SKU');
+			return;
+	}
+	var id = row['id'];
+	SKUDIALOG.init({href:'skuprod/'+id+'.html',width:400});
+}});
 	dataGrid.build(options,{code:14018});
 	//设置新建事件
 	dataGrid.create = function(){

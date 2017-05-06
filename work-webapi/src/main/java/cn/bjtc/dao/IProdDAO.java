@@ -11,4 +11,5 @@ public interface IProdDAO {
 	public int updateProd(ProductView view);
 	public List<Product> findAllProds(ProductView view);
 	public Integer countAllProds(ProductView view);
+	public List<Product> findAllproBySkuId(Object skuid);
 }

@@ -2,6 +2,7 @@ package cn.bjtc.dao;
 
 import java.util.List;
 
+import cn.bjtc.model.Parameters;
 import cn.bjtc.model.Spec;
 import cn.bjtc.view.SpecView;
 
@@ -11,4 +12,6 @@ public interface ISpecDAO {
 	public int updateSpec(SpecView view);
     public List<Spec> findAllSpecs(SpecView view);
 	public Integer countAllSpecs(SpecView view);
+	
+	public List<Spec> findAllSpecByCatId(Object catid);
 }

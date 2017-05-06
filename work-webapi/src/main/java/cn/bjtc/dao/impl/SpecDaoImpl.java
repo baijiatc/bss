@@ -31,6 +31,10 @@ public class SpecDaoImpl extends MyBatisDAO<Spec, Integer> implements
 	public Integer countAllSpecs(SpecView view) {
 		return super.countByParam("countAllSpec", view);
 	}
+
+	public List<Spec> findAllSpecByCatId(Object catid) {
+		return super.findByParam("findAllSpecByCatId", catid);
+	}
     
 	
 }

@@ -10,6 +10,14 @@ public class SpecView extends Pagination{
 	private String specdesc;
 	private Integer spectype;
 	private Integer specst;
+	
+	private boolean checked;
+	public boolean isChecked() {
+		return checked;
+	}
+	public void setChecked(boolean checked) {
+		this.checked = checked;
+	}
 	public Integer getId() {
 		return id;
 	}

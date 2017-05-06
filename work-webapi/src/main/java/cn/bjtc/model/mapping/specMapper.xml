@@ -43,4 +43,11 @@
 	 	<if test="specst!=null and specst!=0"> AND specst=#{specst}</if>
 	</select>
 	 
+	 <select id="findAllSpecByCatId"  resultMap="SpecMap">
+	 	SELECT s.*,catespce.id  FROM spec s   join categoryspec catespce on s.id= catespce.specid
+	    WHERE  catespce.catid=#{0}
+	 	
+	</select>
+	 
+	 
 </mapper>

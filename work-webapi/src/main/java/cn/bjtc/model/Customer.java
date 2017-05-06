@@ -6,7 +6,7 @@ public class Customer {
  private String  cstmname;//客户姓名
  private String  certno;//证件号码 会员为身份证号，商户为企业资质证件号码
  private Integer certtype;//证件类型1-身份证，2-营业执照
- private Integer mobile;
+ private Long     mobile;
  private Integer gender;//性别
  private Integer birthday;//YYYYMMDD
  private Integer cstmlevel;
@@ -47,10 +47,11 @@ public Integer getCerttype() {
 public void setCerttype(Integer certtype) {
 	this.certtype = certtype;
 }
-public Integer getMobile() {
+ 
+public Long getMobile() {
 	return mobile;
 }
-public void setMobile(Integer mobile) {
+public void setMobile(Long mobile) {
 	this.mobile = mobile;
 }
 public Integer getGender() {

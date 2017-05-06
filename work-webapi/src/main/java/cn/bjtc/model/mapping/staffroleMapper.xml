@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Staffrole">
+	<resultMap type="cn.bjtc.model.Staffrole" id="StaffroleMap">
+		<result column="staffid" property="staffid"/>
+		<result column="staffname" property="staffname"/>
+		<result column="idcard" property="idcard"/>
+		<result column="staffroleid" property="staffroleid"/>
+		<result column="telephone" property="telephone"/>
+		<result column="email" property="email"/>
+		<result column="roleid" property="roleid"/>
+		<result column="rolename" property="rolename"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Staffrole" id="StaffroleParamMap">
+		<parameter property="staffid" resultMap="StaffroleMap" />
+		<parameter property="staffname" resultMap="StaffroleMap" />
+		<parameter property="idcard" resultMap="StaffroleMap" />
+		<parameter property="staffroleid" resultMap="StaffroleMap" />
+		<parameter property="telephone" resultMap="StaffroleMap" />
+		<parameter property="email" resultMap="StaffroleMap" />
+		<parameter property="roleid" resultMap="StaffroleMap" />
+		<parameter property="rolename" resultMap="StaffroleMap" />
+	</parameterMap>
+	
+	<insert id="createStaffrole" parameterMap="StaffroleParamMap">
+		insert into staffrole (staffid,roleid) VALUES (#{staffid},#{roleid})
+	</insert>
+	
+	<delete id="delectById">
+		delete from staffrole where staffid = #{staffid}
+	</delete>
+	
+</mapper>

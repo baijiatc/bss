@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Skuspec">
+	<resultMap type="cn.bjtc.model.Skuspec" id="SkuspecMap">
+		<result column="id" property="id"/>
+		<result column="skuid" property="skuid"/>
+		<result column="specid" property="specid"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Skuspec" id="SkuspecParamMap">
+		<parameter property="id" resultMap="SkuspecMap" />
+		<parameter property="skuid" resultMap="SkuspecMap" />
+		<parameter property="specid" resultMap="SkuspecMap" />
+	</parameterMap>
+	
+	<insert id="createSkuspec" parameterMap="SkuspecParamMap">
+	insert into Skuspec (skuid,specid) VALUES (#{skuid},#{specid})
+	</insert>
+	
+	<delete id="delectBySkuId">
+		delete from Skuspec where skuid = #{skuid}
+	</delete>
+	
+</mapper>

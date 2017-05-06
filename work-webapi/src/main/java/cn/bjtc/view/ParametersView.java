@@ -10,6 +10,9 @@ public class ParametersView extends Pagination{
 	private String paramdesc;
 	private Integer paramtype;
 	private Integer paramst;
+	
+	private boolean checked;
+	 
 	public Integer getId() {
 		return id;
 	}
@@ -40,10 +43,10 @@ public class ParametersView extends Pagination{
 	public void setParamst(Integer paramst) {
 		this.paramst = paramst;
 	}
-	public String getParamtypeStr() {
-		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_PARAMTYPE.toString(), String.valueOf(paramtype));
+	public boolean isChecked() {
+		return checked;
 	}
-	public String getParamstStr() {
-		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_PARAMST.toString(), String.valueOf(paramst));
+	public void setChecked(boolean checked) {
+		this.checked = checked;
 	}
 }

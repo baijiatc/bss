@@ -31,6 +31,10 @@ public class ParametersDaoImpl extends MyBatisDAO<Parameters, Integer> implement
 	public Integer countAllParameterss(ParametersView view) {
 		return super.countByParam("countAllParameters", view);
 	}
+
+	public List<Parameters> findAllParameterByProductId(Object productid) {
+		return super.findByParam("findAllParameterByProductId",productid );
+	}
     
 	
 }

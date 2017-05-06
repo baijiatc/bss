@@ -18,7 +18,7 @@ $(function(){
 	var options={
 		columns:[[
           {field:'cstmid',title: 'ID',align: 'center',hidden:'true'},
-          {field:'cstmname',title: '会员姓名',align: 'center',width: 200},
+          {field:'cstmname',title: '名字',align: 'center',width: 200},
           {field:'certno',title: '证件号码',align: 'center',width: 200},
           {field:'certtype',title: '证件类型值',align: 'center',hidden:'true'},
           {field:'certtypeStr',title: '证件类型',align: 'center',width: 200},

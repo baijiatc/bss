@@ -11,4 +11,6 @@ public interface IRoleDAO {
 	public int updateRole(RoleView view);
 	public List<Role> findAllRoles(RoleView view);
 	public Integer countAllRoles(RoleView view);
+	
+	public List<Role> findAllRoleByStaffId(Object staffid);
 }

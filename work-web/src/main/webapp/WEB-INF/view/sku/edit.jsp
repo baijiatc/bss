@@ -26,10 +26,6 @@
 			<td>平台编码：</td>
 			<td><input id="id_sourceid" class="easyui-textbox" type="text" name="sourceid" data-options="required:false"></input></td>
 		</tr>
-		<tr>
-			<td>产品：</td>
-			<td><input id="id_productid" class="easyui-textbox" type="text" name="productid" data-options="required:true"></input></td>
-		</tr>
 	</table>
 </form>
 <script>

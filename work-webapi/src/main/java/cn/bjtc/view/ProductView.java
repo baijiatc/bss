@@ -9,6 +9,7 @@ public class ProductView extends Pagination{
 	private Integer catid;//类别
 	private Integer brandid;
 	private String  description;//商品详情
+	private boolean checked;
 	public Integer getId() {
 		return id;
 	}
@@ -51,5 +52,10 @@ public class ProductView extends Pagination{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+	public boolean isChecked() {
+		return checked;
+	}
+	public void setChecked(boolean checked) {
+		this.checked = checked;
+	}
 }

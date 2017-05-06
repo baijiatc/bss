@@ -7,6 +7,7 @@ public class RoleView extends Pagination {
 	private Integer roleid;
 	private String rolename;
 	private Integer rolest;
+	private boolean checked;
 	
 	public Integer getRoleid() {
 		return roleid;
@@ -28,5 +29,11 @@ public class RoleView extends Pagination {
 	}
 	public String getRolestStr() {
 		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_ROLEST.toString(), String.valueOf(rolest));
+	}
+	public boolean isChecked() {
+		return checked;
+	}
+	public void setChecked(boolean checked) {
+		this.checked = checked;
 	}
 }

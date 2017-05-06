@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import cn.bjtc.dao.IProdDAO;
 import cn.bjtc.dao.mybatis.MyBatisDAO;
 import cn.bjtc.model.Product;
+import cn.bjtc.model.Spec;
 import cn.bjtc.view.ProductView;
 
 @Component("prodDao")
@@ -31,5 +32,7 @@ public class ProdDAOImpl extends MyBatisDAO<Product, Integer>
 	public Integer countAllProds(ProductView view) {
 		return super.countByParam("countAllProds", view);
 	}
-
+	public List<Product> findAllproBySkuId(Object skuid) {
+		return super.findByParam("findAllproBySkuId", skuid);
+	}
 }

@@ -133,4 +133,7 @@ public class OrderView extends Pagination {
 	public String getPaytypeStr() {
 		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_PAYTYPE.toString(), String.valueOf(paytype));
 	}
+	public String getFromsyStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_FROMSYS.toString(), String.valueOf(fromsys));
+	}
 }

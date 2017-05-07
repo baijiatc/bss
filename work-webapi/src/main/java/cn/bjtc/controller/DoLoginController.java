@@ -9,6 +9,7 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,6 +40,9 @@ public class DoLoginController extends BaseController {
 				UsernamePasswordToken token = new UsernamePasswordToken(view.getUname(), view.getUpass());
 				Subject subject = SecurityUtils.getSubject();
 				subject.login(token);
+				String sessTimeout = ApplicationDataManager.getSysParamByCode("SESS_TIMEOUT");
+				long timeout = StringUtils.isEmpty(sessTimeout) ? (-1*1000) : (Long.parseLong(sessTimeout)*1000);
+				subject.getSession().setTimeout(timeout);
 			} catch (AuthenticationException e) {
 				apiReturn.setCode(1);
 				apiReturn.setMessage("用户名或密码错误！");

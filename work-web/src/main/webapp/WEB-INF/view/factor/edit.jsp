@@ -28,8 +28,12 @@ BSS.dispatch({code:15010,data:[{factid:'${factorid}'}]},function(resp){
 		
 		FACTORDIALOG.ok = function(){
 			var factor = BSS.form2json('#frm_factor');
-			BSS.dispatch({code:15009,data:[factor]},function(){
-				BSS.alert('保存成功！');
+			BSS.dispatch({code:15009,data:[factor]},function(rslt){
+				if(rslt.code == 0){
+					BSS.alert('保存成功！');
+				}else{
+					BSS.warning(rslt.message);
+				}
 			},function(){});
 		};
 	}else{

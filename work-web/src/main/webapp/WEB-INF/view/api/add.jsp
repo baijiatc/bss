@@ -36,9 +36,13 @@ var apistCombox = new BSS.Combox('#cbx_apist');
 apistCombox.fromDict('DICT_APIST',function(){
 	APIDIALOG.ok = function(){
 		var api = BSS.form2json('#frm_apiadd');
-		BSS.dispatch({code:21010,data:[api]},function(){
-			BSS.info('保存成功');
-		},function(){});
+		BSS.dispatch({code:21010,data:[api]},function(resp){
+			if(resp.code == 0){
+				BSS.info('保存成功');
+			}else{
+				BSS.warning(resp.message);
+			}
+		},function(resp){});
 	}
 });
 </script>

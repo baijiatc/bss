@@ -45,8 +45,12 @@ function initPrivEidtPage(){
 			
 			PRIVDIALOG.ok = function(){
 				var priv = BSS.form2json('#frm_priv');
-				BSS.dispatch({code:20004,data:[priv]},function(){
-					BSS.alert('保存成功！');
+				BSS.dispatch({code:20004,data:[priv]},function(rslt){
+					if(rslt.code == 0){
+						BSS.info('保存成功！');
+					}else{
+						BSS.warning(rslt.message);
+					}
 				},function(){});
 			}
 		}else{

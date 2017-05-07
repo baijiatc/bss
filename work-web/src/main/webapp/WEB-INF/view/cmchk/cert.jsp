@@ -3,11 +3,34 @@
 	<div id="div_cstmchk_cert_container" style="width:auto;">
 		<div id="div_cstmchk_left" data-options="region:'west'" style="width:350px;" align="center">
 			<!-- left -->
-			<img width="300" height="402" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1492407981&di=6278ce4896924be38597f04de185900b&imgtype=jpg&er=1&src=http%3A%2F%2Fwww.omgqc.com%2FUpFile%2F201603%2F2016030851356933.jpg">
+			<form id="frm_cstmchk_cert">
+			<table>
+				<tr>
+					<td>商户名称：</td>
+					<td><input class="easyui-textbox" name="cstmname" disabled="disabled"></td>
+				</tr>
+				<tr>
+					<td>手机号：</td>
+					<td><input class="easyui-textbox" name="mobile" disabled="disabled"></td>
+				</tr>
+				<tr>
+					<td>证件类型：</td>
+					<td><input class="easyui-textbox" name="certtypeStr" disabled="disabled"></td>
+				</tr>
+				<tr>
+					<td>证件号：</td>
+					<td><input class="easyui-textbox" name="certno" disabled="disabled"></td>
+				</tr>
+				<tr>
+					<td>电子邮件：</td>
+					<td><input class="easyui-textbox" name="email" disabled="disabled"></td>
+				</tr>
+			</table>
+			</form>
 		</div>
 		<div id="div_cstmchk_center" data-options="region:'center'" style="width:auto">
 			<!-- center -->
-			<table>
+			<table style="padding-left:10px;">
 				<tr>
 					<td>审核结果：</td>
 					<td>
@@ -37,6 +60,16 @@ var certPnl =new BSS.Panel('#div_cstmchk_cert_pnl');
 certPnl.init({header:'#div_cstmchk_cert_pnlheader'});
 var certLayout = new BSS.Layout('#div_cstmchk_cert_container');
 certLayout.layout();
+
+BSS.dispatch({code:12002,data:[{cstmid:'${cid}'}]},function(resp){
+	if(resp.code == 0){
+		var cshop = resp.data[0];console.log(JSON.stringify(cshop));
+		BSS.json2form('#frm_cstmchk_cert',cshop);
+	}else{
+		BSS.warning(resp.message);
+	}
+},function(resp){});
+
 $('#lnk_viewcert').click(function(){
 	var chkst = cstmChkCombox.getValue();
 	var chkrslt = $('#sel_chkrslt').textbox('getValue');

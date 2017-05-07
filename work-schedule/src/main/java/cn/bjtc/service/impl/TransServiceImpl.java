@@ -1,5 +1,7 @@
 package cn.bjtc.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,10 @@ public class TransServiceImpl implements ITransService {
 	
 	public void transOrders() {
 		transDAO.transOrders();
+	}
+
+	public List<?> monitorStock() {
+		return transDAO.monitorStock();
 	}
 
 	@Autowired

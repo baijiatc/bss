@@ -44,8 +44,12 @@ function initApiEditPage(){
 			BSS.json2form('#frm_apiedit',resp.data[0]);
 			APIDIALOG.ok = function(){
 				var api = BSS.form2json('#frm_apiedit');
-				BSS.dispatch({code:21013,data:[api]},function(){
-					BSS.info('更新成功');
+				BSS.dispatch({code:21013,data:[api]},function(rslt){
+					if(rslt.code == 0){
+						BSS.info('更新成功');
+					}else{
+						BSS.warning(rslt.message);
+					}
 				},function(){});
 			}
 		}else{

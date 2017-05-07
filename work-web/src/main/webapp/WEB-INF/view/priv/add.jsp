@@ -40,8 +40,12 @@ privtypeCombox.fromDict('DICT_PRIVTYPE',function(){
 function setOk(){
 	PRIVDIALOG.ok = function(){
 		var priv = BSS.form2json('#frm_priv');
-		BSS.dispatch({code:20001,data:[priv]},function(){
-			BSS.alert();;
+		BSS.dispatch({code:20001,data:[priv]},function(resp){
+			if(resp.code == 0){
+				BSS.info('保存成功！');
+			}else{
+				BSS.warning(resp.message);
+			}
 		},function(){});
 	}
 }

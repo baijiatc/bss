@@ -12,8 +12,8 @@
 			<td><input class="easyui-textbox" type="text" name="url" data-options="required:false"></input></td>
 		</tr>
 		<tr>
-			<td>父级菜单：</td>
-			<td><input class="easyui-textbox" type="text" name="parentid" data-options="required:false"></input></td>
+			<td>上级菜单：</td>
+			<td><input id="cbx_parentid" class="easyui-checkbox" type="text" name="parentid" data-options="required:false"></input></td>
 		</tr>
 		<tr>
 			<td>菜单图标：</td>
@@ -31,10 +31,13 @@
 </form>
 <script>
 var menuStCombox = new BSS.Combox('#cbx_menust');
+var parentidCombox=new BSS.Combox('#cbx_parentid');
 menuStCombox.fromDict('DICT_MENUST',function(){
+	parentidCombox.fromDict('DICT_PARENT',function(){
+	
 	setOk();
+  });
 });
-
 function setOk(){
 	MENUDIALOG.ok = function(){
 		var menu = BSS.form2json('#frm_menu');

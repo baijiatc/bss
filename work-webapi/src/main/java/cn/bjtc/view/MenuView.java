@@ -73,4 +73,8 @@ public class MenuView extends Pagination{
 	public String getMenustStr() {
 		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_MENUST.toString(), String.valueOf(menust));
 	}
+	
+	public String getParentStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_PARENT.toString(), String.valueOf(parentid));
+	}
 }

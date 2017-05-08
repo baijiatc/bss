@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <table id="tbl_prod_datagrid" class="easyui-datagrid"></table>
-<div id="div_prodadd" style="padding:0 0 0 50px;"></div>
+<div id="div_prodadd" style="padding:0 0 0 50px;"></div> 
 <!-- javascript部分 -->
 <script language="javascript" src="js/easyui/jquery.easyui.min.js" charset="utf-8"></script>
 <script language="javascript" src="js/easyui/locale/easyui-lang-zh_CN.js" charset="utf-8"></script>
@@ -18,10 +18,21 @@ $(function(){
          
 		]]
 	};
+	
+	
 	//构建datagrid，并填充数据
 	var prodGrid = new BSS.DataGrid('#tbl_prod_datagrid');
 	PRODDIALOG = new BSS.Dialog('#div_prodadd');
-	prodGrid.build(options,{code:14015 });
+	prodGrid.toolbar.push({iconCls:'icon-redo',text:'参数分配 ',handler:function(){
+		var row=prodGrid.getSelectedRow();
+			if(BSS.Helper.isNull(row)){
+				BSS.warning('请选择数据行');
+				return;
+			}
+			var id = row['id'];
+			PRODDIALOG.init({href:'prodparm/'+id+'.html',width:400});
+	}});
+	prodGrid.build(options,{code:14015});
 	//设置新建事件
 	prodGrid.create = function(){
 		PRODDIALOG.init({href:'prod/add.html',width:400});

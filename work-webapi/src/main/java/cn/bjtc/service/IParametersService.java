@@ -11,4 +11,6 @@ public interface IParametersService {
 	public int updateParameters(ParametersView view);
     public List<ParametersView> findAllParameterss(ParametersView view);
 	public Integer countAllParameterss(ParametersView view);
+	
+	public List<ParametersView> findAllParameterByProductId(Object productid);
 }

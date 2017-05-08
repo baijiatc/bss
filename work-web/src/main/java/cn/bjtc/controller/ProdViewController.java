@@ -17,7 +17,7 @@ public class ProdViewController {
 	public String showProdView(){
 		return "prod/list";
 	}
-	
+
 	@RequestMapping(value="add.html",method=RequestMethod.GET)
 	@SysPrivilege(name="prod:add")
 	public String showProdAddView(){

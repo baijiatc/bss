@@ -18,10 +18,11 @@ $(function(){
 		height:240,
 		columns:[[
           {field:'stockdetid',title: 'ID',align: 'center',hidden:'true'},
-          {field:'warehouse',title: '库房',align: 'center',width: 200},
-          {field:'position',title: '库位',align: 'center',width: 200},
+          {field:'warehouse',title: '库房',align: 'center',width: 150},
+          {field:'position',title: '库位',align: 'center',width: 150},
           {field:'batchno',title: '批次号',align: 'center',width: 200},
           {field:'indt',title: '入库日期',align: 'center',width: 200},
+          {field:'expirydt',title: '过期日期',align: 'center',width: 200},
           {field:'stocknum',title: '库位库存数',align: 'center',width: 200}
 		]]
 	};

@@ -1,5 +1,7 @@
 package cn.bjtc.dao.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import cn.bjtc.dao.ITransDAO;
@@ -26,6 +28,11 @@ public class TransDAOImpl extends MyBatisDAO<Object, Integer> implements ITransD
 	public void transOrders() {
 		String statement = "TransJob.transOrders";
 		super.callProcedrue(statement, null);
+	}
+
+	public List<?> monitorStock() {
+		String statement = "TransJob.monitorStock";
+		return super.callProcedrueWithResult(statement, null);
 	}
 
 }

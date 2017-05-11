@@ -33,10 +33,9 @@
 var menuStCombox = new BSS.Combox('#cbx_menust');
 var parentidCombox=new BSS.Combox('#cbx_parentid');
 menuStCombox.fromDict('DICT_MENUST',function(){
-	parentidCombox.fromDict('DICT_PARENT',function(){
-	
-	setOk();
-  });
+	MENUDIALOG.loadParentMenu('#cbx_parentid',function(){
+		setOk();
+	});
 });
 function setOk(){
 	MENUDIALOG.ok = function(){

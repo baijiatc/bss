@@ -10,7 +10,7 @@ $(function(){
           {field:'menuname',title: '菜单名称',align: 'center',width: 220},
           {field:'url',title: '菜单URL',align: 'center',width: 220},
           {field:'parentid',title: '上级菜单值',align: 'center',hidden:'true'},
-          {field:'parentStr',title: '上级菜单',align: 'center',width: 200},
+          {field:'parentname',title: '上级菜单',align: 'center',width: 220},
           {field:'icon',title: '菜单图标',align: 'center',width: 220},
           {field:'sort',title: '菜单排序',align: 'center',width: 220},
           {field:'menust',title: '状态值',align: 'center',hidden:'true'},
@@ -46,5 +46,21 @@ $(function(){
 		var menuid = row['menuid'];
 		MENUDIALOG.init({href:'menu/'+menuid+'.html',width:400});
 	};
+	//设置父类名字
+	MENUDIALOG.loadParentMenu=function(selector,callback){
+		BSS.dispatch({code:21003},function(resp){
+			if(resp.code == 0){
+				var datas = resp.data;
+				var options = {valueField:'menuid',textField:'menuname',data:datas};
+				var parentidCombox=new BSS.Combox(selector);
+				parentidCombox.init(options);
+				if(jQuery.isFunction(callback)){
+					callback();
+				}
+			}else{
+				BSS.warning(resp.message);
+			}
+		},function(resp){});
+	}
 })
 </script>

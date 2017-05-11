@@ -15,6 +15,16 @@ public class MenuView extends Pagination{
 	private boolean checked;
 	private boolean disabled;
 	
+	private String parentname;
+	
+	
+	 
+	public String getParentname() {
+		return parentname;
+	}
+	public void setParentname(String parentname) {
+		this.parentname = parentname;
+	}
 	public Integer getMenuid() {
 		return menuid;
 	}

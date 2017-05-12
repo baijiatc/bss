@@ -35,13 +35,11 @@
 var fromsysCombox = new BSS.Combox('#cbx_fromsys');
 var catCombox=new BSS.Combox('#cbx_catid');
 var brandCombox=new BSS.Combox('#cbx_brandid');
-fromsysCombox.fromDict('DICT_FORMSYS',function(){
-	catCombox.fromDict('DICT_CAT',function(){
-		brandCombox.fromDict('DICT_BRAND',function(){
+fromsysCombox.fromDict('DICT_FROMSYS',function(){
+	 
 	setOk();
   });
-});
-});
+ 
 
 PRODDIALOG.ok = function(){
 	var prod= BSS.form2json('#frm_prod');

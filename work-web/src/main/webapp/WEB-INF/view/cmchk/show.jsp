@@ -14,7 +14,8 @@ $(function(){
           {field:'cstmname',title: '商户名称',align: 'center',width: 200},
           {field:'mobile',title: '手机',align: 'center',width: 200},
           {field:'cstmlevel',title: '级别',align: 'center',width: 200},
-          {field:'cstmst',title: '状态',align: 'center',width: 200},
+          {field:'cstmst',title: '状态值',align: 'center',hidden:'true'},
+          {field:'cstmstStr',title: '状态',align: 'center',width: 200},
           {field:'regtime',title: '申请时间',align: 'center',width: 200}
 		]]
 	};

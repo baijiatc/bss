@@ -21,4 +21,9 @@
 	 		{CALL p_trans_order()}
 	 	]]>
 	</select>
+	<select id="monitorStock" statementType="CALLABLE" resultType="java.util.Map">
+	 	<![CDATA[
+	 		{CALL p_stock_alarm()}
+	 	]]>
+	</select>
 </mapper>

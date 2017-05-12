@@ -1,6 +1,7 @@
 package cn.bjtc.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -77,7 +78,21 @@ public class ProdController extends BaseController{
 		}
 		return apiReturn;
 	}
-
+	
+	@RequestMapping(value="getSkuProd", method=RequestMethod.POST)
+	public ApiReturn findAllSkuProd(){
+		try {
+			ApiParam param = findApiParam();
+			ifParamDataIsEmpty(param);
+			Map<String, Object> skuIdMap = param.getData().get(0);
+			Object skuid = skuIdMap.get("skuid");
+			List<?> prod = prodService.findAllproBySkuId(skuid);
+			apiReturn.setData(prod);
+		} catch (Exception e) {
+			showServerError();
+		}
+		return apiReturn;
+	}
 	@Autowired
 	private IProdService prodService;
 }

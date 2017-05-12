@@ -50,5 +50,8 @@
 	 	<if test="brandid!=null and brandid!=0"> AND brandid=#{brandid}</if>
 	 	<if test="description!=null and description!=''"> AND description=#{description}</if>
 	</select>
-	 
+	 <select id="findAllproBySkuId" resultMap="ProductMap">
+	    select p.* from product p join sku s on p.id = s.productid 
+		WHERE s.id=#{0}
+	</select>
 </mapper>

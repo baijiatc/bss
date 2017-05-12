@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="OrderDet">
+	<resultMap type="cn.bjtc.model.OrderDet" id="OrderDetMap">
+		<result column="id" property="id"/>
+		<result column="orderid" property="orderid"/>
+		<result column="skuid" property="skuid"/>
+		<result column="price" property="price"/>
+		<result column="payment" property="payment"/>
+		<result column="totalpay" property="totalpay"/>
+		<result column="discountfee" property="discountfee"/>
+		<result column="pointsfee" property="pointsfee"/>
+		<result column="platformpay" property="platformpay"/>
+		<result column="refundfee" property="refundfee"/>
+		<result column="num" property="num"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.OrderDet" id="OrderDetParamMap">
+		<parameter property="id" resultMap="OrderDetMap" />
+		<parameter property="orderid" resultMap="OrderDetMap" />
+		<parameter property="skuid" resultMap="OrderDetMap" />
+		<parameter property="price" resultMap="OrderDetMap" />
+		<parameter property="payment" resultMap="OrderDetMap" />
+		<parameter property="totalpay" resultMap="OrderDetMap" />
+		<parameter property="discountfee" resultMap="OrderDetMap" />
+		<parameter property="pointsfee" resultMap="OrderDetMap" />
+		<parameter property="platformpay" resultMap="OrderDetMap" />
+		<parameter property="refundfee" resultMap="OrderDetMap" />
+		<parameter property="num" resultMap="OrderDetMap" />
+	</parameterMap>
+	<select id="findAllOrderDets" resultMap="OrderDetMap" >
+	 	SELECT * FROM OrderDet WHERE 1=1 
+	 	<if test="orderid!=null and orderid!=0"> AND orderid=#{orderid}</if>
+	 	LIMIT #{pageOffset},#{pageSize}
+	</select>
+	<select id="countAllOrderDets" resultType="Integer" >
+		SELECT count(id) FROM OrderDet WHERE 1=1
+		<if test="orderid!=null and orderid!=0"> AND orderid=#{orderid}</if>
+	</select>
+</mapper>

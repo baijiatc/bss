@@ -12,12 +12,12 @@ public class ProductView extends Pagination{
 	private Integer catid;//类别
 	private Integer brandid;
 	private String  description;//商品详情
+	private boolean checked;
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
-		this.id = id;
-	}
+		this.id = id;	}
 	public String getSourceid() {
 		return sourceid;
 	}
@@ -54,6 +54,7 @@ public class ProductView extends Pagination{
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 	public String getFromsysStr() {
 		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_FORMSYS.toString(), String.valueOf(fromsys));
 	}
@@ -65,5 +66,11 @@ public class ProductView extends Pagination{
 	
 	public String getBrandStr() {
 		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_BRAND.toString(), String.valueOf(brandid));
+  }
+	public boolean isChecked() {
+		return checked;
+	}
+	public void setChecked(boolean checked) {
+		this.checked = checked;
 	}
 }

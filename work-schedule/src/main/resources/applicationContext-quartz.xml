@@ -44,6 +44,15 @@
 		<property name="group" value="资金流水组"></property>
 		<property name="durability" value="true" />
 	</bean>
+	<bean id="stockAlarmJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<property name="jobClass">
+			<value>cn.bjtc.quartz.StockAlarmQuartz</value>
+		</property>
+		<property name="name" value="库存预警"></property>
+		<property name="group" value="库存预警组"></property>
+		<property name="durability" value="true" />
+	</bean>
 	<!-- 定义触发时间 -->
 	<!-- cron表达式 -->
 	<bean id="cstmTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
@@ -51,7 +60,7 @@
 		<property name="name" value="客户触发器" />
 		<property name="group" value="客户触发器组" />
 		<property name="cronExpression">
-			<value>0 */2 * * * ?</value>
+			<value>0 */3 * * * ?</value>
 		</property>
 	</bean>
 	<bean id="orderTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
@@ -59,7 +68,7 @@
 		<property name="name" value="订单触发器" />
 		<property name="group" value="订单触发器组" />
 		<property name="cronExpression">
-			<value>0 */1 * * * ?</value>
+			<value>0 */10 * * * ?</value>
 		</property>
 	</bean>
 	<bean id="flowTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
@@ -67,7 +76,15 @@
 		<property name="name" value="资金流水触发器" />
 		<property name="group" value="资金流水触发器组" />
 		<property name="cronExpression">
-			<value>0 * */1 * * ?</value>
+			<value>0 */30 * * * ?</value>
+		</property>
+	</bean>
+	<bean id="stockAlarmTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="stockAlarmJob"/>
+		<property name="name" value="库存预警触发器" />
+		<property name="group" value="库存预警触发器组" />
+		<property name="cronExpression">
+			<value>0 */5 * * * ?</value>
 		</property>
 	</bean>
 	<!-- 总管理类 如果将lazy-init='false'那么容器启动就会执行调度程序 -->
@@ -80,6 +97,7 @@
 				<ref bean="cstmTrigger" />
 				<ref bean="orderTrigger" />
 				<ref bean="flowTrigger" />
+				<ref bean="stockAlarmTrigger" />
 			</list>
 		</property>
 		<!-- 初始化之后延迟30秒启动scheduler -->

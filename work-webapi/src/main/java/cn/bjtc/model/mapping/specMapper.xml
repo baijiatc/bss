@@ -42,12 +42,16 @@
 	 	<if test="spectype!=null and spectype!=0"> AND spectype=#{spectype}</if>
 	 	<if test="specst!=null and specst!=0"> AND specst=#{specst}</if>
 	</select>
-	 
+
+
 	 <select id="findAllSpecByCatId"  resultMap="SpecMap">
 	 	SELECT s.*,catespce.id  FROM spec s   join categoryspec catespce on s.id= catespce.specid
 	    WHERE  catespce.catid=#{0}
-	 	
 	</select>
-	 
-	 
+
+	 <select id="findAllSpecBySkuId" resultMap="SpecMap">
+		SELECT s.* ,sp.id FROM spec s JOIN skuspec sp ON s.id=sp.specid
+		WHERE sp.skuid=#{0}
+	</select>
+
 </mapper>

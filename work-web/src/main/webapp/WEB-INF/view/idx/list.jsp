@@ -17,8 +17,8 @@ $(function(){
           {field:'idxformula',title: '计算公式',align: 'center',width: 100},
           {field:'isdisplay',title: '是否显示',align: 'center',width: 100},
           {field:'isdisplayStr',title: '是否显示',align: 'center',width: 100},
-          {field:'validdt',title: '生效日期',align: 'center',width: 100},
-          {field:'invaliddt',title: '失效日期',align: 'center',width: 100},
+          {field:'validdt',title: '生效日期',align: 'center',width: 150,formatter:BSS.formatTime},
+          {field:'invaliddt',title: '失效日期',align: 'center',width: 150,formatter:BSS.formatTime},
           {field:'creator',title: '创建人',align: 'center',width: 100},
 		]]
 	};

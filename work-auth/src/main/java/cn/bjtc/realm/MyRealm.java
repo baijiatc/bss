@@ -71,7 +71,6 @@ public class MyRealm extends AuthorizingRealm {
 		Subject currentUser = SecurityUtils.getSubject();
 		if(null != currentUser){
 			Session session = currentUser.getSession();
-			System.out.println("Session默认超时时间为[" + session.getTimeout() + "]毫秒");
 			if(null != session){
 				session.setAttribute(key, value);
 			}

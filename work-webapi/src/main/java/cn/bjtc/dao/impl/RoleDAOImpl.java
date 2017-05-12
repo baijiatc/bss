@@ -32,4 +32,8 @@ public class RoleDAOImpl extends MyBatisDAO<Role, Integer> implements
 		return super.countByParam("countAllRoles", view);
 	}
 
+	public List<Role> findAllRoleByStaffId(Object staffid) {
+		return super.findByParam("findAllRoleByStaffId", staffid);
+	}
+
 }

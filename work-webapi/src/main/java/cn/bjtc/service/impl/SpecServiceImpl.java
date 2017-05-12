@@ -8,14 +8,9 @@ import java.util.Map;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import cn.bjtc.dao.ISpecDAO;
-import cn.bjtc.model.Parameters;
-import cn.bjtc.model.Spec;
 import cn.bjtc.model.Spec;
 import cn.bjtc.service.ISpecService;
-import cn.bjtc.view.ParametersView;
-import cn.bjtc.view.SpecView;
 import cn.bjtc.view.SpecView;
 
 @Service("specService")
@@ -41,8 +36,7 @@ public class SpecServiceImpl implements ISpecService {
 			BeanUtils.copyProperties(Spec, SpecView);
 			views.add(SpecView);
 		}
-		return views;
-	}
+		return views;	}
 
 	public Integer countAllSpecs(SpecView view) {
 		return specDAO.countAllSpecs(view);
@@ -71,8 +65,29 @@ public class SpecServiceImpl implements ISpecService {
 		}
 		return views;
 	}
-	
+
+	public List<SpecView> findAllSpecBySkuId(Object skuid) {
+		SpecView view = new SpecView();
+		view.setPageSize(100);
+		List<Spec> allSpecs = specDAO.findAllSpecs(view);
+		List<Spec> skuSpecs = specDAO.findAllSpecBySkuId(skuid);
+		Map<String,Spec> skuSpecMap = new HashMap<String, Spec>();
+		for(Spec spec : skuSpecs){
+			skuSpecMap.put(spec.getSpecname(), spec);
+		}
+		List<SpecView> views = new ArrayList<SpecView>(allSpecs.size());
+		for(Spec spec : allSpecs){
+			SpecView specView = new SpecView();
+			if(skuSpecMap.containsKey(spec.getSpecname())){
+				specView.setChecked(true);
+			}
+			BeanUtils.copyProperties(spec, specView);
+			views.add(specView);
+		}
+		return views;
+	}
 
 	@Autowired
 	private ISpecDAO specDAO;
+	
 }

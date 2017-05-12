@@ -35,6 +35,10 @@ public class MyBatisDAO<T, K> implements IGenericDAO<T, K> {
 	public void callProcedrue(String statement,Object parameter){
 		mybatisTemplate.selectOne(statement, parameter);
 	}
+	
+	public List<T> callProcedrueWithResult(String statement,Object parameter){
+		return mybatisTemplate.selectList(statement, parameter);
+	}
 
 	private SqlSessionTemplate getMybatisTemplate() {
 		return mybatisTemplate;

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import cn.bjtc.dao.ISpecDAO;
 import cn.bjtc.dao.mybatis.MyBatisDAO;
+import cn.bjtc.model.Role;
 import cn.bjtc.model.Spec;
 import cn.bjtc.view.SpecView;
 
@@ -32,9 +33,13 @@ public class SpecDaoImpl extends MyBatisDAO<Spec, Integer> implements
 		return super.countByParam("countAllSpec", view);
 	}
 
+
 	public List<Spec> findAllSpecByCatId(Object catid) {
 		return super.findByParam("findAllSpecByCatId", catid);
 	}
     
+	public List<Spec> findAllSpecBySkuId(Object skuid) {
+		return super.findByParam("findAllSpecBySkuId", skuid);
+	}
 	
 }

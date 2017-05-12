@@ -24,11 +24,7 @@ $(function(){
 						PRODDIALOG.ok = function(){
 						var nodes = proParmTree.getChecked();
 						var len = nodes.length;
-						 
-						if(len <= 0){
-							BSS.alert('保存成功！');
-							return;
-						}
+					
 						var paramids = [];
 						for(var i = 0; i < len; i++){
 						    var paramid = nodes[i].id;

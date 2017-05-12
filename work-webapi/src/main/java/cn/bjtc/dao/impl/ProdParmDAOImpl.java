@@ -7,7 +7,7 @@ import cn.bjtc.dao.mybatis.MyBatisDAO;
 import cn.bjtc.model.ProdParm;
  
 
-@Component("ProdparmDAO)")
+@Component("ProdParmDAO)")
 public  class ProdParmDAOImpl extends MyBatisDAO<ProdParm, Integer> 
               implements  IProdParmDAO{
 
@@ -15,8 +15,8 @@ public  class ProdParmDAOImpl extends MyBatisDAO<ProdParm, Integer>
 		return super.save("saveProdParms",prodParm);		
 	}
 
-	public int delectById(Object productid) {
-		return super.delete("delectById", productid);
+	public int delectPPById(Object productid) {
+		return super.delete("delectPPById", productid);
 	}
 
 }

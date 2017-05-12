@@ -12,7 +12,7 @@ import cn.bjtc.model.ProdParm;
 import cn.bjtc.service.IProdParmService;
  
 
-@Service("prodparmService")
+@Service("ProdParmService")
 public class ProdParmServiceImpl implements  IProdParmService{
  
 
@@ -31,8 +31,8 @@ public class ProdParmServiceImpl implements  IProdParmService{
 	}
 
 
-	public int delectById(Object productid) {
-		return ppDao.delectById(productid);
+	public int delectProdParmById(Object productid) {
+		return ppDao.delectPPById(productid);
 	}
  
 	 

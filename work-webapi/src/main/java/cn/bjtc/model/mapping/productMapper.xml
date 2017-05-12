@@ -39,6 +39,9 @@
 	 	<if test="description!=null and description!=''"> AND description=#{description}</if>
 	 	 LIMIT #{pageOffset},#{pageSize}
 	</select>
+	<select id="findAllnames" resultMap="ProductMap" >
+	select p.*,b.brandname,c.catname   from product p join brand b on p.brandid = b.id join category c on p.catid = c.id 
+	</select>
 	
 	<select id="countAllProds" resultType="Integer" >
 	 	SELECT count(id) FROM product  WHERE   1=1

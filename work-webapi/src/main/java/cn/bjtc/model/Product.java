@@ -9,6 +9,9 @@ public class Product {
 	private Integer catid;//类别
 	private Integer brandid;
 	private String  description;//商品详情
+	private String catname;
+	private String brandname;
+ 
 	public Integer getId() {
 		return id;
 	}
@@ -51,5 +54,16 @@ public class Product {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+	public String getCatname() {
+		return catname;
+	}
+	public void setCatname(String catname) {
+		this.catname = catname;
+	}
+	public String getBrandname() {
+		return brandname;
+	}
+	public void setBrandname(String brandname) {
+		this.brandname = brandname;
+	}
 }

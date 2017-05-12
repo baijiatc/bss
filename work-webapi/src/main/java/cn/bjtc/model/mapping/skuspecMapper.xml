@@ -13,7 +13,7 @@
 	</parameterMap>
 	
 	<insert id="createSkuspec" parameterMap="SkuspecParamMap">
-	insert into Skuspec (skuid,specid) VALUES (#{skuid},#{specid})
+	insert into Skuspec (skuid,specid,specvalue) VALUES (#{skuid},#{specid},#{specvalue})
 	</insert>
 	
 	<delete id="delectBySkuId">

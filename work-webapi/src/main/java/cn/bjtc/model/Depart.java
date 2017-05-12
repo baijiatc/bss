@@ -1,5 +1,9 @@
 package cn.bjtc.model;
 
+/**
+ * @author Mr.wu
+ *
+ */
 public class Depart {
 
 	private Integer departid;
@@ -9,6 +13,8 @@ public class Depart {
 	private String address;
 	private String telephone;
 	private Integer departst;
+	private String parentStr;
+	private String staffname;
 	public Integer getDepartid() {
 		return departid;
 	}
@@ -50,5 +56,17 @@ public class Depart {
 	}
 	public void setDepartst(Integer departst) {
 		this.departst = departst;
+	}
+	public String getParentStr() {
+		return parentStr;
+	}
+	public void setParentStr(String parentStr) {
+		this.parentStr = parentStr;
+	}
+	public String getStaffname() {
+		return staffname;
+	}
+	public void setStaffname(String staffname) {
+		this.staffname = staffname;
 	}
 }

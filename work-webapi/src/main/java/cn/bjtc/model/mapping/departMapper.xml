@@ -28,7 +28,7 @@
 	</update>
 	
 	<select id="findAllDepart" resultMap="DepartMap" >
-	 	SELECT * FROM depart WHERE 1=1 
+	 	SELECT * FROM depart where 1=1
 	 	<if test="departid!=null and departid!=0"> AND departid=#{departid}</if>
 	 	<if test="departname!=null and departname!=''"> AND departname=#{departname}</if>
 	 	<if test="parentid!=null and parentid!=0"> AND parentid=#{parentid}</if>
@@ -39,6 +39,9 @@
 	 	LIMIT #{pageOffset},#{pageSize}
 	</select>
 	
+	<select id="findAllDepartStaff" resultMap="DepartMap" >
+		SELECT d.*,s.staffname FROM depart d join staff s on d.leader = s.staffid 
+	</select>
 	<select id="countAllDepart" resultType="Integer" >
 		SELECT count(departid) FROM depart WHERE 1=1
 		<if test="departid!=null and departid!=0"> AND departid=#{departid}</if>

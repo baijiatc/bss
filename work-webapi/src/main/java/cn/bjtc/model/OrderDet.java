@@ -12,6 +12,7 @@ public class OrderDet {
 	private double pointsfee;
 	private double platformpay;
 	private double refundfee;
+	private String skuname;
 	private Integer num;
 	public Integer getId() {
 		return id;
@@ -78,5 +79,11 @@ public class OrderDet {
 	}
 	public void setNum(Integer num) {
 		this.num = num;
+	}
+	public String getSkuname() {
+		return skuname;
+	}
+	public void setSkuname(String skuname) {
+		this.skuname = skuname;
 	}
 }

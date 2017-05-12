@@ -10,14 +10,19 @@ import cn.bjtc.service.ISkuspecService;
 @Service("skuspecService")
 public class SkuspecServiceImpl implements ISkuspecService {
 
-	public int createSkuspec(Object skuid,Object specids) {
+	public int createSkuspec(Object skuid,Object specids,Object specvalues) {
 		String spids = specids.toString();
+		String spvalues = specvalues.toString();
 		if(spids != "" && spids != null){
 			String speids[] = spids.split(",");
 			for(int i = 0 ;i<speids.length;i++){
 				Skuspec skuspec = new Skuspec();
 				skuspec.setSpecid(Integer.parseInt(speids[i].toString()));
 				skuspec.setSkuid(Integer.parseInt(skuid.toString()));
+				if(spvalues != "" && spvalues != null){
+					String svalue[] = spvalues.split(",");
+						skuspec.setSpecvalue(svalue[i].toString());
+				}
 				skuspecDAO.createSkuspec(skuspec);
 			}	
 		}

@@ -10,7 +10,7 @@
 		</tr>
 		<tr>
 			<td>来源平台：</td>
-			<td><input  id="id_fromsys" class="easyui-textbox" type="text" name="fromsys" data-options="required:false"></input></td>
+			<td><input  id="cbx_fromsys" class="easyui-textbox" type="text" name="fromsys" data-options="required:false"></input></td>
 		</tr>
 		<tr>
 			<td>名称：</td>
@@ -33,13 +33,22 @@
 	</table>
 </form>
 <script>
-BSS.dispatch({code:14092,data:[{id:'${id}'}]},function(resp){
-	BSS.json2form('#frm_prod',resp.data[0]);
-});
-PRODDIALOG.ok = function(){
+
+var fromsysCombox = new BSS.Combox('#cbx_fromsys');
+fromsysCombox.fromDict('DICT_FROMSYS',function(){
+	 
+	initRoleEditPage();
+  });
+
+function initRoleEditPage(){
+  BSS.dispatch({code:14092,data:[{id:'${id}'}]},function(resp){
+	  BSS.json2form('#frm_prod',resp.data[0]);
+   });
+  PRODDIALOG.ok = function(){
 	var prod = BSS.form2json('#frm_prod');
 	BSS.dispatch({code:14014,data:[prod]},function(){
 		BSS.alert('保存成功！');
 	},function(){});	
+ }
 }
 </script>

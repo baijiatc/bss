@@ -56,17 +56,11 @@ public class ProductView extends Pagination{
 	}
 
 	public String getFromsysStr() {
-		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_FORMSYS.toString(), String.valueOf(fromsys));
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_FROMSYS.toString(), String.valueOf(fromsys));
 	}
 
 
-	public String getCatStr() {
-		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_CAT.toString(), String.valueOf(catid));
-	}
-	
-	public String getBrandStr() {
-		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_BRAND.toString(), String.valueOf(brandid));
-  }
+ 
 	public boolean isChecked() {
 		return checked;
 	}

@@ -20,7 +20,7 @@
 	
 	 
 	
-	<select id="delectById" >
+	<select id="delectPPById" >
 		 DELETE FROM productparam  WHERE  productid= #{productid}
 	</select>
 

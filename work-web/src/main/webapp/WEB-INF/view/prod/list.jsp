@@ -13,10 +13,8 @@ $(function(){
           {field:'fromsys',title: '来源平台值',align: 'center',hidden:'true'},
           {field:'fromsysStr',title: '来源平台',align: 'center',width: 200},
           {field:'prodname',title: '名称',align: 'center',width: 200},
-          {field:'catid',title: '类别值',align: 'center',hidden:'true'},
-          {field:'catStr',title: '类别',align: 'center',width: 200},
-          {field:'brandid',title: '品牌值',align: 'center',hidden:'true'},
-          {field:'brandStr',title: '品牌',align: 'center',width: 200},
+          {field:'catid',title: '类别',align: 'center',width: 200},
+          {field:'brandid',title: '品牌',align: 'center',width: 200},
           {field:'description',title: '商品详情',align: 'center',width: 200},
          
 		]]

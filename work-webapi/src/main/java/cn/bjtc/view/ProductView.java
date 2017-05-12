@@ -1,5 +1,8 @@
 package cn.bjtc.view;
 
+import cn.bjtc.api.BaseDictType;
+import cn.bjtc.common.ApplicationDataManager;
+
 public class ProductView extends Pagination{
 
 	private Integer id;
@@ -14,8 +17,7 @@ public class ProductView extends Pagination{
 		return id;
 	}
 	public void setId(Integer id) {
-		this.id = id;
-	}
+		this.id = id;	}
 	public String getSourceid() {
 		return sourceid;
 	}
@@ -52,6 +54,13 @@ public class ProductView extends Pagination{
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	public String getFromsysStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_FROMSYS.toString(), String.valueOf(fromsys));
+	}
+
+
+ 
 	public boolean isChecked() {
 		return checked;
 	}

@@ -11,6 +11,7 @@ public class SpecView extends Pagination{
 	private Integer spectype;
 	private Integer specst;
 	private boolean checked;
+
 	public Integer getId() {
 		return id;
 	}

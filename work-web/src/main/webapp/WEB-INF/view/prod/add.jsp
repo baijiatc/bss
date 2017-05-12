@@ -9,7 +9,7 @@
 		</tr>
 		<tr>
 			<td>来源平台：</td>
-			<td><input class="easyui-textbox" type="text" name="fromsys" data-options="required:false"></input></td>
+			<td><input  id="cbx_fromsys"  class="easyui-textbox" type="text" name="fromsys" data-options="required:false"></input></td>
 		</tr>
 		<tr>
 			<td>名称：</td>
@@ -17,12 +17,12 @@
 		</tr>
 			<tr>
 			<td>类别：</td>
-			<td><input class="easyui-textbox" type="text" name="catid" data-options="required:false"></input></td>
+			<td><input  id="cbx_catid"  class="easyui-textbox" type="text" name="catid" data-options="required:false"></input></td>
 		</tr>
 		
 		<tr>
 			<td>品牌：</td>
-			<td><input class="easyui-textbox" type="text" name="brandid" data-options="required:true"></input></td>
+			<td><input  id="cbx_brandid" class="easyui-textbox" type="text" name="brandid" data-options="required:true"></input></td>
 		</tr>
 		<tr>
 			<td>商品详情：</td>
@@ -32,6 +32,15 @@
 	</table>
 </form>
 <script>
+var fromsysCombox = new BSS.Combox('#cbx_fromsys');
+var catCombox=new BSS.Combox('#cbx_catid');
+var brandCombox=new BSS.Combox('#cbx_brandid');
+fromsysCombox.fromDict('DICT_FROMSYS',function(){
+	 
+	setOk();
+  });
+ 
+
 PRODDIALOG.ok = function(){
 	var prod= BSS.form2json('#frm_prod');
 	BSS.dispatch({code:14013,data:[prod]},function(){

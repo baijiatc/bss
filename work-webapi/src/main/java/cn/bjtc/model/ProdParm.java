@@ -5,7 +5,7 @@ public class ProdParm {
 	private Integer id;
 	private Integer productid;
 	private Integer paramid;
-//	private String  paramvalue;
+ 	private String  paramvalue;
 	public Integer getId() {
 		return id;
 	}

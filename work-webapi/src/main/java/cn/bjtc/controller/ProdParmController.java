@@ -28,14 +28,14 @@ public class ProdParmController extends BaseController{
 			ifParamDataIsEmpty(param);
 			Object paramid = param.getData().get(0).get("paramid");
 			Object productid = param.getData().get(0).get("productid");
-			 ppService.delectById(productid);
+			 ppService.delectProdParmById(productid);
 			 if(paramid != "" && paramid != null){
 				 ppService.saveProdParms(productid, paramid); 
 				 
-			 }
- 		} catch (Exception e) {
-  		showServerError();
- 		}
+ 			 }
+  		} catch (Exception e) {
+   		showServerError();
+ 		} 
 		return apiReturn;
 	}
 	

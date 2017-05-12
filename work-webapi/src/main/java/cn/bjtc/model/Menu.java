@@ -9,8 +9,17 @@ public class Menu {
 	private String icon;
 	private Integer sort;
 	private Integer menust;//1-启用，0-停用，-1删除
+	
+	private String parentname;
+	
  
 	
+	public String getParentname() {
+		return parentname;
+	}
+	public void setParentname(String parentname) {
+		this.parentname = parentname;
+	}
 	public Integer getMenuid() {
 		return menuid;
 	}

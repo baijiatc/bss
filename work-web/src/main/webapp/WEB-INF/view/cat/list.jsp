@@ -20,6 +20,17 @@ $(function(){
 	//构建datagrid，并填充数据
 	var catGrid = new BSS.DataGrid('#tbl_cat_datagrid');
 	CATDIALOG = new BSS.Dialog('#div_catadd');
+	
+	catGrid.toolbar.push({iconCls:'icon-redo',text:'规格分配 ',handler:function(){
+		var row=catGrid.getSelectedRow();
+			if(BSS.Helper.isNull(row)){
+				BSS.warning('请选择数据行');
+				return;
+			}
+			var id = row['id'];
+			CATDIALOG.init({href:'cateSpec/'+id+'.html',width:400});
+	}});
+	
 	catGrid.build(options,{code:14006});
 	//设置新建事件
 	catGrid.create = function(){

@@ -14,7 +14,7 @@
 		</tr>
 		<tr>
 			<td>父级菜单：</td>
-			<td><input id="id_parentid"  class="easyui-textbox" type="text" name="parentid" data-options="required:false"></input></td>
+			<td><input id="cbx_parentid"  class="easyui-textbox" type="text" name="parentid" data-options="required:false"></input></td>
 		</tr>
 		<tr>
 			<td>菜单图标：</td>
@@ -32,12 +32,14 @@
 </form> 
 <script>
 var menuStCombox = new BSS.Combox('#cbx_menust');
+var parentidCombox=new BSS.Combox('#cbx_parentid');
 menuStCombox.fromDict('DICT_MENUST',function(){
+	MENUDIALOG.loadParentMenu('#cbx_parentid',function(){
 	initRoleEditPage();
 });
-
+});
 function initRoleEditPage(){
-	BSS.dispatch({code:21091,data:[{menuid:'${menuid}'}]},function(resp){
+	BSS.dispatch({code:21091,data:[{menuid:'${menuid}'} ]},function(resp){
 		if(resp.code == 0){
 			BSS.json2form('#frm_menu',resp.data[0]);
 			

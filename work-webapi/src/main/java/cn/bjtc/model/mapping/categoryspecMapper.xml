@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Categoryspec">
+	<resultMap type="cn.bjtc.model.Categoryspec" id="CategoryspecMap">
+		<result column="id" property="id"/>
+		<result column="catid" property="catid"/>
+		<result column="specid" property="specid"/>
+		 
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Categoryspec" id="CatespecParamMap">
+		<parameter property="id" resultMap="CategoryspecMap" />
+		<parameter property="catid" resultMap="CategoryspecMap" />
+		<parameter property="specid" resultMap="CategoryspecMap" />
+		 
+	</parameterMap>
+ 
+   <insert id="saveCatespecs" parameterMap="CatespecParamMap">
+		INSERT INTO  categoryspec (catid,specid) VALUES (#{catid},#{specid})
+   </insert>
+	
+	 
+	
+	<select id="delectByCatId" >
+		 DELETE FROM categoryspec  WHERE  catid= #{catid}
+	</select>
+
+</mapper>

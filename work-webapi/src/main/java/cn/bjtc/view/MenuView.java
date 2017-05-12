@@ -15,6 +15,16 @@ public class MenuView extends Pagination{
 	private boolean checked;
 	private boolean disabled;
 	
+	private String parentname;
+	
+	
+	 
+	public String getParentname() {
+		return parentname;
+	}
+	public void setParentname(String parentname) {
+		this.parentname = parentname;
+	}
 	public Integer getMenuid() {
 		return menuid;
 	}
@@ -72,5 +82,9 @@ public class MenuView extends Pagination{
 	
 	public String getMenustStr() {
 		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_MENUST.toString(), String.valueOf(menust));
+	}
+	
+	public String getParentStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_PARENT.toString(), String.valueOf(parentid));
 	}
 }

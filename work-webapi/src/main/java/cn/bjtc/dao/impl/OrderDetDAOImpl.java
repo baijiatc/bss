@@ -21,4 +21,8 @@ public class OrderDetDAOImpl extends MyBatisDAO<OrderDet, Integer> implements
 		return super.countByParam("countAllOrderDets", view);
 	}
 
+	public List<OrderDet> findAllskuNameById(OrderDetView view) {
+		return super.findByParam("findAllskuNameById", view);
+	}
+
 }

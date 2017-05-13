@@ -32,6 +32,9 @@
 	 	<if test="orderid!=null and orderid!=0"> AND orderid=#{orderid}</if>
 	 	LIMIT #{pageOffset},#{pageSize}
 	</select>
+	<select id="findAllskuNameById" resultMap="OrderDetMap" >
+	 	select s.skuname,o.* from orderdet o join sku s on o.skuid = s.id WHERE 1=1 
+	</select>
 	<select id="countAllOrderDets" resultType="Integer" >
 		SELECT count(id) FROM OrderDet WHERE 1=1
 		<if test="orderid!=null and orderid!=0"> AND orderid=#{orderid}</if>

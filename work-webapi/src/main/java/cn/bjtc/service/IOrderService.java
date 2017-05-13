@@ -11,6 +11,6 @@ public interface IOrderService {
 	public List<OrderView> findAllOrder(OrderView view);
 	public Integer countAllOrder(OrderView view);
 	
-	public List<OrderDet> findAllOrderDets(OrderDetView view);
+	public List<OrderDetView> findAllOrderDets(OrderDetView view);
 	public Integer countAllOrderDets(OrderDetView view);
 }

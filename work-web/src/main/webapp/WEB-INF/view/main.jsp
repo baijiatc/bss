@@ -93,7 +93,7 @@ BSS.Combox.prototype.fromDict=function(type,callback){
 };
 BSS.formatTime = function(val,row){
 	if(val <= 0){return '-';}
-	var valDate = new Date(val);
+	var valDate = BSS.DateTime.parseDate(val);
 	return BSS.DateTime.format(valDate);
 }
 </script>

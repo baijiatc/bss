@@ -21,8 +21,8 @@ $(function(){
           {field:'warehouse',title: '库房',align: 'center',width: 150},
           {field:'position',title: '库位',align: 'center',width: 150},
           {field:'batchno',title: '批次号',align: 'center',width: 200},
-          {field:'indt',title: '入库日期',align: 'center',width: 200},
-          {field:'expirydt',title: '过期日期',align: 'center',width: 200},
+          {field:'indt',title: '入库日期',align: 'center',width: 200,formatter:BSS.formatTime},
+          {field:'expirydt',title: '过期日期',align: 'center',width: 200,formatter:BSS.formatTime},
           {field:'stocknum',title: '库位库存数',align: 'center',width: 200}
 		]]
 	};

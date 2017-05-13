@@ -56,9 +56,9 @@ $(function(){
 		BSS.dispatch({code:14006},function(resp){
 			if(resp.code == 0){
 				var datas = resp.data;
-				var options = {valueField:'catid',textField:'catname',data:datas};
-				var catCombox=new BSS.Combox(selector);
-				catCombox.init(options);
+				var options = {valueField:'id',textField:'catname',data:datas};
+				var parentCatCombox=new BSS.Combox(selector);
+				parentCatCombox.init(options);
 				if(jQuery.isFunction(callback)){
 					callback();
 				}
@@ -73,7 +73,7 @@ $(function(){
 		BSS.dispatch({code:14003},function(resp){
 			if(resp.code == 0){
 				var datas = resp.data;
-				var options2 = {valueField:'brandid',textField:'brandname',data:datas};
+				var options2 = {valueField:'id',textField:'brandname',data:datas};
 				var prodGridCombox=new BSS.Combox(selector);
 				prodGridCombox.init(options2);
 				if(jQuery.isFunction(callback)){

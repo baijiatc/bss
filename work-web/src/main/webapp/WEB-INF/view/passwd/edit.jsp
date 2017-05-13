@@ -17,7 +17,7 @@
 	 </table>   
  </form> 
 <script>
-	BSS.dispatch({code:11009,data:[{staffid:'${staffid}'}]},function(resp){
+	function repass(resp){
 		if(resp.code == 0){
 			BSS.json2form('#passwdedit',resp.data[0]);
 			
@@ -41,5 +41,5 @@
 			PASSDIALOG.ok = function(){};
 			BSS.warning(resp.message);
 		}
-	});
+	};
 </script>

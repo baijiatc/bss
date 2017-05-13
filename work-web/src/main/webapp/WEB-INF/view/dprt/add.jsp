@@ -9,11 +9,11 @@
 		</tr>
 		<tr>
 			<td>负责人：</td>
-			<td><input class="easyui-textbox" type="text" name="leader" data-options="required:false"></input></td>
+			<td><input id="cbx_leader" class="easyui-textbox" type="text" name="leader" data-options="required:false"></input></td>
 		</tr>
 		<tr>
 			<td>上级部门：</td>
-			<td><input class="easyui-textbox" type="text" name="parentid" data-options="required:false"></input></td>
+			<td><input id="cbx_parentid" class="easyui-textbox" type="text" name="parentid" data-options="required:false"></input></td>
 		</tr>
 		<tr>
 			<td>地址：</td>
@@ -31,8 +31,14 @@
 </form>
 <script>
 var genderCombox = new BSS.Combox('#cbx_departst');
+var staffCombox = new BSS.Combox('#cbx_leader');
+var parentCombox=new BSS.Combox('#cbx_parentid');
 genderCombox.fromDict('DICT_DEPARTST',function(){
-	setOk();
+	DEPTDIALOG.loadParentDepart('#cbx_parentid',function(){
+		DEPTDIALOG.loadStaff('#cbx_leader',function(){
+		setOk();
+ 		});
+	});
 });
 
 function setOk(){

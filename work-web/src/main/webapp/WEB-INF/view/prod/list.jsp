@@ -13,8 +13,10 @@ $(function(){
           {field:'fromsys',title: '来源平台值',align: 'center',hidden:'true'},
           {field:'fromsysStr',title: '来源平台',align: 'center',width: 200},
           {field:'prodname',title: '名称',align: 'center',width: 200},
-          {field:'catid',title: '类别',align: 'center',width: 200},
-          {field:'brandid',title: '品牌',align: 'center',width: 200},
+          {field:'catid',title: '类别值',align: 'center',hidden:'true'},
+          {field:'catname',title: '类别',align: 'center',width: 220},
+          {field:'brandid',title: '品牌值',align: 'center',hidden:'true'},
+          {field:'brandname',title: '品牌',align: 'center',width: 220},
           {field:'description',title: '商品详情',align: 'center',width: 200},
          
 		]]
@@ -48,5 +50,39 @@ $(function(){
 		var id = row['id'];
 		PRODDIALOG.init({href:'prod/'+id+'.html',width:400});
 	};
+	
+	//设置品类名字
+	PRODDIALOG.loadCatName=function(selector,callback){
+		BSS.dispatch({code:14006},function(resp){
+			if(resp.code == 0){
+				var datas = resp.data;
+				var options = {valueField:'catid',textField:'catname',data:datas};
+				var catCombox=new BSS.Combox(selector);
+				catCombox.init(options);
+				if(jQuery.isFunction(callback)){
+					callback();
+				}
+			}else{
+				BSS.warning(resp.message);
+			}
+		},function(resp){});
+	}
+	
+	//设置品牌名字
+	PRODDIALOG.loadBrandName=function(selector,callback){
+		BSS.dispatch({code:14003},function(resp){
+			if(resp.code == 0){
+				var datas = resp.data;
+				var options2 = {valueField:'brandid',textField:'brandname',data:datas};
+				var prodGridCombox=new BSS.Combox(selector);
+				prodGridCombox.init(options2);
+				if(jQuery.isFunction(callback)){
+					callback();
+				}
+			}else{
+				BSS.warning(resp.message);
+			}
+		},function(resp){});
+	}
 })
 </script>

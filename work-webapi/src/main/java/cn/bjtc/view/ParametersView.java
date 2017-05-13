@@ -49,4 +49,10 @@ public class ParametersView extends Pagination{
 	public void setChecked(boolean checked) {
 		this.checked = checked;
 	}
+	public String getParamtypeStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_PARAMTYPE.toString(), String.valueOf(paramtype));
+	}
+	public String getParamstStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_PARAMST.toString(), String.valueOf(paramst));
+	}
 }

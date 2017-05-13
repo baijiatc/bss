@@ -2,7 +2,12 @@ package cn.bjtc.view;
 
 import cn.bjtc.api.BaseDictType;
 import cn.bjtc.common.ApplicationDataManager;
+import cn.bjtc.service.impl.DepartServiceImpl;
 
+/**
+ * @author Mr.wu
+ *
+ */
 public class DepartView extends Pagination {
 	private Integer departid;
 	private String departname;
@@ -11,6 +16,8 @@ public class DepartView extends Pagination {
 	private String address;
 	private String telephone;
 	private Integer departst;
+	private String parentStr;
+	private String staffname;
 	public Integer getDepartid() {
 		return departid;
 	}
@@ -52,6 +59,18 @@ public class DepartView extends Pagination {
 	}
 	public void setDepartst(Integer departst) {
 		this.departst = departst;
+	}
+	public String getParentStr() {
+		return parentStr;
+	}
+	public void setParentStr(String parentStr) {
+		this.parentStr = parentStr;
+	}
+	public String getStaffname() {
+		return staffname;
+	}
+	public void setStaffname(String staffname) {
+		this.staffname = staffname;
 	}
 	public String getDepartStr() {
 		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_DEPARTST.toString(), String.valueOf(departst));

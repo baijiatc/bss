@@ -28,6 +28,9 @@ public class ProdDAOImpl extends MyBatisDAO<Product, Integer>
 	public List<Product> findAllProds(ProductView view) {
 		return super.findByParam("findAllProds", view);
 	}
+	public List<Product> findAllnames(ProductView view) {
+		return super.findByParam("findAllnames", view);
+	}
 
 	public Integer countAllProds(ProductView view) {
 		return super.countByParam("countAllProds", view);

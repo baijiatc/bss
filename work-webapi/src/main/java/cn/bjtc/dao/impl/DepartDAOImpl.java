@@ -3,6 +3,7 @@ package cn.bjtc.dao.impl;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import cn.bjtc.dao.IDepartDAO;
@@ -30,5 +31,9 @@ public class DepartDAOImpl extends MyBatisDAO<Depart, Integer> implements
 
 	public Integer countAllDepart(DepartView view) {
 		return super.countByParam("countAllDepart", view);
+	}
+
+	public List<Depart> findAllDepartStaff(DepartView view) {
+		return super.findByParam("findAllDepartStaff", view);
 	}
 }

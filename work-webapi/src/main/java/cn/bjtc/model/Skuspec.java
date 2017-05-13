@@ -5,6 +5,7 @@ public class Skuspec {
 	private Integer id;
 	private Integer skuid;
 	private Integer specid;
+	private String specvalue;
 	public Integer getId() {
 		return id;
 	}
@@ -22,5 +23,11 @@ public class Skuspec {
 	}
 	public void setSpecid(Integer specid) {
 		this.specid = specid;
+	}
+	public String getSpecvalue() {
+		return specvalue;
+	}
+	public void setSpecvalue(String specvalue) {
+		this.specvalue = specvalue;
 	}
 }

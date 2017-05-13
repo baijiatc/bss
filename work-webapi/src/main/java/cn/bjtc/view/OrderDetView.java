@@ -12,6 +12,7 @@ public class OrderDetView  extends Pagination{
 	private double platformpay;
 	private double refundfee;
 	private Integer num;
+	private String skuname;
 	public Integer getId() {
 		return id;
 	}
@@ -77,5 +78,11 @@ public class OrderDetView  extends Pagination{
 	}
 	public void setNum(Integer num) {
 		this.num = num;
+	}
+	public String getSkuname() {
+		return skuname;
+	}
+	public void setSkuname(String skuname) {
+		this.skuname = skuname;
 	}
 }

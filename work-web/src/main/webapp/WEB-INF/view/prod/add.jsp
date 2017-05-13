@@ -33,16 +33,15 @@
 </form>
 <script>
 var fromsysCombox = new BSS.Combox('#cbx_fromsys');
-var catCombox = new BSS.Combox('#cbx_catid');
-var brandCombox = new BSS.Combox('#cbx_brandid');
 fromsysCombox.fromDict('DICT_FROMSYS',function(){
 	PRODDIALOG.loadCatName('#cbx_catid',function(){
 		PRODDIALOG.loadBrandName('#cbx_brandid',function(){
 			setOk();
-    });
-   });
-})
- function setOk(){
+		});
+	});
+});
+
+function setOk(){
 	PRODDIALOG.ok = function(){
 		var prod= BSS.form2json('#frm_prod');
 		BSS.dispatch({code:14013,data:[prod]},function(resp){

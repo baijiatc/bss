@@ -6,6 +6,7 @@ public class StockView extends Pagination {
 	private Integer skuid;
 	private Integer stocknum;
 	private Integer minstock;
+	private String skuname;
 	
 	public Integer getStockid() {
 		return stockid;
@@ -36,5 +37,11 @@ public class StockView extends Pagination {
 	}
 	public void setMinstock(Integer minstock) {
 		this.minstock = minstock;
+	}
+	public String getSkuname() {
+		return skuname;
+	}
+	public void setSkuname(String skuname) {
+		this.skuname = skuname;
 	}
 }

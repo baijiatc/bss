@@ -46,7 +46,7 @@
 		</tr>
 		<tr>
 			<td>所属部门：</td>
-			<td><input id="id_departid" class="easyui-textbox" type="text" name="departid" data-options="required:true"></input></td>
+			<td><input id="cbx_departid" class="easyui-textbox" type="text" name="departid" data-options="required:true"></input></td>
 		</tr>
 		<tr>
 			<td>紧急联系人：</td>
@@ -75,13 +75,16 @@
 	</table>
 </form>
 <script>
+var deptNameCombox = new BSS.Combox('#cbx_departid');
 var genderCombox = new BSS.Combox('#cbx_gender');
 genderCombox.fromDict('DICT_GENDER',function(){
 	var staffstCombox = new BSS.Combox('#cbx_staffst');
 	staffstCombox.fromDict('DICT_STAFFST',function(){
 		var eduCombox = new BSS.Combox('#cbx_edu');
 		eduCombox.fromDict('DICT_EDU',function(){
-			initStaffEditPage();
+			STAFFDIALOG.loadDepartName('#cbx_departid',function(){
+				initStaffEditPage();
+			});
 		});
 	});
 });

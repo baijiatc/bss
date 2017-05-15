@@ -42,7 +42,7 @@
 		<parameter property="creator" resultMap="StaffMap" />
 	</parameterMap>
 	<insert id="saveStaff" parameterMap="StaffParamMap">
-		INSERT INTO staff(staffid,staffname,gender,mobile,idcard,telephone,email,edu,jobstation,passwd,address,departid,emername,emerphone,staffst,leavetime,jointime,creator) VALUES (#{staffid},#{staffname},#{gender},#{mobile},#{idcard},#{telphone},#{email},#{edu},#{jobstation},#{passwd},#{address},#{departid},#{emername},#{emerphone},#{staffst},#{leavetime},#{jointime},#{creator})
+		INSERT INTO staff(staffid,staffname,gender,mobile,idcard,telephone,email,edu,jobstation,passwd,address,departid,emername,emerphone,staffst,leavetime,jointime,creator) VALUES (#{staffid},#{staffname},#{gender},#{mobile},#{idcard},#{telephone},#{email},#{edu},#{jobstation},#{passwd},#{address},#{departid},#{emername},#{emerphone},#{staffst},#{leavetime},#{jointime},#{creator})
 	</insert>
 	
 	<update id="updateStaff" parameterMap="StaffParamMap">
@@ -113,5 +113,8 @@
 	 	<if test="leavetime!=null and leavetime!=0"> AND leavetime=#{leavetime}</if>
 	 	<if test="jointime!=null and jointime!=0"> AND jointime=#{jointime}</if>
 	 	<if test="creator!=null and creator!=0"> AND creator=#{creator}</if>
+	</select>
+	<select id="findAllDepartName" resultMap="StaffMap" >
+		SELECT d.departname,s.* FROM depart d join staff s on d.departid = s.departid
 	</select>
 </mapper>

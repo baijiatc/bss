@@ -16,7 +16,7 @@ $(function(){
           {field:'cstmlevel',title: '级别',align: 'center',width: 200},
           {field:'cstmst',title: '状态值',align: 'center',hidden:'true'},
           {field:'cstmstStr',title: '状态',align: 'center',width: 200},
-          {field:'regtime',title: '申请时间',align: 'center',width: 200}
+          {field:'regtime',title: '申请时间',align: 'center',width: 200,formatter:BSS.formatTime}
 		]]
 	};
 	var cstmchkGrid = new BSS.DataGrid('#tbl_cstmchk_datagrid');

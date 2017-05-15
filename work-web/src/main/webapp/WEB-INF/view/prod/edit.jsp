@@ -18,12 +18,12 @@
 		</tr>
 			<tr>
 			<td>类别：</td>
-			<td><input  id="id_catid" class="easyui-textbox" type="text" name="catid" data-options="required:false"></input></td>
+			<td><input  id="cbx_catid" class="easyui-textbox" type="text" name="catid" data-options="required:false"></input></td>
 		</tr>
 		
 		<tr>
 			<td>品牌：</td>
-			<td><input id="id_brandid"  class="easyui-textbox" type="text" name="brandid" data-options="required:true"></input></td>
+			<td><input id="cbx_brandid"  class="easyui-textbox" type="text" name="brandid" data-options="required:true"></input></td>
 		</tr>
 		<tr>
 			<td>商品详情：</td>
@@ -35,12 +35,16 @@
 <script>
 
 var fromsysCombox = new BSS.Combox('#cbx_fromsys');
+var catCombox = new BSS.Combox('#cbx_catid');
+var brandCombox = new BSS.Combox('#cbx_brandid');
 fromsysCombox.fromDict('DICT_FROMSYS',function(){
-	 
-	initRoleEditPage();
-  });
-
-function initRoleEditPage(){
+	PRODDIALOG.loadCatName('#cbx_catid',function(){
+		PRODDIALOG.loadBrandName('#cbx_brandid',function(){
+			initProdEditPage();
+    });
+   });
+})
+function initProdEditPage(){
   BSS.dispatch({code:14092,data:[{id:'${id}'}]},function(resp){
 	  BSS.json2form('#frm_prod',resp.data[0]);
    });

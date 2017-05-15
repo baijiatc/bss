@@ -10,6 +10,7 @@ public interface IProdDAO {
 	public int saveProd(ProductView view);
 	public int updateProd(ProductView view);
 	public List<Product> findAllProds(ProductView view);
+	public List<Product> findAllnames(ProductView view);
 	public Integer countAllProds(ProductView view);
 	public List<Product> findAllproBySkuId(Object skuid);
 }

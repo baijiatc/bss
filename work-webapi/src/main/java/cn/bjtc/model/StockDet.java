@@ -5,8 +5,8 @@ public class StockDet {
 	private String warehouse;
 	private String position;
 	private String batchno;
-	private Integer indt;
-	private Integer expirydt;
+	private Long indt;
+	private Long expirydt;
 	private Integer stocknum;
 	private Integer stockid;
 	
@@ -34,16 +34,16 @@ public class StockDet {
 	public void setBatchno(String batchno) {
 		this.batchno = batchno;
 	}
-	public Integer getIndt() {
+	public Long getIndt() {
 		return indt;
 	}
-	public void setIndt(Integer indt) {
+	public void setIndt(Long indt) {
 		this.indt = indt;
 	}
-	public Integer getExpirydt() {
+	public Long getExpirydt() {
 		return expirydt;
 	}
-	public void setExpirydt(Integer expirydt) {
+	public void setExpirydt(Long expirydt) {
 		this.expirydt = expirydt;
 	}
 	public Integer getStocknum() {

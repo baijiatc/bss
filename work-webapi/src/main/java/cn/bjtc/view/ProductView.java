@@ -13,6 +13,24 @@ public class ProductView extends Pagination{
 	private Integer brandid;
 	private String  description;//商品详情
 	private boolean checked;
+	 
+	private String catname;
+	private String brandname;
+	
+ 
+ 
+	public String getCatname() {
+		return catname;
+	}
+	public void setCatname(String catname) {
+		this.catname = catname;
+	}
+	public String getBrandname() {
+		return brandname;
+	}
+	public void setBrandname(String brandname) {
+		this.brandname = brandname;
+	}
 	public Integer getId() {
 		return id;
 	}

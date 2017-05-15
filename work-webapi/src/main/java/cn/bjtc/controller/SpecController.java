@@ -102,9 +102,10 @@ public class SpecController extends BaseController {
 			ifParamDataIsEmpty(param);
 			Object specids = param.getData().get(0).get("specid");
 			Object skuid = param.getData().get(0).get("skuid");
+			Object specvalue = param.getData().get(0).get("specvalue");
 			skuspecService.deleteById(skuid);
 			if(specids != null && specids !=""){
-				skuspecService.createSkuspec(skuid, specids);
+				skuspecService.createSkuspec(skuid, specids,specvalue);
 			}
 		} catch (Exception e) {
 			showServerError();

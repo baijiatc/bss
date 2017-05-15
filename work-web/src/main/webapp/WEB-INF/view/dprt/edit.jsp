@@ -10,11 +10,11 @@
 		</tr>
 		<tr>
 			<td>负责人：</td>
-			<td><input id="id_leader" class="easyui-textbox" type="text" name="leader" data-options="required:false"></input></td>
+			<td><input id="cbx_leader" class="easyui-textbox" type="text" name="leader" data-options="required:false"></input></td>
 		</tr>
 		<tr>
 			<td>上级部门：</td>
-			<td><input id="id_parentid" class="easyui-textbox" type="text" name="parentid" data-options="required:false"></input></td>
+			<td><input id="cbx_parentid" class="easyui-textbox" type="text" name="parentid" data-options="required:false"></input></td>
 		</tr>
 		<tr>
 			<td>地址：</td>
@@ -32,13 +32,18 @@
 </form>
 <script>
 var genderCombox = new BSS.Combox('#cbx_departst');
+var parentCombox=new BSS.Combox('#cbx_parentid');
+var staffCombox = new BSS.Combox('#cbx_leader');
 genderCombox.fromDict('DICT_DEPARTST',function(){
-	initdprtEditPage();
+	DEPTDIALOG.loadParentDepart('#cbx_parentid',function(){
+		DEPTDIALOG.loadStaff('#cbx_leader',function(){
+		initdprtEditPage();
+		});
+	});
 });
-
 function initdprtEditPage(){
 	BSS.dispatch({code:11010,data:[{departid:'${departid}'}]},function(resp){
-		if(resp.code == 0){
+	    if(resp.code == 0){
 			BSS.json2form('#frm_deport',resp.data[0]);
 			
 			DEPTDIALOG.ok = function(){

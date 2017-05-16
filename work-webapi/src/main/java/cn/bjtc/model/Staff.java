@@ -20,6 +20,7 @@ public class Staff {
 	private Integer leavetime;
 	private Integer jointime;
 	private Integer creator;
+	private String departname;
 	public Integer getStaffid() {
 		return staffid;
 	}
@@ -127,5 +128,11 @@ public class Staff {
 	}
 	public void setMobile(Long mobile) {
 		this.mobile = mobile;
+	}
+	public String getDepartname() {
+		return departname;
+	}
+	public void setDepartname(String departname) {
+		this.departname = departname;
 	}
 }

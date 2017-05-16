@@ -7,6 +7,7 @@ public class Spec {
 	private String specdesc;
 	private Integer spectype;
 	private Integer specst;
+	private String specvalue;
 	public Integer getId() {
 		return id;
 	}
@@ -36,5 +37,11 @@ public class Spec {
 	}
 	public void setSpecst(Integer specst) {
 		this.specst = specst;
+	}
+	public String getSpecvalue() {
+		return specvalue;
+	}
+	public void setSpecvalue(String specvalue) {
+		this.specvalue = specvalue;
 	}
 }

@@ -11,7 +11,7 @@ public class SpecView extends Pagination{
 	private Integer spectype;
 	private Integer specst;
 	private boolean checked;
-
+	private String specvalue;
 	public Integer getId() {
 		return id;
 	}
@@ -53,5 +53,11 @@ public class SpecView extends Pagination{
 	}
 	public void setChecked(boolean checked) {
 		this.checked = checked;
+	}
+	public String getSpecvalue() {
+		return specvalue;
+	}
+	public void setSpecvalue(String specvalue) {
+		this.specvalue = specvalue;
 	}
 }

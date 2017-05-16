@@ -32,4 +32,8 @@ public class StaffDAOImpl extends MyBatisDAO<Staff, Integer> implements
 		return super.countByParam("countAllStaff", view);
 	}
 
+	public List<Staff> findAllDepartName(StaffView view) {
+		return super.findByParam("findAllDepartName", view);
+	}
+
 }

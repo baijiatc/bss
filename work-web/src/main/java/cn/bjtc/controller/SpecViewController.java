@@ -13,6 +13,7 @@ import cn.bjtc.annotation.SysPrivilege;
 public class SpecViewController {
 
 	@RequestMapping(value="show.html",method=RequestMethod.GET)
+	@SysPrivilege(name="spec:show")
 	public String showSpecView(){
 		return "spec/list";
 	}

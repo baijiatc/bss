@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 			<div id="div_customer_tab" class="easyui-tabs">
 				<div title="会员">
-					<ul id="customer_memb"></ul>
+					<table id="customer_memb" class="easyui-datagrid"></table>
 				</div>
 				<div title="商户">
-					<ul id="customer_bus"></ul>
+					<table id="customer_bus" class="easyui-datagrid"></table>
 				</div>
 			</div>
 	<div id="div_customer_center" data-options="region:'center'" style="width:auto">
@@ -37,7 +37,12 @@ $(function(){
           {field:'cstmstStr',title: '状态',align: 'center',width: 200}
 		]]
 	};
-	
+	//构建会员datagrid，并填充数据
+	var custmembGrid = new BSS.DataGrid('#customer_memb');
+	custmembGrid.toolbar=null;
+	custmembGrid.build(options1,{code:12002,data:[{cstmtype:1}]});
+	//table
+ 
 	var options2={
 			columns:[[
 	          {field:'cstmid',title: 'ID',align: 'center',hidden:'true'},
@@ -57,12 +62,6 @@ $(function(){
 	          {field:'cstmstStr',title: '状态',align: 'center',width: 200}
 			]]
 		};
-	//构建会员datagrid，并填充数据
-	var custmembGrid = new BSS.DataGrid('#customer_memb');
-	custmembGrid.toolbar=null;
-	custmembGrid.build(options1,{code:12002,data:[{cstmtype:1}]});
-	//table
- 
 	//构建商户datagrid，并填充数据
 	var custbusGrid = new BSS.DataGrid('#customer_bus');
 	custbusGrid.toolbar=null;

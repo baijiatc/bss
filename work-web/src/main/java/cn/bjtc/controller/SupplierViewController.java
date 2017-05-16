@@ -14,6 +14,7 @@ import cn.bjtc.annotation.SysPrivilege;
 public class SupplierViewController {
 
 	@RequestMapping(value="show.html",method=RequestMethod.GET)
+	@SysPrivilege(name="supp:show")
 	public String showSupplierView(){
 		return "supplier/list";
 	}

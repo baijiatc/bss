@@ -71,7 +71,7 @@
 	</update>
 	
 	<select id="findAllStaff" resultMap="StaffMap" >
-	 	SELECT * FROM staff WHERE 1=1 
+	 	SELECT * FROM staff WHERE 1=1 AND departid>0
 	 	<if test="staffid!=null and staffid!=0"> AND staffid=#{staffid}</if>
 	 	<if test="staffname!=null and staffname!=''"> AND staffname=#{staffname}</if>
 	 	<if test="gender!=null and gender!=0"> AND gender=#{gender}</if>

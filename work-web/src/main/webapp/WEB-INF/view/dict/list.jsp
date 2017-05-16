@@ -9,7 +9,8 @@ $(function(){
           {field:'dictid',title: 'ID',align: 'center',hidden:'true'},
           {field:'dictname',title: '枚举名称',align: 'center',width: 200},
           {field:'dictval',title: '枚举值',align: 'center',width: 200},
-          {field:'dicttype',title: '枚举类型',align: 'center',width: 200},
+          {field:'dicttype',title: '枚举类型值',align:'center', hidden:'true'},
+          {field:'dictTypeStr',title: '枚举类型',align: 'center',width: 200},
           {field:'dictst',title: '状态值',align: 'center',hidden:'true'},
           {field:'dictstStr',title: '状态',align: 'center',width: 200},
 		]]

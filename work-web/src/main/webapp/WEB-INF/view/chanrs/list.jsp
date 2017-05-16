@@ -17,22 +17,37 @@ $(function(){
 		]]
 	};
 	//构建datagrid，并填充数据
-	var dataGrid = new BSS.DataGrid('#tbl_chanrs_datagrid');
-	SUPPRSDIALOG = new BSS.Dialog('#div_chanrsadd');
-	dataGrid.build(options,{code:13006});
+	var chanDataGrid = new BSS.DataGrid('#tbl_chanrs_datagrid');
+	CHANRSDIALOG = new BSS.Dialog('#div_chanrsadd');
+	chanDataGrid.build(options,{code:13006});
 	//设置新建事件
-	dataGrid.create = function(){
-		SUPPRSDIALOG.init({href:'chanrs/add.html',width:400});
+	chanDataGrid.create = function(){
+		CHANRSDIALOG.init({href:'chanrs/add.html',width:400});
 	};
 	//设置编辑事件
-	dataGrid.edit = function(){
+	chanDataGrid.edit = function(){
 		var row=this.getSelectedRow();
 		if(BSS.Helper.isNull(row)){
 			BSS.warning('请选择要编辑的数据行');
 			return;
 		}
 		var staffobjid = row['staffobjid'];
-		SUPPRSDIALOG.init({href:'chanrs/'+staffobjid+'.html',width:400});
+		CHANRSDIALOG.init({href:'chanrs/'+staffobjid+'.html',width:400});
 	};
+	CHANRSDIALOG.loadStaff=function(selector,callback){
+		BSS.dispatch({code:11003,data:[{departid:7}]},function(resp){
+			if(resp.code == 0){
+				var datas = resp.data;
+				var options = {valueField:'staffid',textField:'staffname',data:datas};
+				var staffCombox=new BSS.Combox(selector);
+				staffCombox.init(options);
+				if(jQuery.isFunction(callback)){
+					callback();
+				}
+			}else{
+				BSS.warning(resp.message);
+			}
+		},function(resp){});
+	}
 })
 </script>

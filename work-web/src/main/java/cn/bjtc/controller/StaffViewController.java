@@ -13,6 +13,7 @@ import cn.bjtc.annotation.SysPrivilege;
 public class StaffViewController {
 
 	@RequestMapping(value="show.html",method=RequestMethod.GET)
+	@SysPrivilege(name="staff:show")
 	public String showUserView(){
 		return "staff/list";
 	}

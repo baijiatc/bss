@@ -13,6 +13,7 @@ import cn.bjtc.annotation.SysPrivilege;
 public class PasswdViewController {
 
 	@RequestMapping(value="show.html",method=RequestMethod.GET)
+	@SysPrivilege(name="pwd:show")
 	public String showPasswdView(){
 		return "passwd/list";
 	}

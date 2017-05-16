@@ -13,6 +13,7 @@ import cn.bjtc.annotation.SysPrivilege;
 public class ParametersViewController {
 
 	@RequestMapping(value="show.html",method=RequestMethod.GET)
+	@SysPrivilege(name="param:show")
 	public String showParametersView(){
 		return "parameters/list";
 	}

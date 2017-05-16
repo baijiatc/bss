@@ -72,14 +72,18 @@ public class SpecServiceImpl implements ISpecService {
 		List<Spec> allSpecs = specDAO.findAllSpecs(view);
 		List<Spec> skuSpecs = specDAO.findAllSpecBySkuId(skuid);
 		Map<String,Spec> skuSpecMap = new HashMap<String, Spec>();
+		Map<String,String> svalues = new HashMap<String,String>();
 		for(Spec spec : skuSpecs){
 			skuSpecMap.put(spec.getSpecname(), spec);
+			svalues.put("v"+spec.getId(),spec.getSpecvalue());
 		}
 		List<SpecView> views = new ArrayList<SpecView>(allSpecs.size());
 		for(Spec spec : allSpecs){
 			SpecView specView = new SpecView();
 			if(skuSpecMap.containsKey(spec.getSpecname())){
 				specView.setChecked(true);
+				specView.setSpecvalue(svalues.get("v"+spec.getId()));
+				spec.setSpecvalue(svalues.get("v"+spec.getId()));
 			}
 			BeanUtils.copyProperties(spec, specView);
 			views.add(specView);

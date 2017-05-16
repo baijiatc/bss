@@ -14,9 +14,7 @@ $(function(){
 					var len = data.length;
 					for(var i = 0; i < len; i++){
 						var spec = data[i];
-						var  html = '&nbsp<input id="id_specvalue'+i+'" class="easyui-textbox unrequired" required="true" name="specvalue" placeholder="请填写规格值"></input>';
-// 						$("#id_specvalue"+i+"").value=spec.specvalue;
-// 						alert(JSON.stringify(resp.data));
+						var  html = '&nbsp<input id="id_specvalue'+i+'" class="easyui-textbox unrequired" required="true" name="specvalue'+i+'" placeholder="请填写规格值"></input>';
 						var node = {text:spec.specname+html,id:spec.id,checked:spec.checked};
 						nodes.push(node);
 					}
@@ -24,7 +22,10 @@ $(function(){
 						data:nodes,
 						checkbox:true
 						})
-						
+						for(var i = 0; i < len; i++){
+							var specs = data[i];
+							$("#id_specvalue"+i+"").val(specs.specvalue);
+						}
 						SKUDIALOG.ok = function(){
 							var nodes = specTree.getChecked();
 							var len = nodes.length;

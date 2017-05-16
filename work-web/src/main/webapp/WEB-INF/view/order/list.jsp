@@ -35,7 +35,7 @@ $(function(){
 			columns:[[
 	          {field:'id',title: 'ID',align: 'center',hidden:'true'},
 	          {field:'skuid',title: 'SKU值',align: 'center',hidden:'true'},
-	          {field:'skuname',title: 'SKU',align: 'center',width: 100},
+	          {field:'skuname',title: 'SKU',align: 'center',width: 500},
 	          {field:'price',title: '商品价格',align: 'center',width: 100},
 	          {field:'payment',title: '实付金额',align: 'center',width: 100},
 	          {field:'totalpay',title: '应付金额',align: 'center',width: 100},

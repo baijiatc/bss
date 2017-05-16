@@ -44,5 +44,7 @@ public class DictionaryView extends Pagination {
 	public String getDictstStr() {
 		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_DICTST.toString(), String.valueOf(dictst));
 	}
-    
+	public String getDictTypeStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_DICTTY.toString(), String.valueOf(dicttype));
+	}
 }

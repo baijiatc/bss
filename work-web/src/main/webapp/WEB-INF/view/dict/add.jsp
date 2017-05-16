@@ -18,7 +18,7 @@
 		<tr>
 			<td>枚举类型：</td>
 			<td>
-				<input class="easyui-textbox" type="text" name="dicttype" data-options="required:true"></input> 
+				<input  id="cbx_dicttype" class="easyui-textbox" type="text" name="dicttype" data-options="required:true"></input> 
 				 
 			</td>
 		</tr>
@@ -35,10 +35,12 @@
 </form>
 <script>
 var dictStCombox = new BSS.Combox('#cbx_dictst');
+var dicttypeCombox = new BSS.Combox('#cbx_dicttype');
 dictStCombox.fromDict('DICT_DICTST',function(){
+	dicttypeCombox.fromDict('DICT_DICTTY',function(){
 	setOk();
 });
-
+});
 function setOk(){
 	DICTDIALOG.ok = function(){
 		var dict = BSS.form2json('#frm_dict');

@@ -9,7 +9,8 @@ $(function(){
 		columns:[[
           {field:'stockid',title: 'ID',align: 'center',hidden:'true'},
           {field:'productid',title: '商品',align: 'center',width: 200},
-          {field:'skuid',title: '商品SKU',align: 'center',width: 200},
+          {field:'skuid',title: '商品SKUID',align: 'center',hidden:'true'},
+          {field:'skuname',title: '商品SKU',align: 'center',width: 200},
           {field:'stocknum',title: '库存总数',align: 'center',width: 200},
           {field:'minstock',title: '最小库存数',align: 'center',width: 200}
 		]]

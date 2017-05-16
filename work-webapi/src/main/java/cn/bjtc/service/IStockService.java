@@ -9,9 +9,9 @@ import cn.bjtc.view.StockView;
 
 public interface IStockService {
 
-	public List<Stock> findAllStocks(StockView view);
+	public List<StockView> findAllStocks(StockView view);
 	public Integer countAllStocks(StockView view);
 	
-	public List<StockDet> findAllStockDets(StockDetView view);
+	public List<StockDetView> findAllStockDets(StockDetView view);
 	public Integer countAllStockDets(StockDetView view);
 }

@@ -35,10 +35,10 @@
 var dictStCombox = new BSS.Combox('#cbx_dictst');
 var dicttypeCombox = new BSS.Combox('#cbx_dicttype');
 dictStCombox.fromDict('DICT_ROLEST',function(){
-	dicttypeCombox.fromDict('DICT_DICTTY',function(){
-	initRoleEditPage();
+ 	DICTDIALOG.loadDtName('#cbx_dicttype',function(){
+	initDictEditPage();
 });
-});
+  });
 function initDictEditPage(){
 	BSS.dispatch({code:21090,data:[{dictid:'${dictid}'}]},function(resp){
 		if(resp.code == 0){

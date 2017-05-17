@@ -4,6 +4,7 @@ import java.util.List;
 
 import cn.bjtc.model.Parameters;
 import cn.bjtc.view.ParametersView;
+import cn.bjtc.view.SpecView;
 
 public interface IParametersService {
 
@@ -13,4 +14,5 @@ public interface IParametersService {
 	public Integer countAllParameterss(ParametersView view);
 	
 	public List<ParametersView> findAllParameterByProductId(Object productid);
+ 
 }

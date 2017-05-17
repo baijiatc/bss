@@ -6,6 +6,13 @@ public class ProdParm {
 	private Integer productid;
 	private Integer paramid;
  	private String  paramvalue;
+ 	
+	public String getParamvalue() {
+		return paramvalue;
+	}
+	public void setParamvalue(String paramvalue) {
+		this.paramvalue = paramvalue;
+	}
 	public Integer getId() {
 		return id;
 	}

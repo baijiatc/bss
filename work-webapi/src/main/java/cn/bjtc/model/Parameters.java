@@ -7,6 +7,15 @@ public class Parameters {
 	private String paramdesc;
 	private Integer paramtype;
 	private Integer paramst;
+    private String paramvalue;
+	
+	
+	public String getParamvalue() {
+		return paramvalue;
+	}
+	public void setParamvalue(String paramvalue) {
+		this.paramvalue = paramvalue;
+	}
 	public Integer getId() {
 		return id;
 	}

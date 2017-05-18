@@ -35,6 +35,7 @@ public class ParametersDaoImpl extends MyBatisDAO<Parameters, Integer> implement
 	public List<Parameters> findAllParameterByProductId(Object productid) {
 		return super.findByParam("findAllParameterByProductId",productid );
 	}
-    
+
+ 
 	
 }

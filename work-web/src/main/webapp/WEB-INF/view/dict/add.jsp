@@ -37,7 +37,7 @@
 var dictStCombox = new BSS.Combox('#cbx_dictst');
 var dicttypeCombox = new BSS.Combox('#cbx_dicttype');
 dictStCombox.fromDict('DICT_DICTST',function(){
-	dicttypeCombox.fromDict('DICT_DICTTY',function(){
+	DICTDIALOG.loadDtName('#cbx_dicttype',function(){
 	setOk();
 });
 });

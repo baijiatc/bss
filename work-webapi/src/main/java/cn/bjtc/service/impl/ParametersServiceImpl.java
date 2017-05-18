@@ -15,10 +15,12 @@ import cn.bjtc.dao.IParametersDAO;
 import cn.bjtc.model.Parameters;
 import cn.bjtc.model.Parameters;
 import cn.bjtc.model.ProdParm;
+import cn.bjtc.model.Spec;
 import cn.bjtc.service.IParametersService;
 import cn.bjtc.view.ParametersView;
 import cn.bjtc.view.ParametersView;
 import cn.bjtc.view.ProdParmView;
+import cn.bjtc.view.SpecView;
 
 @Service("parametersService")
 public class ParametersServiceImpl implements IParametersService {
@@ -59,14 +61,18 @@ public class ParametersServiceImpl implements IParametersService {
 		List<Parameters> allParms =parametersDAO.findAllParameterss(view);
 		List<Parameters>  parameters = parametersDAO.findAllParameterByProductId(productid);
 		Map<String,Parameters> parametersMap = new HashMap<String, Parameters>();
+		Map<String,String> pvalues = new HashMap<String,String>();
 		for(Parameters parameter : parameters){
 			parametersMap.put( parameter.getParamname(),parameter );
+			pvalues.put("v"+parameter.getId(),parameter.getParamvalue());
 		}
 		List<ParametersView> views = new ArrayList<ParametersView>(allParms.size());
 		for(Parameters parameter : allParms){
 			ParametersView  parametersView = new ParametersView();
 			if(parametersMap.containsKey(parameter.getParamname())){
 				parametersView.setChecked(true);
+				parametersView.setParamvalue(pvalues.get("v"+parameter.getId())); 
+				parameter.setParamvalue(pvalues.get("v"+parameter.getId()));
 			}
 			BeanUtils.copyProperties(parameter, parametersView);
 			views.add(parametersView);
@@ -76,5 +82,7 @@ public class ParametersServiceImpl implements IParametersService {
 
 	@Autowired
 	private IParametersDAO parametersDAO;
+
+	 
 
 }

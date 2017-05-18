@@ -6,7 +6,7 @@ public class Dictionary {
     private String dictval;//枚举值
     private Integer dicttype;//枚举类型
     private Integer dictst;//状态1-启用，0-停用
- 
+    
 	public Integer getDictid() {
 		return dictid;
 	}

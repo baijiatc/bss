@@ -1,9 +1,7 @@
 package cn.bjtc.service.impl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +9,14 @@ import org.springframework.stereotype.Service;
 
 import cn.bjtc.dao.IOrderDAO;
 import cn.bjtc.dao.IOrderDetDAO;
-import cn.bjtc.model.Depart;
-import cn.bjtc.model.Orders;
+import cn.bjtc.dao.ISkuDAO;
 import cn.bjtc.model.OrderDet;
+import cn.bjtc.model.Orders;
+import cn.bjtc.model.Sku;
 import cn.bjtc.service.IOrderService;
-import cn.bjtc.view.DepartView;
-import cn.bjtc.view.OrderView;
 import cn.bjtc.view.OrderDetView;
+import cn.bjtc.view.OrderView;
+import cn.bjtc.view.SkuView;
 
 @Service("orderService")
 public class OrderServiceImpl implements IOrderService {
@@ -41,22 +40,26 @@ public class OrderServiceImpl implements IOrderService {
 	}
 	
 	public List<OrderDetView> findAllOrderDets(OrderDetView view) {
-		List<OrderDet> orderDets = orderDetDAO.findAllskuNameById(view);
+		List<OrderDet> orderDets = orderDetDAO.findAllOrderDets(view);
 		if(orderDets == null || orderDets.size() <= 0){
 			return new ArrayList<OrderDetView>(0);
 		}
-		OrderDetView OrderDetView = new OrderDetView();
-		OrderDetView.setPageSize(100);
-		Map<String, String> parentMap = new HashMap<String, String>(orderDets==null?0:orderDets.size());
-		List<OrderDet> oDets = orderDetDAO.findAllskuNameById(OrderDetView);
-		for(OrderDet oDet : oDets){
-			parentMap.put("P"+oDet.getSkuid(), oDet.getSkuname());
-	}
 		List<OrderDetView> views = new ArrayList<OrderDetView>(orderDets.size());
+		SkuView skuView = new SkuView();
+		OrderView orderView = new OrderView();
 		for(OrderDet orderDet : orderDets){
 			OrderDetView orderDetView = new OrderDetView();
 			BeanUtils.copyProperties(orderDet, orderDetView);
-			orderDetView.setSkuname(parentMap.get("P"+orderDet.getSkuid()));
+			orderView.setId(orderDet.getOrderid());
+			skuView.setSourceid(orderDet.getSkuid());
+			List<Orders> orders = orderDAO.findAllOrder(orderView);
+			if(orders != null && orders.size() > 0){
+				skuView.setFromsys(orders.get(0).getFromsys());
+			}
+			List<Sku> skus = skuDAO.findAllSkus(skuView);
+			if(skus != null && skus.size() > 0){
+				orderDetView.setSkuname(skus.get(0).getSkuname());
+			}
 			views.add(orderDetView);
 		}
 		return views;
@@ -70,5 +73,7 @@ public class OrderServiceImpl implements IOrderService {
 	private IOrderDAO orderDAO;
 	@Autowired
 	private IOrderDetDAO orderDetDAO;
+	@Autowired
+	private ISkuDAO skuDAO;
 
 }

@@ -14,6 +14,7 @@ import cn.bjtc.annotation.SysPrivilege;
 public class IdxrateViewController {
 
 	@RequestMapping(value="show.html",method=RequestMethod.GET)
+	@SysPrivilege(name="idxrate:show")
 	public String showIdxrateView(){
 		return "idxrate/list";
 	}

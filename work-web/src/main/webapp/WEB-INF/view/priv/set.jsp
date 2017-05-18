@@ -77,7 +77,7 @@ $(function(){
 			}
 		});
 	},function(resp){});
-	BSS.dispatch({code:11003,data:[{staffst:1}]},function(resp){
+	BSS.dispatch({code:11003,data:[{staffst:1}],psize:100},function(resp){
 		var staffs = [];
 		var data = resp.data;
 		var len = data.length;

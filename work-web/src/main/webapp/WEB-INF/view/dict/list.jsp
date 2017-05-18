@@ -9,7 +9,8 @@ $(function(){
           {field:'dictid',title: 'ID',align: 'center',hidden:'true'},
           {field:'dictname',title: '枚举名称',align: 'center',width: 200},
           {field:'dictval',title: '枚举值',align: 'center',width: 200},
-          {field:'dicttype',title: '枚举类型',align: 'center',width: 200},
+          {field:'dicttype',title: '枚举类型值',align:'center', hidden:'true'},
+          {field:'dtname',title: '枚举类型',align: 'center',width: 200},
           {field:'dictst',title: '状态值',align: 'center',hidden:'true'},
           {field:'dictstStr',title: '状态',align: 'center',width: 200},
 		]]
@@ -32,5 +33,24 @@ $(function(){
 		var dictid = row['dictid'];
 		DICTDIALOG.init({href:'dict/'+dictid+'.html',width:400});
 	};
+	
+	//设置枚举类型名称
+  DICTDIALOG.loadDtName=function(selector,callback){	 
+	BSS.dispatch({code:21007},function(resp){
+		if(resp.code == 0 ){
+			var datas = resp.data;
+		    datas.push({dictname:'定义类型',dictid:'0'});
+		    var options = {valueField:'dictid',textField:'dictname',data:datas};
+			var dicttypeCombox=new BSS.Combox(selector);
+			dicttypeCombox.init(options);
+			if(jQuery.isFunction(callback)){
+				callback();
+			}
+		}else{
+			BSS.warning(resp.message);
+		}
+	},function(resp){});
+}
+	
 })
 </script>

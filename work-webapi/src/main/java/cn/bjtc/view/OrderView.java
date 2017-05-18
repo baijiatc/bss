@@ -9,13 +9,13 @@ public class OrderView extends Pagination {
 	private String orderno;
 	private Integer orderst;
 	private Integer fromsys;
-	private double totalfee;
-	private double payment;
-	private double totalpay;
-	private double discountfee;
-	private double pointsfee;
-	private double platformpay;
-	private double refundfee;
+	private Double totalfee;
+	private Double payment;
+	private Double totalpay;
+	private Double discountfee;
+	private Double pointsfee;
+	private Double platformpay;
+	private Double refundfee;
 	private Integer ordertype;
 	private Integer buyer;
 	private Integer saler;
@@ -46,46 +46,46 @@ public class OrderView extends Pagination {
 	public void setFromsys(Integer fromsys) {
 		this.fromsys = fromsys;
 	}
-	public double getTotalfee() {
+	public Double getTotalfee() {
 		return totalfee;
 	}
-	public void setTotalfee(double totalfee) {
+	public void setTotalfee(Double totalfee) {
 		this.totalfee = totalfee;
 	}
-	public double getPayment() {
+	public Double getPayment() {
 		return payment;
 	}
-	public void setPayment(double payment) {
+	public void setPayment(Double payment) {
 		this.payment = payment;
 	}
-	public double getTotalpay() {
+	public Double getTotalpay() {
 		return totalpay;
 	}
-	public void setTotalpay(double totalpay) {
+	public void setTotalpay(Double totalpay) {
 		this.totalpay = totalpay;
 	}
-	public double getDiscountfee() {
+	public Double getDiscountfee() {
 		return discountfee;
 	}
-	public void setDiscountfee(double discountfee) {
+	public void setDiscountfee(Double discountfee) {
 		this.discountfee = discountfee;
 	}
-	public double getPointsfee() {
+	public Double getPointsfee() {
 		return pointsfee;
 	}
-	public void setPointsfee(double pointsfee) {
+	public void setPointsfee(Double pointsfee) {
 		this.pointsfee = pointsfee;
 	}
-	public double getPlatformpay() {
+	public Double getPlatformpay() {
 		return platformpay;
 	}
-	public void setPlatformpay(double platformpay) {
+	public void setPlatformpay(Double platformpay) {
 		this.platformpay = platformpay;
 	}
-	public double getRefundfee() {
+	public Double getRefundfee() {
 		return refundfee;
 	}
-	public void setRefundfee(double refundfee) {
+	public void setRefundfee(Double refundfee) {
 		this.refundfee = refundfee;
 	}
 	public Integer getOrdertype() {

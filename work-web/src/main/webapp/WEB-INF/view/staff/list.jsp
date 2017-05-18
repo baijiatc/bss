@@ -26,8 +26,8 @@ $(function(){
           {field:'emerphone',title: '紧急联系人手机',align: 'center',width: 100},
           {field:'staffst',title: '员工状态值',align: 'center',hidden:'true'},
           {field:'staffStr',title: '员工状态',align: 'center',width: 100},
-          {field:'leavetime',title: '离职时间',align: 'center',width: 150,formatter:BSS.formatTime},
-          {field:'jointime',title: '入职时间',align: 'center',width: 150,formatter:BSS.formatTime},
+          {field:'leavetime',title: '离职时间',align: 'center',width: 150/*,formatter:BSS.formatTime*/},
+          {field:'jointime',title: '入职时间',align: 'center',width: 150/*,formatter:BSS.formatTime*/},
           {field:'creator',title: '创建人',align: 'center',width: 100},
 		]]
 	};

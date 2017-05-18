@@ -19,7 +19,7 @@
 		<tr>
 			<td>枚举类型：</td>
 			<td>
-		    	<input class="easyui-textbox"  id="id_dicttype" type="text" name="dicttype" data-options="required:true"></input>	 
+		    	<input class="easyui-textbox"  id="cbx_dicttype" type="text" name="dicttype" data-options="required:true"></input>	 
 			</td>
 		</tr>
 		
@@ -33,10 +33,12 @@
 </form>   
 <script>
 var dictStCombox = new BSS.Combox('#cbx_dictst');
+var dicttypeCombox = new BSS.Combox('#cbx_dicttype');
 dictStCombox.fromDict('DICT_ROLEST',function(){
-	initRoleEditPage();
+ 	DICTDIALOG.loadDtName('#cbx_dicttype',function(){
+	initDictEditPage();
 });
-
+  });
 function initDictEditPage(){
 	BSS.dispatch({code:21090,data:[{dictid:'${dictid}'}]},function(resp){
 		if(resp.code == 0){

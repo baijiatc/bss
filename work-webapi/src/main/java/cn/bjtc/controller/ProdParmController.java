@@ -23,18 +23,19 @@ public class ProdParmController extends BaseController{
 	@RequestMapping(value="create", method=RequestMethod.POST)
 	@SysLogger(content="新增产品绑定参数",type=AspectType.CONTROLLER)
 	public ApiReturn execAddProdParms(){
- 		 try {
+// 		 try {
 			ApiParam param=findApiParam();
 			ifParamDataIsEmpty(param);
 			Object paramid = param.getData().get(0).get("paramid");
 			Object productid = param.getData().get(0).get("productid");
+			Object paramvalue = param.getData().get(0).get("paramvalue");
 			 ppService.delectProdParmById(productid);
 			 if(paramid != "" && paramid != null){
-				 ppService.saveProdParms(productid, paramid); 
+				 ppService.saveProdParms(productid, paramid,paramvalue); 
 				 
- 			 }
-  		} catch (Exception e) {
-   		showServerError();
+// 			 }
+//  		} catch (Exception e) {
+//   		showServerError();
  		} 
 		return apiReturn;
 	}

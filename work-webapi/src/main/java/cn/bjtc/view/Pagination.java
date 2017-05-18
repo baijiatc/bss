@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Pagination implements Serializable {
 
 	private int pageIndex = 1;
-	private int pageSize;
+	private int pageSize = 10;
 	
 	public int getPageIndex() {
 		return pageIndex;

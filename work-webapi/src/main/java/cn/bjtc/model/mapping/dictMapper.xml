@@ -42,5 +42,5 @@
 	 	<if test="dicttype!=null"> AND dicttype=#{dicttype}</if>
 	 	<if test="dictst!=null"> AND dictst=#{dictst}</if>
 	</select>
-	 
+	  
 </mapper>

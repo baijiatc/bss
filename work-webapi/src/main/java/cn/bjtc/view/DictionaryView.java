@@ -10,7 +10,15 @@ public class DictionaryView extends Pagination {
     private String dictval;//枚举值
     private Integer dicttype;
     private Integer dictst;//状态
-
+    private String  dtname;//枚举类型名称
+    
+    
+   	public String getDtname() {
+   		return dtname;
+   	}
+   	public void setDtname(String dtname) {
+   		this.dtname = dtname;
+   	}
 	public Integer getDictid() {
 		return dictid;
 	}
@@ -44,5 +52,5 @@ public class DictionaryView extends Pagination {
 	public String getDictstStr() {
 		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_DICTST.toString(), String.valueOf(dictst));
 	}
-    
+ 
 }

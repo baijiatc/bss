@@ -1,5 +1,8 @@
 package cn.bjtc.view;
 
+import cn.bjtc.api.BaseDictType;
+import cn.bjtc.common.ApplicationDataManager;
+
 public class PasswdView extends Pagination {
 
 	private Integer staffid;
@@ -20,6 +23,10 @@ public class PasswdView extends Pagination {
 	private Integer leavetime;
 	private Integer jointime;
 	private Integer creator;
+	
+	private String genderStr;
+	private String departname;
+	
 	public Integer getStaffid() {
 		return staffid;
 	}
@@ -127,5 +134,14 @@ public class PasswdView extends Pagination {
 	}
 	public void setCreator(Integer creator) {
 		this.creator = creator;
+	}
+	public String getGenderStr() {
+		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_GENDER.toString(), String.valueOf(gender));
+	}
+	public String getDepartname() {
+		return departname;
+	}
+	public void setDepartname(String departname) {
+		this.departname = departname;
 	}
 }

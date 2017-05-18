@@ -19,7 +19,7 @@ public class PasswdViewController {
 	}
 	
 	@RequestMapping(value="{staffid}.html",method=RequestMethod.GET)
-	@SysPrivilege(name="pwd:reset")
+	//@SysPrivilege(name="pwd:reset")
 	public String showPasswdEditView(@PathVariable Integer staffid,Model model){
 		model.addAttribute("staffid", staffid);
 		return "passwd/edit";

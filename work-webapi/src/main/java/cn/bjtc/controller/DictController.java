@@ -27,16 +27,16 @@ public class DictController extends BaseController{
 	@RequestMapping(value="all", method=RequestMethod.POST)
 	@SysLogger(content="查询字典信息",type=AspectType.CONTROLLER)
 	public  ApiReturn showDictionary(){
-		try {
+//		try {
 			ApiParam param=findApiParam();
 			DictionaryView  view=(DictionaryView) ParamUtil.convertToView(param, DictionaryView.class);
 			int count=dictService.countAllDicts(view);
 			List<?> dicts=dictService.findAllDicts(view);
 			apiReturn.setCount(count);
 			apiReturn.setData(dicts);
-		} catch (Exception e) {
-			showServerError();
-		}
+//		} catch (Exception e) {
+//			showServerError();
+//		}
 		return apiReturn;
 	}
 	
@@ -44,15 +44,15 @@ public class DictController extends BaseController{
 	@RequestMapping(value="create",method=RequestMethod.POST)
 	@SysLogger(content="新增字典信息",type=AspectType.CONTROLLER)
 	public ApiReturn execAddDict(){
-		try {
+//		try {
 			ApiParam param=findApiParam();
 			ifParamDataIsEmpty(param);
 			DictionaryView  view=(DictionaryView) ParamUtil.convertToView(param, DictionaryView.class);
 			dictService.saveDict(view);
-		} catch (Exception e) {
-			showServerError();
-		}
-		return apiReturn;
+//		} catch (Exception e) {
+//			showServerError();
+//		}
+ 		return apiReturn;
 	}
 	
 	@RequestMapping(value="update",method=RequestMethod.POST)

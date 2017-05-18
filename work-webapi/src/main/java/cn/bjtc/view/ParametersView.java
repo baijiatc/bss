@@ -11,6 +11,15 @@ public class ParametersView extends Pagination{
 	private Integer paramtype;
 	private Integer paramst;
 	
+	private String paramvalue;
+	
+	
+	public String getParamvalue() {
+		return paramvalue;
+	}
+	public void setParamvalue(String paramvalue) {
+		this.paramvalue = paramvalue;
+	}
 	private boolean checked;
 	 
 	public Integer getId() {

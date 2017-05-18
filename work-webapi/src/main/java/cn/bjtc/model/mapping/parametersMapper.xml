@@ -45,9 +45,11 @@
 	 
 	 
 	 <select id="findAllParameterByProductId" resultMap="ParametersMap" >
-	 	SELECT parm.*,prparm.id  FROM parameters parm join productparam prparm on parm.id= prparm.paramid
-	    WHERE  prparm.productid=#{0}
+	  	SELECT * FROM parameters p join productparam pp on p.id= pp.paramid
+	    WHERE  pp.productid=#{0}
 	 	
 	</select>
+	
+	  
 	 
 </mapper>

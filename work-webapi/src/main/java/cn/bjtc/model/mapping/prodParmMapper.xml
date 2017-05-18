@@ -15,7 +15,7 @@
 	</parameterMap>
  
    <insert id="saveProdParms" parameterMap="ProdParmParamMap">
-		INSERT INTO  productparam (productid,paramid) VALUES (#{productid},#{paramid})
+		INSERT INTO  productparam (productid,paramid,paramvalue) VALUES (#{productid},#{paramid},#{paramvalue})
    </insert>
 	
 	 

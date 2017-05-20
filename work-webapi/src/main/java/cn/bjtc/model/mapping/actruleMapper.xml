@@ -3,9 +3,9 @@
 <mapper namespace="Actrule">
 	<resultMap type="cn.bjtc.model.Actrule" id="ActruleMap">
 		<result column="id" property="id"/>
-		<result column="actid" property="actid"/>
-		<result column="objtype" property="objtype"/>
-		<result column="objid" property="objid"/>
+		<result column="actId" property="actid"/>
+		<result column="objType" property="objtype"/>
+		<result column="objId" property="objid"/>
 		<result column="creator" property="creator"/>
 	</resultMap>
 	<parameterMap type="cn.bjtc.model.Actrule" id="ActruleParamMap">
@@ -17,29 +17,29 @@
 	</parameterMap>
  
    <insert id="saveActrule" parameterMap="ActruleParamMap">
-		INSERT INTO  actrules (actid,objtype,objid,creator) VALUES (#{actid},#{objtype},#{objid},#{creator})
+		INSERT INTO  pr_actrule (actId,objType,objId,creator) VALUES (#{actid},#{objtype},#{objid},#{creator})
    </insert>
 	
 	<update id="updateActrule" parameterMap="ActruleParamMap">
-		UPDATE actrules SET actid=#{actid},objtype=#{objtype},objid=#{objid},creator=#{creator}  WHERE id =#{id}
+		UPDATE pr_actrule SET actId=#{actid},objType=#{objtype},objId=#{objid},creator=#{creator}  WHERE id =#{id}
 	</update>
 
 	<select id="findAllActrules" resultMap="ActruleMap" >
-	 	SELECT * FROM  actrules WHERE   1=1
+	 	SELECT * FROM  pr_actrule WHERE   1=1
 	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
-	 	<if test="actid!=null and actid!=0"> AND actid=#{actid}</if>
-	 	<if test="objtype!=null and  objtype!=0"> AND objtype=#{objtype}</if>
-	 	<if test="objid!=null and objid!=0"> AND objid=#{objid}</if>
+	 	<if test="actid!=null and actid!=0"> AND actId=#{actid}</if>
+	 	<if test="objtype!=null and  objtype!=0"> AND objType=#{objtype}</if>
+	 	<if test="objid!=null and objid!=0"> AND objId=#{objid}</if>
 	 	<if test="creator!=null "> AND creator=#{creator}</if>
 	 	LIMIT #{pageOffset},#{pageSize}
 	</select>
 	
 	<select id="countAllActrules" resultType="Integer" >
-	 	SELECT count(id) FROM actrules   WHERE   1=1
+	 	SELECT count(id) FROM pr_actrule   WHERE   1=1
 	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
-	 	<if test="actid!=null and actid!=0"> AND actid=#{actid}</if>
-	 	<if test="objtype!=null and  objtype!=0"> AND objtype=#{objtype}</if>
-	 	<if test="objid!=null and objid!=0"> AND objid=#{objid}</if>
+	 	<if test="actid!=null and actid!=0"> AND actId=#{actid}</if>
+	 	<if test="objtype!=null and  objtype!=0"> AND objType=#{objtype}</if>
+	 	<if test="objid!=null and objid!=0"> AND objId=#{objid}</if>
 	 	<if test="creator!=null "> AND creator=#{creator}</if>
 	</select>
 	 

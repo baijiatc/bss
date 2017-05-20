@@ -3,9 +3,9 @@
 <mapper namespace="Actparam">
 	<resultMap type="cn.bjtc.model.Actparam" id="ActparamMap">
 		<result column="id" property="id"/>
-		<result column="actid" property="actid"/>
-		<result column="paramtype" property="paramtype"/>
-		<result column="paramvalue" property="paramvalue"/>
+		<result column="actId" property="actid"/>
+		<result column="parmType" property="paramtype"/>
+		<result column="paramValue" property="paramvalue"/>
 		<result column="creator" property="creator"/>	
 	</resultMap>
 	<parameterMap type="cn.bjtc.model.Actparam" id="ActparamParamMap">
@@ -17,29 +17,29 @@
 	</parameterMap>
  
    <insert id="saveActparam" parameterMap="ActparamParamMap">
-		INSERT INTO  actparam (actid,paramtype,paramvalue,creator) VALUES (#{actid},#{paramtype},#{paramvalue},#{creator})
+		INSERT INTO  pr_actparams (actId,parmType,paramValue,creator) VALUES (#{actid},#{paramtype},#{paramvalue},#{creator})
    </insert>
 	
 	<update id="updateActparam" parameterMap="ActparamParamMap">
-		UPDATE actparam SET actid=#{actid},paramtype=#{paramtype},paramvalue=#{paramvalue},creator=#{creator}   WHERE id =#{id}
+		UPDATE pr_actparams SET actId=#{actid},parmType=#{paramtype},paramValue=#{paramvalue},creator=#{creator}   WHERE id =#{id}
 	</update>
 
 	<select id="findAllActparams" resultMap="ActparamMap" >
-	 	SELECT * FROM  actparam WHERE   1=1
+	 	SELECT * FROM  pr_actparams WHERE   1=1
 	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
-	 	<if test="actid!=null and actid!=0"> AND actid=#{actid}</if>
-	 	<if test="paramtype!=null and  paramtype!=0"> AND paramtype=#{paramtype}</if>
-	 	<if test="paramvalue!=null and paramvalue!=0"> AND paramvalue=#{paramvalue}</if>
+	 	<if test="actid!=null and actid!=0"> AND actId=#{actid}</if>
+	 	<if test="paramtype!=null and  paramtype!=0"> AND parmType=#{paramtype}</if>
+	 	<if test="paramvalue!=null and paramvalue!=0"> AND paramValue=#{paramvalue}</if>
 	 	<if test="creator!=null"> AND creator=#{creator}</if>  
 	 	LIMIT #{pageOffset},#{pageSize}
 	</select>
 	
 	<select id="countAllActparams" resultType="Integer" >
-	 	SELECT count(id) FROM actparam   WHERE   1=1
+	 	SELECT count(id) FROM pr_actparams   WHERE   1=1
 	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
-	 	<if test="actid!=null and actid!=0"> AND actid=#{actid}</if>
-	 	<if test="paramtype!=null and  paramtype!=0"> AND paramtype=#{paramtype}</if>
-	 	<if test="paramvalue!=null and paramvalue!=0"> AND paramvalue=#{paramvalue}</if>
+	 	<if test="actid!=null and actid!=0"> AND actId=#{actid}</if>
+	 	<if test="paramtype!=null and  paramtype!=0"> AND parmType=#{paramtype}</if>
+	 	<if test="paramvalue!=null and paramvalue!=0"> AND paramValue=#{paramvalue}</if>
 	 	<if test="creator!=null"> AND creator=#{creator}</if> 
 	</select>
 	 

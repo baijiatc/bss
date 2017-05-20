@@ -3,9 +3,9 @@
 <mapper namespace="Actawards">
 	<resultMap type="cn.bjtc.model.Actawards" id="ActawardsMap">
 		<result column="id" property="id"/>
-		<result column="actid" property="actid"/>
-		<result column="awardtype" property="awardtype"/>
-		<result column="awobj" property="awobj"/>
+		<result column="actId" property="actid"/>
+		<result column="awardType" property="awardtype"/>
+		<result column="awObj" property="awobj"/>
 	</resultMap>
 	<parameterMap type="cn.bjtc.model.Actawards" id="ActawardsParamMap">
 		<parameter property="id" resultMap="ActawardsMap" />
@@ -15,28 +15,28 @@
 	</parameterMap>
  
    <insert id="saveActawards" parameterMap="ActawardsParamMap">
-		INSERT INTO  actawards (actid,awardtype,awobj) VALUES (#{actid},#{awardtype},#{awobj})
+		INSERT INTO  pr_actawards (actId,awardType,awObj) VALUES (#{actid},#{awardtype},#{awobj})
    </insert>
 	
 	<update id="updateActawards" parameterMap="ActawardsParamMap">
-		UPDATE actawards SET actid=#{actid},awardtype=#{awardtype},awobj=#{awobj}    WHERE id =#{id}
+		UPDATE pr_actawards SET actId=#{actid},awardType=#{awardtype},awObj=#{awobj}    WHERE id =#{id}
 	</update>
 
 	<select id="findAllActawards" resultMap="ActawardsMap" >
-	 	SELECT * FROM  actawards WHERE   1=1
+	 	SELECT * FROM  pr_actawards WHERE   1=1
 	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
-	 	<if test="actid!=null and actid!=0"> AND actid=#{actid}</if>
-	 	<if test="awardtype!=null and  awardtype!=0"> AND awardtype=#{awardtype}</if>
-	 	<if test="awobj!=null and awobj!=''"> AND awobj=#{awobj}</if>
+	 	<if test="actid!=null and actid!=0"> AND actId=#{actid}</if>
+	 	<if test="awardtype!=null and  awardtype!=0"> AND awardType=#{awardtype}</if>
+	 	<if test="awobj!=null and awobj!=''"> AND awObj=#{awobj}</if>
 	 	LIMIT #{pageOffset},#{pageSize}
 	</select>
 	
 	<select id="countAllActawards" resultType="Integer" >
-	 	SELECT count(id) FROM actawards   WHERE   1=1
+	 	SELECT count(id) FROM pr_actawards   WHERE   1=1
 	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
-	 	<if test="actid!=null and actid!=0"> AND actid=#{actid}</if>
-	 	<if test="awardtype!=null and  awardtype!=0"> AND awardtype=#{awardtype}</if>
-	 	<if test="awobj!=null and awobj!=''"> AND awobj=#{awobj}</if>
+	 	<if test="actid!=null and actid!=0"> AND actId=#{actid}</if>
+	 	<if test="awardtype!=null and  awardtype!=0"> AND awardType=#{awardtype}</if>
+	 	<if test="awobj!=null and awobj!=''"> AND awObj=#{awobj}</if>
 	</select>
 	 
 </mapper>

@@ -3,11 +3,11 @@
 <mapper namespace="Idxparaminstance">
 	<resultMap type="cn.bjtc.model.Idxparaminstance" id="IdxrateMap">
 		<result column="id" property="id"/>
-		<result column="parmid" property="parmid"/>
-		<result column="forshop" property="forshop"/>
-		<result column="forcat" property="forcat"/>
-		<result column="forobj" property="forobj"/>
-		<result column="parmvalue" property="parmvalue"/>
+		<result column="parmId" property="parmid"/>
+		<result column="forShop" property="forshop"/>
+		<result column="forCat" property="forcat"/>
+		<result column="forObj" property="forobj"/>
+		<result column="parmValue" property="parmvalue"/>
 		<result column="creator" property="creator"/>
 	</resultMap>
 	<parameterMap type="cn.bjtc.model.Idxparaminstance" id="IdxrateParamMap">
@@ -20,33 +20,33 @@
 		<parameter property="creator" resultMap="IdxrateMap" />
 	</parameterMap>
 	<insert id="saveIdxrate" parameterMap="IdxrateParamMap">
-		INSERT INTO idxparaminstance(id,parmid,forshop,forcat,forobj,parmvalue,creator) VALUES (#{id},#{parmid},#{forshop},#{forcat},#{forobj},#{parmvalue},#{creator})
+		INSERT INTO pe_parminstance(id,parmId,forShop,forCat,forObj,parmValue,creator) VALUES (#{id},#{parmid},#{forshop},#{forcat},#{forobj},#{parmvalue},#{creator})
 	</insert>
 	
 	<update id="updateIdxrate" parameterMap="IdxrateParamMap">
-		UPDATE  idxparaminstance set parmid=#{parmid},forshop=#{forshop},forcat=#{forcat},forobj=#{forobj},parmvalue=#{parmvalue},creator=#{creator} WHERE id=#{id}
+		UPDATE  pe_parminstance set parmId=#{parmid},forShop=#{forshop},forCat=#{forcat},forObj=#{forobj},parmValue=#{parmvalue},creator=#{creator} WHERE id=#{id}
 	</update>
 	
 	<select id="findAllIdxrate" resultMap="IdxrateMap" >
-	 	SELECT * FROM idxparaminstance WHERE 1=1 
+	 	SELECT * FROM pe_parminstance WHERE 1=1 
 	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
-	 	<if test="parmid!=null and parmid!=''"> AND parmid=#{parmid}</if>
-	 	<if test="forshop!=null and forshop!=''"> AND forshop=#{forshop}</if>
-	 	<if test="forcat!=null and forcat!=0"> AND forcat=#{forcat}</if>
-	 	<if test="forobj!=null and forobj!=0"> AND forobj=#{forobj}</if>
-	 	<if test="parmvalue!=null and parmvalue!=0"> AND parmvalue=#{parmvalue}</if>
+	 	<if test="parmid!=null and parmid!=''"> AND parmId=#{parmid}</if>
+	 	<if test="forshop!=null and forshop!=''"> AND forShop=#{forshop}</if>
+	 	<if test="forcat!=null and forcat!=0"> AND forCat=#{forcat}</if>
+	 	<if test="forobj!=null and forobj!=0"> AND forObj=#{forobj}</if>
+	 	<if test="parmvalue!=null and parmvalue!=0"> AND parmValue=#{parmvalue}</if>
 	 	<if test="creator!=null and creator!=0"> AND creator=#{creator}</if>
 	 	LIMIT #{pageOffset},#{pageSize}
 	</select>
 	
 	<select id="countAllIdxrate" resultType="Integer" >
-		SELECT count(id) FROM idxparaminstance WHERE 1=1
+		SELECT count(id) FROM pe_parminstance WHERE 1=1
 		<if test="id!=null and id!=0"> AND id=#{id}</if>
-	 	<if test="parmid!=null and parmid!=''"> AND parmid=#{parmid}</if>
-	 	<if test="forshop!=null and forshop!=''"> AND forshop=#{forshop}</if>
-	 	<if test="forcat!=null and forcat!=0"> AND forcat=#{forcat}</if>
-	 	<if test="forobj!=null and forobj!=0"> AND forobj=#{forobj}</if>
-	 	<if test="parmvalue!=null and parmvalue!=0"> AND parmvalue=#{parmvalue}</if>
+	 	<if test="parmid!=null and parmid!=''"> AND parmId=#{parmid}</if>
+	 	<if test="forshop!=null and forshop!=''"> AND forShop=#{forshop}</if>
+	 	<if test="forcat!=null and forcat!=0"> AND forCat=#{forcat}</if>
+	 	<if test="forobj!=null and forobj!=0"> AND forObj=#{forobj}</if>
+	 	<if test="parmvalue!=null and parmvalue!=0"> AND parmValue=#{parmvalue}</if>
 	 	<if test="creator!=null and creator!=0"> AND creator=#{creator}</if>
 	</select>
 </mapper>

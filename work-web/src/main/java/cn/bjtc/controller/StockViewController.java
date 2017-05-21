@@ -15,4 +15,9 @@ public class StockViewController {
 	public String showStockView(){
 		return "stock/list";
 	}
+	
+	@RequestMapping(value="query.html",method=RequestMethod.GET)
+	public String showQueryView(){
+		return "stock/query";
+	}
 }

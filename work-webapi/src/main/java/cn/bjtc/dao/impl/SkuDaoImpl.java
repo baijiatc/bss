@@ -31,6 +31,10 @@ public class SkuDaoImpl extends MyBatisDAO<Sku, Integer> implements
 	public Integer countAllSkus(SkuView view) {
 		return super.countByParam("countAllSku", view);
 	}
+
+	public List<Sku> findSkuHasStock(SkuView view) {
+		return super.findByParam("findSkuHasStock", view);
+	}
     
 	
 }

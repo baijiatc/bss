@@ -61,11 +61,11 @@
 		</tr>
 		<tr>
 			<td>离职时间：</td>
-			<td><input class="easyui-textbox" type="text" name="leavetime" data-options="required:false"></input></td>
+			<td><input id="leavetime" class="easyui-textbox" type="text" name="leavetime" data-options="formatter:dateFormatter,parser:myparser,required:false"></input></td>
 		</tr>
 		<tr>
 			<td>入职时间：</td>
-			<td><input class="easyui-textbox" type="text" name="jointime" data-options="required:true"></input></td>
+			<td><input id="jointime" class="easyui-textbox" type="text" name="jointime" data-options="formatter:dateFormatter,parser:myparser,required:true"></input></td>
 		</tr>
 		<tr>
 			<td>创建人：</td>
@@ -87,6 +87,29 @@ genderCombox.fromDict('DICT_GENDER',function(){
 		});
 	});
 });
+$('#leavetime').datebox({
+    required:true
+});
+$('#jointime').datebox({
+    required:true
+});
+function dateFormatter(date){
+	var y = date.getFullYear();
+	var m = date.getMonth()+1;
+	var d = date.getDate();
+	return y+(m<10?('0'+m):m)+(d<10?('0'+d):d);
+}
+function myparser(s){
+	if (!s) return new Date();
+	var y = s.substring(0,4);
+	var m =s.substring(4,6);
+	var d = s.substring(6,8);
+	if (!isNaN(y) && !isNaN(m) && !isNaN(d)){
+		return new Date(y,m-1,d);
+	} else {
+		return new Date();
+	}
+}
 function setOk(){
 	STAFFDIALOG.ok = function(){
 		var staff = BSS.form2json('#frm_staff');

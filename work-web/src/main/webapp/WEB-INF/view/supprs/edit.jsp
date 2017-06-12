@@ -22,7 +22,7 @@
 		</tr>
 		<tr>
 			<td>创建时间：</td>
-			<td><input id="id_createtime" class="easyui-textbox" type="text" name="createtime" data-options="required:true"></input></td>
+			<td><input id="id_createtime" class="easyui-textbox" type="text" name="createtime" data-options="formatter:dateFormatter,parser:myparser,required:true"></input></td>
 		</tr>
 	</table>
 </form>
@@ -31,7 +31,27 @@ var objCombox = new BSS.Combox('#cbx_objtype');
 objCombox.fromDict('DICT_OBJTYPE',function(){
 	initSuppersEditPage();
 });
-
+$('#id_createtime').datebox({
+    required:true
+});
+function dateFormatter(date){
+	var y = date.getFullYear();
+	var m = date.getMonth()+1;
+	var d = date.getDate();
+	return y+(m<10?('0'+m):m)+(d<10?('0'+d):d);
+}
+function myparser(s){
+	s=''+s;
+	if (!s) return new Date();
+	var y = s.substring(0,4);
+	var m =s.substring(4,6);
+	var d = s.substring(6,8);
+	if (!isNaN(y) && !isNaN(m) && !isNaN(d)){
+		return new Date(y,m-1,d);
+	} else {
+		return new Date();
+	}
+}
 function initSuppersEditPage(){
 	BSS.dispatch({code:13015,data:[{staffobjid:'${staffobjid}'}]},function(resp){
 		if(resp.code == 0){

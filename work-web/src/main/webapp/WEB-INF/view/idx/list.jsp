@@ -15,7 +15,7 @@ $(function(){
           {field:'idxtype',title: '指标类型',align: 'center',width: 100},
           {field:'idxscope',title: '适用范围',align: 'center',width: 100},
           {field:'idxformula',title: '计算公式',align: 'center',width: 100},
-          {field:'isdisplay',title: '是否显示',align: 'center',width: 100},
+          {field:'isdisplay',title: '是否显示',align: 'center',hidden:'true'},
           {field:'isdisplayStr',title: '是否显示',align: 'center',width: 100},
           {field:'validdt',title: '生效日期',align: 'center',width: 150},
           {field:'invaliddt',title: '失效日期',align: 'center',width: 150},

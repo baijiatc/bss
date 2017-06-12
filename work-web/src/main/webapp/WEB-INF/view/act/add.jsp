@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+ 
+
 <form id="frm_acty" method="post">
 	<table cellpadding="8">
 		<tr>
@@ -17,11 +19,11 @@
 		</tr>
 		<tr>
 			<td>开始时间：</td>
-			<td><input class="easyui-textbox" type="text" name="begindt" data-options="required:false"></input></td>
+			<td><input class="easyui-datebox"   type="text" name="begindt" data-options="formatter:myformatter,parser:myparser,required:false"></input></td>
 		</tr>
 		<tr>
 			<td>结束时间：</td>
-			<td><input class="easyui-textbox" type="text" name="enddt" data-options="required:false"></input></td>
+			<td><input class="easyui-datebox" type="text" name="enddt" data-options="formatter:myformatter,parser:myparser,required:false"></input></td>
 		</tr>
 		<tr>
 			<td>活动详情：</td>
@@ -44,10 +46,35 @@ var actcatCombox = new BSS.Combox('#cbx_actcat');
 actcatCombox.fromDict('DICT_ACTCAT',function(){
 var actstCombox = new BSS.Combox('#cbx_actst');
 actstCombox.fromDict('DICT_ACTST',function(){
+	
+
 	setOk();
 	  });
 	 });
   });
+  
+  
+function myformatter(date){
+		var y = date.getFullYear();
+			var m = date.getMonth()+1;
+			var d = date.getDate();
+			return y+(m<10?('0'+m):m)+(d<10?('0'+d):d);
+		}
+
+
+	function myparser(s){
+		if (!s) return new Date();
+		var y = s.substring(0,4);
+		var m =s.substring(4,6);
+		var d = s.substring(6,8);
+	 
+		if (!isNaN(y) && !isNaN( m) && !isNaN(d) ){
+			return new Date(y,m-1,d );
+		} else {
+			return new Date();
+		}
+	}
+
 
 function setOk(){
 	ACTYDIALOG.ok = function(){

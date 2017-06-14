@@ -9,12 +9,12 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cn.bjtc.dao.IDepartDAO;
 import cn.bjtc.dao.IStaffDAO;
 import cn.bjtc.model.Depart;
-import cn.bjtc.model.Role;
 import cn.bjtc.model.Staff;
 import cn.bjtc.service.IStaffService;
-import cn.bjtc.view.RoleView;
+import cn.bjtc.view.DepartView;
 import cn.bjtc.view.StaffView;
 
 @Service("staffService")
@@ -33,18 +33,18 @@ public class StaffServiceImpl implements IStaffService {
 		if(staffs == null || staffs.size() <= 0){
 			return new ArrayList<StaffView>(0);
 		}
-		StaffView staffView = new StaffView();
-		staffView.setPageSize(100);
-		Map<String, String> parentMap = new HashMap<String, String>(staffs==null?0:staffs.size());
-		List<Staff> staffnames = staffDAO.findAllDepartName(staffView);
-		for(Staff staff : staffnames){
-			parentMap.put("d"+staff.getDepartid(), staff.getDepartname());
+		DepartView dpView = new DepartView();
+		dpView.setPageSize(100);
+		List<Depart> departs = departDAO.findAllDepart(dpView);
+		Map<String, String> departMap = new HashMap<String,String>(departs == null ? 0 : departs.size());
+		for(Depart depart : departs){
+			departMap.put("d"+depart.getDepartid(), depart.getDepartname());
 		}
 		List<StaffView> views = new ArrayList<StaffView>(staffs.size());
 		for(Staff staff : staffs){
 			StaffView staffsView = new StaffView();
 			BeanUtils.copyProperties(staff, staffsView);
-			staffsView.setDepartname(parentMap.get("d"+staff.getDepartid()));
+			staffsView.setDepartname(departMap.get("d"+staff.getDepartid()));
 			views.add(staffsView);
 		}
 		return views;
@@ -56,5 +56,7 @@ public class StaffServiceImpl implements IStaffService {
 	
 	@Autowired
 	private IStaffDAO staffDAO;
+	@Autowired
+	private IDepartDAO departDAO;
 
 }

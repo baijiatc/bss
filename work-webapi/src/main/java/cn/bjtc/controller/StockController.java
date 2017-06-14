@@ -12,7 +12,9 @@ import cn.bjtc.api.ApiParam;
 import cn.bjtc.api.ApiReturn;
 import cn.bjtc.api.util.ParamUtil;
 import cn.bjtc.aspect.AspectType;
+import cn.bjtc.service.ISkuService;
 import cn.bjtc.service.IStockService;
+import cn.bjtc.view.SkuView;
 import cn.bjtc.view.StockDetView;
 import cn.bjtc.view.StockView;
 
@@ -52,6 +54,21 @@ public class StockController extends BaseController {
 		return apiReturn;
 	}
 	
+	@RequestMapping(value="query", method=RequestMethod.POST)
+	public ApiReturn queryStock(){
+		try {
+			SkuView view = new SkuView();
+			view.setFromsys(2);
+			List<?> data = skuService.findSkuHasStock(view);
+			apiReturn.setData(data);
+		} catch (Exception e) {
+			showServerError();
+		}
+		return apiReturn;
+	}
+	
 	@Autowired
 	private IStockService stockService;
+	@Autowired
+	private ISkuService skuService;
 }

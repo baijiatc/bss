@@ -14,7 +14,7 @@ $(function(){
           {field:'cstype',title: '关系类型',align: 'center',width: 200},
           {field:'objtype',title: '对象类型',align: 'center',hidden:'true'},
           {field:'objtypeStr',title: '对象类型',align: 'center',width: 200},
-          {field:'createtime',title: '关系建立日期',align: 'center',width: 200,formatter:BSS.formatTime},
+          {field:'createtime',title: '关系建立日期',align: 'center',width: 200},
 		]]
 	};
 	//构建datagrid，并填充数据

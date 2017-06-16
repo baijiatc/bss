@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="MotScheme">
+	<resultMap type="cn.bjtc.model.MotScheme" id="MotSchemeMap">
+		<result column="id" property="id"/>
+		<result column="schmname" property="schmname"/>
+		<result column="schmdesc" property="schmdesc"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.MotScheme" id="MScheParamMap">
+		<parameter property="id" resultMap="MotSchemeMap" />
+		<parameter property="schmname" resultMap="MotSchemeMap" />
+		<parameter property="schmdesc" resultMap="MotSchemeMap" />
+	</parameterMap>
+ 
+   <insert id="saveMotScheme" parameterMap="MScheParamMap">
+		INSERT INTO  motscheme (schmname,schmdesc) VALUES (#{schmname},#{schmdesc})
+   </insert>
+	
+	<update id="updateMotScheme" parameterMap="MScheParamMap">
+		UPDATE motscheme SET schmname=#{schmname},schmdesc=#{schmdesc}    WHERE id =#{id}
+	</update>
+
+	<select id="findAllMotScheme" resultMap="MotSchemeMap" >
+	 	SELECT * FROM  motscheme WHERE   1=1
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="schmname!=null and schmname!=''"> AND schmname=#{schmname}</if>
+	 	<if test="schmdesc!=null and  schmdesc!=''"> AND schmdesc=#{schmdesc}</if>
+	 	LIMIT #{pageOffset},#{pageSize}
+	</select>
+	
+	<select id="countAllMotScheme" resultType="Integer" >
+	 	SELECT count(id) FROM motscheme   WHERE   1=1
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="schmname!=null and schmname!=''"> AND schmname=#{schmname}</if>
+	 	<if test="schmdesc!=null and  schmdesc!=''"> AND schmdesc=#{schmdesc}</if>
+	</select>
+	 
+</mapper>

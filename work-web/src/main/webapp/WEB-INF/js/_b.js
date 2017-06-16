@@ -257,6 +257,10 @@ BSS.DataGrid = function(selector){
 	$this.load=function(param){
 		BSS.dispatch(param,function(data){
 			if(data.code == 0){
+				if(data.data==null || data.data.length<=0){
+					BSS.info('无查询记录');
+					return;
+				}
 				$($this.selector).datagrid('loadData',{"total":data.count,"rows":data.data});
 				$this.__whenSelectPage(param);
 			}else{

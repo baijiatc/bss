@@ -11,4 +11,6 @@ public interface ISkuDAO {
 	public int updateSku(SkuView view);
     public List<Sku> findAllSkus(SkuView view);
 	public Integer countAllSkus(SkuView view);
+	
+	public List<Sku> findSkuHasStock(SkuView view);
 }

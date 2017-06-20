@@ -13,15 +13,15 @@
 	</parameterMap>
  
    <insert id="saveMotScheme" parameterMap="MScheParamMap">
-		INSERT INTO  motscheme (schmname,schmdesc) VALUES (#{schmname},#{schmdesc})
+		INSERT INTO  mot_scheme (schmname,schmdesc) VALUES (#{schmname},#{schmdesc})
    </insert>
 	
 	<update id="updateMotScheme" parameterMap="MScheParamMap">
-		UPDATE motscheme SET schmname=#{schmname},schmdesc=#{schmdesc}    WHERE id =#{id}
+		UPDATE mot_scheme SET schmname=#{schmname},schmdesc=#{schmdesc}    WHERE id =#{id}
 	</update>
 
 	<select id="findAllMotScheme" resultMap="MotSchemeMap" >
-	 	SELECT * FROM  motscheme WHERE   1=1
+	 	SELECT * FROM  mot_scheme WHERE   1=1
 	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
 	 	<if test="schmname!=null and schmname!=''"> AND schmname=#{schmname}</if>
 	 	<if test="schmdesc!=null and  schmdesc!=''"> AND schmdesc=#{schmdesc}</if>
@@ -29,7 +29,7 @@
 	</select>
 	
 	<select id="countAllMotScheme" resultType="Integer" >
-	 	SELECT count(id) FROM motscheme   WHERE   1=1
+	 	SELECT count(id) FROM mot_scheme  WHERE   1=1
 	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
 	 	<if test="schmname!=null and schmname!=''"> AND schmname=#{schmname}</if>
 	 	<if test="schmdesc!=null and  schmdesc!=''"> AND schmdesc=#{schmdesc}</if>

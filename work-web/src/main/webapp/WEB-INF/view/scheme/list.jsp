@@ -9,8 +9,8 @@ $(function(){
 	var options={
 		columns:[[
           {field:'id',title: 'ID',align: 'center',hidden:'true'},
-          {field:'schmname',title: '方案名称',align: 'center',width: 200},
-          {field:'schmdesc',title: '方案描述',align: 'center',width: 200 },
+          {field:'schmname',title: '方案名称',align: 'center',width: 550},
+          {field:'schmdesc',title: '方案描述',align: 'center',width: 550 },
 		]]
 	};
 	//构建datagrid，并填充数据

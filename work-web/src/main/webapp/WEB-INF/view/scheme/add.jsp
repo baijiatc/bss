@@ -9,7 +9,10 @@
 		</tr>
 		<tr>
 			<td>方案描述：</td>
-			<td><input  class="easyui-textbox" type="text" name="schmdesc" data-options="required:false"></input></td>
+			<td>
+			<textarea name="schmdesc"  style="height:40px;width:200px" data-options="required:false"></textarea>
+			
+			</td>
 		</tr>
 		 
 	</table>

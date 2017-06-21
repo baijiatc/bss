@@ -10,16 +10,10 @@ $(function(){
 		columns:[[
           {field:'id',title: 'ID',align: 'center',hidden:'true'},
           {field:'actname',title: '活动名称',align: 'center',width: 200},
-          {field:'acttype',title: '活动类型值',align: 'center',hidden:'true'},
-          {field:'acttypeStr',title: '活动类型',align: 'center',width: 200},
-          {field:'actcat',title: '活动类别值',align: 'center',hidden:'true'},
-          {field:'actcatStr',title: '活动类别',align: 'center',width: 200},
           {field:'begindt',title: '开始日期',align: 'center',width: 200},
           {field:'enddt',title: '结束日期',align: 'center',width: 200},
           {field:'actdesc',title: '活动详情',align: 'center',width: 200},
           {field:'creator',title: '创建人',align: 'center',width: 200},
-          {field:'actst',title: '状态值',align: 'center',hidden:'true'},
-          {field:'actstStr',title: '状态',align: 'center',width: 200}
 		]]
 	};
 	//构建datagrid，并填充数据

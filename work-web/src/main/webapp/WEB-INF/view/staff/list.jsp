@@ -20,21 +20,22 @@ $(function(){
           {field:'eduStr',title: '教育程度',align: 'center',width: 100},
           {field:'jobstation',title: '岗位',align: 'center',width: 100},
           {field:'address',title: '联系地址',align: 'center',width: 100},
-          {field:'departid',title: '所属部门',align: 'center',width: 100},
+          {field:'departid',title: '所属部门ID',align: 'center',hidden:'true'},
+          {field:'departname',title: '所属部门',align: 'center',width: 100},
           {field:'emername',title: '紧急联系人',align: 'center',width: 100},
           {field:'emerphone',title: '紧急联系人手机',align: 'center',width: 100},
           {field:'staffst',title: '员工状态值',align: 'center',hidden:'true'},
           {field:'staffStr',title: '员工状态',align: 'center',width: 100},
-          {field:'leavetime',title: '离职时间',align: 'center',width: 150,formatter:BSS.formatTime},
-          {field:'jointime',title: '入职时间',align: 'center',width: 150,formatter:BSS.formatTime},
+          {field:'leavetime',title: '离职时间',align: 'center',width: 150/*,formatter:BSS.formatTime*/},
+          {field:'jointime',title: '入职时间',align: 'center',width: 150/*,formatter:BSS.formatTime*/},
           {field:'creator',title: '创建人',align: 'center',width: 100},
 		]]
 	};
 	//构建datagrid，并填充数据
-	var dataGrid = new BSS.DataGrid('#tbl_staff_datagrid');
+	var staffGrid = new BSS.DataGrid('#tbl_staff_datagrid');
 	STAFFDIALOG = new BSS.Dialog('#div_staffadd');
-	dataGrid.toolbar.push({iconCls:'icon-redo',text:'分配角色',handler:function(){
-			var row = dataGrid.getSelectedRow();
+	staffGrid.toolbar.push({iconCls:'icon-redo',text:'分配角色',handler:function(){
+			var row = staffGrid.getSelectedRow();
 			if(BSS.Helper.isNull(row)){
 				BSS.warning('请选择要分配的员工');
 				return;
@@ -42,13 +43,13 @@ $(function(){
 		var staffid = row['staffid'];
 		STAFFDIALOG.init({href:'staffrole/'+staffid+'.html',width:400});
 	}});
-	dataGrid.build(options,{code:11003});
+	staffGrid.build(options,{code:11003});
 	//设置新建事件
-	dataGrid.create = function(){
+	staffGrid.create = function(){
 		STAFFDIALOG.init({href:'staff/add.html',width:400});
 	};
 	//设置编辑事件
-	dataGrid.edit = function(){
+	staffGrid.edit = function(){
 		var row=this.getSelectedRow();
 		if(BSS.Helper.isNull(row)){
 			BSS.warning('请选择要编辑的数据行');
@@ -57,5 +58,20 @@ $(function(){
 		var staffid = row['staffid'];
 		STAFFDIALOG.init({href:'staff/'+staffid+'.html',width:400});
 	};
+	STAFFDIALOG.loadDepartName=function(selector,callback){
+		BSS.dispatch({code:11008},function(resp){
+			if(resp.code == 0){
+				var datas = resp.data;
+				var options = {valueField:'departid',textField:'departname',data:datas};
+				var deptNameCombox=new BSS.Combox(selector);
+				deptNameCombox.init(options);
+				if(jQuery.isFunction(callback)){
+					callback();
+				}
+			}else{
+				BSS.warning(resp.message);
+			}
+		},function(resp){});
+	}
 })
 </script>

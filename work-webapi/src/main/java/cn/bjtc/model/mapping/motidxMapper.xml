@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Motidx">
+	<resultMap type="cn.bjtc.model.Motidx" id="MotidxMap">
+		<result column="id" property="id"/>
+		<result column="idxname" property="idxname"/>
+		<result column="tblid" property="tblid"/>
+		<result column="colid" property="colid"/>
+		<result column="biztype" property="biztype"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Motidx" id="MotidxParamMap">
+		<parameter property="id" resultMap="MotidxMap" />
+		<parameter property="idxname" resultMap="MotidxMap" />
+		<parameter property="tblid" resultMap="MotidxMap" />
+		<parameter property="colid" resultMap="MotidxMap" />
+		<parameter property="biztype" resultMap="MotidxMap" />
+	</parameterMap>
+ 
+   <insert id="saveMotidx" parameterMap="MotidxParamMap">
+		INSERT INTO  mot_index (idxname,tblid,colid,biztype) VALUES (#{idxname},#{tblid},#{colid},#{biztype})
+   </insert>
+	
+	<update id="updateMotidx" parameterMap="MotidxParamMap">
+		UPDATE mot_index SET idxname=#{idxname},tblid=#{tblid},colid=#{colid},biztype=#{biztype}    WHERE id =#{id}
+	</update>
+
+	<select id="findAllMotidx" resultMap="MotidxMap" >
+	 	SELECT * FROM  mot_index WHERE   1=1
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="idxname!=null and idxname!=0"> AND idxname=#{idxname}</if>
+	 	<if test="tblid!=null and  tblid!=0"> AND tblid=#{tblid}</if>
+	 	<if test="colid!=null and colid!=0"> AND colid=#{colid}</if>
+	 	<if test="biztype!=null and biztype!=0"> AND biztype=#{biztype}</if>
+	 	LIMIT #{pageOffset},#{pageSize}
+	</select>
+	
+	<select id="countAllMotidx" resultType="Integer" >
+	 	SELECT count(id) FROM mot_index   WHERE   1=1
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="idxname!=null and idxname!=0"> AND idxname=#{idxname}</if>
+	 	<if test="tblid!=null and  tblid!=0"> AND tblid=#{tblid}</if>
+	 	<if test="colid!=null and colid!=0"> AND colid=#{colid}</if>
+	 	<if test="biztype!=null and biztype!=0"> AND biztype=#{biztype}</if>
+	</select>
+	 
+</mapper>

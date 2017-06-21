@@ -13,15 +13,14 @@ $(function(){
 		columns:[[
           {field:'staffid',title: 'ID',align: 'center',hidden:'true'},
           {field:'staffname',title: '员工姓名',align: 'center',width: 100},
-          {field:'gender',title: '性别',align: 'center',width: 100},
+          {field:'gender',title: '性别值',align: 'center',hidden:'true'},
+          {field:'genderStr',title: '性别',align: 'center',width: 100},
           {field:'mobile',title: '手机',align: 'center',width: 100},
           {field:'idcard',title: '身份证',align: 'center',width: 100},
           {field:'telephone',title: '电话',align: 'center',width: 100},
           {field:'jobstation',title: '岗位',align: 'center',width: 100},
-          {field:'departid',title: '所属部门',align: 'center',width: 100},
-          {field:'leavetime',title: '离职时间',align: 'center',width: 150,formatter:BSS.formatTime},
-          {field:'jointime',title: '入职时间',align: 'center',width: 150,formatter:BSS.formatTime},
-          {field:'creator',title: '创建人',align: 'center',width: 100},
+          {field:'departid',title: '所属部门值',align: 'center',hidden:'true'},
+          {field:'departname',title: '所属部门',align: 'center',width: 100}
 		]]
 	};
 	//构建datagrid，并填充数据

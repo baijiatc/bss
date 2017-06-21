@@ -62,5 +62,18 @@
 	 	<if test="sourceid!=null and sourceid!=0"> AND sourceid=#{sourceid}</if>
 	 	<if test="productid!=null and productid!=0"> AND productid=#{productid}</if>
 	</select>
+	
+	<select id="findSkuHasStock" resultMap="SkuMap">
+		SELECT sku.* FROM  sku JOIN stock ON sku.sourceid=stock.skuid
+		WHERE   1=1
+	 	<if test="id!=null and id!=0"> AND sku.id=#{id}</if>
+	 	<if test="skuname!=null and skuname!=''"> AND sku.skuname=#{skuname}</if>
+	 	<if test="barcode!=null and barcode!=''"> AND sku.barcode=#{barcode}</if>
+	 	<if test="price!=null and price!=0"> AND sku.price=#{price}</if>
+	 	<if test="mktprice!=null and mktprice!=0"> AND sku.mktprice=#{mktprice}</if>
+	 	<if test="fromsys!=null and fromsys!=0"> AND sku.fromsys=#{fromsys}</if>
+	 	<if test="sourceid!=null and sourceid!=0"> AND sku.sourceid=#{sourceid}</if>
+	 	<if test="productid!=null and productid!=0"> AND sku.productid=#{productid}</if>
+	</select>
 	 
 </mapper>

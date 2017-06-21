@@ -13,12 +13,13 @@ import cn.bjtc.annotation.SysPrivilege;
 public class PasswdViewController {
 
 	@RequestMapping(value="show.html",method=RequestMethod.GET)
+	@SysPrivilege(name="pwd:show")
 	public String showPasswdView(){
 		return "passwd/list";
 	}
 	
 	@RequestMapping(value="{staffid}.html",method=RequestMethod.GET)
-	@SysPrivilege(name="pwd:reset")
+	//@SysPrivilege(name="pwd:reset")
 	public String showPasswdEditView(@PathVariable Integer staffid,Model model){
 		model.addAttribute("staffid", staffid);
 		return "passwd/edit";

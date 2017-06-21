@@ -23,6 +23,7 @@ public class StaffView extends Pagination {
 	private Integer leavetime;
 	private Integer jointime;
 	private Integer creator;
+	private String departname;
 	public Integer getStaffid() {
 		return staffid;
 	}
@@ -139,5 +140,11 @@ public class StaffView extends Pagination {
 	}
 	public String getEduStr() {
 		return ApplicationDataManager.getDictValueByTypeValue(BaseDictType.DICT_EDU.toString(), String.valueOf(edu));
+	}
+	public String getDepartname() {
+		return departname;
+	}
+	public void setDepartname(String departname) {
+		this.departname = departname;
 	}
 }

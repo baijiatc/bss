@@ -13,6 +13,7 @@ import cn.bjtc.annotation.SysPrivilege;
 public class IdxparamViewController {
 
 	@RequestMapping(value="show.html",method=RequestMethod.GET)
+	@SysPrivilege(name="idxparam:show")
 	public String showIdxparamView(){
 		return "idxparam/list";
 	}

@@ -11,5 +11,6 @@ public interface IStaffDAO {
 	public int saveStaff(StaffView view);
 	public int updateStaff(StaffView view);
 	public List<Staff> findAllStaff(StaffView view);
+	public List<Staff> findAllDepartName(StaffView view);
 	public Integer countAllStaff(StaffView view);
 }

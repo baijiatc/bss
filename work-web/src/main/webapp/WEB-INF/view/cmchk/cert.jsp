@@ -63,7 +63,7 @@ certLayout.layout();
 
 BSS.dispatch({code:12002,data:[{cstmid:'${cid}'}]},function(resp){
 	if(resp.code == 0){
-		var cshop = resp.data[0];console.log(JSON.stringify(cshop));
+		var cshop = resp.data[0];
 		BSS.json2form('#frm_cstmchk_cert',cshop);
 	}else{
 		BSS.warning(resp.message);

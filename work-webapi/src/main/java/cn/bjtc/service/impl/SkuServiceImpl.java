@@ -44,6 +44,21 @@ public class SkuServiceImpl implements ISkuService {
 	}
  
 
+	public List<SkuView> findSkuHasStock(SkuView view) {
+		List<Sku> Skus = skuDAO.findSkuHasStock(view);
+		if(Skus == null || Skus.size() <= 0){
+			return new ArrayList<SkuView>(0);
+		}
+		List<SkuView> views = new ArrayList<SkuView>(Skus.size());
+		for(Sku Sku : Skus){
+			SkuView SkuView = new SkuView();
+			BeanUtils.copyProperties(Sku, SkuView);
+			views.add(SkuView);
+		}
+		return views;
+	}
+
+
 	@Autowired
 	private ISkuDAO skuDAO;
 

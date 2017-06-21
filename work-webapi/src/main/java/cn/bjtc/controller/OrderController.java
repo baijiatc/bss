@@ -38,16 +38,16 @@ public class OrderController extends BaseController {
 	@RequestMapping(value="orderdet", method=RequestMethod.POST)
 	@SysLogger(content="查询订单明细信息",type=AspectType.CONTROLLER)
 	public ApiReturn showOrderDets(){
-//		try {
+		try {
 			ApiParam param = findApiParam();
 			OrderDetView view = (OrderDetView) ParamUtil.convertToView(param, OrderDetView.class);
 			int count = orderService.countAllOrderDets(view);
 			List<?> privis = orderService.findAllOrderDets(view);
 			apiReturn.setCount(count);
 			apiReturn.setData(privis);
-//		} catch (Exception e) {
-//			showServerError();
-//		}
+		} catch (Exception e) {
+			showServerError();
+		}
 		return apiReturn;
 	}
 	@Autowired

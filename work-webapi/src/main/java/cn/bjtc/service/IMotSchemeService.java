@@ -11,4 +11,7 @@ public interface IMotSchemeService {
 	public int updateMotScheme(MotSchemeView view);
 	public List<MotSchemeView> findAllMotScheme(MotSchemeView view);
 	public Integer countAllMotScheme(MotSchemeView view);
+	
+//	public List<MotSchemeView> fAllMScByName(String schmname);
+
 }

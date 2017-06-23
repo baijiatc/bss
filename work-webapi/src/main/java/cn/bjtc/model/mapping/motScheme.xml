@@ -23,16 +23,20 @@
 	<select id="findAllMotScheme" resultMap="MotSchemeMap" >
 	 	SELECT * FROM  mot_scheme WHERE   1=1
 	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
-	 	<if test="schmname!=null and schmname!=''"> AND schmname=#{schmname}</if>
-	 	<if test="schmdesc!=null and  schmdesc!=''"> AND schmdesc=#{schmdesc}</if>
+	 	<if test="schmname!=null and schmname!=''"> AND schmname LIKE CONCAT('%',#{schmname},'%')</if>
+	 	<if test="schmdesc!=null and  schmdesc!=''"> AND schmdesc LIKE #{schmdesc}</if>
 	 	LIMIT #{pageOffset},#{pageSize}
 	</select>
 	
 	<select id="countAllMotScheme" resultType="Integer" >
 	 	SELECT count(id) FROM mot_scheme  WHERE   1=1
 	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
-	 	<if test="schmname!=null and schmname!=''"> AND schmname=#{schmname}</if>
-	 	<if test="schmdesc!=null and  schmdesc!=''"> AND schmdesc=#{schmdesc}</if>
+	 	<if test="schmname!=null and schmname!=''"> AND schmname LIKE #{schmname}</if>
+	 	<if test="schmdesc!=null and  schmdesc!=''"> AND schmdesc LIKE #{schmdesc}</if>
 	</select>
+	 
+<!-- 	 <select id="fAllMScByName" resultType="MotSchemeMap" > -->
+<!-- 	 	SELECT * FROM  mot_scheme WHERE  schmname=#{schmname} -->
+<!-- 	</select> -->
 	 
 </mapper>

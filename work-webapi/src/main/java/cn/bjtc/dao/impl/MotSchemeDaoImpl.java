@@ -31,6 +31,10 @@ public class MotSchemeDaoImpl extends MyBatisDAO<MotScheme, Integer>
 	public Integer countAllMotScheme(MotSchemeView view) {
 		return super.countByParam("countAllMotScheme", view);
 	}
+
+//	public List<MotScheme> fAllMScByName(MotSchemeView view) {
+//		return super.findByParam("fAllMScByName", view);
+//	}
 	
 
 }

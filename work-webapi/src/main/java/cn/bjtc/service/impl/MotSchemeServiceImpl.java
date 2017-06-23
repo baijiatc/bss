@@ -6,18 +6,9 @@ import java.util.List;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import cn.bjtc.dao.IActivityDao;
 import cn.bjtc.dao.IMotSchemeDao;
-import cn.bjtc.model.Activity;
-import cn.bjtc.model.Brand;
-import cn.bjtc.model.Menu;
 import cn.bjtc.model.MotScheme;
-import cn.bjtc.service.IActyService;
 import cn.bjtc.service.IMotSchemeService;
-import cn.bjtc.view.ActivityView;
-import cn.bjtc.view.BrandView;
-import cn.bjtc.view.MenuView;
 import cn.bjtc.view.MotSchemeView;
 
 @Service("motSchemeService")
@@ -51,6 +42,25 @@ public class MotSchemeServiceImpl implements  IMotSchemeService {
 		return motSchDao.countAllMotScheme(view);
 	}
  
+
+//
+//	public List<MotSchemeView> fAllMScByName(String schmname) {
+//		
+//		List<MotScheme> motSchs =motSchDao.fAllMScByName(schmname);
+//		if(motSchs == null || motSchs.size() <= 0){
+//			return new ArrayList<MotSchemeView>(0);
+//		}
+//		List<MotSchemeView> views = new ArrayList<MotSchemeView>(motSchs.size());
+//		for(MotScheme motSch : motSchs){
+//			MotSchemeView motSchView = new MotSchemeView();
+//			BeanUtils.copyProperties(motSch, motSchView);
+//			views.add(motSchView);
+//		}
+//		return views;
+//	}
+//	 
+//	 
+	
 	@Autowired
 	private IMotSchemeDao  motSchDao;
 }

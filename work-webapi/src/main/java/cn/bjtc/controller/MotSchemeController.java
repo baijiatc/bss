@@ -23,16 +23,16 @@ public class MotSchemeController  extends BaseController {
 	@RequestMapping(value="all", method=RequestMethod.POST)
 	@SysLogger(content="查询方案信息",type=AspectType.CONTROLLER)
 	public ApiReturn showMotScheme(){
-	   try {
+//	   try {
 		ApiParam param=findApiParam();
 		MotSchemeView  view=(MotSchemeView) ParamUtil.convertToView(param, MotSchemeView.class);
 		   int count=motSchService.countAllMotScheme(view);
 		   List<?> motSch=motSchService.findAllMotScheme(view);
 		   apiReturn.setCount(count);
 		   apiReturn.setData(motSch);
-	} catch (Exception e) {
-		showServerError();
-	}
+//	} catch (Exception e) {
+//		showServerError();
+//	}
 	   return apiReturn;
 	}
 	
@@ -77,6 +77,21 @@ public class MotSchemeController  extends BaseController {
 		}
         return apiReturn;
     }
+    
+//    @RequestMapping(value="findbyname", method=RequestMethod.POST)
+//	@SysLogger(content="根据名字查询方案信息",type=AspectType.CONTROLLER)
+//	public ApiReturn execFindByNameMotScheme(){
+//		try {
+//			ApiParam param=findApiParam();
+//			ifParamDataIsEmpty(param);
+//			String  schmname = (String) param.getData().get(0).get("schmname");
+//			List<?> motSch=motSchService.fAllMScByName(schmname);
+//			   apiReturn.setData(motSch);
+//		} catch (Exception e) {
+//			showServerError();
+//		}
+//		return apiReturn;
+//	}
 	
 	@Autowired
 	private IMotSchemeService motSchService;

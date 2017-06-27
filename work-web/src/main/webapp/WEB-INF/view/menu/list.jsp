@@ -48,10 +48,10 @@ $(function(){
 	};
 	//设置父类名字
 	MENUDIALOG.loadParentMenu=function(selector,callback){
-		BSS.dispatch({code:21003,data:[{parentid:0}]},function(resp){
+		BSS.dispatch({code:21003,data:[{parentid:0}],psize:50},function(resp){
 			if(resp.code == 0 ){
 				var datas = resp.data;
-				var options = {valueField:'menuid',textField:'menuname',data:datas};
+				var options = {valueField:'menuid',textField:'menuname',data:datas,panelHeight:150};
 				var parentidCombox=new BSS.Combox(selector);
 				parentidCombox.init(options);
 				if(jQuery.isFunction(callback)){

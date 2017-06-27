@@ -15,9 +15,17 @@ BSS.dispatch({code:22004},function(resp){
 	if(resp.code == 0){ 
 		SCHEMEQUERYDIALOG.ok=function(){
 			  var scheme = $('#id_schmname').val();
-			SCMEGRID.load({code:22004,data:[{schmname:scheme}]});
+				  SCMEGRID.load({code:22004,data:[{schmname:scheme}]});	 
 	}
-	}else{	 
+	}else{
+		BSS.warning(resp.message);
+	    
 	}
 },function(resp){});
+
+// SCHEMEQUERYDIALOG.ok=function(){
+// 			  var scheme = $('#id_schmname').val();
+// 			SCMEGRID.load({code:22004,data:[{schmname:scheme}]});
+
+// }
 </script>

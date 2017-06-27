@@ -40,7 +40,7 @@ menuStCombox.fromDict('DICT_MENUST',function(){
 function setOk(){
 	MENUDIALOG.ok = function(){
 		var menu = BSS.form2json('#frm_menu');
-		BSS.dispatch({code:21001,data:[menu]},function(resp){
+		BSS.dispatch({code:21001,data:[menu],panelHeight:150},function(resp){
 			if(resp.code == 0){
 				BSS.info('保存成功');
 			}else{

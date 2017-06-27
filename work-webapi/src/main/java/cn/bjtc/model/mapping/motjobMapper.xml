@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="MotJob">
+	<resultMap type="cn.bjtc.model.MotJob" id="MotJobMap">
+		<result column="id" property="id"/>
+		<result column="evtid" property="evtid"/>
+		<result column="priority" property="priority"/>
+		<result column="isauto" property="isauto"/>
+		<result column="executor" property="executor"/>
+		<result column="jobstats" property="jobstats"/>
+		<result column="begintime" property="begintime"/>
+		<result column="endtime" property="endtime"/>
+		<result column="finishtime" property="finishtime"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.MotJob" id="MJobParamMap">
+		<parameter property="id" resultMap="MotJobMap" />
+		<parameter property="evtid" resultMap="MotJobMap" />
+		<parameter property="priority" resultMap="MotJobMap" />
+		<parameter property="isauto" resultMap="MotJobMap" />
+		<parameter property="executor" resultMap="MotJobMap" />
+		<parameter property="jobstats" resultMap="MotJobMap" />
+		<parameter property="begintime" resultMap="MotJobMap" />
+		<parameter property="endtime" resultMap="MotJobMap" />
+		<parameter property="finishtime" resultMap="MotJobMap" />
+	</parameterMap>
+ 
+	<update id="updateMJob" parameterMap="MJobParamMap">
+		UPDATE mot_job SET evtid=#{evtid},priority=#{priority},isauto=#{isauto},executor=#{executor},jobstats=#{jobstats},begintime=#{begintime},endtime=#{endtime},finishtime=#{finishtime} WHERE id =#{id}
+	</update>
+
+	<select id="findAllMJob" resultMap="MotJobMap" >
+	 	SELECT  *  FROM  mot_job   WHERE   1=1
+        <if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="evtid!=null and evtid!=0"> AND evtid=#{evtid}</if>
+	 	<if test="priority!=null and priority!=0"> AND priority=#{priority}</if>
+	 	<if test="isauto!=null and isauto!=0"> AND isauto=#{isauto}</if>
+	 	<if test="executor!=null "> AND executor=#{executor}</if>
+	 	<if test="jobstats!=null "> AND jobstats=#{jobstats}</if>
+	 	<if test="begintime!=null and begintime!=0"> AND begintime=#{begintime}</if>
+	 	<if test="endtime!=null and endtime!=0"> AND endtime=#{endtime}</if>
+	 	<if test="finishtime!=null and finishtime!=0"> AND finishtime=#{finishtime}</if>
+	 	LIMIT #{pageOffset},#{pageSize}
+	</select>
+	
+	<select id="countAllMJob" resultType="Integer" >
+	 	SELECT count(id) FROM mot_job   WHERE   1=1
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="evtid!=null and evtid!=0"> AND evtid=#{evtid}</if>
+	 	<if test="priority!=null and priority!=0"> AND priority=#{priority}</if>
+	 	<if test="isauto!=null and isauto!=0"> AND isauto=#{isauto}</if>
+	 	<if test="executor!=null "> AND executor=#{executor}</if>
+	 	<if test="jobstats!=null "> AND jobstats=#{jobstats}</if>
+	 	<if test="begintime!=null and begintime!=0"> AND begintime=#{begintime}</if>
+	 	<if test="endtime!=null and endtime!=0"> AND endtime=#{endtime}</if>
+	 	<if test="finishtime!=null and finishtime!=0"> AND finishtime=#{finishtime}</if>
+	</select>
+	 
+</mapper>

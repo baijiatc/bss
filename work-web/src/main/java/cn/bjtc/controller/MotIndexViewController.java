@@ -30,4 +30,8 @@ public class MotIndexViewController {
 		model.addAttribute("id", id);
 		return "motidx/edit";	
 	}
+	@RequestMapping(value="query.html",method=RequestMethod.GET)
+	public String showQueryView(){
+		return "motidx/query";
+	}
 }

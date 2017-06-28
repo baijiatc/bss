@@ -7,21 +7,30 @@
 		</tr>
 		<tr>
 			<td>数据源表：</td>
-			<td><input class="easyui-textbox" type="text" name="tblid" data-options="required:false"></input></td>
+			<td><input id='cbx_tblid' class="easyui-textbox" type="text" name="tblid" data-options="required:false"></input></td>
 		</tr>
 		<tr>
 			<td>数据源列：</td>
-			<td><input class="easyui-textbox" type="text" name="colid" data-options="required:false"></input></td>
+			<td><input id='cbx_colid' class="easyui-textbox" type="text" name="colid" data-options="required:false"></input></td>
 		</tr>
 		<tr>
 			<td>业务类型：</td>
-			<td><input class="easyui-textbox" type="text" name="biztype" data-options="required:true"></input></td>
+			<td><input id='cbx_biztype' class="easyui-textbox" type="text" name="biztype" data-options="required:true"></input></td>
 		</tr>
 	</table>
 </form>
 <script>
-
-// function setOk(){
+var tblCombox = new BSS.Combox('#cbx_tblid');
+var colCombox = new BSS.Combox('#cbx_colid');
+var bizCombox = new BSS.Combox('#cbx_biztype');
+bizCombox.fromDict('DICT_BIZTYPE',function(){
+	MOTIDXDIALOG.loadTblName('#cbx_tblid',function(){
+		MOTIDXDIALOG.loadColName('#cbx_colid',function(){
+			setOk()
+		});
+	});
+});
+function setOk(){
 	MOTIDXDIALOG.ok = function(){
 		var idx = BSS.form2json('#frm_motidx');
 		BSS.dispatch({code:22005,data:[idx]},function(resp){
@@ -34,5 +43,5 @@
 			console.log(JSON.stringify(resp));
 		});
 	}
-// }
+}
 </script>

@@ -7,6 +7,8 @@ public class Motidx {
 	private Integer tblid;
 	private Integer colid;
 	private Integer biztype;
+	private String tblname;
+	private String colname;
 	public Integer getId() {
 		return id;
 	}
@@ -36,5 +38,17 @@ public class Motidx {
 	}
 	public void setBiztype(Integer biztype) {
 		this.biztype = biztype;
+	}
+	public String getTblname() {
+		return tblname;
+	}
+	public void setTblname(String tblname) {
+		this.tblname = tblname;
+	}
+	public String getColname() {
+		return colname;
+	}
+	public void setColname(String colname) {
+		this.colname = colname;
 	}
 }

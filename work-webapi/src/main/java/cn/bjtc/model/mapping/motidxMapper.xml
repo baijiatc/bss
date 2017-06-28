@@ -27,17 +27,22 @@
 	<select id="findAllMotidx" resultMap="MotidxMap" >
 	 	SELECT * FROM  mot_index WHERE   1=1
 	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
-	 	<if test="idxname!=null and idxname!=0"> AND idxname=#{idxname}</if>
+	 	<if test="idxname!=null and idxname!=''"> AND idxname LIKE CONCAT('%',#{idxname},'%')</if>
 	 	<if test="tblid!=null and  tblid!=0"> AND tblid=#{tblid}</if>
 	 	<if test="colid!=null and colid!=0"> AND colid=#{colid}</if>
 	 	<if test="biztype!=null and biztype!=0"> AND biztype=#{biztype}</if>
 	 	LIMIT #{pageOffset},#{pageSize}
 	</select>
-	
+	<select id="findAlltblname" resultMap="MotidxMap" >
+		SELECT mi.*,md.tblname FROM mot_index mi join mot_dstbl md  on  mi.tblid = md.id
+	</select>
+	<select id="findAllcolname" resultMap="MotidxMap" >
+		SELECT mi.*,md.colname FROM mot_index mi join mot_dscol md  on  mi.colid = md.id
+	</select>
 	<select id="countAllMotidx" resultType="Integer" >
 	 	SELECT count(id) FROM mot_index   WHERE   1=1
 	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
-	 	<if test="idxname!=null and idxname!=0"> AND idxname=#{idxname}</if>
+	 	<if test="idxname!=null and idxname!=''"> AND idxname=#{idxname}</if>
 	 	<if test="tblid!=null and  tblid!=0"> AND tblid=#{tblid}</if>
 	 	<if test="colid!=null and colid!=0"> AND colid=#{colid}</if>
 	 	<if test="biztype!=null and biztype!=0"> AND biztype=#{biztype}</if>

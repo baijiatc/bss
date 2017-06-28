@@ -30,4 +30,12 @@ public class MotSchemeViewController {
 		model.addAttribute("id", id);
 		return "scheme/edit";
 	}
+	
+	@RequestMapping(value="find.html",method=RequestMethod.GET)
+//	@SysPrivilege(name="scheme:edit")
+	public String showQueryView(){
+		return "scheme/find";
+	}
+	
+ 
 }

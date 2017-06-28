@@ -45,7 +45,7 @@ function initRoleEditPage(){
 			
 			MENUDIALOG.ok = function(){
 				var menu = BSS.form2json('#frm_menu');
-				BSS.dispatch({code:21002,data:[menu]},function(){
+				BSS.dispatch({code:21002,data:[menu],panelHeight:150},function(){
 					BSS.alert('保存成功！');
 				},function(){});
 			};

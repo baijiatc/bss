@@ -41,13 +41,15 @@
 			<tr>
 			<td>开始时间：</td>
 			<td>
-				<input id="id_begintime"  class="easyui-textbox" type="text" name="begintime" style="width:200px;" ></input>
+				<input id="id_begintime"  class="easyui-datebox" type="text" name="begintime" style="width:200px;" 
+				    data-options="formatter:myformatter,parser:myparser,required:false" ></input>
 			</td>
 		</tr> 
 			<tr>
 			<td>结束时间：</td>
 			<td>
-				<input id="id_endtime"  class="easyui-textbox" type="text" name="endtime" style="width:200px;" ></input>
+				<input id="id_endtime"  class="easyui-datebox" type="text" name="endtime" style="width:200px;" 
+				data-options="formatter:myformatter,parser:myparser,required:false" ></input>
 			</td>
 		</tr> 
 		 
@@ -55,7 +57,30 @@
 	</table>
 </form>  
 <script>
- 
+
+function myformatter(date){
+		var y = date.getFullYear();
+			var m = date.getMonth()+1;
+			var d = date.getDate();
+			return y+(m<10?('0'+m):m)+(d<10?('0'+d):d);
+		}
+
+
+	function myparser(s){
+		s=''+s;
+		if (!s) return new Date();
+		var y = s.substring(0,4);
+		var m =s.substring(4,6);
+		var d = s.substring(6,8);
+	 
+		if (!isNaN(y) && !isNaN( m) && !isNaN(d) ){
+			return new Date(y,m-1,d );
+		} else {
+			return new Date();
+		}
+	}
+
+
   
 BSS.dispatch({code:23001},function(resp){
 	if(resp.code == 0){ 

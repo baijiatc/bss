@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Moteventscheme">
+	<resultMap type="cn.bjtc.model.Moteventscheme" id="MoteventschemeMap">
+		<result column="id" property="id"/>
+		<result column="evtid" property="evtid"/>
+		<result column="chnid" property="chnid"/>
+		<result column="schmid" property="schmid"/>
+		<result column="isactive" property="isactive"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Moteventscheme" id="MoteventschemeParamMap">
+		<parameter property="id" resultMap="MoteventschemeMap" />
+		<parameter property="evtid" resultMap="MoteventschemeMap" />
+		<parameter property="chnid" resultMap="MoteventschemeMap" />
+		<parameter property="schmid" resultMap="MoteventschemeMap" />
+		<parameter property="isactive" resultMap="MoteventschemeMap" />
+	</parameterMap>
+ 
+   <insert id="saveMoteventscheme" parameterMap="MoteventschemeParamMap">
+		INSERT INTO  mot_event_scheme (schmid,evtid,chnid,isactive) VALUES (#{schmid},#{evtid},#{chnid},#{isactive})
+   </insert>
+	
+	<update id="updateMoteventscheme" parameterMap="MoteventschemeParamMap">
+		UPDATE mot_event_scheme SET evtid=#{evtid},chnid=#{chnid},schmid=#{schmid},isactive=#{isactive}    WHERE id =#{id}
+	</update>
+	<delete id="deleteMoteventscheme">
+		DELETE FROM mot_event_scheme WHERE id=#{id}
+	</delete>
+	<select id="findAllMoteventscheme" resultMap="MoteventschemeMap" >
+	 	SELECT * FROM  mot_event_scheme WHERE   1=1
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="evtid!=null and evtid!=0"> AND evtid=#{evtid}</if>
+	 	<if test="chnid!=null and  chnid!=0"> AND chnid=#{chnid}</if>
+	 	<if test="schmid!=null and schmid!=0"> AND schmid=#{schmid}</if>
+	 	<if test="isactive!=null and isactive!=''"> AND isactive=#{isactive}</if>
+	 	LIMIT #{pageOffset},#{pageSize}
+	</select>
+	<select id="countAllMoteventscheme" resultType="Integer" >
+	 	SELECT count(id) FROM mot_event   WHERE   1=1
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="evtid!=null and evtid!=0"> AND evtid=#{evtid}</if>
+	 	<if test="chnid!=null and  chnid!=0"> AND chnid=#{chnid}</if>
+	 	<if test="schmid!=null and schmid!=0"> AND schmid=#{schmid}</if>
+	 	<if test="isactive!=null and isactive!=''"> AND isactive=#{isactive}</if>
+	</select>
+	 
+</mapper>

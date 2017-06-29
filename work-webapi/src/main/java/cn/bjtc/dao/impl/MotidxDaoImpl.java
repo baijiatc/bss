@@ -32,5 +32,13 @@ public class MotidxDaoImpl extends MyBatisDAO<Motidx, Integer> implements
 		return super.countByParam("countAllMotidx", view);
 	}
 
+	public List<Motidx> findAlltblname(MotidxView view) {
+		return super.findByParam("findAlltblname", view);
+	}
+
+	public List<Motidx> findAllcolname(MotidxView view) {
+		return super.findByParam("findAllcolname", view);
+	}
+
 
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Mottbl">
+	<resultMap type="cn.bjtc.model.Mottbl" id="MottblMap">
+		<result column="id" property="id"/>
+		<result column="tblname" property="tblname"/>
+		<result column="tbldesc" property="tbldesc"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Mottbl" id="MottblParamMap">
+		<parameter property="id" resultMap="MottblMap" />
+		<parameter property="tblname" resultMap="MottblMap" />
+		<parameter property="tbldesc" resultMap="MottblMap" />
+	</parameterMap>
+ 
+	<select id="findAllMottbl" resultMap="MottblMap" >
+	 	SELECT * FROM  mot_dstbl WHERE   1=1
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="tblname!=null and tblname!=0"> AND tblname=#{tblname}</if>
+	 	<if test="tbldesc!=null and  tbldesc!=0"> AND tbldesc=#{tbldesc}</if>
+	 	LIMIT #{pageOffset},#{pageSize}
+	</select>
+	 
+</mapper>

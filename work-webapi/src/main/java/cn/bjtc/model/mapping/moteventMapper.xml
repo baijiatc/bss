@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Motevent">
+	<resultMap type="cn.bjtc.model.Motevent" id="MoteventMap">
+		<result column="id" property="id"/>
+		<result column="evtname" property="evtname"/>
+		<result column="biztype" property="biztype"/>
+		<result column="evtdesc" property="evtdesc"/>
+		<result column="evtstats" property="evtstats"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Motevent" id="MoteventParamMap">
+		<parameter property="id" resultMap="MoteventMap" />
+		<parameter property="evtname" resultMap="MoteventMap" />
+		<parameter property="biztype" resultMap="MoteventMap" />
+		<parameter property="evtdesc" resultMap="MoteventMap" />
+		<parameter property="evtstats" resultMap="MoteventMap" />
+	</parameterMap>
+ 
+   <insert id="saveMotevent" parameterMap="MoteventParamMap">
+		INSERT INTO  mot_event (evtname,biztype,evtdesc,evtstats) VALUES (#{evtname},#{biztype},#{evtdesc},#{evtstats})
+   </insert>
+	
+	<update id="updateMotevent" parameterMap="MoteventParamMap">
+		UPDATE mot_event SET evtname=#{evtname},biztype=#{biztype},evtdesc=#{evtdesc},evtstats=#{evtstats}    WHERE id =#{id}
+	</update>
+
+	<select id="findAllMotevent" resultMap="MoteventMap" >
+	 	SELECT * FROM  mot_event WHERE   1=1
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="evtname!=null and evtname!=''"> AND evtname LIKE CONCAT('%',#{evtname},'%')</if>
+	 	<if test="biztype!=null and  biztype!=0"> AND biztype=#{biztype}</if>
+	 	<if test="evtdesc!=null and evtdesc!=0"> AND evtdesc=#{evtdesc}</if>
+	 	<if test="evtstats!=null and evtstats!=''"> AND evtstats LIKE CONCAT('%',#{evtstats},'%')</if>
+	 	LIMIT #{pageOffset},#{pageSize}
+	</select>
+	<select id="countAllMotevent" resultType="Integer" >
+	 	SELECT count(id) FROM mot_event   WHERE   1=1
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="evtname!=null and evtname!=''"> AND evtname=#{evtname}</if>
+	 	<if test="biztype!=null and  biztype!=0"> AND biztype=#{biztype}</if>
+	 	<if test="evtdesc!=null and evtdesc!=0"> AND evtdesc=#{evtdesc}</if>
+	 	<if test="evtstats!=null and evtstats!=''"> AND evtstats=#{evtstats}</if>
+	</select>
+	 
+</mapper>

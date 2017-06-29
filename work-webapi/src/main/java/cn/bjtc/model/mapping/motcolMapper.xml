@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Motcol">
+	<resultMap type="cn.bjtc.model.Motcol" id="MotcolMap">
+		<result column="id" property="id"/>
+		<result column="tblid" property="tblid"/>
+		<result column="colname" property="colname"/>
+		<result column="coldesc" property="coldesc"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Motcol" id="MotcolParamMap">
+		<parameter property="id" resultMap="MotcolMap" />
+		<parameter property="tblid" resultMap="MotcolMap" />
+		<parameter property="colname" resultMap="MotcolMap" />
+		<parameter property="coldesc" resultMap="MotcolMap" />
+	</parameterMap>
+ 
+	<select id="findAllMotcol" resultMap="MotcolMap" >
+	 	SELECT * FROM  mot_dscol WHERE   1=1
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="tblid!=null and tblid!=0"> AND tblid=#{tblid}</if>
+	 	<if test="colname!=null and  colname!=0"> AND colname=#{colname}</if>
+	 	<if test="coldesc!=null and  coldesc!=0"> AND coldesc=#{coldesc}</if>
+	 	LIMIT #{pageOffset},#{pageSize}
+	</select>
+	 
+</mapper>

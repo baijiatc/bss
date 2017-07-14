@@ -3,38 +3,31 @@ package cn.bjtc.view;
 public class MotcolView  extends Pagination{
 
 	private Integer id;
-	private String evtname;
-	private Integer biztype;
-	private String evtdesc;
-	private Integer evtstats;
+	private Integer tblid;
+	private String colname;
+	private String coldesc;
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getEvtname() {
-		return evtname;
+	public Integer getTblid() {
+		return tblid;
 	}
-	public void setEvtname(String evtname) {
-		this.evtname = evtname;
+	public void setTblid(Integer tblid) {
+		this.tblid = tblid;
 	}
-	public Integer getBiztype() {
-		return biztype;
+	public String getColname() {
+		return colname;
 	}
-	public void setBiztype(Integer biztype) {
-		this.biztype = biztype;
+	public void setColname(String colname) {
+		this.colname = colname;
 	}
-	public String getEvtdesc() {
-		return evtdesc;
+	public String getColdesc() {
+		return coldesc;
 	}
-	public void setEvtdesc(String evtdesc) {
-		this.evtdesc = evtdesc;
-	}
-	public Integer getEvtstats() {
-		return evtstats;
-	}
-	public void setEvtstats(Integer evtstats) {
-		this.evtstats = evtstats;
+	public void setColdesc(String coldesc) {
+		this.coldesc = coldesc;
 	}
 }

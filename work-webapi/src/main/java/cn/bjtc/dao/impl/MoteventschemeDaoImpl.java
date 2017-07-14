@@ -24,6 +24,12 @@ public class MoteventschemeDaoImpl extends MyBatisDAO<Moteventscheme, Integer> i
 	public List<Moteventscheme> findAllMoteventscheme(MoteventschemeView view) {
 		 return super.findByParam("findAllMoteventscheme", view);
 	}
+	public List<Moteventscheme> findAllschename(MoteventschemeView view) {
+		return super.findByParam("findAllschename", view);
+	}
+	public List<Moteventscheme> findAllschedesc(MoteventschemeView view) {
+		return super.findByParam("findAllschedesc", view);
+	}
 
 	public Integer countAllMoteventscheme(MoteventschemeView view) {
 		return super.countByParam("countAllMoteventscheme", view);

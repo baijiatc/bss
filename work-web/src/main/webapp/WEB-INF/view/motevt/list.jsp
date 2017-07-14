@@ -3,6 +3,7 @@
 <div id="div_motevtadd" style="padding:0 0 0 50px;"></div>
 <div id="motevt_query" style="display:none;"></div>
 <div id="motevt_control" style="display:none;"></div>
+<div id="motevt_setting" style="display:none;"></div>
 <!-- javascript部分 -->
 <script>
 $(function(){
@@ -28,20 +29,6 @@ $(function(){
 			showQueryDialog();
 		}
 	});
-	MOTEVTGRID.toolbar.push({
-		text:'设定群体',
-		iconCls:'icon-tip',
-		handler:function(){
-			showQueryDialog();
-		}
-	});
-	MOTEVTGRID.toolbar.push({
-		text:'绑定条件',
-		iconCls:'icon-ok',
-		handler:function(){
-			showQueryDialog();
-		}
-	});
 	//支配方案
 	MOTEVTCONTROLDIALOG = new BSS.Dialog('#motevt_control');
 	MOTEVTGRID.toolbar.push({iconCls:'icon-redo',text:'支配方案',handler:function(){
@@ -52,6 +39,33 @@ $(function(){
 		}
 			var id = row['id'];
 			MOTEVTCONTROLDIALOG.init({href:'motevt/'+id+'/control.html',width:500,height:500});
+		}
+	});
+	//设定群体
+// 	MOTEVTSETROLDIALOG = new BSS.Dialog('#motevt_setting');
+	MOTEVTGRID.toolbar.push({iconCls:'icon-redo',text:'设定群体',handler:function(){
+	var row =MOTEVTGRID.getSelectedRow();
+		if(BSS.Helper.isNull(row)){
+			BSS.warning('请选择要设定的方案');
+			return;
+		}
+			var id = row['id'];
+		 	var dlg = new BSS.Dialog('#motevt_setting');
+		 	dlg.init({
+		 		href:'motevt/'+id+'/setting.html',
+		 		width:550,
+		 		height:500,
+		 		buttons:[
+ 							{text:'关闭',iconCls:'icon-remove',handler:function(){}}
+						]
+		 		});
+		}
+	});
+	MOTEVTGRID.toolbar.push({
+		text:'绑定条件',
+		iconCls:'icon-ok',
+		handler:function(){
+			showQueryDialog();
 		}
 	});
 	MOTEVTGRID.build(options,{code:22013});

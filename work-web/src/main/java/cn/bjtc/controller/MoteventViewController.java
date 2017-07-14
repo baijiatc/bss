@@ -38,4 +38,10 @@ public class MoteventViewController {
 		model.addAttribute("id", id);
 		return "motevt/control";
 	}
+	@RequestMapping(value="{id}/setting.html",method=RequestMethod.GET)
+	//@SysPrivilege(name="pwd:modify")
+	public String showSettingView(@PathVariable Integer id,Model model){
+		model.addAttribute("id", id);
+		return "motevt/setting";
+	}
 }

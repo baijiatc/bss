@@ -32,16 +32,21 @@
 	 	<if test="evtid!=null and evtid!=0"> AND evtid=#{evtid}</if>
 	 	<if test="chnid!=null and  chnid!=0"> AND chnid=#{chnid}</if>
 	 	<if test="schmid!=null and schmid!=0"> AND schmid=#{schmid}</if>
-	 	<if test="isactive!=null and isactive!=''"> AND isactive=#{isactive}</if>
+	 	<if test="isactive!=null and isactive!=0"> AND isactive=#{isactive}</if>
 	 	LIMIT #{pageOffset},#{pageSize}
 	</select>
 	<select id="countAllMoteventscheme" resultType="Integer" >
-	 	SELECT count(id) FROM mot_event   WHERE   1=1
+	 	SELECT count(id) FROM mot_event_scheme   WHERE   1=1
 	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
 	 	<if test="evtid!=null and evtid!=0"> AND evtid=#{evtid}</if>
 	 	<if test="chnid!=null and  chnid!=0"> AND chnid=#{chnid}</if>
 	 	<if test="schmid!=null and schmid!=0"> AND schmid=#{schmid}</if>
-	 	<if test="isactive!=null and isactive!=''"> AND isactive=#{isactive}</if>
+	 	<if test="isactive!=null and isactive!=0"> AND isactive=#{isactive}</if>
 	</select>
-	 
+	 <select id="findAllschename" resultMap="MoteventschemeMap" >
+		SELECT mes.*,ms.schmname FROM mot_event_scheme mes join mot_scheme ms  on  ms.id = mes.schmid
+	</select>
+	<select id="findAllschedesc" resultMap="MoteventschemeMap" >
+		SELECT mes.*,ms.schmdesc FROM mot_event_scheme mes join mot_scheme ms  on  ms.id = mes.schmid
+	</select>
 </mapper>

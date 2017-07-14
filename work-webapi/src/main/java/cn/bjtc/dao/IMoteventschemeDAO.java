@@ -10,5 +10,7 @@ public interface IMoteventschemeDAO {
 	public int saveMoteventscheme(MoteventschemeView view);
 	public int deleteMoteventscheme(Integer id);
 	public List<Moteventscheme> findAllMoteventscheme(MoteventschemeView view);
+	public List<Moteventscheme> findAllschename(MoteventschemeView view);
+	public List<Moteventscheme> findAllschedesc(MoteventschemeView view);
 	public Integer countAllMoteventscheme(MoteventschemeView view);
 }

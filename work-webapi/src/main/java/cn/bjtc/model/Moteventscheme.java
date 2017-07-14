@@ -6,6 +6,8 @@ public class Moteventscheme {
 	private Integer chnid;
 	private Integer schmid;
 	private Integer isactive;
+	private String schmname;
+	private String schmdesc;
 	public Integer getId() {
 		return id;
 	}
@@ -35,5 +37,17 @@ public class Moteventscheme {
 	}
 	public void setIsactive(Integer isactive) {
 		this.isactive = isactive;
+	}
+	public String getSchmname() {
+		return schmname;
+	}
+	public void setSchmname(String schmname) {
+		this.schmname = schmname;
+	}
+	public String getSchmdesc() {
+		return schmdesc;
+	}
+	public void setSchmdesc(String schmdesc) {
+		this.schmdesc = schmdesc;
 	}
 }

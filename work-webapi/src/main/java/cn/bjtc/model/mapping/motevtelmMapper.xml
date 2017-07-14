@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Motevtelm">
+	<resultMap type="cn.bjtc.model.Motevtelm" id="MotevtelmMap">
+		<result column="id" property="id"/>
+		<result column="evtid" property="evtid"/>
+		<result column="colid" property="colid"/>
+		<result column="chnname" property="chnname"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Motevtelm" id="MotevtelmParamMap">
+		<parameter property="id" resultMap="MotevtelmMap" />
+		<parameter property="evtid" resultMap="MotevtelmMap" />
+		<parameter property="colid" resultMap="MotevtelmMap" />
+		<parameter property="chnname" resultMap="MotevtelmMap" />
+	</parameterMap>
+ 
+   <insert id="saveMotevtelm" parameterMap="MotevtelmParamMap">
+		INSERT INTO  mot_event_elem (evtid,colid,chnname) VALUES (#{evtid},#{colid},#{chnname})
+   </insert>
+	
+	<update id="updateMotevtelm" parameterMap="MotevtelmParamMap">
+		UPDATE mot_event_elem SET evtid=#{evtid},colid=#{colid},chnname=#{chnname} WHERE id =#{id}
+	</update>
+	<delete id="deleteMotevtelm">
+		DELETE FROM mot_event_elem WHERE id=#{id}
+	</delete>
+	<select id="findAllMotevtelm" resultMap="MotevtelmMap" >
+	 	SELECT * FROM  mot_event_elem WHERE   1=1
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="evtid!=null and evtid!=0"> AND evtid=#{evtid}</if>
+	 	<if test="colid!=null and  colid!=0"> AND colid=#{colid}</if>
+	 	<if test="chnname!=null and chnname!=''"> AND chnname=#{chnname}</if>
+	 	LIMIT #{pageOffset},#{pageSize}
+	</select>
+	<select id="countAllMotevtelm" resultType="Integer" >
+	 	SELECT count(id) FROM mot_event_elem   WHERE   1=1
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="evtid!=null and evtid!=0"> AND evtid=#{evtid}</if>
+	 	<if test="colid!=null and  colid!=0"> AND colid=#{colid}</if>
+	 	<if test="chnname!=null and chnname!=''"> AND chnname=#{chnname}</if>
+	</select>
+</mapper>

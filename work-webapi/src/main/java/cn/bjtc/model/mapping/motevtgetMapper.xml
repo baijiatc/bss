@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Motevtget">
+	<resultMap type="cn.bjtc.model.Motevtget" id="MotevtgetMap">
+		<result column="id" property="id"/>
+		<result column="evtid" property="evtid"/>
+		<result column="ltblid" property="ltblid"/>
+		<result column="hjoin" property="hjoin"/>
+		<result column="rtblid" property="rtblid"/>
+		<result column="onjoin" property="onjoin"/>
+		<result column="issingle" property="issingle"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Motevtget" id="MotevtgetParamMap">
+		<parameter property="id" resultMap="MotevtgetMap" />
+		<parameter property="evtid" resultMap="MotevtgetMap" />
+		<parameter property="ltblid" resultMap="MotevtgetMap" />
+		<parameter property="hjoin" resultMap="MotevtgetMap" />
+		<parameter property="rtblid" resultMap="MotevtgetMap" />
+		<parameter property="onjoin" resultMap="MotevtgetMap" />
+		<parameter property="issingle" resultMap="MotevtgetMap" />
+	</parameterMap>
+ 
+   <insert id="saveMotevtget" parameterMap="MotevtgetParamMap">
+		INSERT INTO  mot_event_target (evtid,ltblid,hjoin,rtblid,onjoin,issingle) VALUES (#{evtid},#{ltblid},#{hjoin},#{rtblid},#{onjoin},#{issingle})
+   </insert>
+	
+	<update id="updateMotevtget" parameterMap="MotevtgetParamMap">
+		UPDATE mot_event_target SET evtid=#{evtid},ltblid=#{ltblid},hjoin=#{hjoin},rtblid=#{rtblid},onjoin=#{onjoin},issingle=#{issingle}    WHERE id =#{id}
+	</update>
+	<delete id="deleteMotevtget">
+		DELETE FROM mot_event_target WHERE id=#{id}
+	</delete>
+	<select id="findAllMotevtget" resultMap="MotevtgetMap" >
+	 	SELECT * FROM  mot_event_target WHERE   1=1
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="evtid!=null and evtid!=0"> AND evtid=#{evtid}</if>
+	 	<if test="ltblid!=null and  ltblid!=0"> AND ltblid=#{ltblid}</if>
+	 	<if test="hjoin!=null and hjoin!=0"> AND hjoin=#{hjoin}</if>
+	 	<if test="rtblid!=null and rtblid!=0"> AND rtblid=#{rtblid}</if>
+	 	<if test="onjoin!=null and onjoin!=0"> AND onjoin=#{onjoin}</if>
+	 	<if test="issingle!=null and issingle!=0"> AND issingle=#{issingle}</if>
+	 	LIMIT #{pageOffset},#{pageSize}
+	</select>
+	<select id="countAllMotevtget" resultType="Integer" >
+	 	SELECT count(id) FROM mot_event_target   WHERE   1=1
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="evtid!=null and evtid!=0"> AND evtid=#{evtid}</if>
+	 	<if test="ltblid!=null and  ltblid!=0"> AND ltblid=#{ltblid}</if>
+	 	<if test="hjoin!=null and hjoin!=0"> AND hjoin=#{hjoin}</if>
+	 	<if test="rtblid!=null and rtblid!=0"> AND rtblid=#{rtblid}</if>
+	 	<if test="onjoin!=null and onjoin!=0"> AND onjoin=#{onjoin}</if>
+	 	<if test="issingle!=null and issingle!=0"> AND issingle=#{issingle}</if>
+	</select>
+	 <select id="findAllltblname" resultMap="MotevtgetMap" >
+		SELECT met.*,md.tblname as ltblname from mot_dstbl md join mot_event_target met on md.id = met.ltblid
+	</select>
+	<select id="findAllrtblname" resultMap="MotevtgetMap" >
+		SELECT met.*,md.tblname as rtblname from mot_dstbl md join mot_event_target met on md.id = met.rtblid
+	</select>
+</mapper>

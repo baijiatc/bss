@@ -5,7 +5,7 @@ public class Motevtget{
 	private Integer id;
 	private Integer evtid;
 	private Integer ltblid;
-	private Integer hjoin;
+	private String hjoin;
 	private Integer rtblid;
 	private String onjoin;
 	private Integer issingle;
@@ -29,10 +29,10 @@ public class Motevtget{
 	public void setLtblid(Integer ltblid) {
 		this.ltblid = ltblid;
 	}
-	public Integer getHjoin() {
+	public String getHjoin() {
 		return hjoin;
 	}
-	public void setHjoin(Integer hjoin) {
+	public void setHjoin(String hjoin) {
 		this.hjoin = hjoin;
 	}
 	public Integer getRtblid() {

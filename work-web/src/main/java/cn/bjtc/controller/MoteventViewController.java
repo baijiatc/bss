@@ -44,4 +44,11 @@ public class MoteventViewController {
 		model.addAttribute("id", id);
 		return "motevt/setting";
 	}
+	@RequestMapping(value="{id}/{evtname}/condition.html",method=RequestMethod.GET)
+	//@SysPrivilege(name="pwd:modify")
+	public String showConditionView(@PathVariable Integer id,@PathVariable String evtname,Model model){
+		model.addAttribute("id", id);
+		model.addAttribute("evtname", evtname);
+		return "motevt/condition";
+	}
 }

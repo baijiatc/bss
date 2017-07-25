@@ -25,6 +25,7 @@ public class MottblController extends BaseController{
 			List<?> Mottbl=mottblService.findAllMottbl(view);
 			apiReturn.setData(Mottbl);
 		} catch (Exception e) {
+			e.printStackTrace();
 			showServerError();
 		}
 		return apiReturn;

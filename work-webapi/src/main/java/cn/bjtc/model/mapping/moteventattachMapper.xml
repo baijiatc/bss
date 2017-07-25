@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Moteventattach">
+	<resultMap type="cn.bjtc.model.Moteventattach" id="MoteventattachMap">
+		<result column="id" property="id"/>
+		<result column="evtid" property="evtid"/>
+		<result column="idxid" property="idxid"/>
+		<result column="oprtchar" property="oprtchar"/>
+		<result column="parmval" property="parmval"/>
+		<result column="isactive" property="isactive"/>
+		<result column="iscstm" property="iscstm"/>
+	</resultMap>
+	<parameterMap type="cn.bjtc.model.Moteventattach" id="MoteventattachParamMap">
+		<parameter property="id" resultMap="MoteventattachMap" />
+		<parameter property="evtid" resultMap="MoteventattachMap" />
+		<parameter property="idxid" resultMap="MoteventattachMap" />
+		<parameter property="oprtchar" resultMap="MoteventattachMap" />
+		<parameter property="parmval" resultMap="MoteventattachMap" />
+		<parameter property="isactive" resultMap="MoteventattachMap" />
+		<parameter property="iscstm" resultMap="MoteventattachMap" />
+	</parameterMap>
+ 
+   <insert id="saveMoteventattach" parameterMap="MoteventattachParamMap">
+		INSERT INTO  mot_event_attach (evtid,idxid,oprtchar,parmval,isactive,iscstm) VALUES (#{evtid},#{idxid},#{oprtchar},#{parmval},#{isactive},#{iscstm})
+   </insert>
+	
+	<update id="updateMoteventattach" parameterMap="MoteventattachParamMap">
+		UPDATE mot_event_attach SET evtid=#{evtid},idxid=#{idxid},oprtchar=#{oprtchar},parmval=#{parmval},isactive=#{isactive},iscstm=#{iscstm} WHERE id =#{id}
+	</update>
+	
+	<delete id="deleteMoteventattach">
+		DELETE FROM mot_event_attach WHERE id=#{id}
+	</delete>
+
+	<select id="findAllMoteventattach" resultMap="MoteventattachMap" >
+	 	SELECT * FROM  mot_event_attach WHERE   1=1
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="evtid!=null and evtid!=0"> AND evtid=#{evtid}</if>
+	 	<if test="idxid!=null and idxid!=0"> AND idxid=#{idxid}</if>
+	 	<if test="isactive!=null"> AND isactive=#{isactive}</if>
+	 	<if test="iscstm!=null"> AND iscstm=#{iscstm}</if>
+	 	<if test="oprtchar!=null and oprtchar!=''"> AND oprtchar=#{oprtchar}</if>
+	 	<if test="parmval!=null and parmval!=''"> AND parmval=#{parmval}</if>
+	 	LIMIT #{pageOffset},#{pageSize}
+	</select>
+	<select id="countAllMoteventattach" resultType="Integer" >
+	 	SELECT count(id) FROM mot_event_attach   WHERE   1=1
+	 	<if test="id!=null and id!=0"> AND id=#{id}</if>
+	 	<if test="evtid!=null and evtid!=0"> AND evtid=#{evtid}</if>
+	 	<if test="idxid!=null and idxid!=0"> AND idxid=#{idxid}</if>
+	 	<if test="isactive!=null"> AND isactive=#{isactive}</if>
+	 	<if test="iscstm!=null"> AND iscstm=#{iscstm}</if>
+	 	<if test="oprtchar!=null and oprtchar!=''"> AND oprtchar=#{oprtchar}</if>
+	 	<if test="parmval!=null and parmval!=''"> AND parmval=#{parmval}</if>
+	</select>
+	 
+</mapper>

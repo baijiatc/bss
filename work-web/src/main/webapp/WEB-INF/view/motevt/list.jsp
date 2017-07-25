@@ -4,6 +4,7 @@
 <div id="motevt_query" style="display:none;"></div>
 <div id="motevt_control" style="display:none;"></div>
 <div id="motevt_setting" style="display:none;"></div>
+<div id="motevt_condition" style="display:none;"></div>
 <!-- javascript部分 -->
 <script>
 $(function(){
@@ -18,8 +19,8 @@ $(function(){
           {field:'biztypeStr',title: '业务类型',align: 'center',width: 100},
 		]]
 	};
-	//构建datagrid，并填充数据
 	
+	//构建datagrid，并填充数据	
 	MOTEVTGRID = new BSS.DataGrid('#tbl_motevt_datagrid');
 	MOTEVTDIALOG = new BSS.Dialog('#div_motevtadd');
 	MOTEVTGRID.toolbar.push({
@@ -29,6 +30,7 @@ $(function(){
 			showQueryDialog();
 		}
 	});
+	
 	//支配方案
 	MOTEVTCONTROLDIALOG = new BSS.Dialog('#motevt_control');
 	MOTEVTGRID.toolbar.push({iconCls:'icon-redo',text:'支配方案',handler:function(){
@@ -41,8 +43,9 @@ $(function(){
 			MOTEVTCONTROLDIALOG.init({href:'motevt/'+id+'/control.html',width:500,height:500});
 		}
 	});
+	
 	//设定群体
-// 	MOTEVTSETROLDIALOG = new BSS.Dialog('#motevt_setting');
+	// 	MOTEVTSETROLDIALOG = new BSS.Dialog('#motevt_setting');
 	MOTEVTGRID.toolbar.push({iconCls:'icon-redo',text:'设定群体',handler:function(){
 	var row =MOTEVTGRID.getSelectedRow();
 		if(BSS.Helper.isNull(row)){
@@ -61,18 +64,36 @@ $(function(){
 		 		});
 		}
 	});
-	MOTEVTGRID.toolbar.push({
-		text:'绑定条件',
-		iconCls:'icon-ok',
-		handler:function(){
-			showQueryDialog();
+	
+	//设定条件
+	// 	MOTEVTSETROLDIALOG = new BSS.Dialog('#motevt_setting');
+	MOTEVTGRID.toolbar.push({iconCls:'icon-ok',text:'绑定条件',handler:function(){
+	var row =MOTEVTGRID.getSelectedRow();
+		if(BSS.Helper.isNull(row)){
+			BSS.warning('请选择要设定的方案');
+			return;
+		}
+			var id = row['id'];
+			var evtname= row['evtname'];
+		 	var dlg = new BSS.Dialog('#motevt_condition');
+		 	dlg.init({
+		 		href:'motevt/'+id +"/"+evtname+'/condition.html',
+		 		width:550,
+		 		height:500,
+		 		buttons:[
+ 							{text:'关闭',iconCls:'icon-remove',handler:function(){}}
+						]
+		 		});
 		}
 	});
+	
 	MOTEVTGRID.build(options,{code:22013});
+	
 	//设置新建事件
 	MOTEVTGRID.create = function(){
 		MOTEVTDIALOG.init({href:'motevt/add.html',width:400});
 	};
+	
 	//设置编辑事件
 	MOTEVTGRID.edit = function(){
 		var row=this.getSelectedRow();
@@ -83,6 +104,7 @@ $(function(){
 		var id = row['id'];
 		MOTEVTDIALOG.init({href:'motevt/'+id+'.html',width:400});
 	};
+	
 	//查询
 	MOTEVTQUERYDIALOG = new BSS.Dialog('#motevt_query');
 	function showQueryDialog(){

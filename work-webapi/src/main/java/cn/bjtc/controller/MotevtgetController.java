@@ -29,6 +29,7 @@ public class MotevtgetController extends BaseController{
 			apiReturn.setCount(count);
 			apiReturn.setData(Motevtget);
 		} catch (Exception e) {
+			e.printStackTrace();
 			showServerError();
 		}
 		return apiReturn;

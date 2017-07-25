@@ -11,7 +11,7 @@ function setOk(){
 	MOTEVTQUERYDIALOG.ok = function(){
 			var biztype=bizCombox.getValue();
 			var evtstats=statsCombox.getValue();
-			var evtname=$('#motevt_name').val()
+			var evtname=$('#motevt_name1').val();
 			MOTEVTGRID.load({code:22013,data:[{evtname:evtname,biztype:biztype,evtstats:evtstats}]},function(resp){
 				if(resp.code == 0){
 					BSS.info('查询成功');
@@ -28,7 +28,7 @@ function setOk(){
 	<table style="text-align:center">
 		<tr>
 			<td>事件名称</td>
-			<td><input id="motevt_name" type="text" class="easyui-textbox" style="width:200px;"/></td>
+			<td><input id="motevt_name1" type="text" class="easyui-textbox" style="width:200px;"/></td>
 		</tr>
 		<tr>
 			<td>业务类型</td>

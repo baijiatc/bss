@@ -23,16 +23,17 @@ public class MotSchemeController  extends BaseController {
 	@RequestMapping(value="all", method=RequestMethod.POST)
 	@SysLogger(content="查询方案信息",type=AspectType.CONTROLLER)
 	public ApiReturn showMotScheme(){
-//	   try {
+   try {
 		ApiParam param=findApiParam();
 		MotSchemeView  view=(MotSchemeView) ParamUtil.convertToView(param, MotSchemeView.class);
 		   int count=motSchService.countAllMotScheme(view);
 		   List<?> motSch=motSchService.findAllMotScheme(view);
 		   apiReturn.setCount(count);
 		   apiReturn.setData(motSch);
-//	} catch (Exception e) {
-//		showServerError();
-//	}
+	} catch (Exception e) {
+		e.printStackTrace();
+		showServerError();
+	}
 	   return apiReturn;
 	}
 	

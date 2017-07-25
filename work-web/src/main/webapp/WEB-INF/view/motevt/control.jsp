@@ -6,7 +6,8 @@
 	</tr>
 </table>
 <form id="frm_motevtsem" method="post">
-	<input id="id_evtid"  name="evtid" class="easyui-textbox" type="hidden"/>
+	<input id="id_evtid"  name="evtid" class="easyui-textbox" type="hidden" value="${id }"/>
+	<input type="hidden" name="isactive" value="1" />
 	<table style="text-align:center">
 		<tr>
 			<td>渠&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;道</td>
@@ -48,40 +49,50 @@ $(function(){
 	var motevtsmeGrid = new BSS.DataGrid('#tbl_motevtcon_datagrid');
 	motevtsmeGrid.toolbar=null;
 	motevtsmeGrid.build(options,{code:22016,data:[{evtid:'${id}'}]});
-})
-
-var schemCombox = new BSS.Combox('#motevtsme_schmid');
-var chinCombox = new BSS.Combox('#motevtsme_chinid');
-var automaticCombox = new BSS.Combox('#motevtsme_auto');
-chinCombox.fromDict('DICT_CHNAL');
-automaticCombox.fromDict('DICT_AUTO');
-var eid = '${id}';
-$("#id_evtid").attr('value',eid);
-//方案名
-	var motevtsmeGrid = new BSS.DataGrid('#tbl_motevtcon_datagrid');
-		BSS.dispatch({code:22004},function(resp){
-				var datas = resp.data;
-				var options = {valueField:'id',textField:'schmname',data:datas};
-				schemCombox.init(options);
+	
+	var schemCombox = new BSS.Combox('#motevtsme_schmid');
+	var chinCombox = new BSS.Combox('#motevtsme_chinid');
+	var automaticCombox = new BSS.Combox('#motevtsme_auto');
+	
+	chinCombox.fromDict('DICT_CHNAL',function(){
+		automaticCombox.fromDict('DICT_AUTO');
 	});
-//事件名
-	BSS.dispatch({code:22013,data:[{id:'${id}'}]},function(resp){
+	
+	//方案列表
+	setTimeout(function () { 
+		BSS.dispatch({code:22004},function(resp){
+			var datas = resp.data;
+			var options = {valueField:'id',textField:'schmname',data:datas};
+			schemCombox.init(options);
+			});
+    }, 100);
+	
+	//事件名
+	setTimeout(function () { 
+		BSS.dispatch({code:22013,data:[{id:'${id}'}]},function(resp){
 			var datas = resp.data;
 			$("#motevt_name").textbox('setValue',datas[0].evtname);
-		});
-	function add(){  
-		var evt = BSS.form2json('#frm_motevtsem');
-		BSS.dispatch({code:22015,data:[evt]},function(resp){
-			if(resp.code == 0){
-				BSS.info('保存成功');
-			}else{
-				BSS.warning(resp.message);
-			}
-		},function(resp){
-			console.log(JSON.stringify(resp));
-		});
-	}
-function deleteMot(id){  
+			});
+    }, 200);
+})
+
+
+function add()
+{  
+	var evt = BSS.form2json('#frm_motevtsem');
+	BSS.dispatch({code:22015,data:[evt]},function(resp){
+		if(resp.code == 0){
+			BSS.info('保存成功');
+		}else{
+			BSS.warning(resp.message);
+		}
+	},function(resp){
+		console.log(JSON.stringify(resp));
+	});
+}
+
+function deleteMot(id)
+{  
 	BSS.dispatch({code:22017,data:[{id:id}]},function(resp){
 		if(resp.code == 0){
 			BSS.info('删除成功');
@@ -90,7 +101,6 @@ function deleteMot(id){
 		}
 	},function(resp){
 		console.log(JSON.stringify(resp));
-	});
-	    
-	}
+	});	    
+}
 </script>

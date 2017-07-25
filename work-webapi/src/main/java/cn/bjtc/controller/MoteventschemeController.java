@@ -43,6 +43,7 @@ public class MoteventschemeController extends BaseController{
 			MoteventschemeView view=(MoteventschemeView) ParamUtil.convertToView(param, MoteventschemeView.class);
 			moteventschemeService.saveMoteventscheme(view);
 		} catch (Exception e) {
+			e.printStackTrace();
 			showServerError();
 		}
 		return apiReturn;

@@ -1,17 +1,13 @@
 package cn.bjtc.view;
 
-import cn.bjtc.api.BaseDictType;
-import cn.bjtc.common.ApplicationDataManager;
-
-
-
 public class MoteventattachView extends Pagination {
 	private Integer id;
 	private Integer evtid;
 	private Integer idxid;
+	private String idxname;
 	private String oprtchar;
 	private String parmval;
-	private Integer isactive;
+	private Integer isactive = 1;
 	private Integer iscstm;
 
 	public Integer getId() {
@@ -31,6 +27,12 @@ public class MoteventattachView extends Pagination {
 	}
 	public void setIdxid(Integer idxid) {
 		this.idxid = idxid;
+	}
+	public String getIdxname() {
+		return idxname;
+	}
+	public void setIdxname(String idxname) {
+		this.idxname = idxname;
 	}
 	public Integer getIsactive() {
 		return isactive;
@@ -59,5 +61,9 @@ public class MoteventattachView extends Pagination {
 	}
 	public void setIscstm(Integer iscstm) {
 		this.iscstm = iscstm;
+	}
+	
+	public String getCstmStr(){
+		return iscstm==1?"自定义":"非自定义";
 	}
 }

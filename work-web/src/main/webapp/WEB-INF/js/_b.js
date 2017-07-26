@@ -183,6 +183,9 @@ BSS.Combox = function(selector){
 	$this.getValue=function(){
 		return $($this.selector).combobox('getValue');
 	};
+	$this.setPlacehoder=function(text){
+		$($this.selector).parent().find('span').find('input:first').attr("placeholder",text);
+	};
 }
 BSS.PropGrid = function(selector){
 	var $this = this;

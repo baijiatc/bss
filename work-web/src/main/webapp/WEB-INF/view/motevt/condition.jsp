@@ -13,11 +13,11 @@
 
 <form id="frm_motevtget" method="post">
 	<input id="id_evtids"  name="evtid" class="easyui-textbox" type="hidden" value="${id}"/>
-	<input id="hid_ischeak"  name="isctsm" value="0" type="hidden"/>
+	<input id="hid_ischeak"  name="iscstm" value="0" type="hidden"/>
 	<table style="text-align:center" id="tblone">
 		<tr>
 			<td>业务类型</td>
-		    <td><input id="cbx_biztype" type="text" name="biztype"class="easyui-combobox" style="width:150px;" /></td>
+		    <td><input id="cbx_biztype" type="text" class="easyui-combobox" style="width:150px;" /></td>
 		</tr>
 	</table>
 	<table style="text-align:center" id="tbltwo">
